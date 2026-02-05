@@ -69,7 +69,7 @@ export default function Navbar() {
           className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent bg-[length:200%_100%]"
         />
 
-        <div className="container-custom">
+        <div>
           <div className="flex justify-between items-center h-20">
             {/* Logo with Animation */}
             <motion.div
