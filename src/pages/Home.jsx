@@ -104,7 +104,7 @@ export default function Home() {
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[url('https://s-cdn.sportbox.ru/images/styles/upload/fp_fotos/d1/e9/6c02a3135fe59830a25c4f353e2fc7d1655b52b1bef99714146655.jpg')] bg-cover bg-center"></div>
-          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/70 to-black/90"></div>
         </div>
 
         {/* Animated Championship Belt */}
