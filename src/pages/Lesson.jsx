@@ -4,10 +4,12 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, CheckCircle, Clock, BookOpen } from 'lucide-react'
 import { getLesson, updateLessonProgress } from '../services/apiService'
 import { getLessonById } from '../data/staticLessons'
+import { useTranslation } from 'react-i18next'
 
 export default function Lesson() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [lesson, setLesson] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -22,16 +24,16 @@ export default function Lesson() {
           console.log('API не доступен, используем статичные данные')
           
           // Используем статичные данные если API недоступен
-          const staticLesson = getLessonById(id)
+          const staticLesson = getLessonById(id, t)
           if (staticLesson) {
             setLesson(staticLesson)
           } else {
-            throw new Error('Урок не найден')
+            throw new Error(t('lesson.notFound'))
           }
         }
       } catch (err) {
         console.error(err)
-        alert('Урок не найден')
+        alert(t('lesson.notFound'))
         navigate('/courses')
       } finally {
         setLoading(false)
@@ -44,7 +46,7 @@ export default function Lesson() {
   const markAsCompleted = async () => {
     try {
       await updateLessonProgress(id, { completed: true })
-      alert('✅ Урок отмечен как пройденный!')
+      alert(t('lesson.completedAlert'))
     } catch (error) {
       console.error(error)
     }
@@ -55,7 +57,7 @@ export default function Lesson() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">⏳</div>
-          <p className="text-gray-400">Загрузка урока...</p>
+          <p className="text-gray-400">{t('lesson.loading')}</p>
         </div>
       </div>
     )
@@ -66,7 +68,7 @@ export default function Lesson() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">❌</div>
-          <p className="text-gray-400">Урок не найден</p>
+          <p className="text-gray-400">{t('lesson.notFound')}</p>
         </div>
       </div>
     )
@@ -137,7 +139,7 @@ export default function Lesson() {
                 className="inline-flex items-center gap-2 text-gray-400 hover:text-primary transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Вернуться к курсу: {lesson.course.title}
+                {t('lesson.backToCourse', { title: lesson.course.title })}
               </Link>
             </div>
           )}
@@ -167,10 +169,10 @@ export default function Lesson() {
                   <source src={lesson.video_url} type="video/mp4" />
                   <source src={lesson.video_url} type="video/quicktime" />
                   <p className="text-white p-8 text-center">
-                    Ваш браузер не поддерживает воспроизведение видео. 
+                    {t('lesson.videoNotSupported')}
                     <br/>
                     <a href={lesson.video_url} className="text-blue-500 underline" download>
-                      Скачать видео
+                      {t('lesson.downloadVideo')}
                     </a>
                   </p>
                 </video>
@@ -190,12 +192,12 @@ export default function Lesson() {
                 <div className="flex items-center gap-6 text-gray-400">
                   <div className="flex items-center gap-2">
                     <Clock className="w-5 h-5 text-primary" />
-                    <span>{lesson.duration_minutes} минут</span>
+                    <span>{t('lesson.durationMinutes', { minutes: lesson.duration_minutes })}</span>
                   </div>
                   {lesson.order && (
                     <div className="flex items-center gap-2">
                       <BookOpen className="w-5 h-5 text-blue-500" />
-                      <span>Урок {lesson.order}</span>
+                      <span>{t('lesson.lessonNumber', { number: lesson.order })}</span>
                     </div>
                   )}
                 </div>
@@ -208,21 +210,21 @@ export default function Lesson() {
                   className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl text-white font-semibold hover:from-red-600 hover:to-primary transition-all duration-300"
                 >
                   <CheckCircle className="w-5 h-5" />
-                  Отметить пройденным
+                  {t('lesson.markComplete')}
                 </button>
               )}
               
               {lesson.completed && (
                 <div className="flex items-center gap-2 px-6 py-3 bg-green-600/20 border border-green-600/50 rounded-xl text-green-500 font-semibold">
                   <CheckCircle className="w-5 h-5" />
-                  Пройден
+                  {t('lesson.completed')}
                 </div>
               )}
             </div>
             
             {lesson.description && (
               <div className="border-t border-gray-800 pt-6">
-                <h2 className="text-2xl font-bold text-white mb-4">Описание урока</h2>
+                <h2 className="text-2xl font-bold text-white mb-4">{t('lesson.descriptionTitle')}</h2>
                 <p className="text-gray-300 leading-relaxed whitespace-pre-line">
                   {lesson.description}
                 </p>

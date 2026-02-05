@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { Trophy, Target, Zap, Brain, Award, Calendar, Medal, BarChart } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export default function About() {
+  const { t } = useTranslation()
   const containerRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -12,19 +14,43 @@ export default function About() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3])
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
 
-  const achievements = [
-    { year: '2025', title: 'Абсолютный чемпион мира', desc: 'Победа над Артуром Бетербиевым', icon: <Trophy className="w-6 h-6" /> },
-    { year: '2022', title: 'Победа над Канело', desc: 'Сенсация года в боксе', icon: <Target className="w-6 h-6" /> },
-    { year: '2017-2024', title: 'Чемпион WBA (Super)', desc: '8 лет непрерывного чемпионства', icon: <Award className="w-6 h-6" /> },
-    { year: '2013', title: 'Золото World Combat Games', desc: 'Чемпион в любителях', icon: <Medal className="w-6 h-6" /> },
-  ]
+  const achievements = useMemo(() => ([
+    { year: '2025', title: t('aboutPage.achievements.0.title'), desc: t('aboutPage.achievements.0.desc'), icon: <Trophy className="w-6 h-6" /> },
+    { year: '2022', title: t('aboutPage.achievements.1.title'), desc: t('aboutPage.achievements.1.desc'), icon: <Target className="w-6 h-6" /> },
+    { year: '2017-2024', title: t('aboutPage.achievements.2.title'), desc: t('aboutPage.achievements.2.desc'), icon: <Award className="w-6 h-6" /> },
+    { year: '2013', title: t('aboutPage.achievements.3.title'), desc: t('aboutPage.achievements.3.desc'), icon: <Medal className="w-6 h-6" /> },
+  ]), [t])
 
-  const stats = [
-    { label: 'Побед', value: '24', sub: 'из них 12 нокаутом', icon: <BarChart className="w-5 h-5" /> },
-    { label: 'Титулы', value: '4', sub: 'WBA, WBC, IBF, WBO', icon: <Trophy className="w-5 h-5" /> },
-    { label: 'Рейтинг', value: '#1', sub: 'pound-for-pound', icon: <Zap className="w-5 h-5" /> },
-    { label: 'Карьера', value: '11', sub: 'лет в профессионалах', icon: <Calendar className="w-5 h-5" /> },
-  ]
+  const stats = useMemo(() => ([
+    { label: t('aboutPage.stats.0.label'), value: t('aboutPage.stats.0.value'), sub: t('aboutPage.stats.0.sub'), icon: <BarChart className="w-5 h-5" /> },
+    { label: t('aboutPage.stats.1.label'), value: t('aboutPage.stats.1.value'), sub: t('aboutPage.stats.1.sub'), icon: <Trophy className="w-5 h-5" /> },
+    { label: t('aboutPage.stats.2.label'), value: t('aboutPage.stats.2.value'), sub: t('aboutPage.stats.2.sub'), icon: <Zap className="w-5 h-5" /> },
+    { label: t('aboutPage.stats.3.label'), value: t('aboutPage.stats.3.value'), sub: t('aboutPage.stats.3.sub'), icon: <Calendar className="w-5 h-5" /> },
+  ]), [t])
+
+  const philosophy = useMemo(() => ([
+    {
+      title: t('aboutPage.philosophy.items.0.title'),
+      desc: t('aboutPage.philosophy.items.0.desc'),
+      icon: "🎯"
+    },
+    {
+      title: t('aboutPage.philosophy.items.1.title'),
+      desc: t('aboutPage.philosophy.items.1.desc'),
+      icon: "🧠"
+    },
+    {
+      title: t('aboutPage.philosophy.items.2.title'),
+      desc: t('aboutPage.philosophy.items.2.desc'),
+      icon: "📈"
+    }
+  ]), [t])
+
+  const galleryItems = useMemo(() => ([
+    { title: t('aboutPage.gallery.items.0.title'), desc: t('aboutPage.gallery.items.0.desc'), emoji: "💪" },
+    { title: t('aboutPage.gallery.items.1.title'), desc: t('aboutPage.gallery.items.1.desc'), emoji: "🎬" },
+    { title: t('aboutPage.gallery.items.2.title'), desc: t('aboutPage.gallery.items.2.desc'), emoji: "🏆" }
+  ]), [t])
 
   return (
     <div ref={containerRef} className="relative min-h-screen overflow-hidden">
@@ -62,7 +88,7 @@ export default function About() {
               <div className="absolute -inset-4 bg-primary/20 blur-xl rounded-full" />
               <div className="relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl px-8 py-6">
                 <h1 className="text-6xl md:text-8xl font-black mb-4 bg-gradient-to-r from-white via-primary to-white bg-clip-text text-transparent">
-                  ДМИТРИЙ <span className="text-primary">БИВОЛ</span>
+                  {t('aboutPage.hero.nameLine1')} <span className="text-primary">{t('aboutPage.hero.nameLine2')}</span>
                 </h1>
               </div>
             </div>
@@ -74,7 +100,9 @@ export default function About() {
             transition={{ delay: 0.3 }}
             className="text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
           >
-            Абсолютный чемпион мира в полутяжёлом весе. <span className="text-primary font-semibold">Непобеждённый чемпион</span>, победитель Канело Альвареса и Артура Бетербиева
+              <span>{t('aboutPage.hero.subtitle.start')} </span>
+              <span className="text-primary font-semibold">{t('aboutPage.hero.subtitle.highlight')}</span>
+              <span>, {t('aboutPage.hero.subtitle.end')}</span>
           </motion.p>
         </motion.div>
 
@@ -139,7 +167,7 @@ export default function About() {
                 className="absolute -bottom-6 -left-6 bg-primary text-black p-4 rounded-xl shadow-2xl"
               >
                 <div className="text-2xl font-black">WBA</div>
-                <div className="text-sm font-semibold">Super Champion</div>
+                <div className="text-sm font-semibold">{t('aboutPage.hero.badges.wba')}</div>
               </motion.div>
 
               <motion.div
@@ -148,7 +176,7 @@ export default function About() {
                 className="absolute -top-6 -right-6 bg-blue-600 text-white p-4 rounded-xl shadow-2xl"
               >
                 <div className="text-2xl font-black">WBC</div>
-                <div className="text-sm font-semibold">World Champion</div>
+                <div className="text-sm font-semibold">{t('aboutPage.hero.badges.wbc')}</div>
               </motion.div>
             </div>
           </motion.div>
@@ -164,20 +192,20 @@ export default function About() {
             <div>
               <h2 className="text-4xl font-bold mb-4 flex items-center gap-3">
                 <Brain className="w-8 h-8 text-primary" />
-                БИОГРАФИЯ ЧЕМПИОНА
+                {t('aboutPage.biography.title')}
               </h2>
               <div className="space-y-6">
                 <p className="text-xl text-gray-300 leading-relaxed">
-                  <span className="text-primary font-semibold">Дмитрий Юрьевич Бивол</span> — выдающийся боксёр современности, 
-                  родившийся 18 декабря 1990 года в Токмоке, Кыргызстан. Начал заниматься боксом в 6 лет под руководством отца.
+                  <span className="text-primary font-semibold">{t('aboutPage.biography.paragraphs.0.highlight')}</span>{' '}
+                  {t('aboutPage.biography.paragraphs.0.text')}
                 </p>
                 <p className="text-xl text-gray-300 leading-relaxed">
-                  В любительской карьере провёл <span className="text-primary font-semibold">свыше 280 боёв</span> с невероятным 
-                  рекордом 268-15. Перешёл в профессионалы в 2014 году и с тех пор не знал поражений.
+                  {t('aboutPage.biography.paragraphs.1.start')} <span className="text-primary font-semibold">{t('aboutPage.biography.paragraphs.1.highlight')}</span>{' '}
+                  {t('aboutPage.biography.paragraphs.1.end')}
                 </p>
                 <p className="text-xl text-gray-300 leading-relaxed">
-                  Обладатель уникального стиля: <span className="text-primary font-semibold">безупречный джеб</span>, 
-                  превосходная работа ног и тактический интеллект, позволяющий доминировать над любым соперником.
+                  {t('aboutPage.biography.paragraphs.2.start')} <span className="text-primary font-semibold">{t('aboutPage.biography.paragraphs.2.highlight')}</span>,{' '}
+                  {t('aboutPage.biography.paragraphs.2.end')}
                 </p>
               </div>
             </div>
@@ -186,7 +214,7 @@ export default function About() {
             <div>
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                 <Trophy className="w-6 h-6 text-primary" />
-                ГЛАВНЫЕ ДОСТИЖЕНИЯ
+                {t('aboutPage.achievementsTitle')}
               </h3>
               <div className="space-y-4">
                 {achievements.map((item, idx) => (
@@ -231,26 +259,10 @@ export default function About() {
           <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 via-transparent to-blue-500/20 rounded-3xl blur-3xl" />
           <div className="relative bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-gray-800 rounded-3xl p-12">
             <h2 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
-              ФИЛОСОФИЯ ЧЕМПИОНА
+              {t('aboutPage.philosophy.title')}
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Техническое превосходство",
-                  desc: "Точность джеба, контроль дистанции и работа ног — фундамент чемпионского стиля",
-                  icon: "🎯"
-                },
-                {
-                  title: "Тактический интеллект",
-                  desc: "Умение читать соперника и адаптировать стратегию во время боя",
-                  icon: "🧠"
-                },
-                {
-                  title: "Непрерывный рост",
-                  desc: "Каждая тренировка — шаг к совершенству. Каждый бой — новая глава в истории",
-                  icon: "📈"
-                }
-              ].map((item, idx) => (
+              {philosophy.map((item, idx) => (
                 <motion.div
                   key={idx}
                   whileHover={{ scale: 1.05, y: -5 }}
@@ -274,15 +286,11 @@ export default function About() {
         >
           <h2 className="text-4xl font-bold mb-12 text-center">
             <span className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
-              МОМЕНТЫ ВЕЛИЧИЯ
+              {t('aboutPage.gallery.title')}
             </span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: "Тренировочный процесс", desc: "Ежедневная работа над совершенством", emoji: "💪" },
-              { title: "Тактические сессии", desc: "Анализ и подготовка к боям", emoji: "🎬" },
-              { title: "Чемпионские ночи", desc: "Исторические победы на ринге", emoji: "🏆" }
-            ].map((item, idx) => (
+            {galleryItems.map((item, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -320,11 +328,11 @@ export default function About() {
             <div className="relative">
               <div className="text-6xl mb-6">"</div>
               <p className="text-3xl md:text-4xl font-light italic text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                На ринге нет места сомнениям. Только дисциплина, техника и воля к победе создают чемпиона
+                {t('aboutPage.quote.text')}
               </p>
               <div className="text-6xl mt-6 rotate-180">"</div>
               <div className="mt-8 text-xl text-primary font-semibold">
-                — Дмитрий Бивол
+                {t('aboutPage.quote.author')}
               </div>
             </div>
           </div>

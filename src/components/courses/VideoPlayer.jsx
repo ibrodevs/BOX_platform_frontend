@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 import { Play, Pause, Volume2, VolumeX, Maximize, Settings } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 export default function VideoPlayer({ videoUrl, timestamps, onTimeUpdate, onComplete, initialTime = 0, videoFormat = '16:9' }) {
+  const { t } = useTranslation()
   const videoRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(initialTime)
@@ -146,7 +148,7 @@ export default function VideoPlayer({ videoUrl, timestamps, onTimeUpdate, onComp
               className="absolute right-0 top-0 bottom-16 w-80 bg-black/90 backdrop-blur overflow-y-auto"
             >
               <div className="p-4">
-                <h3 className="text-white font-semibold mb-4">Таймкоды</h3>
+                <h3 className="text-white font-semibold mb-4">{t('videoPlayer.timestamps')}</h3>
                 {timestamps.map((ts, index) => (
                   <button
                     key={index}

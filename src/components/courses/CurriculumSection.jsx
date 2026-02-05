@@ -1,10 +1,12 @@
 import React from 'react'
 import { CheckCircle, Lock, Play, Clock } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export default function CurriculumSection({ lessons, isPurchased, onLessonClick }) {
+  const { t } = useTranslation()
   return (
     <div className="space-y-4">
-      <h3 className="text-2xl font-bold mb-6">Программа курса</h3>
+      <h3 className="text-2xl font-bold mb-6">{t('curriculum.title')}</h3>
       <div className="space-y-3">
         {lessons?.map((lesson, index) => (
           <div
@@ -28,9 +30,9 @@ export default function CurriculumSection({ lessons, isPurchased, onLessonClick 
                   <div className="flex items-center space-x-4 text-sm text-gray-500 mt-1">
                     <span className="flex items-center space-x-1">
                       <Clock size={14} />
-                      <span>{lesson.duration || '10 мин'}</span>
+                      <span>{lesson.duration || t('curriculum.defaultDuration', { minutes: 10 })}</span>
                     </span>
-                    {lesson.video_file && <span>Видео</span>}
+                    {lesson.video_file && <span>{t('curriculum.videoLabel')}</span>}
                   </div>
                 </div>
               </div>

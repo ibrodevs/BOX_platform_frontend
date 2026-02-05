@@ -3,15 +3,15 @@ import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Globe, Check } from 'lucide-react'
 
-const languages = [
-  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'ky', name: 'Кыргызча', flag: '🇰🇬' }
-]
-
 export default function LanguageSwitcher() {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
+
+  const languages = [
+    { code: 'ru', name: t('languages.ru'), flag: '🇷🇺' },
+    { code: 'en', name: t('languages.en'), flag: '🇬🇧' },
+    { code: 'ky', name: t('languages.ky'), flag: '🇰🇬' }
+  ]
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0]
 

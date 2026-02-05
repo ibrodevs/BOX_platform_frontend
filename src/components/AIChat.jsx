@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuthStore } from '../store/authStore'
 import { sendAIMessage } from '../services/apiService'
+import { useTranslation } from 'react-i18next'
 
 export default function AIChat() {
+  const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
@@ -23,16 +25,16 @@ export default function AIChat() {
       if (isAuthenticated) {
         const response = await sendAIMessage(userMessage)
         // API возвращает объект с полем response (текст ответа AI)
-        const aiResponse = response.data?.response || response.data?.message || 'Получен пустой ответ'
+        const aiResponse = response.data?.response || response.data?.message || t('aiChat.emptyResponse')
         setMessages(prev => [...prev, { role: 'assistant', content: aiResponse }])
       } else {
         // Демо ответы для неавторизованных
         setTimeout(() => {
           const demoResponses = [
-            'Привет! Я AI-тренер. Чтобы получить персональные рекомендации, пожалуйста, авторизуйтесь.',
-            'Для начинающих рекомендую курс "Основы бокса". Там есть всё необходимое!',
-            'Бокс - это не только сила, но и техника. Правильная стойка - основа всего.',
-            'Тренируйтесь регулярно! Минимум 3 раза в неделю для видимого прогресса.'
+            t('aiChat.demoResponses.0'),
+            t('aiChat.demoResponses.1'),
+            t('aiChat.demoResponses.2'),
+            t('aiChat.demoResponses.3')
           ]
           const randomResponse = demoResponses[Math.floor(Math.random() * demoResponses.length)]
           setMessages(prev => [...prev, { role: 'assistant', content: randomResponse }])
@@ -44,7 +46,7 @@ export default function AIChat() {
       console.error('AI Error:', error)
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: 'Извините, произошла ошибка. Попробуйте позже.' 
+        content: t('aiChat.error') 
       }])
     } finally {
       setLoading(false)
@@ -74,16 +76,16 @@ export default function AIChat() {
           >
             {/* Header */}
             <div className="bg-primary p-4 rounded-t-lg">
-              <h3 className="font-bold text-lg">🥊 AI Тренер</h3>
-              <p className="text-xs opacity-90">Задай вопрос о технике бокса</p>
+              <h3 className="font-bold text-lg">🥊 {t('aiChat.title')}</h3>
+              <p className="text-xs opacity-90">{t('aiChat.subtitle')}</p>
             </div>
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {messages.length === 0 && (
                 <div className="text-center text-gray-500 mt-8">
-                  <p>Привет! Я твой AI тренер.</p>
-                  <p className="text-sm mt-2">Задай мне любой вопрос о боксе!</p>
+                  <p>{t('aiChat.welcomeTitle')}</p>
+                  <p className="text-sm mt-2">{t('aiChat.welcomeSubtitle')}</p>
                 </div>
               )}
               
@@ -107,7 +109,7 @@ export default function AIChat() {
               {loading && (
                 <div className="flex justify-start">
                   <div className="bg-gray-800 p-3 rounded-lg">
-                    <span className="animate-pulse">Печатает...</span>
+                    <span className="animate-pulse">{t('aiChat.typing')}</span>
                   </div>
                 </div>
               )}
@@ -121,7 +123,7 @@ export default function AIChat() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Напиши сообщение..."
+                  placeholder={t('aiChat.placeholder')}
                   className="flex-1 bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-primary"
                   disabled={loading}
                 />

@@ -31,8 +31,8 @@ export default function Courses() {
     { id: 'intermediate', label: t('courses.intermediate'), icon: TrendingUp, count: 0 },
     { id: 'advanced', label: t('courses.advanced'), icon: Trophy, count: 0 },
     { id: 'pro', label: t('courses.advanced'), icon: Crown, count: 0 },
-    { id: 'new', label: t('courses.newCourses', { defaultValue: 'Новые курсы' }), icon: Sparkles, count: 0 },
-    { id: 'popular', label: t('courses.popular', { defaultValue: 'Популярные' }), icon: TrendingUp, count: 0 },
+    { id: 'new', label: t('courses.newCourses'), icon: Sparkles, count: 0 },
+    { id: 'popular', label: t('courses.popular'), icon: TrendingUp, count: 0 },
   ]
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function Courses() {
       }
       
       // Если API недоступен или нет данных, используем статичные данные
-      const staticData = getAllCourses().map(course => ({
+      const staticData = getAllCourses(t).map(course => ({
         ...course,
         isNew: Math.random() > 0.7,
         isBestseller: Math.random() > 0.8,
@@ -77,10 +77,10 @@ export default function Courses() {
       setError(null)
     } catch (err) {
       console.error('Failed to fetch courses:', err)
-      setError('Не удалось загрузить курсы')
+      setError(t('coursesPage.errors.loadFailed'))
       
       // В случае ошибки всё равно показываем статичные данные
-      const staticData = getAllCourses().map(course => ({
+      const staticData = getAllCourses(t).map(course => ({
         ...course,
         isNew: Math.random() > 0.7,
         isBestseller: Math.random() > 0.8,
@@ -181,7 +181,7 @@ export default function Courses() {
             <motion.div variants={fadeInUp} className="inline-block mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-red-600/20 rounded-full border border-primary/30">
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-primary text-sm font-semibold">ОБУЧЕНИЕ ОТ ЧЕМПИОНА</span>
+                <span className="text-primary text-sm font-semibold">{t('coursesPage.hero.badge')}</span>
               </span>
             </motion.div>
 
@@ -189,9 +189,9 @@ export default function Courses() {
               variants={fadeInUp}
               className="text-5xl md:text-7xl font-black mb-6"
             >
-              <span className="block text-white">Стань учеником</span>
+              <span className="block text-white">{t('coursesPage.hero.titleLine1')}</span>
               <span className="bg-gradient-to-r from-primary via-yellow-500 to-primary bg-[length:200%_auto] bg-clip-text text-transparent">
-                Чемпиона
+                {t('coursesPage.hero.titleLine2')}
               </span>
             </motion.h1>
 
@@ -199,7 +199,7 @@ export default function Courses() {
               variants={fadeInUp}
               className="text-xl text-gray-400 max-w-2xl mx-auto mb-10"
             >
-              Эксклюзивные программы от Дмитрия Бивола с персональным AI-тренером и поддержкой комьюнити
+              {t('coursesPage.hero.subtitle')}
             </motion.p>
 
             {/* Search Bar */}
@@ -213,7 +213,7 @@ export default function Courses() {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Искать курсы, уроки, техники..."
+                  placeholder={t('coursesPage.searchPlaceholder')}
                   className="w-full pl-14 pr-6 py-4 bg-black/50 border border-gray-800 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors backdrop-blur-xl"
                 />
                 <button
@@ -260,18 +260,18 @@ export default function Courses() {
                 
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <span className="text-gray-400">Сортировка:</span>
+                    <span className="text-gray-400">{t('common.sort')}:</span>
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
                       className="bg-black/50 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary"
                     >
-                      <option value="popular">По популярности</option>
-                      <option value="rating">По рейтингу</option>
-                      <option value="students">По количеству студентов</option>
-                      <option value="price-low">Цена: по возрастанию</option>
-                      <option value="price-high">Цена: по убыванию</option>
-                      <option value="newest">Сначала новые</option>
+                      <option value="popular">{t('coursesPage.sort.popular')}</option>
+                      <option value="rating">{t('coursesPage.sort.rating')}</option>
+                      <option value="students">{t('coursesPage.sort.students')}</option>
+                      <option value="price-low">{t('coursesPage.sort.priceLow')}</option>
+                      <option value="price-high">{t('coursesPage.sort.priceHigh')}</option>
+                      <option value="newest">{t('coursesPage.sort.newest')}</option>
                     </select>
                   </div>
                   
@@ -318,14 +318,14 @@ export default function Courses() {
                 <Shield className="w-8 h-8 text-red-500" />
                 <div>
                   <p className="text-red-500 font-semibold">{error}</p>
-                  <p className="text-red-400/80 text-sm">Пожалуйста, попробуйте позже</p>
+                  <p className="text-red-400/80 text-sm">{t('coursesPage.errors.tryLater')}</p>
                 </div>
               </div>
               <button 
                 onClick={fetchCourses}
                 className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold transition-colors"
               >
-                Обновить
+                {t('coursesPage.actions.refresh')}
               </button>
             </div>
           </motion.div>
@@ -335,11 +335,11 @@ export default function Courses() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-3xl font-bold text-white">
-              {filteredCourses.length} {filteredCourses.length === 1 ? 'курс' : 'курсов'} найдено
+              {t('coursesPage.results.found', { count: filteredCourses.length })}
             </h2>
             {searchTerm && (
               <p className="text-gray-400">
-                По запросу: <span className="text-primary">{searchTerm}</span>
+                {t('coursesPage.results.byQuery')} <span className="text-primary">{searchTerm}</span>
               </p>
             )}
           </div>
@@ -349,7 +349,7 @@ export default function Courses() {
             animate={{ opacity: 1 }}
             className="flex items-center gap-3"
           >
-            <span className="text-gray-400 text-sm">Отображение:</span>
+            <span className="text-gray-400 text-sm">{t('coursesPage.viewMode')}:</span>
             <div className="flex bg-gray-900 rounded-lg p-1">
               <button
                 onClick={() => setFilter('all')}
@@ -359,7 +359,7 @@ export default function Courses() {
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
-                Все
+                {t('courses.all')}
               </button>
               <button
                 onClick={() => setFilter('beginner')}
@@ -369,7 +369,7 @@ export default function Courses() {
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
-                Начинающие
+                {t('courses.beginner')}
               </button>
               <button
                 onClick={() => setFilter('intermediate')}
@@ -379,7 +379,7 @@ export default function Courses() {
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
-                Средний
+                {t('courses.intermediate')}
               </button>
               <button
                 onClick={() => setFilter('advanced')}
@@ -389,7 +389,7 @@ export default function Courses() {
                     : 'text-gray-400 hover:text-white'
                 }`
               }>
-                Продвинутые
+                {t('courses.advanced')}
               </button>
             </div>
           </motion.div>
@@ -419,7 +419,7 @@ export default function Courses() {
                     {course.isNew && (
                       <div className="absolute top-4 left-4 z-10">
                         <span className="px-3 py-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full text-xs font-bold text-white">
-                          НОВЫЙ
+                          {t('coursesPage.badges.new')}
                         </span>
                       </div>
                     )}
@@ -427,7 +427,7 @@ export default function Courses() {
                       <div className="absolute top-4 right-4 z-10">
                         <span className="px-3 py-1 bg-gradient-to-r from-yellow-600 to-orange-500 rounded-full text-xs font-bold text-white flex items-center gap-1">
                           <TrendingUp className="w-3 h-3" />
-                          ТОП
+                          {t('coursesPage.badges.top')}
                         </span>
                       </div>
                     )}
@@ -480,13 +480,13 @@ export default function Courses() {
                         <div className="flex flex-wrap items-center gap-3 mb-3">
                           {course.isNew && (
                             <span className="px-3 py-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full text-xs font-bold text-white">
-                              НОВЫЙ
+                              {t('coursesPage.badges.new')}
                             </span>
                           )}
                           {course.isBestseller && (
                             <span className="px-3 py-1 bg-gradient-to-r from-yellow-600 to-orange-500 rounded-full text-xs font-bold text-white flex items-center gap-1">
                               <TrendingUp className="w-3 h-3" />
-                              ТОП КУРС
+                              {t('coursesPage.badges.topCourse')}
                             </span>
                           )}
                           <span className="px-3 py-1 bg-gray-800 rounded-full text-xs font-medium text-gray-300">
@@ -513,7 +513,7 @@ export default function Courses() {
                           </div>
                           <div className="flex items-center gap-2">
                             <Users className="w-4 h-4 text-green-500" />
-                            <span>{course.studentsCount} студентов</span>
+                            <span>{course.studentsCount} {t('courses.students')}</span>
                           </div>
                           <div className="flex items-center gap-2">
                             <Target className="w-4 h-4 text-primary" />
@@ -525,7 +525,7 @@ export default function Courses() {
                         {course.progress && (
                           <div className="mb-4">
                             <div className="flex justify-between text-sm mb-1">
-                              <span className="text-gray-400">Прогресс</span>
+                              <span className="text-gray-400">{t('coursesPage.progress')}</span>
                               <span className="text-primary font-semibold">{course.progress}%</span>
                             </div>
                             <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
@@ -541,9 +541,9 @@ export default function Courses() {
                         {/* Price & CTA */}
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-3xl font-bold text-white">{course.price} с</div>
+                            <div className="text-3xl font-bold text-white">{course.price} {t('common.currency')}</div>
                             {course.originalPrice && (
-                              <div className="text-sm text-gray-500 line-through">{course.originalPrice} с</div>
+                              <div className="text-sm text-gray-500 line-through">{course.originalPrice} {t('common.currency')}</div>
                             )}
                           </div>
                           
@@ -552,7 +552,7 @@ export default function Courses() {
                               <Heart className="w-5 h-5" />
                             </button>
                             <button className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl font-semibold text-white hover:from-red-600 hover:to-primary transition-all duration-300">
-                              Подробнее
+                              {t('coursesPage.actions.details')}
                             </button>
                           </div>
                         </div>
@@ -573,11 +573,11 @@ export default function Courses() {
               <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-primary/20 to-red-600/20 flex items-center justify-center">
                 <BookOpen className="w-12 h-12 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Курсы не найдены</h3>
+              <h3 className="text-2xl font-bold text-white mb-3">{t('coursesPage.empty.title')}</h3>
               <p className="text-gray-400 mb-6">
                 {searchTerm 
-                  ? `По запросу "${searchTerm}" ничего не найдено. Попробуйте изменить поисковый запрос.`
-                  : 'Попробуйте изменить фильтры или выберите другую категорию.'
+                  ? t('coursesPage.empty.withQuery', { query: searchTerm })
+                  : t('coursesPage.empty.noFilters')
                 }
               </p>
               <div className="flex flex-wrap justify-center gap-4">
@@ -585,7 +585,7 @@ export default function Courses() {
                   onClick={() => setSearchTerm('')}
                   className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-white font-medium transition-colors"
                 >
-                  Сбросить поиск
+                  {t('coursesPage.actions.resetSearch')}
                 </button>
                 <button
                   onClick={() => {
@@ -595,7 +595,7 @@ export default function Courses() {
                   }}
                   className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl text-white font-medium hover:from-red-600 hover:to-primary transition-all"
                 >
-                  Смотреть все курсы
+                  {t('coursesPage.actions.viewAll')}
                 </button>
               </div>
             </div>
@@ -637,13 +637,12 @@ export default function Courses() {
           className="mt-20 p-8 rounded-2xl bg-gradient-to-r from-primary/10 via-black/50 to-primary/10 border border-gray-800 text-center"
         >
           <Award className="w-16 h-16 text-primary mx-auto mb-6" />
-          <h3 className="text-3xl font-bold text-white mb-4">Не нашли подходящий курс?</h3>
+          <h3 className="text-3xl font-bold text-white mb-4">{t('coursesPage.cta.title')}</h3>
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-            Мы готовы разработать индивидуальную программу тренировок специально для вас. 
-            Запишитесь на консультацию с нашим тренером.
+            {t('coursesPage.cta.subtitle')}
           </p>
           <button className="px-8 py-4 bg-gradient-to-r from-primary to-red-600 rounded-xl font-bold text-lg hover:from-red-600 hover:to-primary transition-all duration-300">
-            Записаться на консультацию
+            {t('coursesPage.cta.button')}
           </button>
         </motion.div>
       </section>

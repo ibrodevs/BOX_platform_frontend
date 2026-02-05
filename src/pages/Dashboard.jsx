@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { 
   TrendingUp, Award, Clock, BookOpen, Target, Trophy,
@@ -12,8 +12,10 @@ import {
 import { getMyCourses } from '../services/apiService'
 import Loader from '../components/ui/Loader'
 import CourseProgress from '../components/courses/CourseProgress'
+import { useTranslation } from 'react-i18next'
 
 export default function Dashboard() {
+  const { t } = useTranslation()
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState({
     totalCourses: 0,
@@ -21,7 +23,7 @@ export default function Dashboard() {
     totalLessons: 0,
     completedLessons: 0,
     streak: 7,
-    rank: 'Новичок',
+    rank: 'beginner',
     xp: 1250,
     nextLevelXp: 2000,
     weeklyProgress: 65,
@@ -30,24 +32,27 @@ export default function Dashboard() {
   const [recentCourses, setRecentCourses] = useState([])
   const [dailyTip, setDailyTip] = useState('')
   const [showNotifications, setShowNotifications] = useState(false)
-  const [notifications, setNotifications] = useState([
-    { id: 1, type: 'success', title: 'Урок завершён', message: 'Вы завершили урок "Базовая стойка"', time: '2 часа назад', read: false },
-    { id: 2, type: 'info', title: 'Новый курс доступен', message: 'Курс "Продвинутая техника" теперь в вашей библиотеке', time: '1 день назад', read: false },
-    { id: 3, type: 'warning', title: 'Не пропустите тренировку', message: 'Ваша следующая тренировка запланирована на завтра', time: '2 дня назад', read: true },
-  ])
+  const [notifications, setNotifications] = useState([])
 
-  const tips = [
-    'Занимайтесь утром для лучшей концентрации',
-    'Пейте воду во время тренировки',
-    'Не забывайте разминаться перед тренировкой',
-    'Следите за дыханием во время ударов',
-    'Регулярно растягивайтесь для гибкости'
-  ]
+  const tips = useMemo(() => ([
+    t('dashboardPage.tips.0'),
+    t('dashboardPage.tips.1'),
+    t('dashboardPage.tips.2'),
+    t('dashboardPage.tips.3'),
+    t('dashboardPage.tips.4')
+  ]), [t])
+
+  const notificationsData = useMemo(() => ([
+    { id: 1, type: 'success', title: t('dashboardPage.notifications.0.title'), message: t('dashboardPage.notifications.0.message'), time: t('dashboardPage.notifications.0.time'), read: false },
+    { id: 2, type: 'info', title: t('dashboardPage.notifications.1.title'), message: t('dashboardPage.notifications.1.message'), time: t('dashboardPage.notifications.1.time'), read: false },
+    { id: 3, type: 'warning', title: t('dashboardPage.notifications.2.title'), message: t('dashboardPage.notifications.2.message'), time: t('dashboardPage.notifications.2.time'), read: true },
+  ]), [t])
 
   useEffect(() => {
     fetchDashboardData()
     setDailyTip(tips[Math.floor(Math.random() * tips.length)])
-  }, [])
+    setNotifications(notificationsData)
+  }, [tips, notificationsData])
 
   const fetchDashboardData = async () => {
     try {
@@ -62,7 +67,7 @@ export default function Dashboard() {
         progress: course.progress || 0, // Используем реальный прогресс из API
         lastAccessed: course.last_accessed ? new Date(course.last_accessed) : new Date(),
         difficulty: course.level || 'beginner',
-        duration: `${course.duration_hours || 5} часов`,
+        duration: `${course.duration_hours || 5} ${t('courses.hours')}`,
         total_lessons: course.lessons_count || course.total_lessons || 12,
         completed_lessons: course.completed_lessons || 0
       }))
@@ -82,7 +87,7 @@ export default function Dashboard() {
         totalLessons,
         completedLessons,
         streak: Math.floor(Math.random() * 30) + 1, // TODO: получать с бэкенда
-        rank: ['Новичок', 'Ученик', 'Боец', 'Чемпион', 'Мастер'][Math.floor(enrichedCourses.length / 2)],
+        rank: ['beginner', 'apprentice', 'fighter', 'champion', 'master'][Math.floor(enrichedCourses.length / 2)],
         xp: completedLessons * 50, // 50 XP за урок
         nextLevelXp: 2000,
         weeklyProgress: Math.min(100, (completedLessons / totalLessons) * 100),
@@ -142,10 +147,10 @@ export default function Dashboard() {
             <div>
               <h1 className="text-4xl md:text-5xl font-black mb-2">
                 <span className="bg-gradient-to-r from-primary via-white to-primary bg-[length:200%_auto] bg-clip-text text-transparent">
-                  Личный кабинет
+                  {t('dashboardPage.title')}
                 </span>
               </h1>
-              <p className="text-gray-400">Добро пожаловать в вашу учебную панель</p>
+              <p className="text-gray-400">{t('dashboardPage.subtitle')}</p>
             </div>
             
             <div className="flex items-center gap-4">
@@ -164,35 +169,35 @@ export default function Dashboard() {
             {[
               {
                 icon: Trophy,
-                title: 'Текущий ранг',
-                value: stats.rank,
+                title: t('dashboardPage.stats.currentRank'),
+                value: t(`dashboardPage.ranks.${stats.rank}`),
                 color: 'from-yellow-500 to-orange-500',
                 progress: (stats.xp / stats.nextLevelXp) * 100,
-                subtext: `${stats.xp} XP / ${stats.nextLevelXp} XP`
+                subtext: t('dashboardPage.stats.rankProgress', { xp: stats.xp, next: stats.nextLevelXp })
               },
               {
                 icon: ClockIcon,
-                title: 'Дней подряд',
-                value: `${stats.streak} дней`,
+                title: t('dashboardPage.stats.streak'),
+                value: t('dashboardPage.stats.streakValue', { count: stats.streak }),
                 color: 'from-green-500 to-emerald-600',
                 progress: (stats.streak / 30) * 100,
-                subtext: 'Рекорд: 30 дней'
+                subtext: t('dashboardPage.stats.streakRecord')
               },
               {
                 icon: TrendingUpIcon,
-                title: 'Прогресс за неделю',
+                title: t('dashboardPage.stats.weeklyProgress'),
                 value: `${stats.weeklyProgress}%`,
                 color: 'from-blue-500 to-cyan-500',
                 progress: stats.weeklyProgress,
-                subtext: '+5% с прошлой недели'
+                subtext: t('dashboardPage.stats.weeklyDelta', { value: 5 })
               },
               {
                 icon: Book,
-                title: 'Всего часов',
-                value: `${stats.totalHours}ч`,
+                title: t('dashboardPage.stats.totalHours'),
+                value: t('dashboardPage.stats.totalHoursValue', { hours: stats.totalHours }),
                 color: 'from-purple-500 to-pink-500',
                 progress: 75,
-                subtext: 'Цель: 100 часов'
+                subtext: t('dashboardPage.stats.totalHoursGoal', { hours: 100 })
               }
             ].map((stat, index) => (
               <motion.div
@@ -218,7 +223,7 @@ export default function Dashboard() {
                   
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs text-gray-500">
-                      <span>Прогресс</span>
+                      <span>{t('dashboardPage.stats.progress')}</span>
                       <span>{Math.round(stat.progress)}%</span>
                     </div>
                     <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
@@ -247,8 +252,8 @@ export default function Dashboard() {
             <div className="bg-gradient-to-br from-gray-900/50 to-black rounded-2xl border border-gray-800 p-6 mb-8">
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-1">Продолжить обучение</h2>
-                  <p className="text-gray-400">Возобновите с того места, где остановились</p>
+                  <h2 className="text-2xl font-bold text-white mb-1">{t('dashboardPage.continueLearning.title')}</h2>
+                  <p className="text-gray-400">{t('dashboardPage.continueLearning.subtitle')}</p>
                 </div>
                 <Link to="/dashboard/my-courses" className="text-primary hover:text-white transition-colors">
                   <ChevronRight className="w-6 h-6" />
@@ -282,8 +287,8 @@ export default function Dashboard() {
                                 course.difficulty === 'intermediate' ? 'bg-yellow-600' :
                                 'bg-red-600'
                               }`}>
-                                {course.difficulty === 'beginner' ? 'Начальный' :
-                                 course.difficulty === 'intermediate' ? 'Средний' : 'Продвинутый'}
+                                {course.difficulty === 'beginner' ? t('courses.beginner') :
+                                 course.difficulty === 'intermediate' ? t('courses.intermediate') : t('courses.advanced')}
                               </div>
                             </div>
                           </div>
@@ -309,14 +314,14 @@ export default function Dashboard() {
                               <div className="flex items-center gap-4 text-sm text-gray-400">
                                 <div className="flex items-center gap-1">
                                   <BookOpen className="w-4 h-4" />
-                                  <span>{course.total_lessons} уроков</span>
+                                  <span>{t('courses.lessonsCount', { count: course.total_lessons })}</span>
                                 </div>
                                 <div className="flex items-center gap-1">
                                   <Calendar className="w-4 h-4" />
                                   <span>
                                     {course.lastAccessed 
-                                      ? `${Math.floor((Date.now() - course.lastAccessed) / (1000 * 60 * 60 * 24))} дн. назад`
-                                      : 'Недавно'
+                                      ? t('dashboardPage.lastAccessedDays', { days: Math.floor((Date.now() - course.lastAccessed) / (1000 * 60 * 60 * 24)) })
+                                      : t('dashboardPage.lastAccessedRecent')
                                     }
                                   </span>
                                 </div>
@@ -340,11 +345,11 @@ export default function Dashboard() {
                   <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-primary/20 to-red-600/20 flex items-center justify-center">
                     <BookOpen className="w-10 h-10 text-primary" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Курсы не найдены</h3>
-                  <p className="text-gray-400 mb-6">Начните свой путь к чемпионству с первого курса</p>
+                  <h3 className="text-xl font-bold text-white mb-3">{t('dashboardPage.emptyCourses.title')}</h3>
+                  <p className="text-gray-400 mb-6">{t('dashboardPage.emptyCourses.subtitle')}</p>
                   <Link to="/courses" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl font-semibold text-white hover:from-red-600 hover:to-primary transition-all">
                     <Sparkles className="w-5 h-5" />
-                    Выбрать курс
+                    {t('dashboardPage.emptyCourses.cta')}
                   </Link>
                 </div>
               )}
@@ -353,10 +358,10 @@ export default function Dashboard() {
             {/* Quick Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { icon: Award, label: 'Завершено курсов', value: stats.completedCourses, color: 'text-green-500' },
-                { icon: Target, label: 'Пройдено уроков', value: stats.completedLessons, color: 'text-blue-500' },
-                { icon: Zap, label: 'Всего курсов', value: stats.totalCourses, color: 'text-yellow-500' },
-                { icon: Users, label: 'Всего уроков', value: stats.totalLessons, color: 'text-purple-500' },
+                { icon: Award, label: t('dashboardPage.quickStats.completedCourses'), value: stats.completedCourses, color: 'text-green-500' },
+                { icon: Target, label: t('dashboardPage.quickStats.completedLessons'), value: stats.completedLessons, color: 'text-blue-500' },
+                { icon: Zap, label: t('dashboardPage.quickStats.totalCourses'), value: stats.totalCourses, color: 'text-yellow-500' },
+                { icon: Users, label: t('dashboardPage.quickStats.totalLessons'), value: stats.totalLessons, color: 'text-purple-500' },
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -391,28 +396,28 @@ export default function Dashboard() {
                 <div className="p-2 rounded-xl bg-gradient-to-r from-blue-500/20 to-cyan-500/20">
                   <Sparkles className="w-6 h-6 text-blue-500" />
                 </div>
-                <h3 className="font-bold text-lg">Совет дня</h3>
+                <h3 className="font-bold text-lg">{t('dashboardPage.dailyTip.title')}</h3>
               </div>
               <p className="text-gray-300 mb-4">{dailyTip}</p>
               <div className="flex items-center justify-between text-sm text-gray-500">
-                <span>Обновляется ежедневно</span>
+                <span>{t('dashboardPage.dailyTip.updated')}</span>
                 <button className="text-primary hover:text-white transition-colors">
-                  Показать еще
+                  {t('dashboardPage.dailyTip.showMore')}
                 </button>
               </div>
             </div>
 
             {/* Quick Actions */}
             <div className="bg-gradient-to-br from-gray-900/50 to-black rounded-2xl border border-gray-800 p-6">
-              <h3 className="font-bold text-lg mb-4">Быстрые действия</h3>
+              <h3 className="font-bold text-lg mb-4">{t('dashboardPage.quickActions.title')}</h3>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { icon: BookOpen, label: 'Мои курсы', to: '/dashboard/my-courses', color: 'from-blue-500 to-cyan-500' },
-                  { icon: User, label: 'Профиль', to: '/dashboard/profile', color: 'from-purple-500 to-pink-500' },
-                  { icon: ShoppingBag, label: 'Магазин', to: '/merch', color: 'from-green-500 to-emerald-500' },
-                  { icon: Trophy, label: 'Мои заказы', to: '/dashboard/orders', color: 'from-primary to-red-600' },
-                  { icon: Download, label: 'Материалы', to: '/dashboard/materials', color: 'from-yellow-500 to-orange-500' },
-                  { icon: HelpCircle, label: 'Помощь', to: '/help', color: 'from-red-500 to-pink-500' },
+                  { icon: BookOpen, label: t('dashboardPage.quickActions.myCourses'), to: '/dashboard/my-courses', color: 'from-blue-500 to-cyan-500' },
+                  { icon: User, label: t('dashboardPage.quickActions.profile'), to: '/dashboard/profile', color: 'from-purple-500 to-pink-500' },
+                  { icon: ShoppingBag, label: t('dashboardPage.quickActions.shop'), to: '/merch', color: 'from-green-500 to-emerald-500' },
+                  { icon: Trophy, label: t('dashboardPage.quickActions.orders'), to: '/dashboard/orders', color: 'from-primary to-red-600' },
+                  { icon: Download, label: t('dashboardPage.quickActions.materials'), to: '/dashboard/materials', color: 'from-yellow-500 to-orange-500' },
+                  { icon: HelpCircle, label: t('dashboardPage.quickActions.help'), to: '/help', color: 'from-red-500 to-pink-500' },
                 ].map((action, index) => (
                   <motion.div
                     key={action.label}
@@ -436,17 +441,17 @@ export default function Dashboard() {
             {/* Monthly Goals */}
             <div className="bg-gradient-to-br from-gray-900/50 to-black rounded-2xl border border-gray-800 p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-lg">Цели на месяц</h3>
+                <h3 className="font-bold text-lg">{t('dashboardPage.monthlyGoals.title')}</h3>
                 <div className="text-primary font-bold">{stats.monthlyGoals}/5</div>
               </div>
               
               <div className="space-y-4">
                 {[
-                  { label: 'Завершить 1 курс', completed: true },
-                  { label: 'Тренироваться 15 дней подряд', completed: false },
-                  { label: 'Пройди 20 уроков', completed: true },
-                  { label: 'Пригласить друга', completed: false },
-                  { label: 'Заработать 1000 XP', completed: true },
+                  { label: t('dashboardPage.monthlyGoals.items.0'), completed: true },
+                  { label: t('dashboardPage.monthlyGoals.items.1'), completed: false },
+                  { label: t('dashboardPage.monthlyGoals.items.2'), completed: true },
+                  { label: t('dashboardPage.monthlyGoals.items.3'), completed: false },
+                  { label: t('dashboardPage.monthlyGoals.items.4'), completed: true },
                 ].map((goal, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center ${

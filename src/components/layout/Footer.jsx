@@ -6,8 +6,10 @@ import {
   ChevronRight, Heart, Send, Trophy, Crown
 } from 'lucide-react'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function Footer() {
+  const { t } = useTranslation()
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
 
@@ -21,60 +23,60 @@ export default function Footer() {
   }
 
   const socialLinks = [
-    { icon: Instagram, href: '#', label: 'Instagram', color: 'from-purple-600 to-pink-600' },
-    { icon: Youtube, href: '#', label: 'YouTube', color: 'from-red-600 to-red-700' },
-    { icon: Facebook, href: '#', label: 'Facebook', color: 'from-blue-600 to-blue-700' },
-    { icon: Twitter, href: '#', label: 'Twitter', color: 'from-sky-500 to-blue-500' },
-    { icon: MessageCircle, href: '#', label: 'Telegram', color: 'from-blue-400 to-blue-500' },
+    { icon: Instagram, href: '#', label: t('footer.social.instagram'), color: 'from-purple-600 to-pink-600' },
+    { icon: Youtube, href: '#', label: t('footer.social.youtube'), color: 'from-red-600 to-red-700' },
+    { icon: Facebook, href: '#', label: t('footer.social.facebook'), color: 'from-blue-600 to-blue-700' },
+    { icon: Twitter, href: '#', label: t('footer.social.twitter'), color: 'from-sky-500 to-blue-500' },
+    { icon: MessageCircle, href: '#', label: t('footer.social.telegram'), color: 'from-blue-400 to-blue-500' },
   ]
 
   const footerLinks = [
     {
-      title: 'Школа',
+      title: t('footer.links.school.title'),
       links: [
-        { label: 'О Дмитрии Биволе', to: '/about' },
-        { label: 'Наша миссия', to: '/mission' },
-        { label: 'Тренеры', to: '/coaches' },
-        { label: 'Отзывы', to: '/testimonials' },
-        { label: 'Карьера', to: '/careers' },
+        { label: t('footer.links.school.items.about'), to: '/about' },
+        { label: t('footer.links.school.items.mission'), to: '/mission' },
+        { label: t('footer.links.school.items.coaches'), to: '/coaches' },
+        { label: t('footer.links.school.items.testimonials'), to: '/testimonials' },
+        { label: t('footer.links.school.items.careers'), to: '/careers' },
       ]
     },
     {
-      title: 'Курсы',
+      title: t('footer.links.courses.title'),
       links: [
-        { label: 'Все курсы', to: '/courses' },
-        { label: 'Для начинающих', to: '/courses/beginner' },
-        { label: 'Продвинутый уровень', to: '/courses/advanced' },
-        { label: 'Профессиональный', to: '/courses/pro' },
-        { label: 'Тренировочные планы', to: '/plans' },
+        { label: t('footer.links.courses.items.all'), to: '/courses' },
+        { label: t('footer.links.courses.items.beginner'), to: '/courses/beginner' },
+        { label: t('footer.links.courses.items.advanced'), to: '/courses/advanced' },
+        { label: t('footer.links.courses.items.pro'), to: '/courses/pro' },
+        { label: t('footer.links.courses.items.plans'), to: '/plans' },
       ]
     },
     {
-      title: 'Поддержка',
+      title: t('footer.links.support.title'),
       links: [
-        { label: 'Помощь', to: '/help' },
-        { label: 'FAQ', to: '/faq' },
-        { label: 'Контакты', to: '/contact' },
-        { label: 'Статус системы', to: '/status' },
-        { label: 'Сообщество', to: '/community' },
+        { label: t('footer.links.support.items.help'), to: '/help' },
+        { label: t('footer.links.support.items.faq'), to: '/faq' },
+        { label: t('footer.links.support.items.contact'), to: '/contact' },
+        { label: t('footer.links.support.items.status'), to: '/status' },
+        { label: t('footer.links.support.items.community'), to: '/community' },
       ]
     },
     {
-      title: 'Правовая информация',
+      title: t('footer.links.legal.title'),
       links: [
-        { label: 'Политика конфиденциальности', to: '/privacy' },
-        { label: 'Условия использования', to: '/terms' },
-        { label: 'Возврат средств', to: '/refund' },
-        { label: 'Cookie-политика', to: '/cookies' },
-        { label: 'Лицензии', to: '/licenses' },
+        { label: t('footer.links.legal.items.privacy'), to: '/privacy' },
+        { label: t('footer.links.legal.items.terms'), to: '/terms' },
+        { label: t('footer.links.legal.items.refund'), to: '/refund' },
+        { label: t('footer.links.legal.items.cookies'), to: '/cookies' },
+        { label: t('footer.links.legal.items.licenses'), to: '/licenses' },
       ]
     }
   ]
 
   const contactInfo = [
-    { icon: Mail, text: 'support@bivolboxing.com', href: 'mailto:support@bivolboxing.com' },
-    { icon: Phone, text: '+996 (XXX) XXX-XXX', href: 'tel:+996XXXXXXXXX' },
-    { icon: MapPin, text: 'Бишкек, Кыргызстан', href: '#' },
+    { icon: Mail, text: t('footer.contact.email'), href: 'mailto:support@bivolboxing.com' },
+    { icon: Phone, text: t('footer.contact.phone'), href: 'tel:+996XXXXXXXXX' },
+    { icon: MapPin, text: t('footer.contact.location'), href: '#' },
   ]
 
   return (
@@ -136,21 +138,20 @@ export default function Footer() {
               </Link>
               
               <p className="text-gray-400 mb-6 max-w-md">
-                Ведущая школа бокса под руководством абсолютного чемпиона мира Дмитрия Бивола. 
-                Объединяем традиции чемпионского бокса с инновационными технологиями обучения.
+                {t('footer.description')}
               </p>
               
               <div className="flex items-center gap-4 mb-8">
                 <Award className="w-6 h-6 text-yellow-500" />
-                <span className="text-gray-300">Сертифицированная школа</span>
+                <span className="text-gray-300">{t('footer.badges.certified')}</span>
                 <Shield className="w-6 h-6 text-green-500" />
-                <span className="text-gray-300">Безопасные платежи</span>
+                <span className="text-gray-300">{t('footer.badges.securePayments')}</span>
               </div>
             </div>
             
             {/* Social Links */}
             <div className="mb-8">
-              <h4 className="font-bold text-lg mb-4">Мы в соцсетях</h4>
+              <h4 className="font-bold text-lg mb-4">{t('footer.socialTitle')}</h4>
               <div className="flex flex-wrap gap-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -173,7 +174,7 @@ export default function Footer() {
             
             {/* Contact Info */}
             <div className="space-y-3">
-              <h4 className="font-bold text-lg mb-4">Контакты</h4>
+              <h4 className="font-bold text-lg mb-4">{t('footer.contactsTitle')}</h4>
               {contactInfo.map((contact, index) => (
                 <motion.a
                   key={index}
@@ -240,8 +241,8 @@ export default function Footer() {
                 <Globe className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h4 className="text-xl font-bold mb-2">Мобильное приложение</h4>
-                <p className="text-gray-400">Тренируйтесь где угодно с нашим приложением</p>
+                <h4 className="text-xl font-bold mb-2">{t('footer.app.title')}</h4>
+                <p className="text-gray-400">{t('footer.app.subtitle')}</p>
               </div>
             </div>
             
@@ -254,7 +255,7 @@ export default function Footer() {
               >
                 <div className="text-2xl">📱</div>
                 <div className="text-left">
-                  <div className="text-xs text-gray-400">Download on</div>
+                  <div className="text-xs text-gray-400">{t('footer.app.downloadOn')}</div>
                   <div className="font-bold">App Store</div>
                 </div>
               </motion.a>
@@ -267,7 +268,7 @@ export default function Footer() {
               >
                 <div className="text-2xl">🤖</div>
                 <div className="text-left">
-                  <div className="text-xs text-gray-400">Get it on</div>
+                  <div className="text-xs text-gray-400">{t('footer.app.getItOn')}</div>
                   <div className="font-bold">Google Play</div>
                 </div>
               </motion.a>
@@ -279,22 +280,22 @@ export default function Footer() {
         <div className="pt-8 border-t border-gray-800/50">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-gray-400 text-sm">
-              <p>&copy; 2026 Bivol School. Все права защищены.</p>
+              <p>{t('footer.copyright', { year: 2026 })}</p>
             </div>
             
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
                 <Globe className="w-5 h-5 text-gray-400" />
                 <select className="bg-transparent text-gray-400 focus:outline-none">
-                  <option>Русский</option>
-                  <option>English</option>
-                  <option>Español</option>
+                  <option>{t('languages.ru')}</option>
+                  <option>{t('languages.en')}</option>
+                  <option>{t('languages.es')}</option>
                 </select>
               </div>
               
               <div className="flex items-center gap-2 text-gray-400">
                 <Shield className="w-5 h-5" />
-                <span className="text-sm">Защищено SSL</span>
+                <span className="text-sm">{t('footer.sslProtected')}</span>
               </div>
               
               <div className="flex items-center gap-4">

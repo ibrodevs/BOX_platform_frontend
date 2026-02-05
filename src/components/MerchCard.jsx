@@ -5,9 +5,11 @@ import {
   Check, TrendingUp, Package, Award
 } from 'lucide-react'
 import { useCart } from '../hooks/useCart'
+import { useTranslation } from 'react-i18next'
 
 export default function MerchCard({ item, index = 0 }) {
   const { addItem, isInCart } = useCart()
+  const { t } = useTranslation()
   const [selectedSize, setSelectedSize] = useState(item.sizes?.[0] || null)
   const [selectedColor, setSelectedColor] = useState(item.colors?.[0] || null)
   const [isLiked, setIsLiked] = useState(false)
@@ -42,7 +44,7 @@ export default function MerchCard({ item, index = 0 }) {
             className="px-3 py-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center gap-1 shadow-lg"
           >
             <Sparkles className="w-3 h-3 text-white" />
-            <span className="text-xs font-bold text-white">НОВИНКА</span>
+            <span className="text-xs font-bold text-white">{t('shop.badges.new')}</span>
           </motion.div>
         )}
         
@@ -53,7 +55,7 @@ export default function MerchCard({ item, index = 0 }) {
             className="px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 flex items-center gap-1 shadow-lg"
           >
             <TrendingUp className="w-3 h-3 text-white" />
-            <span className="text-xs font-bold text-white">ХИТ</span>
+            <span className="text-xs font-bold text-white">{t('shop.badges.bestseller')}</span>
           </motion.div>
         )}
         
@@ -64,7 +66,7 @@ export default function MerchCard({ item, index = 0 }) {
             className="px-3 py-1 rounded-full bg-gradient-to-r from-red-600 to-pink-600 flex items-center gap-1 shadow-lg"
           >
             <Zap className="w-3 h-3 text-white" />
-            <span className="text-xs font-bold text-white">ЛИМИТЕД</span>
+            <span className="text-xs font-bold text-white">{t('shop.badges.limited')}</span>
           </motion.div>
         )}
       </div>
@@ -99,7 +101,7 @@ export default function MerchCard({ item, index = 0 }) {
         {/* Stock Warning */}
         {item.stock < 10 && (
           <div className="absolute bottom-4 left-4 px-3 py-1 rounded-lg bg-red-600/90 backdrop-blur-sm">
-            <span className="text-xs font-semibold text-white">Осталось {item.stock} шт.</span>
+            <span className="text-xs font-semibold text-white">{t('shop.stockLeft', { count: item.stock })}</span>
           </div>
         )}
       </div>
@@ -110,7 +112,7 @@ export default function MerchCard({ item, index = 0 }) {
         <div className="flex items-center gap-2 mb-3">
           <Tag className="w-4 h-4 text-primary" />
           <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-            {item.category}
+            {t(`shop.categories.${item.category}`)}
           </span>
         </div>
         
@@ -130,14 +132,14 @@ export default function MerchCard({ item, index = 0 }) {
             <Star className="w-4 h-4 text-yellow-500 fill-current" />
             <span className="text-sm font-semibold text-white">{item.rating}</span>
           </div>
-          <span className="text-xs text-gray-500">({item.reviews} отзывов)</span>
+          <span className="text-xs text-gray-500">{t('shop.reviews', { count: item.reviews })}</span>
         </div>
         
         {/* Size Selector */}
         <div className="mb-4">
           {item.sizes && item.sizes.length > 0 && (
             <>
-              <label className="text-xs text-gray-400 mb-2 block">Размер:</label>
+              <label className="text-xs text-gray-400 mb-2 block">{t('merch.size')}:</label>
               <div className="flex flex-wrap gap-2 min-h-[2rem]">
                 {item.sizes.map(size => (
                   <button
@@ -161,7 +163,7 @@ export default function MerchCard({ item, index = 0 }) {
         <div className="mb-4">
           {item.colors && item.colors.length > 0 && (
             <>
-              <label className="text-xs text-gray-400 mb-2 block">Цвет:</label>
+              <label className="text-xs text-gray-400 mb-2 block">{t('merch.color')}:</label>
               <div className="flex flex-wrap gap-2 min-h-[2rem]">
                 {item.colors.map(color => (
                   <button
@@ -188,9 +190,9 @@ export default function MerchCard({ item, index = 0 }) {
         <div className="flex items-center justify-between mb-4">
           <div className="flex flex-col">
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-white">{item.price.toLocaleString()} с</span>
+              <span className="text-2xl font-bold text-white">{item.price.toLocaleString()} {t('common.currency')}</span>
               {item.originalPrice && (
-                <span className="text-sm text-gray-500 line-through">{item.originalPrice.toLocaleString()} с</span>
+                <span className="text-sm text-gray-500 line-through">{item.originalPrice.toLocaleString()} {t('common.currency')}</span>
               )}
             </div>
             <span className="text-xs text-gray-500 mt-1 line-clamp-1">{item.material}</span>
@@ -212,12 +214,12 @@ export default function MerchCard({ item, index = 0 }) {
           {inCart ? (
             <>
               <Check className="w-5 h-5" />
-              <span>В корзине</span>
+              <span>{t('shop.inCart')}</span>
             </>
           ) : (
             <>
               <ShoppingCart className="w-5 h-5" />
-              <span>Добавить в корзину</span>
+              <span>{t('shop.addToCart')}</span>
             </>
           )}
         </motion.button>
@@ -230,7 +232,7 @@ export default function MerchCard({ item, index = 0 }) {
             exit={{ opacity: 0 }}
             className="absolute bottom-4 left-4 right-4 bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-lg text-center"
           >
-            ✓ Добавлено в корзину!
+            {t('shop.addedToCart')}
           </motion.div>
         )}
         

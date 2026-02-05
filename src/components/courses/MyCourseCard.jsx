@@ -6,8 +6,10 @@ import {
   Target, Zap
 } from 'lucide-react'
 import CourseProgress from './CourseProgress'
+import { useTranslation } from 'react-i18next'
 
 export default function MyCourseCard({ course, index = 0 }) {
+  const { t, i18n } = useTranslation()
   const progressPercentage = course.progress || 0
   const isCompleted = progressPercentage >= 100
   const isStarted = progressPercentage > 0
@@ -32,7 +34,7 @@ export default function MyCourseCard({ course, index = 0 }) {
             className="px-3 py-1 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center gap-1 shadow-lg"
           >
             <CheckCircle className="w-3 h-3 text-white" />
-            <span className="text-xs font-bold text-white">ЗАВЕРШЕНО</span>
+            <span className="text-xs font-bold text-white">{t('myCourses.status.completed')}</span>
           </motion.div>
         ) : isStarted ? (
           <motion.div
@@ -41,7 +43,7 @@ export default function MyCourseCard({ course, index = 0 }) {
             className="px-3 py-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center gap-1 shadow-lg"
           >
             <Play className="w-3 h-3 text-white" />
-            <span className="text-xs font-bold text-white">В ПРОЦЕССЕ</span>
+            <span className="text-xs font-bold text-white">{t('myCourses.status.inProgress')}</span>
           </motion.div>
         ) : (
           <motion.div
@@ -50,7 +52,7 @@ export default function MyCourseCard({ course, index = 0 }) {
             className="px-3 py-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center gap-1 shadow-lg"
           >
             <Zap className="w-3 h-3 text-white" />
-            <span className="text-xs font-bold text-white">НОВЫЙ</span>
+            <span className="text-xs font-bold text-white">{t('myCourses.status.new')}</span>
           </motion.div>
         )}
         
@@ -62,7 +64,7 @@ export default function MyCourseCard({ course, index = 0 }) {
             className="px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 flex items-center gap-1 shadow-lg"
           >
             <Award className="w-3 h-3 text-white" />
-            <span className="text-xs font-bold text-white">СЕРТИФИКАТ</span>
+            <span className="text-xs font-bold text-white">{t('myCourses.certificate')}</span>
           </motion.div>
         )}
       </div>
@@ -99,7 +101,7 @@ export default function MyCourseCard({ course, index = 0 }) {
               <div className="flex items-center gap-2">
                 <Calendar className="w-3 h-3 text-gray-400" />
                 <span className="text-xs text-gray-300">
-                  {new Date(course.lastAccessed).toLocaleDateString('ru-RU')}
+                  {new Date(course.lastAccessed).toLocaleDateString(i18n.language || 'ru')}
                 </span>
               </div>
             </div>
@@ -112,7 +114,7 @@ export default function MyCourseCard({ course, index = 0 }) {
         {/* Category & Level */}
         <div className="flex items-center justify-between mb-3">
           <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-            {course.category || 'Курс'}
+            {course.category || t('common.course')}
           </span>
           <div className={`px-2 py-1 rounded-lg text-xs font-bold ${
             course.level === 'beginner' ? 'bg-green-600/20 text-green-400' :
@@ -120,9 +122,9 @@ export default function MyCourseCard({ course, index = 0 }) {
             course.level === 'advanced' ? 'bg-red-600/20 text-red-400' :
             'bg-purple-600/20 text-purple-400'
           }`}>
-            {course.level === 'beginner' ? 'Начальный' :
-             course.level === 'intermediate' ? 'Средний' :
-             course.level === 'advanced' ? 'Продвинутый' : 'Профи'}
+            {course.level === 'beginner' ? t('courses.beginner') :
+             course.level === 'intermediate' ? t('courses.intermediate') :
+             course.level === 'advanced' ? t('courses.advanced') : t('courses.pro')}
           </div>
         </div>
         
@@ -151,11 +153,11 @@ export default function MyCourseCard({ course, index = 0 }) {
         <div className="grid grid-cols-3 gap-3 mb-4">
           <div className="flex items-center gap-2 text-sm text-gray-400">
             <BookOpen className="w-4 h-4 text-blue-500" />
-            <span>{course.total_lessons || 12} уроков</span>
+            <span>{t('courses.lessonsCount', { count: course.total_lessons || 12 })}</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-400">
             <Clock className="w-4 h-4 text-green-500" />
-            <span>{course.duration || '8ч'}</span>
+            <span>{course.duration || t('myCourses.defaultDuration', { hours: 8 })}</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-400">
             <Star className="w-4 h-4 text-yellow-500 fill-current" />
@@ -166,7 +168,7 @@ export default function MyCourseCard({ course, index = 0 }) {
         {/* Next Lesson */}
         {course.nextLesson && !isCompleted && (
           <div className="mb-4 p-3 rounded-lg bg-gray-900/50 border border-gray-800">
-            <div className="text-xs text-gray-400 mb-1">Следующий урок:</div>
+            <div className="text-xs text-gray-400 mb-1">{t('myCourses.nextLesson')}</div>
             <div className="text-sm font-semibold text-white">{course.nextLesson}</div>
           </div>
         )}
@@ -176,7 +178,7 @@ export default function MyCourseCard({ course, index = 0 }) {
           <div className="mb-4 p-3 rounded-lg bg-blue-600/10 border border-blue-600/30">
             <div className="flex items-center gap-2 mb-1">
               <Calendar className="w-4 h-4 text-blue-500" />
-              <span className="text-xs text-blue-400 font-semibold">Запланировано</span>
+              <span className="text-xs text-blue-400 font-semibold">{t('myCourses.scheduled')}</span>
             </div>
             <div className="text-sm font-semibold text-white">{course.upcomingLesson.title}</div>
             <div className="text-xs text-gray-400 mt-1">{course.upcomingLesson.scheduled}</div>
@@ -189,7 +191,7 @@ export default function MyCourseCard({ course, index = 0 }) {
             <div className="flex items-center justify-between text-xs mb-2">
               <span className="text-gray-400 flex items-center gap-1">
                 <Trophy className="w-3 h-3 text-yellow-500" />
-                Прогресс сертификации
+                {t('myCourses.certificationProgress')}
               </span>
               <span className="text-yellow-500 font-semibold">{course.certificationProgress}%</span>
             </div>
@@ -218,17 +220,17 @@ export default function MyCourseCard({ course, index = 0 }) {
               {isCompleted ? (
                 <>
                   <CheckCircle className="w-5 h-5" />
-                  <span>Повторить</span>
+                  <span>{t('myCourses.actions.repeat')}</span>
                 </>
               ) : isStarted ? (
                 <>
                   <Play className="w-5 h-5" />
-                  <span>Продолжить</span>
+                  <span>{t('myCourses.actions.continue')}</span>
                 </>
               ) : (
                 <>
                   <Play className="w-5 h-5" />
-                  <span>Начать</span>
+                  <span>{t('myCourses.actions.start')}</span>
                 </>
               )}
               
@@ -253,7 +255,7 @@ export default function MyCourseCard({ course, index = 0 }) {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="w-12 h-12 rounded-xl bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition-colors"
-              title="Скачать материалы"
+              title={t('myCourses.actions.downloadMaterials')}
             >
               <Download className="w-5 h-5 text-gray-400" />
             </motion.button>
@@ -265,12 +267,12 @@ export default function MyCourseCard({ course, index = 0 }) {
           <div className="mt-4 pt-4 border-t border-gray-800">
             <div className="flex items-center justify-between">
               <div className="text-xs text-gray-400">
-                Инструктор: <span className="text-white font-semibold">{course.instructor}</span>
+                {t('myCourses.instructor')} <span className="text-white font-semibold">{course.instructor}</span>
               </div>
               {course.students && (
                 <div className="flex items-center gap-1 text-xs text-gray-400">
                   <Target className="w-3 h-3" />
-                  <span>{course.students.toLocaleString()} студентов</span>
+                  <span>{course.students.toLocaleString()} {t('courses.students')}</span>
                 </div>
               )}
             </div>

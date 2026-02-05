@@ -1,10 +1,13 @@
+import { useTranslation } from 'react-i18next'
+
 export default function CourseProgress({ completed, total }) {
+  const { t } = useTranslation()
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0
 
   return (
     <div className="w-full">
       <div className="flex justify-between mb-2">
-        <span className="text-sm text-gray-400">Прогресс</span>
+        <span className="text-sm text-gray-400">{t('courseProgress.label')}</span>
         <span className="text-sm font-bold">{percentage}%</span>
       </div>
       <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
@@ -14,7 +17,7 @@ export default function CourseProgress({ completed, total }) {
         />
       </div>
       <p className="text-xs text-gray-500 mt-1">
-        {completed} из {total} уроков пройдено
+        {t('courseProgress.completedOf', { completed, total })}
       </p>
     </div>
   )

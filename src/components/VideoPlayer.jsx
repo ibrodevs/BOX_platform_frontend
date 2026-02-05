@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export default function VideoPlayer({ videoUrl, title, onProgress, onComplete }) {
+  const { t } = useTranslation()
   const videoRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
@@ -164,7 +166,7 @@ export default function VideoPlayer({ videoUrl, title, onProgress, onComplete })
         className="w-full h-full object-contain"
         onClick={togglePlay}
       >
-        Ваш браузер не поддерживает воспроизведение видео.
+        {t('videoPlayer.notSupported')}
       </video>
 
       {/* Controls Overlay */}
@@ -252,7 +254,7 @@ export default function VideoPlayer({ videoUrl, title, onProgress, onComplete })
               </button>
               <div className="absolute bottom-full right-0 mb-2 bg-gray-900 rounded-lg p-2 opacity-0 group-hover/settings:opacity-100 transition-opacity pointer-events-none group-hover/settings:pointer-events-auto">
                 <div className="text-xs space-y-1 whitespace-nowrap">
-                  <div className="text-gray-400 mb-1">Скорость</div>
+                  <div className="text-gray-400 mb-1">{t('videoPlayer.speed')}</div>
                   {[0.5, 0.75, 1, 1.25, 1.5, 2].map(rate => (
                     <button
                       key={rate}

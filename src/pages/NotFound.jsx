@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export default function NotFound() {
+  const { t } = useTranslation()
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -26,7 +28,7 @@ export default function NotFound() {
           transition={{ delay: 0.4 }}
           className="text-4xl font-black mb-4"
         >
-          Страница не найдена
+          {t('notFound.title')}
         </motion.h1>
         
         <motion.p
@@ -35,7 +37,7 @@ export default function NotFound() {
           transition={{ delay: 0.6 }}
           className="text-gray-400 mb-8"
         >
-          К сожалению, запрашиваемая страница не существует
+          {t('notFound.subtitle')}
         </motion.p>
         
         <motion.div
@@ -44,7 +46,7 @@ export default function NotFound() {
           transition={{ delay: 0.8 }}
         >
           <Link to="/" className="btn-primary inline-block">
-            Вернуться на главную
+            {t('notFound.goHome')}
           </Link>
         </motion.div>
 

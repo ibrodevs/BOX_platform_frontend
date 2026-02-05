@@ -44,16 +44,16 @@ export default function Register() {
         login(res.data.tokens, res.data.user)
         navigate('/dashboard')
       } else {
-        setError('Ошибка получения данных авторизации')
+        setError(t('errors.authDataFetch'))
       }
     } catch (err) {
       console.error('Registration error:', err)
       const errors = err.response?.data
       if (errors) {
         const errorMessages = Object.values(errors).flat().join('. ')
-        setError(errorMessages || 'Ошибка регистрации')
+        setError(errorMessages || t('errors.registrationFailed'))
       } else {
-        setError(err.message || 'Ошибка регистрации. Попробуйте позже.')
+        setError(err.message || t('errors.registrationTryLater'))
       }
     } finally {
       setLoading(false)
@@ -73,7 +73,7 @@ export default function Register() {
           </h1>
           
           <p className="text-center text-gray-400 mb-8">
-            {t('auth.registerSubtitle', { defaultValue: 'Создайте аккаунт для доступа ко всем возможностям платформы' })}
+            {t('auth.registerSubtitle')}
           </p>
 
           {error && (

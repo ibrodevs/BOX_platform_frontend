@@ -58,6 +58,88 @@
       "subtitle": "Success stories of our students"
     }
   },
+  "homePage": {
+    "hero": {
+      "badge": "ONLINE BOXING SCHOOL",
+      "titleLine1": "BECOME",
+      "titleLine2": "A CHAMPION",
+      "subtitle": "Dmitry Bivol — undisputed world champion — reveals the secrets of professional boxing. An innovative platform with an AI coach and a personal approach.",
+      "cta": "🥊 Start Training",
+      "watchVideo": "Watch video",
+      "features": [
+        "Results guarantee",
+        "Personal AI coach",
+        "Mobile app"
+      ]
+    },
+    "stats": {
+      "items": [
+        { "value": "24-1", "label": "Pro record" },
+        { "value": "4", "label": "Champion titles" },
+        { "value": "268", "label": "Amateur wins" },
+        { "value": "100%", "label": "Progress guarantee" }
+      ]
+    },
+    "popular": {
+      "badge": "POPULAR",
+      "title": "PREMIUM LEVEL COURSES",
+      "subtitle": "Exclusive training programs with personal feedback",
+      "viewAll": "View all programs"
+    },
+    "benefits": {
+      "titlePrimary": "INNOVATIVE",
+      "titleSecondary": "APPROACH",
+      "subtitle": "We combine champion boxing traditions with modern technology",
+      "items": [
+        {
+          "title": "Personal plan",
+          "description": "AI system creates personalized programs based on your goals"
+        },
+        {
+          "title": "Neural coach",
+          "description": "24/7 access to AI for technique analysis"
+        },
+        {
+          "title": "Flexible schedule",
+          "description": "Train when it's convenient with sync across devices"
+        },
+        {
+          "title": "Motivation",
+          "description": "Gamification and challenges to keep progress"
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "SUCCESS STORIES",
+      "items": [
+        {
+          "name": "Alexey Ivanov",
+          "course": "Basics of Boxing course",
+          "text": "In 3 months I completely changed my technique. The AI coach spotted errors real trainers missed.",
+          "progress": "+40% punching power"
+        },
+        {
+          "name": "Maria Petrova",
+          "course": "Advanced Technique course",
+          "text": "From beginner to regional champion. The platform is the best investment in myself.",
+          "progress": "1st place at a tournament"
+        },
+        {
+          "name": "Dmitry Sokolov",
+          "course": "Sparring course",
+          "text": "The champion's professional approach is in every detail. Techniques used by top boxers.",
+          "progress": "-12 kg in 2 months"
+        }
+      ]
+    },
+    "cta": {
+      "titleLine1": "YOUR TITLE PATH",
+      "titleLine2": "STARTS TODAY",
+      "subtitle": "Join 10,000+ students who have already changed their lives with our academy",
+      "primary": "BECOME A CHAMPION",
+      "secondary": "FREE LESSON"
+    }
+  },
   "about": {
     "title": "ABOUT THE FIGHTER",
     "subtitle": "Meet the world boxing legend",
@@ -66,6 +148,82 @@
     "philosophy": "Philosophy",
     "records": "Records"
   },
+  "aboutPage": {
+    "hero": {
+      "nameLine1": "DMITRY",
+      "nameLine2": "BIVOL",
+      "subtitle": {
+        "start": "Undisputed world champion at light heavyweight.",
+        "highlight": "Undefeated champion",
+        "end": "winner over Canelo Alvarez and Artur Beterbiev"
+      },
+      "badges": {
+        "wba": "Super Champion",
+        "wbc": "World Champion"
+      }
+    },
+    "stats": [
+      { "label": "Wins", "value": "24", "sub": "12 by knockout" },
+      { "label": "Titles", "value": "4", "sub": "WBA, WBC, IBF, WBO" },
+      { "label": "Rank", "value": "#1", "sub": "pound-for-pound" },
+      { "label": "Career", "value": "11", "sub": "years as pro" }
+    ],
+    "achievementsTitle": "TOP ACHIEVEMENTS",
+    "achievements": [
+      { "title": "Undisputed World Champion", "desc": "Victory over Artur Beterbiev" },
+      { "title": "Win over Canelo", "desc": "Boxing upset of the year" },
+      { "title": "WBA (Super) Champion", "desc": "8 years of continuous reign" },
+      { "title": "World Combat Games Gold", "desc": "Amateur champion" }
+    ],
+    "biography": {
+      "title": "CHAMPION BIOGRAPHY",
+      "paragraphs": [
+        {
+          "highlight": "Dmitry Yuryevich Bivol",
+          "text": "is one of the best modern boxers, born on December 18, 1990 in Tokmok, Kyrgyzstan. He started boxing at age 6 under his father's guidance."
+        },
+        {
+          "start": "In his amateur career he fought",
+          "highlight": "over 280 bouts",
+          "end": "with an incredible 268-15 record. He turned pro in 2014 and has remained unbeaten."
+        },
+        {
+          "start": "He has a unique style:",
+          "highlight": "a flawless jab",
+          "end": "excellent footwork and tactical intelligence that allow him to dominate any opponent."
+        }
+      ]
+    },
+    "philosophy": {
+      "title": "CHAMPION PHILOSOPHY",
+      "items": [
+        {
+          "title": "Technical excellence",
+          "desc": "Jab precision, distance control, and footwork are the foundation of a champion's style"
+        },
+        {
+          "title": "Tactical intelligence",
+          "desc": "Reading opponents and adapting strategy during a fight"
+        },
+        {
+          "title": "Continuous growth",
+          "desc": "Every training session is a step to perfection. Every fight is a new chapter"
+        }
+      ]
+    },
+    "gallery": {
+      "title": "MOMENTS OF GREATNESS",
+      "items": [
+        { "title": "Training process", "desc": "Daily work on perfection" },
+        { "title": "Tactical sessions", "desc": "Analysis and fight preparation" },
+        { "title": "Championship nights", "desc": "Historic victories in the ring" }
+      ]
+    },
+    "quote": {
+      "text": "There is no room for doubt in the ring. Only discipline, technique, and the will to win create a champion.",
+      "author": "— Dmitry Bivol"
+    }
+  },
   "courses": {
     "title": "COURSES",
     "subtitle": "Choose your path to mastery",
@@ -73,6 +231,9 @@
     "beginner": "Beginner",
     "intermediate": "Intermediate",
     "advanced": "Advanced",
+    "pro": "Pro",
+    "newCourses": "New Courses",
+    "popular": "Popular",
     "filter": "Filter",
     "sort": "Sort",
     "lessons": "lessons",
@@ -82,18 +243,212 @@
     "continue": "Continue",
     "buy": "Buy",
     "addToCart": "Add to Cart",
-    "free": "Free"
+    "free": "Free",
+    "hoursShort": "h",
+    "lessonsCount_one": "{{count}} lesson",
+    "lessonsCount_other": "{{count}} lessons",
+    "lessonsCount_few": "{{count}} lessons",
+    "lessonsCount_many": "{{count}} lessons",
+    "openCourse": "Open course",
+    "watchFree": "Watch",
+    "purchasing": "Purchasing...",
+    "purchased": "Purchased",
+    "purchaseSuccess": "🎉 Course purchased successfully!",
+    "purchaseError": "Purchase error"
+  },
+  "coursesPage": {
+    "hero": {
+      "badge": "TRAINING BY A CHAMPION",
+      "titleLine1": "Become a student",
+      "titleLine2": "of the Champion",
+      "subtitle": "Exclusive programs by Dmitry Bivol with a personal AI coach and community support"
+    },
+    "searchPlaceholder": "Search courses, lessons, techniques...",
+    "sort": {
+      "popular": "By popularity",
+      "rating": "By rating",
+      "students": "By students",
+      "priceLow": "Price: Low to High",
+      "priceHigh": "Price: High to Low",
+      "newest": "Newest first"
+    },
+    "errors": {
+      "loadFailed": "Failed to load courses",
+      "tryLater": "Please try again later"
+    },
+    "actions": {
+      "refresh": "Refresh",
+      "details": "Details",
+      "resetSearch": "Reset search",
+      "viewAll": "View all courses"
+    },
+    "results": {
+      "found_one": "Found {{count}} course",
+      "found_other": "Found {{count}} courses",
+      "found_few": "Found {{count}} courses",
+      "found_many": "Found {{count}} courses",
+      "byQuery": "By query:"
+    },
+    "viewMode": "View",
+    "badges": {
+      "new": "NEW",
+      "top": "TOP",
+      "topCourse": "TOP COURSE"
+    },
+    "progress": "Progress",
+    "empty": {
+      "title": "No courses found",
+      "withQuery": "Nothing found for \"{{query}}\". Try adjusting your search.",
+      "noFilters": "Try adjusting filters or choose another category."
+    },
+    "cta": {
+      "title": "Didn't find the right course?",
+      "subtitle": "We can create a personalized training program just for you. Book a consultation with our coach.",
+      "button": "Book a consultation"
+    }
   },
   "courseDetail": {
     "overview": "Overview",
     "curriculum": "Curriculum",
     "instructor": "Instructor",
     "reviews": "Reviews",
+    "reviewsCount_one": "({{count}} review)",
+    "reviewsCount_other": "({{count}} reviews)",
+    "reviewsCount_few": "({{count}} reviews)",
+    "reviewsCount_many": "({{count}} reviews)",
     "whatYouLearn": "What You'll Learn",
     "requirements": "Requirements",
     "description": "Description",
     "enroll": "Enroll Now",
-    "enrolled": "You're Enrolled"
+    "enrolled": "You're Enrolled",
+    "loading": "Loading course...",
+    "notFound": "Course not found",
+    "notFoundTitle": "Course not found",
+    "notFoundSubtitle": "The course may have been moved or deleted",
+    "backToCourses": "Back to courses",
+    "levelSuffix": "LEVEL",
+    "levels": {
+      "beginner": "BEGINNER",
+      "intermediate": "INTERMEDIATE",
+      "advanced": "ADVANCED"
+    },
+    "freeLessonsBanner": "{{count}} {{lessons}} available for free!",
+    "freeLessonsSubtitle": "Start learning right now without registration",
+    "freeLessonsCta": "Watch →",
+    "fullDescription": "A professional course from undisputed world champion Dmitry Bivol. In this course you will master the key techniques and strategies that led Dmitry to the world title. The program includes both theory and practical exercises with step-by-step guidance.",
+    "instructorData": {
+      "name": "Dmitry Bivol",
+      "title": "Undisputed world champion"
+    },
+    "features": [
+      "24/7 access to an AI coach",
+      "Certificate of completion",
+      "Lifetime access",
+      "Mobile app",
+      "Private community",
+      "Personal consultations"
+    ],
+    "requirementsList": {
+      "0": "Boxing gloves",
+      "1": "Sportswear",
+      "2": "Willingness to learn",
+      "3": "30 minutes per day",
+      "3Alt": "30 minutes per day for training"
+    },
+    "lessons": [
+      "Introduction to boxing",
+      "Basic stance and movement",
+      "Straight punches (jab, cross)",
+      "Uppercuts and hooks",
+      "Defense and slipping",
+      "Punch combinations",
+      "Bag work",
+      "Sparring techniques",
+      "Fight tactics",
+      "Finale and certification"
+    ],
+    "reviewsData": [
+      {
+        "user": "Alexey Ivanov",
+        "date": "2 weeks ago",
+        "comment": "Best boxing course! The AI coach really helps with technique."
+      },
+      {
+        "user": "Maria Petrova",
+        "date": "1 month ago",
+        "comment": "In 2 months I went from beginner to confident fighter. Bivol's method works!"
+      }
+    ],
+    "purchaseSuccess": "🎉 Congrats! The course was successfully purchased. All lessons are now available.",
+    "purchaseError": "Purchase failed. Please try again.",
+    "freePreview": "FREE PREVIEW",
+    "goToLearning": "Go to learning",
+    "watchFree": "Watch for free ({{count}} {{lessons}})",
+    "addToFavorites": "Add to favorites",
+    "guarantee": {
+      "title": "Money-back guarantee",
+      "subtitle": "30-day money-back guarantee, no questions asked"
+    },
+    "like": "Like",
+    "share": "Share",
+    "shareCopy": "Copy link",
+    "shareEmail": "Send via email",
+    "faq": "FAQ",
+    "faqTitle": "Frequently asked questions",
+    "faqItems": {
+      "0": {
+        "q": "Do I need prior experience?",
+        "a": "The course is suitable for all levels. Beginners can start from scratch; experienced boxers will find advanced techniques."
+      },
+      "1": {
+        "q": "How long do I have access?",
+        "a": "Lifetime access. You can learn at your own pace and revisit materials anytime."
+      },
+      "2": {
+        "q": "Is there a completion certificate?",
+        "a": "Yes, after completing all lessons you'll receive a personalized certificate."
+      },
+      "3": {
+        "q": "Can I ask the instructor questions?",
+        "a": "Yes, the course includes consultations and feedback through the platform."
+      }
+    },
+    "whatYouLearnTitle": "What you'll learn",
+    "keyLearnings": [
+      "Proper boxing stance and movement",
+      "Technique of all major punches",
+      "Effective defense and slipping",
+      "Punch combinations for real fights",
+      "Bag work and partner drills",
+      "Fight tactics and strategy"
+    ],
+    "includes": "What's included",
+    "availableImmediately": "Available immediately after purchase",
+    "instructorStats": {
+      "rating": "Rating",
+      "students": "Students",
+      "courses": "Courses",
+      "years": "Years of experience"
+    },
+    "instructorBio": "Undisputed world champion, holder of WBA, IBO, and The Ring belts. One of the most technical boxers of the modern era with 15+ years of pro experience and 268 amateur wins.",
+    "reviewsTitle": "Student reviews",
+    "reviewsBasedOn": "Based on {{count}} reviews",
+    "leaveReview": "Leave a review",
+    "helpful": "Helpful ({{count}})",
+    "reply": "Reply",
+    "detailsTitle": "Course details",
+    "stats": {
+      "students": "Students",
+      "lessons": "Lessons",
+      "duration": "Duration",
+      "level": "Level"
+    },
+    "relatedTitle": "You may also like",
+    "relatedCourse": "Course {{index}}",
+    "relatedPrice": "From 2,990 KGS",
+    "supportTitle": "Need help?",
+    "supportSubtitle": "Our support team is ready to answer your questions",
+    "supportCta": "Contact support"
   },
   "dashboard": {
     "welcome": "Welcome",
@@ -108,6 +463,95 @@
       "totalHours": "Total Hours",
       "certificates": "Certificates"
     }
+  },
+  "dashboardPage": {
+    "title": "Dashboard",
+    "subtitle": "Welcome to your learning hub",
+    "ranks": {
+      "beginner": "Beginner",
+      "apprentice": "Apprentice",
+      "fighter": "Fighter",
+      "champion": "Champion",
+      "master": "Master"
+    },
+    "stats": {
+      "currentRank": "Current rank",
+      "rankProgress": "{{xp}} XP / {{next}} XP",
+      "streak": "Streak",
+      "streakValue": "{{count}} days",
+      "streakRecord": "Record: 30 days",
+      "weeklyProgress": "Weekly progress",
+      "weeklyDelta": "+{{value}}% from last week",
+      "totalHours": "Total hours",
+      "totalHoursValue": "{{hours}}h",
+      "totalHoursGoal": "Goal: {{hours}} hours",
+      "progress": "Progress"
+    },
+    "continueLearning": {
+      "title": "Continue learning",
+      "subtitle": "Pick up where you left off"
+    },
+    "lastAccessedDays": "{{days}} days ago",
+    "lastAccessedRecent": "Recently",
+    "emptyCourses": {
+      "title": "No courses found",
+      "subtitle": "Start your champion journey with your first course",
+      "cta": "Choose a course"
+    },
+    "quickStats": {
+      "completedCourses": "Courses completed",
+      "completedLessons": "Lessons completed",
+      "totalCourses": "Total courses",
+      "totalLessons": "Total lessons"
+    },
+    "dailyTip": {
+      "title": "Tip of the day",
+      "updated": "Updated daily",
+      "showMore": "Show more"
+    },
+    "quickActions": {
+      "title": "Quick actions",
+      "myCourses": "My courses",
+      "profile": "Profile",
+      "shop": "Shop",
+      "orders": "My orders",
+      "materials": "Materials",
+      "help": "Help"
+    },
+    "monthlyGoals": {
+      "title": "Monthly goals",
+      "items": [
+        "Complete 1 course",
+        "Train 15 days in a row",
+        "Complete 20 lessons",
+        "Invite a friend",
+        "Earn 1000 XP"
+      ]
+    },
+    "tips": [
+      "Train in the morning for better focus",
+      "Drink water during training",
+      "Don't forget to warm up before training",
+      "Watch your breathing while striking",
+      "Stretch regularly for flexibility"
+    ],
+    "notifications": [
+      {
+        "title": "Lesson completed",
+        "message": "You completed the \"Basic stance\" lesson",
+        "time": "2 hours ago"
+      },
+      {
+        "title": "New course available",
+        "message": "The \"Advanced technique\" course is now in your library",
+        "time": "1 day ago"
+      },
+      {
+        "title": "Don't miss your workout",
+        "message": "Your next training session is scheduled for tomorrow",
+        "time": "2 days ago"
+      }
+    ]
   },
   "profile": {
     "title": "Profile",
@@ -129,20 +573,229 @@
     "total": "Total",
     "checkout": "Checkout",
     "remove": "Remove",
-    "continue": "Continue Shopping"
+    "continue": "Continue Shopping",
+    "clear": "Clear cart",
+    "emptySubtitle": "Add items from our shop",
+    "goToShop": "Go to shop"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "subtitle": "Fill in delivery details",
+    "contactTitle": "Contact information",
+    "fullName": "Full name",
+    "phone": "Phone",
+    "fullNamePlaceholder": "John Smith",
+    "phonePlaceholder": "+996 XXX XXX XXX",
+    "deliveryAddressTitle": "Delivery address",
+    "city": "City",
+    "address": "Address",
+    "addressPlaceholder": "Street, building, apartment",
+    "paymentTitle": "Card details",
+    "cardNumber": "Card number",
+    "expiryDate": "Expiry date",
+    "cvv": "CVV",
+    "cardNumberPlaceholder": "XXXX XXXX XXXX XXXX",
+    "expiryPlaceholder": "MM/YY",
+    "cvvPlaceholder": "XXX",
+    "items": "Items ({{count}}):",
+    "delivery": "Delivery",
+    "freeDelivery": "Free",
+    "totalToPay": "Total to pay:",
+    "cancel": "Cancel",
+    "pay": "Pay",
+    "processing": "Processing...",
+    "terms": "By clicking \"Pay\", you agree to the terms of use and privacy policy",
+    "successTitle": "Order placed!",
+    "successSubtitle": "Your order has been paid and sent for delivery. We will contact you shortly to confirm.",
+    "orderAmountLabel": "Order amount:",
+    "successButton": "Great!",
+    "cities": {
+      "bishkek": "Bishkek",
+      "osh": "Osh",
+      "jalalAbad": "Jalal-Abad",
+      "karakol": "Karakol",
+      "tokmok": "Tokmok",
+      "balykchy": "Balykchy"
+    }
   },
   "shop": {
     "title": "SHOP",
     "subtitle": "Official merch from Dmitry Bivol",
+    "hero": {
+      "badge": "EXCLUSIVE SHOP",
+      "titleLine1": "Clothing and equipment",
+      "titleLine2": "FOR CHAMPIONS",
+      "subtitle": "Exclusive items from Dmitry Bivol Academy. Quality proven in battle."
+    },
+    "searchPlaceholder": "Search products by name, description, or tags...",
+    "filters": {
+      "categories": "Categories",
+      "price": "Price, {{currency}}"
+    },
+    "sort": {
+      "popular": "Popular",
+      "new": "New",
+      "priceLow": "Price: Low to High",
+      "priceHigh": "Price: High to Low",
+      "rating": "By rating",
+      "discount": "Discounts"
+    },
+    "stats": {
+      "qualityGuarantee": "Quality guarantee",
+      "qualityGuaranteeValue": "100%",
+      "freeDelivery": "Free delivery",
+      "freeDeliveryValue": "from 5000 KGS",
+      "deliveryTime": "Delivery",
+      "deliveryTimeValue": "3-7 days",
+      "happyClients": "Happy clients",
+      "happyClientsValue": "5000+"
+    },
+    "results": {
+      "items_one": "{{count}} item",
+      "items_other": "{{count}} items",
+      "items_few": "{{count}} items",
+      "items_many": "{{count}} items",
+      "byQuery": "By query:",
+      "shown": "Shown {{shown}} of {{total}}"
+    },
+    "empty": {
+      "title": "No items found",
+      "withQuery": "Nothing found for \"{{query}}\". Try changing your search.",
+      "noFilters": "Try adjusting filters or choose another category.",
+      "resetSearch": "Reset search",
+      "viewAll": "View all items"
+    },
+    "features": {
+      "freeDeliveryTitle": "Free delivery",
+      "freeDeliveryDesc": "Orders from 5000 KGS across Kyrgyzstan",
+      "qualityTitle": "Quality guarantee",
+      "qualityDesc": "Returns and exchanges within 14 days",
+      "originalTitle": "Original products",
+      "originalDesc": "Only licensed goods"
+    },
+    "notification": {
+      "addedTitle": "Added to cart",
+      "goToCart": "Go to cart to checkout"
+    },
     "categories": {
       "all": "All Items",
       "clothing": "Clothing",
       "equipment": "Equipment",
-      "accessories": "Accessories"
+      "accessories": "Accessories",
+      "sets": "Sets"
     },
     "addToCart": "Add to Cart",
+    "inCart": "In cart",
+    "addedToCart": "✓ Added to cart!",
     "outOfStock": "Out of Stock",
-    "inStock": "In Stock"
+    "inStock": "In Stock",
+    "badges": {
+      "new": "NEW",
+      "bestseller": "BEST",
+      "limited": "LIMITED"
+    },
+    "stockLeft": "{{count}} left",
+    "reviews_one": "({{count}} review)",
+    "reviews_other": "({{count}} reviews)",
+    "reviews_few": "({{count}} reviews)",
+    "reviews_many": "({{count}} reviews)",
+    "colors": {
+      "black": "Black",
+      "white": "White",
+      "red": "Red",
+      "blue": "Blue",
+      "gray": "Gray",
+      "darkBlue": "Dark Blue",
+      "khakiGray": "Khaki Gray",
+      "transparent": "Transparent",
+      "multicolor": "Multicolor",
+      "camouflage": "Camouflage",
+      "grayMelange": "Gray Melange",
+      "burgundy": "Burgundy",
+      "blackGold": "Black/Gold",
+      "redBlack": "Red/Black",
+      "blueWhite": "Blue/White"
+    },
+    "tags": {
+      "hit": "best",
+      "new": "new",
+      "exclusive": "exclusive",
+      "pro": "pro",
+      "limited": "limited",
+      "tech": "tech",
+      "economy": "budget",
+      "smart": "smart",
+      "safety": "safety",
+      "gift": "gift"
+    },
+    "sizes": {
+      "wraps45m": "4.5m",
+      "oneSize": "One size",
+      "adjustable": "Adjustable",
+      "set": "Set"
+    },
+    "items": {
+      "item1": {
+        "name": "Champion Signature T-Shirt",
+        "description": "Premium 100% organic cotton tee with embroidered academy logo. Limited series.",
+        "material": "100% cotton"
+      },
+      "item2": {
+        "name": "Professional Boxing Gloves",
+        "description": "Premium genuine leather gloves for professional training. AirFlow technology.",
+        "material": "Genuine leather"
+      },
+      "item3": {
+        "name": "Night Training Hoodie",
+        "description": "Warm premium hoodie for training in cool weather. Built-in headphones.",
+        "material": "80% cotton, 20% polyester"
+      },
+      "item4": {
+        "name": "Pro Hand Wraps",
+        "description": "Professional elastic wraps with reinforced joint protection. Length 4.5 m.",
+        "material": "Cotton/Lycra"
+      },
+      "item5": {
+        "name": "Smart Sports Bottle",
+        "description": "Bottle with touch display tracking water intake. Auto sterilization.",
+        "material": "Tritan"
+      },
+      "item6": {
+        "name": "AirFlex Training Shorts",
+        "description": "Ultra-light shorts with quick-dry and ventilation tech.",
+        "material": "92% polyester, 8% elastane"
+      },
+      "item7": {
+        "name": "Protective Mouthguard",
+        "description": "Anatomical mouthguard with dual protection and ventilation. Pro level.",
+        "material": "Medical silicone"
+      },
+      "item8": {
+        "name": "Pro Gear Backpack",
+        "description": "Spacious backpack with compartments for gear, laptop, and shoes. Waterproof.",
+        "material": "Polyester 600D"
+      },
+      "item9": {
+        "name": "Champion Edition Cap",
+        "description": "Exclusive cap with gold thread embroidery. Limited drop.",
+        "material": "Cotton/Polyester"
+      },
+      "item10": {
+        "name": "Victory Hoodie",
+        "description": "Premium hoodie with fleece lining. Limited collection.",
+        "material": "70% cotton, 30% fleece"
+      },
+      "item11": {
+        "name": "Pro Speed Jump Rope",
+        "description": "Professional rope with bearings and adjustable length for intense workouts.",
+        "material": "PVC, steel"
+      },
+      "item12": {
+        "name": "Champion Gift Set",
+        "description": "Gift set: T-shirt, cap, bottle, and boxing wraps in branded packaging.",
+        "material": "Mixed"
+      }
+    }
   },
   "payments": {
     "title": "Payment",
@@ -166,6 +819,8 @@
     "firstName": "First Name",
     "lastName": "Last Name",
     "forgotPassword": "Forgot Password?",
+    "loginSubtitle": "Sign in to access courses, shop, and your dashboard",
+    "registerSubtitle": "Create an account to access all platform features",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
     "signUp": "Sign Up",
@@ -184,16 +839,29 @@
     "next": "Next",
     "previous": "Previous",
     "close": "Close",
+    "currency": "KGS",
+    "minutesShort": "min",
+    "course": "Course",
     "search": "Search",
     "filter": "Filter",
     "sort": "Sort",
     "showMore": "Show More",
     "showLess": "Show Less"
   },
+  "languages": {
+    "ru": "Russian",
+    "en": "English",
+    "ky": "Kyrgyz",
+    "es": "Spanish"
+  },
   "errors": {
     "required": "This field is required",
     "invalidEmail": "Invalid email",
     "passwordMismatch": "Passwords do not match",
+    "invalidCredentials": "Invalid username or password",
+    "authDataFetch": "Failed to retrieve authentication data",
+    "registrationFailed": "Registration failed",
+    "registrationTryLater": "Registration failed. Please try again later.",
     "networkError": "Network error",
     "unauthorized": "Unauthorized",
     "notFound": "Not Found"
@@ -208,7 +876,24 @@
     "previousLesson": "Previous Lesson",
     "videoNotAvailable": "Video Unavailable",
     "downloadMaterials": "Download Materials",
-    "markComplete": "Mark as Complete"
+    "markComplete": "Mark as Complete",
+    "loading": "Loading lesson...",
+    "notFound": "Lesson not found",
+    "completedAlert": "✅ Lesson marked as completed!",
+    "backToCourse": "Back to course: {{title}}",
+    "videoNotSupported": "Your browser does not support video playback.",
+    "downloadVideo": "Download video",
+    "durationMinutes": "{{minutes}} minutes",
+    "lessonNumber": "Lesson {{number}}",
+    "descriptionTitle": "Lesson description"
+  },
+  "lessonItem": {
+    "locked": "Locked"
+  },
+  "videoPlayer": {
+    "notSupported": "Your browser does not support video playback.",
+    "speed": "Speed",
+    "timestamps": "Timestamps"
   },
   "coursePlayer": {
     "overview": "Overview",
@@ -216,7 +901,182 @@
     "resources": "Resources",
     "progress": "Progress",
     "certificate": "Certificate",
-    "shareProgress": "Share Progress"
+    "shareProgress": "Share Progress",
+    "lessonOf": "Lesson {{number}} of {{total}}",
+    "lessonAbout": "About this lesson",
+    "lessonMaterials": "Lesson materials",
+    "module": "Module {{number}}",
+    "lessonLabel": "Lesson {{number}}",
+    "preview": "PREVIEW",
+    "sidebar": {
+      "title": "Course contents",
+      "completed": "{{completed}} of {{total}} lessons completed"
+    }
+  },
+  "courseProgress": {
+    "label": "Progress",
+    "completedOf": "{{completed}} of {{total}} lessons completed"
+  },
+  "curriculum": {
+    "title": "Course curriculum",
+    "videoLabel": "Video",
+    "defaultDuration": "{{minutes}} min"
+  },
+  "myCourses": {
+    "status": {
+      "completed": "COMPLETED",
+      "inProgress": "IN PROGRESS",
+      "new": "NEW"
+    },
+    "certificate": "CERTIFICATE",
+    "defaultDuration": "{{hours}}h",
+    "nextLesson": "Next lesson:",
+    "scheduled": "Scheduled",
+    "certificationProgress": "Certification progress",
+    "actions": {
+      "repeat": "Repeat",
+      "continue": "Continue",
+      "start": "Start",
+      "downloadMaterials": "Download materials"
+    },
+    "instructor": "Instructor:",
+    "students": "students"
+  },
+  "myCoursesPage": {
+    "titlePrimary": "MY",
+    "titleSecondary": "COURSES",
+    "subtitle": "Courses you have purchased",
+    "empty": "You don't have any purchased courses yet",
+    "emptyCta": "Go to catalog",
+    "demo": [
+      {
+        "title": "Boxing fundamentals for beginners",
+        "description": "Learn the basic boxing techniques"
+      }
+    ]
+  },
+  "payments": {
+    "title": "Payment history",
+    "summary": {
+      "totalSpent": "Total spent",
+      "successful": "Successful payments",
+      "totalTransactions": "Total transactions"
+    },
+    "status": {
+      "completed": "Paid",
+      "pending": "Pending",
+      "failed": "Declined"
+    },
+    "methods": {
+      "card": "Bank card"
+    },
+    "empty": {
+      "title": "No payments",
+      "subtitle": "You don't have any payment history yet",
+      "cta": "Buy a course"
+    },
+    "help": {
+      "title": "Need help?",
+      "subtitle": "If you have questions about payments, contact our support team",
+      "cta": "Contact support →"
+    },
+    "demo": [
+      { "title": "Boxing fundamentals for beginners" },
+      { "title": "Advanced techniques" }
+    ]
+  },
+  "profile": {
+    "title": "Profile",
+    "personalData": "Personal details",
+    "saveChanges": "Save changes",
+    "updateSuccess": "Profile updated successfully",
+    "updateError": "Profile update failed",
+    "changePassword": "Change password",
+    "currentPassword": "Current password",
+    "currentPasswordPlaceholder": "Enter current password",
+    "newPassword": "New password",
+    "newPasswordPlaceholder": "Enter new password",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat new password",
+    "updatePassword": "Change password",
+    "dangerZone": "Danger zone",
+    "deleteWarning": "Account deletion is irreversible. All your data will be lost.",
+    "deleteAccount": "Delete account"
+  },
+  "mobileMenu": {
+    "greeting": "Hello,",
+    "register": "Register"
+  },
+  "footer": {
+    "description": "A leading boxing school led by absolute world champion Dmitry Bivol. We combine champion traditions with innovative learning technologies.",
+    "badges": {
+      "certified": "Certified school",
+      "securePayments": "Secure payments"
+    },
+    "socialTitle": "Follow us",
+    "contactsTitle": "Contacts",
+    "social": {
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "telegram": "Telegram"
+    },
+    "links": {
+      "school": {
+        "title": "School",
+        "items": {
+          "about": "About Dmitry Bivol",
+          "mission": "Our mission",
+          "coaches": "Coaches",
+          "testimonials": "Testimonials",
+          "careers": "Careers"
+        }
+      },
+      "courses": {
+        "title": "Courses",
+        "items": {
+          "all": "All courses",
+          "beginner": "Beginner",
+          "advanced": "Advanced level",
+          "pro": "Professional",
+          "plans": "Training plans"
+        }
+      },
+      "support": {
+        "title": "Support",
+        "items": {
+          "help": "Help",
+          "faq": "FAQ",
+          "contact": "Contact",
+          "status": "System status",
+          "community": "Community"
+        }
+      },
+      "legal": {
+        "title": "Legal",
+        "items": {
+          "privacy": "Privacy Policy",
+          "terms": "Terms of Use",
+          "refund": "Refunds",
+          "cookies": "Cookie Policy",
+          "licenses": "Licenses"
+        }
+      }
+    },
+    "contact": {
+      "email": "support@bivolboxing.com",
+      "phone": "+996 (XXX) XXX-XXX",
+      "location": "Bishkek, Kyrgyzstan"
+    },
+    "app": {
+      "title": "Mobile app",
+      "subtitle": "Train anywhere with our app",
+      "downloadOn": "Download on",
+      "getItOn": "Get it on"
+    },
+    "sslProtected": "SSL secured",
+    "copyright": "© {{year}} Bivol School. All rights reserved."
   },
   "merch": {
     "size": "Size",
@@ -225,7 +1085,120 @@
     "selectSize": "Select Size",
     "selectColor": "Select Color"
   },
+  "staticCourses": {
+    "boxingFundamentals": {
+      "title": "Boxing Fundamentals",
+      "description": "Learn fundamental boxing techniques from a world champion",
+      "duration": "8 hours",
+      "instructor": {
+        "name": "Dmitry Bivol",
+        "title": "Undisputed World Champion"
+      },
+      "lessons": {
+        "1": {
+          "title": "Introduction to Boxing",
+          "description": "Welcome to the world of professional boxing. In this lesson we will cover the basics.",
+          "content": "<h2>What you will learn in this lesson:</h2>\n<ul>\n<li>History of boxing and its philosophy</li>\n<li>Basic rules and etiquette</li>\n<li>Necessary equipment</li>\n<li>How to start training correctly</li>\n</ul>"
+        },
+        "2": {
+          "title": "Proper Boxing Stance",
+          "description": "Learn the correct basic stance — the foundation of all boxing technique.",
+          "content": "<h2>Key points:</h2>\n<ul>\n<li>Foot position and weight distribution</li>\n<li>Hand position and defense</li>\n<li>Balance and stability</li>\n<li>Common beginner mistakes</li>\n</ul>"
+        },
+        "3": {
+          "title": "Jab — The Main Punch in Boxing",
+          "description": "We break down the jab technique — the most important punch in a boxer's arsenal.",
+          "content": "<h2>Jab technique:</h2>\n<ul>\n<li>Movement mechanics</li>\n<li>Shoulder and hip work</li>\n<li>Speed and accuracy</li>\n<li>Practical drills</li>\n</ul>"
+        },
+        "4": {
+          "title": "Straight Right (Cross)",
+          "description": "Learn the technique of the powerful straight right.",
+          "content": "<h2>Power of the cross:</h2>\n<ul>\n<li>Body rotation</li>\n<li>Weight transfer</li>\n<li>Coordination of movements</li>\n<li>Combining with the jab</li>\n</ul>"
+        },
+        "5": {
+          "title": "Ring Movement",
+          "description": "Footwork basics — how to move correctly in the ring.",
+          "content": "<h2>Footwork basics:</h2>\n<ul>\n<li>Basic steps forward and backward</li>\n<li>Side movement</li>\n<li>Circular movement</li>\n<li>Working at distance</li>\n</ul>"
+        }
+      }
+    },
+    "advancedCombinations": {
+      "title": "Advanced Combinations",
+      "description": "Master class on building and drilling effective punch combinations",
+      "duration": "12 hours",
+      "instructor": {
+        "name": "Dmitry Bivol",
+        "title": "Undisputed World Champion"
+      },
+      "lessons": {
+        "11": {
+          "title": "Basic Two-Punch Combinations",
+          "description": "Learn classic two-punch combinations.",
+          "content": "<h2>Two-punch combinations:</h2>\n<ul>\n<li>Jab + Cross</li>\n<li>Jab + Hook</li>\n<li>Cross + Hook</li>\n<li>Timing and rhythm</li>\n</ul>"
+        },
+        "12": {
+          "title": "Three-Punch Series",
+          "description": "Advanced three-punch combinations for maximum effectiveness.",
+          "content": "<h2>Three-punch series:</h2>\n<ul>\n<li>1-2-3 combination</li>\n<li>Hooks to the body and head</li>\n<li>Level changes</li>\n<li>Execution speed</li>\n</ul>"
+        },
+        "13": {
+          "title": "Combinations with Defense",
+          "description": "Learn to combine offense with defensive actions.",
+          "content": "<h2>Offense + Defense:</h2>\n<ul>\n<li>Punch with a slip</li>\n<li>Block and counter</li>\n<li>Slip and combination</li>\n<li>Working under pressure</li>\n</ul>"
+        }
+      }
+    },
+    "defenseMastery": {
+      "title": "Defense Mastery",
+      "description": "Comprehensive course on defensive techniques and counterattacks",
+      "duration": "10 hours",
+      "instructor": {
+        "name": "Dmitry Bivol",
+        "title": "Undisputed World Champion"
+      },
+      "lessons": {
+        "21": {
+          "title": "Blocking Basics",
+          "description": "Learn different types of blocks and how to use them.",
+          "content": "<h2>Types of blocks:</h2>\n<ul>\n<li>High guard</li>\n<li>Arm blocks</li>\n<li>Body defense</li>\n<li>When to use each type</li>\n</ul>"
+        },
+        "22": {
+          "title": "Slipping Technique (Slips)",
+          "description": "Master slips — the most effective form of defense.",
+          "content": "<h2>Slip technique:</h2>\n<ul>\n<li>Head movement</li>\n<li>Footwork and body movement</li>\n<li>Timing and distance</li>\n<li>Counterattack after the slip</li>\n</ul>"
+        },
+        "23": {
+          "title": "Ducks and Rolls",
+          "description": "Learn to duck under punches and use it for attack.",
+          "content": "<h2>Duck and Bob technique:</h2>\n<ul>\n<li>Ducking under hooks</li>\n<li>Body movement</li>\n<li>Exit to attack position</li>\n<li>Combinations with body shots</li>\n</ul>"
+        }
+      }
+    }
+  },
   "orders": {
+    "title": "My Orders",
+    "subtitle": "Your purchase history and delivery status",
+    "totalSpent": "Total spent",
+    "deliveredCount": "Orders delivered",
+    "totalOrders": "Total orders",
+    "orderNumberLabel": "Order #{{id}}",
+    "orderTotal": "Order total",
+    "shippingInfo": "Shipping information",
+    "recipient": "Recipient",
+    "phone": "Phone",
+    "city": "City",
+    "address": "Address",
+    "itemsTitle": "Order items",
+    "itemsSubtotal": "Items",
+    "delivery": "Delivery",
+    "freeDelivery": "Free",
+    "total": "Total",
+    "emptyTitle": "No orders",
+    "emptySubtitle": "You don't have any orders yet",
+    "goToShop": "Go to shop",
+    "helpTitle": "Need help with an order?",
+    "helpSubtitle": "If you have questions about your order or delivery, contact our support",
+    "contactSupport": "Contact support →",
     "orderNumber": "Order Number",
     "orderDate": "Order Date",
     "orderStatus": "Order Status",
@@ -241,12 +1214,19 @@
   },
   "aiChat": {
     "title": "AI Coach",
-    "placeholder": "Ask a question...",
-    "send": "Send",
+    "subtitle": "Ask about boxing technique",
+    "welcomeTitle": "Hi! I'm your AI coach.",
+    "welcomeSubtitle": "Ask me anything about boxing!",
+    "placeholder": "Type a message...",
     "typing": "Typing...",
-    "clearChat": "Clear Chat",
-    "suggestions": "Suggestions",
-    "askQuestion": "Ask Question"
+    "error": "Sorry, something went wrong. Please try again later.",
+    "emptyResponse": "Empty response received",
+    "demoResponses": [
+      "Hi! I'm an AI coach. To get personalized advice, please sign in.",
+      "For beginners, I recommend the \"Boxing Fundamentals\" course. It covers everything you need!",
+      "Boxing is not only strength, but also technique. Proper stance is the foundation.",
+      "Train regularly! At least 3 times a week for noticeable progress."
+    ]
   },
   "notFound": {
     "title": "404 - Page Not Found",

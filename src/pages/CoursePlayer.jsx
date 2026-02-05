@@ -7,10 +7,12 @@ import Loader from '../components/ui/Loader'
 import LessonSidebar from '../components/courses/LessonSidebar'
 import VideoPlayer from '../components/courses/VideoPlayer'
 import AIChat from '../components/AIChat'
+import { useTranslation } from 'react-i18next'
 
 const API_URL = 'http://127.0.0.1:8000/api'
 
 export default function CoursePlayer() {
+  const { t } = useTranslation()
   const { id } = useParams()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
@@ -161,12 +163,12 @@ export default function CoursePlayer() {
               <div className="mb-8">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-sm text-gray-400">
-                    Урок {currentLesson.order_index + 1} из {course.lessons.length}
+                    {t('coursePlayer.lessonOf', { number: currentLesson.order_index + 1, total: course.lessons.length })}
                   </span>
                   {currentLesson.progress?.completed && (
                     <span className="flex items-center gap-1 text-sm text-green-500">
                       <Star className="w-4 h-4 fill-current" />
-                      Завершено
+                      {t('lesson.completed')}
                     </span>
                   )}
                 </div>
@@ -178,7 +180,7 @@ export default function CoursePlayer() {
               {/* Описание урока */}
               {currentLesson.text_content && (
                 <div className="mb-8">
-                  <h2 className="text-xl font-semibold text-white mb-4">О чём этот урок</h2>
+                  <h2 className="text-xl font-semibold text-white mb-4">{t('coursePlayer.lessonAbout')}</h2>
                   <div className="prose prose-invert max-w-none">
                     <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">
                       {currentLesson.text_content}
@@ -190,7 +192,7 @@ export default function CoursePlayer() {
               {/* Ресурсы для скачивания */}
               {currentLesson.resources && currentLesson.resources.length > 0 && (
                 <div className="mb-8">
-                  <h2 className="text-xl font-semibold text-white mb-4">Материалы урока</h2>
+                  <h2 className="text-xl font-semibold text-white mb-4">{t('coursePlayer.lessonMaterials')}</h2>
                   <div className="space-y-3">
                     {currentLesson.resources.map((resource, index) => (
                       <a
@@ -224,7 +226,7 @@ export default function CoursePlayer() {
                   `}
                 >
                   <ChevronLeft className="w-5 h-5" />
-                  Предыдущий урок
+                  {t('lesson.previousLesson')}
                 </button>
 
                 <button
@@ -238,7 +240,7 @@ export default function CoursePlayer() {
                     }
                   `}
                 >
-                  Следующий урок
+                  {t('lesson.nextLesson')}
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>

@@ -1,8 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useAuthStore } from '../../store/authStore'
+import { useTranslation } from 'react-i18next'
 
 export default function MobileMenu({ isOpen, onClose }) {
+  const { t } = useTranslation()
   const { isAuthenticated, user, logout } = useAuthStore()
 
   const handleLogout = () => {
@@ -45,7 +47,7 @@ export default function MobileMenu({ isOpen, onClose }) {
               {/* User Info */}
               {isAuthenticated && (
                 <div className="mb-8 pb-6 border-b border-gray-800">
-                  <p className="text-sm text-gray-400">Привет,</p>
+                  <p className="text-sm text-gray-400">{t('mobileMenu.greeting')}</p>
                   <p className="font-bold text-lg">{user?.username || user?.email}</p>
                 </div>
               )}
@@ -57,28 +59,28 @@ export default function MobileMenu({ isOpen, onClose }) {
                   onClick={onClose}
                   className="block py-3 text-lg hover:text-primary transition-colors"
                 >
-                  Главная
+                  {t('nav.home')}
                 </Link>
                 <Link
                   to="/about"
                   onClick={onClose}
                   className="block py-3 text-lg hover:text-primary transition-colors"
                 >
-                  О тренере
+                  {t('nav.about')}
                 </Link>
                 <Link
                   to="/courses"
                   onClick={onClose}
                   className="block py-3 text-lg hover:text-primary transition-colors"
                 >
-                  Курсы
+                  {t('nav.courses')}
                 </Link>
                 <Link
                   to="/merch"
                   onClick={onClose}
                   className="block py-3 text-lg hover:text-primary transition-colors"
                 >
-                  Магазин
+                  {t('nav.shop')}
                 </Link>
                 
                 {isAuthenticated && (
@@ -88,21 +90,21 @@ export default function MobileMenu({ isOpen, onClose }) {
                       onClick={onClose}
                       className="block py-3 text-lg hover:text-primary transition-colors"
                     >
-                      Личный кабинет
+                      {t('nav.dashboard')}
                     </Link>
                     <Link
                       to="/dashboard/my-courses"
                       onClick={onClose}
                       className="block py-3 text-lg hover:text-primary transition-colors"
                     >
-                      Мои курсы
+                      {t('nav.myCourses')}
                     </Link>
                     <Link
                       to="/dashboard/profile"
                       onClick={onClose}
                       className="block py-3 text-lg hover:text-primary transition-colors"
                     >
-                      Профиль
+                      {t('nav.profile')}
                     </Link>
                   </>
                 )}
@@ -115,7 +117,7 @@ export default function MobileMenu({ isOpen, onClose }) {
                     onClick={handleLogout}
                     className="w-full btn-secondary"
                   >
-                    Выход
+                    {t('nav.logout')}
                   </button>
                 ) : (
                   <>
@@ -124,14 +126,14 @@ export default function MobileMenu({ isOpen, onClose }) {
                       onClick={onClose}
                       className="block w-full text-center btn-secondary"
                     >
-                      Вход
+                      {t('nav.login')}
                     </Link>
                     <Link
                       to="/register"
                       onClick={onClose}
                       className="block w-full text-center btn-primary"
                     >
-                      Регистрация
+                      {t('mobileMenu.register')}
                     </Link>
                   </>
                 )}

@@ -13,8 +13,10 @@ import CoursePlayer from '../components/courses/CoursePlayer'
 import CurriculumSection from '../components/courses/CurriculumSection'
 import { getCourseBySlug } from '../data/staticLessons'
 import { purchaseUtils } from '../utils/purchaseUtils'
+import { useTranslation } from 'react-i18next'
 
 export default function CourseDetail() {
+  const { t, i18n } = useTranslation()
   const { slug } = useParams()
   const navigate = useNavigate()
   const { isAuthenticated, user } = useAuthStore()
@@ -51,12 +53,12 @@ export default function CourseDetail() {
         const enhancedCourse = {
           ...courseData,
           is_purchased: courseData.is_purchased || isPurchasedLocally,
-          full_description: courseData.full_description || `Профессиональный курс от абсолютного чемпиона мира Дмитрия Бивола. В этом курсе вы освоите все ключевые техники и стратегии, которые привели Дмитрия к мировому титулу. Программа включает как теоретические знания, так и практические упражнения с пошаговой инструкцией.`,
+          full_description: courseData.full_description || t('courseDetail.fullDescription'),
         
         // Mock additional details
         instructor: {
-          name: 'Дмитрий Бивол',
-          title: 'Абсолютный чемпион мира',
+          name: t('courseDetail.instructorData.name'),
+          title: t('courseDetail.instructorData.title'),
           rating: 4.9,
           students: 10500,
           courses: 8,
@@ -72,51 +74,51 @@ export default function CourseDetail() {
         },
         
         features: [
-          'Доступ к AI-тренеру 24/7',
-          'Сертификат об окончании',
-          'Пожизненный доступ',
-          'Мобильное приложение',
-          'Закрытое сообщество',
-          'Персональные консультации'
+          t('courseDetail.features.0'),
+          t('courseDetail.features.1'),
+          t('courseDetail.features.2'),
+          t('courseDetail.features.3'),
+          t('courseDetail.features.4'),
+          t('courseDetail.features.5')
         ],
         
         requirements: [
-          'Наличие боксёрских перчаток',
-          'Спортивная форма',
-          'Готовность учиться',
-          '30 минут в день'
+          t('courseDetail.requirementsList.0'),
+          t('courseDetail.requirementsList.1'),
+          t('courseDetail.requirementsList.2'),
+          t('courseDetail.requirementsList.3')
         ],
         
         lessons: courseData.lessons || [
-          { id: 1, title: 'Введение в бокс', duration_minutes: 45, is_free: true, preview: true },
-          { id: 2, title: 'Базовая стойка и передвижение', duration_minutes: 60, is_free: false, preview: false },
-          { id: 3, title: 'Прямые удары (джеб, кросс)', duration_minutes: 75, is_free: false, preview: false },
-          { id: 4, title: 'Апперкоты и хуки', duration_minutes: 90, is_free: false, preview: false },
-          { id: 5, title: 'Защита и уклонение', duration_minutes: 80, is_free: false, preview: false },
-          { id: 6, title: 'Комбинации ударов', duration_minutes: 85, is_free: false, preview: false },
-          { id: 7, title: 'Работа на снарядах', duration_minutes: 70, is_free: false, preview: false },
-          { id: 8, title: 'Спарринг техника', duration_minutes: 95, is_free: false, preview: false },
-          { id: 9, title: 'Тактика боя', duration_minutes: 65, is_free: false, preview: false },
-          { id: 10, title: 'Финал и сертификация', duration_minutes: 50, is_free: false, preview: false }
+          { id: 1, title: t('courseDetail.lessons.0'), duration_minutes: 45, is_free: true, preview: true },
+          { id: 2, title: t('courseDetail.lessons.1'), duration_minutes: 60, is_free: false, preview: false },
+          { id: 3, title: t('courseDetail.lessons.2'), duration_minutes: 75, is_free: false, preview: false },
+          { id: 4, title: t('courseDetail.lessons.3'), duration_minutes: 90, is_free: false, preview: false },
+          { id: 5, title: t('courseDetail.lessons.4'), duration_minutes: 80, is_free: false, preview: false },
+          { id: 6, title: t('courseDetail.lessons.5'), duration_minutes: 85, is_free: false, preview: false },
+          { id: 7, title: t('courseDetail.lessons.6'), duration_minutes: 70, is_free: false, preview: false },
+          { id: 8, title: t('courseDetail.lessons.7'), duration_minutes: 95, is_free: false, preview: false },
+          { id: 9, title: t('courseDetail.lessons.8'), duration_minutes: 65, is_free: false, preview: false },
+          { id: 10, title: t('courseDetail.lessons.9'), duration_minutes: 50, is_free: false, preview: false }
         ],
         
         reviews: [
           {
             id: 1,
-            user: 'Алексей Иванов',
+            user: t('courseDetail.reviewsData.0.user'),
             avatar: '👤',
             rating: 5,
-            date: '2 недели назад',
-            comment: 'Лучший курс по боксу! Особенно понравился AI-тренер, который помогает с техникой.',
+            date: t('courseDetail.reviewsData.0.date'),
+            comment: t('courseDetail.reviewsData.0.comment'),
             helpful: 24
           },
           {
             id: 2,
-            user: 'Мария Петрова',
+            user: t('courseDetail.reviewsData.1.user'),
             avatar: '👩',
             rating: 5,
-            date: '1 месяц назад',
-            comment: 'За 2 месяца прошла путь от новичка до уверенного бойца. Методика Бивола работает!',
+            date: t('courseDetail.reviewsData.1.date'),
+            comment: t('courseDetail.reviewsData.1.comment'),
             helpful: 18
           }
         ]
@@ -127,7 +129,7 @@ export default function CourseDetail() {
         console.log('API не доступен, используем статичные данные')
         
         // Используем статичные данные если API недоступен
-        const staticCourse = getCourseBySlug(slug)
+        const staticCourse = getCourseBySlug(slug, t)
         if (staticCourse) {
           // Проверяем, куплен ли курс локально
           const isPurchasedLocally = purchaseUtils.isPurchased(staticCourse.id)
@@ -135,7 +137,7 @@ export default function CourseDetail() {
           const enhancedStaticCourse = {
             ...staticCourse,
             is_purchased: isPurchasedLocally,
-            full_description: `Профессиональный курс от абсолютного чемпиона мира Дмитрия Бивола. В этом курсе вы освоите все ключевые техники и стратегии, которые привели Дмитрия к мировому титулу. Программа включает как теоретические знания, так и практические упражнения с пошаговой инструкцией.`,
+            full_description: t('courseDetail.fullDescription'),
             stats: {
               rating: staticCourse.rating || 4.8,
               totalReviews: 342,
@@ -144,43 +146,43 @@ export default function CourseDetail() {
               satisfactionRate: 94
             },
             features: [
-              'Доступ к AI-тренеру 24/7',
-              'Сертификат об окончании',
-              'Пожизненный доступ к материалам',
-              'Мобильное приложение',
-              'Закрытое сообщество',
-              'Персональные консультации'
+              t('courseDetail.features.0'),
+              t('courseDetail.features.1'),
+              t('courseDetail.features.2'),
+              t('courseDetail.features.3'),
+              t('courseDetail.features.4'),
+              t('courseDetail.features.5')
             ],
             requirements: [
-              'Наличие боксёрских перчаток',
-              'Спортивная форма',
-              'Готовность учиться',
-              '30 минут в день для тренировок'
+              t('courseDetail.requirementsList.0'),
+              t('courseDetail.requirementsList.1'),
+              t('courseDetail.requirementsList.2'),
+              t('courseDetail.requirementsList.3Alt')
             ],
             reviews: [
               {
                 id: 1,
-                user: 'Алексей Иванов',
+                user: t('courseDetail.reviewsData.0.user'),
                 avatar: '👤',
                 rating: 5,
-                date: '2 недели назад',
-                comment: 'Лучший курс по боксу! Особенно понравился AI-тренер, который помогает с техникой.',
+                date: t('courseDetail.reviewsData.0.date'),
+                comment: t('courseDetail.reviewsData.0.comment'),
                 helpful: 24
               },
               {
                 id: 2,
-                user: 'Мария Петрова',
+                user: t('courseDetail.reviewsData.1.user'),
                 avatar: '👩',
                 rating: 5,
-                date: '1 месяц назад',
-                comment: 'За 2 месяца прошла путь от новичка до уверенного бойца. Методика Бивола работает!',
+                date: t('courseDetail.reviewsData.1.date'),
+                comment: t('courseDetail.reviewsData.1.comment'),
                 helpful: 18
               }
             ]
           }
           setCourse(enhancedStaticCourse)
         } else {
-          throw new Error('Курс не найден')
+          throw new Error(t('courseDetail.notFound'))
         }
       }
     } catch (error) {
@@ -206,11 +208,11 @@ export default function CourseDetail() {
       setCourse({ ...course, is_purchased: true })
       
       // Показываем успешное сообщение
-      alert('🎉 Поздравляем! Курс успешно куплен! Теперь вам доступны все уроки.')
+      alert(t('courseDetail.purchaseSuccess'))
       
     } catch (error) {
       console.error('Purchase error:', error)
-      alert('Произошла ошибка при покупке. Попробуйте еще раз.')
+      alert(t('courseDetail.purchaseError'))
     } finally {
       setPurchasing(false)
     }
@@ -252,7 +254,7 @@ export default function CourseDetail() {
           >
             ⚡
           </motion.div>
-          <p className="text-gray-400 text-lg">Загрузка курса...</p>
+          <p className="text-gray-400 text-lg">{t('courseDetail.loading')}</p>
         </div>
       </div>
     )
@@ -263,11 +265,11 @@ export default function CourseDetail() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">🥊</div>
-          <h3 className="text-2xl font-bold text-white mb-2">Курс не найден</h3>
-          <p className="text-gray-400 mb-6">Возможно, курс был перемещен или удален</p>
+          <h3 className="text-2xl font-bold text-white mb-2">{t('courseDetail.notFoundTitle')}</h3>
+          <p className="text-gray-400 mb-6">{t('courseDetail.notFoundSubtitle')}</p>
           <Link to="/courses" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl font-semibold text-white hover:from-red-600 hover:to-primary transition-all">
             <ChevronRight className="w-5 h-5 rotate-180" />
-            Вернуться к курсам
+            {t('courseDetail.backToCourses')}
           </Link>
         </div>
       </div>
@@ -294,7 +296,13 @@ export default function CourseDetail() {
             <motion.div variants={fadeInUp} className="lg:col-span-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-primary/20 to-red-600/20 rounded-full border border-primary/30 mb-6">
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-primary text-sm font-semibold">{course.level === 'beginner' ? 'НАЧИНАЮЩИЙ' : course.level === 'intermediate' ? 'СРЕДНИЙ' : 'ПРОДВИНУТЫЙ'} УРОВЕНЬ</span>
+                <span className="text-primary text-sm font-semibold">
+                  {course.level === 'beginner'
+                    ? t('courseDetail.levels.beginner')
+                    : course.level === 'intermediate'
+                      ? t('courseDetail.levels.intermediate')
+                      : t('courseDetail.levels.advanced')}{' '}{t('courseDetail.levelSuffix')}
+                </span>
               </div>
 
               <h1 className="text-4xl md:text-6xl font-black mb-6">
@@ -314,17 +322,20 @@ export default function CourseDetail() {
                     </div>
                     <div className="flex-1">
                       <div className="font-bold text-white mb-1">
-                        🎁 {course.lessons.filter(l => l.is_free).length} {course.lessons.filter(l => l.is_free).length === 1 ? 'урок' : 'уроков'} доступно бесплатно!
+                        🎁 {t('courseDetail.freeLessonsBanner', {
+                          count: course.lessons.filter(l => l.is_free).length,
+                          lessons: t('courses.lessonsCount', { count: course.lessons.filter(l => l.is_free).length })
+                        })}
                       </div>
                       <div className="text-sm text-gray-300">
-                        Начните обучение прямо сейчас без регистрации
+                        {t('courseDetail.freeLessonsSubtitle')}
                       </div>
                     </div>
                     <Link
                       to={`/lessons/${course.lessons.find(l => l.is_free)?.id}`}
                       className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold text-white transition-colors whitespace-nowrap"
                     >
-                      Смотреть →
+                      {t('courseDetail.freeLessonsCta')}
                     </Link>
                   </div>
                 </motion.div>
@@ -346,7 +357,9 @@ export default function CourseDetail() {
                     <Star className="w-4 h-4 text-yellow-500 fill-current" />
                     <span className="text-sm">{course.instructor?.rating}</span>
                     <span className="text-gray-500 text-sm">•</span>
-                    <span className="text-sm text-gray-400">{course.instructor?.students?.toLocaleString()} студентов</span>
+                    <span className="text-sm text-gray-400">
+                      {course.instructor?.students?.toLocaleString()} {t('courses.students')}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -360,22 +373,26 @@ export default function CourseDetail() {
                       <Star key={i} className="w-4 h-4 text-yellow-500 fill-current" />
                     ))}
                   </div>
-                  <div className="text-xs text-gray-400 mt-1">{course.reviews?.length || 342} отзывов</div>
+                  <div className="text-xs text-gray-400 mt-1">
+                    {t('courseDetail.reviewsCount', { count: course.reviews?.length || 342 })}
+                  </div>
                 </div>
                 
                 <div className="p-4 rounded-xl bg-gray-900/50 border border-gray-800">
                   <div className="text-2xl font-bold text-white mb-1">{course.stats?.studentsEnrolled?.toLocaleString() || 2843}</div>
-                  <div className="text-sm text-gray-400">Студентов</div>
+                  <div className="text-sm text-gray-400">{t('courseDetail.stats.students')}</div>
                 </div>
                 
                 <div className="p-4 rounded-xl bg-gray-900/50 border border-gray-800">
                   <div className="text-2xl font-bold text-white mb-1">{course.lessons_count || 10}</div>
-                  <div className="text-sm text-gray-400">Уроков</div>
+                  <div className="text-sm text-gray-400">{t('courseDetail.stats.lessons')}</div>
                 </div>
                 
                 <div className="p-4 rounded-xl bg-gray-900/50 border border-gray-800">
-                  <div className="text-2xl font-bold text-white mb-1">{course.duration_hours || 8}ч</div>
-                  <div className="text-sm text-gray-400">Длительность</div>
+                  <div className="text-2xl font-bold text-white mb-1">
+                    {course.duration_hours || 8}{t('courses.hoursShort')}
+                  </div>
+                  <div className="text-sm text-gray-400">{t('courseDetail.stats.duration')}</div>
                 </div>
               </div>
             </motion.div>
@@ -410,7 +427,7 @@ export default function CourseDetail() {
                     {course.lessons?.[0]?.is_free && (
                       <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full text-sm font-bold text-white">
-                          БЕСПЛАТНЫЙ ПРОСМОТР
+                          {t('courseDetail.freePreview')}
                         </span>
                       </div>
                     )}
@@ -419,9 +436,9 @@ export default function CourseDetail() {
                   {/* Price Section */}
                   <div className="p-6">
                     <div className="flex items-baseline gap-2 mb-6">
-                      <div className="text-4xl font-black text-primary">{course.price?.toLocaleString()} с</div>
+                      <div className="text-4xl font-black text-primary">{course.price?.toLocaleString()} {t('common.currency')}</div>
                       {course.originalPrice && (
-                        <div className="text-lg text-gray-400 line-through">{course.originalPrice?.toLocaleString()} с</div>
+                        <div className="text-lg text-gray-400 line-through">{course.originalPrice?.toLocaleString()} {t('common.currency')}</div>
                       )}
                     </div>
 
@@ -430,7 +447,7 @@ export default function CourseDetail() {
                         to="/dashboard/my-courses"
                         className="block w-full py-4 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl font-bold text-lg text-white text-center hover:from-emerald-600 hover:to-green-600 transition-all mb-4"
                       >
-                        Перейти к обучению
+                        {t('courseDetail.goToLearning')}
                       </Link>
                     ) : (
                       <>
@@ -442,7 +459,10 @@ export default function CourseDetail() {
                           >
                             <span className="relative z-10 flex items-center justify-center gap-2">
                               <Play className="w-5 h-5" />
-                              Смотреть бесплатно ({course.lessons.filter(l => l.is_free).length} {course.lessons.filter(l => l.is_free).length === 1 ? 'урок' : 'уроков'})
+                              {t('courseDetail.watchFree', {
+                                count: course.lessons.filter(l => l.is_free).length,
+                                lessons: t('courses.lessonsCount', { count: course.lessons.filter(l => l.is_free).length })
+                              })}
                             </span>
                             <motion.div
                               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -463,7 +483,7 @@ export default function CourseDetail() {
                           disabled={purchasing}
                           className="w-full py-4 bg-gradient-to-r from-primary to-red-600 rounded-xl font-bold text-lg text-white hover:from-red-600 hover:to-primary transition-all mb-4 relative overflow-hidden disabled:opacity-50"
                         >
-                          {purchasing ? 'Покупка...' : 'Купить курс'}
+                          {purchasing ? t('courses.purchasing') : t('courses.buy')}
                           
                           {/* Shine effect */}
                           {!purchasing && (
@@ -482,7 +502,7 @@ export default function CourseDetail() {
                         </button>
                         
                         <button className="w-full py-3 border-2 border-primary text-primary rounded-xl font-semibold hover:bg-primary/10 transition-colors">
-                          Добавить в избранное
+                          {t('courseDetail.addToFavorites')}
                         </button>
                       </>
                     )}
@@ -491,10 +511,10 @@ export default function CourseDetail() {
                     <div className="mt-6 p-4 bg-gradient-to-r from-primary/10 to-red-600/10 rounded-xl border border-primary/30">
                       <div className="flex items-center gap-3 mb-2">
                         <Shield className="w-5 h-5 text-primary" />
-                        <span className="font-semibold text-white">Гарантия возврата</span>
+                        <span className="font-semibold text-white">{t('courseDetail.guarantee.title')}</span>
                       </div>
                       <p className="text-sm text-gray-400">
-                        30-дневная гарантия возврата средств без вопросов
+                        {t('courseDetail.guarantee.subtitle')}
                       </p>
                     </div>
 
@@ -505,7 +525,7 @@ export default function CourseDetail() {
                         className={`flex items-center gap-2 ${isLiked ? 'text-red-500' : 'text-gray-400 hover:text-white'}`}
                       >
                         <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
-                        <span>Нравится</span>
+                        <span>{t('courseDetail.like')}</span>
                       </button>
                       
                       <div className="relative">
@@ -514,7 +534,7 @@ export default function CourseDetail() {
                           className="flex items-center gap-2 text-gray-400 hover:text-white"
                         >
                           <Share2 className="w-5 h-5" />
-                          <span>Поделиться</span>
+                          <span>{t('courseDetail.share')}</span>
                         </button>
                         
                         <AnimatePresence>
@@ -526,10 +546,10 @@ export default function CourseDetail() {
                               className="absolute right-0 mt-2 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-2 z-50"
                             >
                               <button className="w-full px-4 py-2 text-left hover:bg-gray-800 rounded-lg transition-colors">
-                                📱 Скопировать ссылку
+                                📱 {t('courseDetail.shareCopy')}
                               </button>
                               <button className="w-full px-4 py-2 text-left hover:bg-gray-800 rounded-lg transition-colors">
-                                📧 Отправить на email
+                                📧 {t('courseDetail.shareEmail')}
                               </button>
                             </motion.div>
                           )}
@@ -558,10 +578,10 @@ export default function CourseDetail() {
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
-                {tab === 'overview' ? 'Обзор' :
-                 tab === 'curriculum' ? 'Программа' :
-                 tab === 'instructor' ? 'Инструктор' :
-                 tab === 'reviews' ? 'Отзывы' : 'FAQ'}
+                {tab === 'overview' ? t('courseDetail.overview') :
+                 tab === 'curriculum' ? t('courseDetail.curriculum') :
+                 tab === 'instructor' ? t('courseDetail.instructor') :
+                 tab === 'reviews' ? t('courseDetail.reviews') : t('courseDetail.faq')}
               </button>
             ))}
           </div>
@@ -585,7 +605,7 @@ export default function CourseDetail() {
                   >
                     {/* Full Description */}
                     <div className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-8">
-                      <h2 className="text-3xl font-bold mb-6 text-white">Что вы узнаете</h2>
+                      <h2 className="text-3xl font-bold mb-6 text-white">{t('courseDetail.whatYouLearn')}</h2>
                       <div className="prose prose-invert max-w-none">
                         <p className="text-gray-300 text-lg leading-relaxed mb-6">
                           {course.full_description}
@@ -594,12 +614,12 @@ export default function CourseDetail() {
                         {/* Key Learnings */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                           {[
-                            'Правильная боксёрская стойка и передвижение',
-                            'Техника всех основных ударов',
-                            'Эффективная защита и уклонение',
-                            'Комбинации ударов для реального боя',
-                            'Работа на снарядах и с партнёром',
-                            'Тактика и стратегия ведения боя'
+                            t('courseDetail.keyLearnings.0'),
+                            t('courseDetail.keyLearnings.1'),
+                            t('courseDetail.keyLearnings.2'),
+                            t('courseDetail.keyLearnings.3'),
+                            t('courseDetail.keyLearnings.4'),
+                            t('courseDetail.keyLearnings.5')
                           ].map((item, idx) => (
                             <div key={idx} className="flex items-center gap-3">
                               <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
@@ -612,7 +632,7 @@ export default function CourseDetail() {
 
                     {/* Features */}
                     <div ref={featuresRef} className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-8">
-                      <h2 className="text-3xl font-bold mb-6 text-white">Что включает курс</h2>
+                      <h2 className="text-3xl font-bold mb-6 text-white">{t('courseDetail.includes')}</h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {course.features?.map((feature, idx) => (
                           <div key={idx} className="flex items-start gap-3">
@@ -621,7 +641,7 @@ export default function CourseDetail() {
                             </div>
                             <div>
                               <h4 className="font-semibold text-white mb-1">{feature}</h4>
-                              <p className="text-sm text-gray-400">Доступно сразу после покупки</p>
+                              <p className="text-sm text-gray-400">{t('courseDetail.availableImmediately')}</p>
                             </div>
                           </div>
                         ))}
@@ -630,7 +650,7 @@ export default function CourseDetail() {
 
                     {/* Requirements */}
                     <div className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-8">
-                      <h2 className="text-3xl font-bold mb-6 text-white">Требования</h2>
+                      <h2 className="text-3xl font-bold mb-6 text-white">{t('courseDetail.requirements')}</h2>
                       <div className="space-y-3">
                         {course.requirements?.map((req, idx) => (
                           <div key={idx} className="flex items-center gap-3">
@@ -679,26 +699,24 @@ export default function CourseDetail() {
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                           <div className="p-4 rounded-xl bg-gray-900/50">
                             <div className="text-2xl font-bold text-white mb-1">{course.instructor?.rating}</div>
-                            <div className="text-sm text-gray-400">Рейтинг</div>
+                            <div className="text-sm text-gray-400">{t('courseDetail.instructorStats.rating')}</div>
                           </div>
                           <div className="p-4 rounded-xl bg-gray-900/50">
                             <div className="text-2xl font-bold text-white mb-1">{course.instructor?.students?.toLocaleString()}</div>
-                            <div className="text-sm text-gray-400">Студентов</div>
+                            <div className="text-sm text-gray-400">{t('courseDetail.instructorStats.students')}</div>
                           </div>
                           <div className="p-4 rounded-xl bg-gray-900/50">
                             <div className="text-2xl font-bold text-white mb-1">{course.instructor?.courses}</div>
-                            <div className="text-sm text-gray-400">Курсов</div>
+                            <div className="text-sm text-gray-400">{t('courseDetail.instructorStats.courses')}</div>
                           </div>
                           <div className="p-4 rounded-xl bg-gray-900/50">
                             <div className="text-2xl font-bold text-white mb-1">15+</div>
-                            <div className="text-sm text-gray-400">Лет опыта</div>
+                            <div className="text-sm text-gray-400">{t('courseDetail.instructorStats.years')}</div>
                           </div>
                         </div>
                         
                         <p className="text-gray-300 leading-relaxed">
-                          Абсолютный чемпион мира по боксу, обладатель поясов WBA, IBO, The Ring. 
-                          Один из самых техничных боксеров современности. С 15-летним опытом профессиональных 
-                          выступлений и 268 любительскими победами.
+                          {t('courseDetail.instructorBio')}
                         </p>
                       </div>
                     </div>
@@ -715,7 +733,7 @@ export default function CourseDetail() {
                     <div className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-8 mb-6">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                         <div>
-                          <h2 className="text-3xl font-bold text-white mb-2">Отзывы студентов</h2>
+                          <h2 className="text-3xl font-bold text-white mb-2">{t('courseDetail.reviewsTitle')}</h2>
                           <div className="flex items-center gap-4">
                             <div className="text-5xl font-bold text-white">{course.stats?.rating || 4.8}</div>
                             <div>
@@ -724,13 +742,15 @@ export default function CourseDetail() {
                                   <Star key={i} className="w-5 h-5 text-yellow-500 fill-current" />
                                 ))}
                               </div>
-                              <div className="text-gray-400">На основе {course.stats?.totalReviews || 342} отзывов</div>
+                              <div className="text-gray-400">
+                                {t('courseDetail.reviewsBasedOn', { count: course.stats?.totalReviews || 342 })}
+                              </div>
                             </div>
                           </div>
                         </div>
                         
                         <button className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl font-semibold text-white hover:from-red-600 hover:to-primary transition-all">
-                          Оставить отзыв
+                          {t('courseDetail.leaveReview')}
                         </button>
                       </div>
                       
@@ -782,10 +802,10 @@ export default function CourseDetail() {
                           <div className="flex items-center justify-between">
                             <button className="text-sm text-gray-400 hover:text-white flex items-center gap-1">
                               <span>👍</span>
-                              <span>Полезно ({review.helpful})</span>
+                              <span>{t('courseDetail.helpful', { count: review.helpful })}</span>
                             </button>
                             <button className="text-sm text-gray-400 hover:text-white">
-                              Ответить
+                              {t('courseDetail.reply')}
                             </button>
                           </div>
                         </div>
@@ -802,24 +822,24 @@ export default function CourseDetail() {
                     exit={{ opacity: 0, y: -20 }}
                   >
                     <div className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-8">
-                      <h2 className="text-3xl font-bold mb-6 text-white">Часто задаваемые вопросы</h2>
+                      <h2 className="text-3xl font-bold mb-6 text-white">{t('courseDetail.faqTitle')}</h2>
                       <div className="space-y-4">
                         {[
                           {
-                            q: 'Нужен ли опыт для прохождения курса?',
-                            a: 'Курс рассчитан на все уровни. Начинающие могут стартовать с нуля, опытные боксеры найдут продвинутые техники.'
+                            q: t('courseDetail.faqItems.0.q'),
+                            a: t('courseDetail.faqItems.0.a')
                           },
                           {
-                            q: 'Как долго есть доступ к курсу?',
-                            a: 'Доступ к курсу — пожизненный. Вы можете проходить уроки в удобное время и возвращаться к материалам.'
+                            q: t('courseDetail.faqItems.1.q'),
+                            a: t('courseDetail.faqItems.1.a')
                           },
                           {
-                            q: 'Есть ли сертификат об окончании?',
-                            a: 'Да, после прохождения всех уроков вы получите именной сертификат, подтверждающий ваши навыки.'
+                            q: t('courseDetail.faqItems.2.q'),
+                            a: t('courseDetail.faqItems.2.a')
                           },
                           {
-                            q: 'Можно ли задавать вопросы инструктору?',
-                            a: 'Да, в рамках курса доступны консультации и обратная связь от инструктора через платформу.'
+                            q: t('courseDetail.faqItems.3.q'),
+                            a: t('courseDetail.faqItems.3.a')
                           }
                         ].map((faq, idx) => (
                           <div key={idx} className="border-b border-gray-800 last:border-0 pb-4 last:pb-0">
@@ -838,20 +858,20 @@ export default function CourseDetail() {
             <div className="space-y-6">
               {/* Course Details */}
               <div className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-6">
-                <h3 className="font-bold text-lg mb-4">Детали курса</h3>
+                <h3 className="font-bold text-lg mb-4">{t('courseDetail.detailsTitle')}</h3>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <Clock className="w-5 h-5 text-blue-500" />
                     <div>
-                      <div className="text-sm text-gray-400">Длительность</div>
-                      <div className="font-semibold text-white">{course.duration_hours} часов</div>
+                      <div className="text-sm text-gray-400">{t('courseDetail.stats.duration')}</div>
+                      <div className="font-semibold text-white">{course.duration_hours} {t('courses.hours')}</div>
                     </div>
                   </div>
                   
                   <div className="flex items-center gap-3">
                     <BookOpen className="w-5 h-5 text-green-500" />
                     <div>
-                      <div className="text-sm text-gray-400">Уроков</div>
+                      <div className="text-sm text-gray-400">{t('courseDetail.stats.lessons')}</div>
                       <div className="font-semibold text-white">{course.lessons_count}</div>
                     </div>
                   </div>
@@ -859,7 +879,7 @@ export default function CourseDetail() {
                   <div className="flex items-center gap-3">
                     <Users className="w-5 h-5 text-purple-500" />
                     <div>
-                      <div className="text-sm text-gray-400">Студентов</div>
+                      <div className="text-sm text-gray-400">{t('courseDetail.stats.students')}</div>
                       <div className="font-semibold text-white">{course.stats?.studentsEnrolled?.toLocaleString()}</div>
                     </div>
                   </div>
@@ -867,10 +887,10 @@ export default function CourseDetail() {
                   <div className="flex items-center gap-3">
                     <TrendingUp className="w-5 h-5 text-yellow-500" />
                     <div>
-                      <div className="text-sm text-gray-400">Уровень</div>
+                      <div className="text-sm text-gray-400">{t('courseDetail.stats.level')}</div>
                       <div className="font-semibold text-white">
-                        {course.level === 'beginner' ? 'Начинающий' : 
-                         course.level === 'intermediate' ? 'Средний' : 'Продвинутый'}
+                        {course.level === 'beginner' ? t('courses.beginner') : 
+                         course.level === 'intermediate' ? t('courses.intermediate') : t('courses.advanced')}
                       </div>
                     </div>
                   </div>
@@ -879,7 +899,7 @@ export default function CourseDetail() {
 
               {/* Related Courses */}
               <div className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-6">
-                <h3 className="font-bold text-lg mb-4">Смотрите также</h3>
+                <h3 className="font-bold text-lg mb-4">{t('courseDetail.relatedTitle')}</h3>
                 <div className="space-y-4">
                   {[1, 2, 3].map(i => (
                     <div key={i} className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800/50 transition-colors">
@@ -887,8 +907,8 @@ export default function CourseDetail() {
                         <span className="text-2xl">🥊</span>
                       </div>
                       <div>
-                        <div className="font-semibold text-white text-sm mb-1">Курс {i}</div>
-                        <div className="text-xs text-gray-400">От 2,990 с</div>
+                        <div className="font-semibold text-white text-sm mb-1">{t('courseDetail.relatedCourse', { index: i })}</div>
+                        <div className="text-xs text-gray-400">{t('courseDetail.relatedPrice')}</div>
                       </div>
                     </div>
                   ))}
@@ -899,10 +919,10 @@ export default function CourseDetail() {
               <div className="bg-gradient-to-br from-blue-600/10 to-cyan-600/10 border border-blue-600/30 rounded-2xl p-6">
                 <div className="text-center">
                   <HelpCircle className="w-12 h-12 text-blue-500 mx-auto mb-4" />
-                  <h3 className="font-bold text-lg mb-2 text-white">Нужна помощь?</h3>
-                  <p className="text-gray-300 text-sm mb-4">Наша команда поддержки готова ответить на ваши вопросы</p>
+                  <h3 className="font-bold text-lg mb-2 text-white">{t('courseDetail.supportTitle')}</h3>
+                  <p className="text-gray-300 text-sm mb-4">{t('courseDetail.supportSubtitle')}</p>
                   <button className="w-full py-2 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg text-white font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all">
-                    Написать в поддержку
+                    {t('courseDetail.supportCta')}
                   </button>
                 </div>
               </div>

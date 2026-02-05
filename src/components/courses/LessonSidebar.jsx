@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle2, Circle, Lock, Play, ChevronDown, ChevronUp } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export default function LessonSidebar({ lessons, currentLesson, onLessonSelect, userProgress, hasCourseAccess }) {
+  const { t } = useTranslation()
   const [expandedModules, setExpandedModules] = useState([0])
 
   // Группируем уроки по модулям (каждые 5 уроков - модуль)
@@ -11,7 +13,7 @@ export default function LessonSidebar({ lessons, currentLesson, onLessonSelect, 
   for (let i = 0; i < lessons.length; i += lessonsPerModule) {
     modules.push({
       id: Math.floor(i / lessonsPerModule),
-      name: `Модуль ${Math.floor(i / lessonsPerModule) + 1}`,
+      name: t('coursePlayer.module', { number: Math.floor(i / lessonsPerModule) + 1 }),
       lessons: lessons.slice(i, i + lessonsPerModule)
     })
   }
@@ -42,9 +44,12 @@ export default function LessonSidebar({ lessons, currentLesson, onLessonSelect, 
     <div className="h-full flex flex-col bg-gray-900">
       {/* Заголовок */}
       <div className="p-6 border-b border-gray-800">
-        <h2 className="text-xl font-bold text-white">Содержание курса</h2>
+        <h2 className="text-xl font-bold text-white">{t('coursePlayer.sidebar.title')}</h2>
         <p className="text-sm text-gray-400 mt-1">
-          {lessons.filter(l => isLessonCompleted(l.id)).length} из {lessons.length} уроков завершено
+          {t('coursePlayer.sidebar.completed', {
+            completed: lessons.filter(l => isLessonCompleted(l.id)).length,
+            total: lessons.length
+          })}
         </p>
       </div>
 
@@ -124,10 +129,10 @@ export default function LessonSidebar({ lessons, currentLesson, onLessonSelect, 
                         {/* Информация об уроке */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
-                            <span className="text-xs text-gray-500">Урок {lesson.order_index + 1}</span>
+                            <span className="text-xs text-gray-500">{t('coursePlayer.lessonLabel', { number: lesson.order_index + 1 })}</span>
                             {lesson.is_free_preview && (
                               <span className="text-xs bg-green-600/20 text-green-400 px-2 py-0.5 rounded">
-                                ПРЕВЬЮ
+                                {t('coursePlayer.preview')}
                               </span>
                             )}
                           </div>
@@ -135,7 +140,7 @@ export default function LessonSidebar({ lessons, currentLesson, onLessonSelect, 
                             {lesson.title}
                           </h4>
                           <p className="text-xs text-gray-400 mt-1">
-                            {lesson.duration_minutes} мин
+                            {lesson.duration_minutes} {t('common.minutesShort')}
                           </p>
                         </div>
                       </button>

@@ -1,4 +1,7 @@
+import { useTranslation } from 'react-i18next'
+
 export default function Loader({ size = 'md', fullScreen = false }) {
+  const { t } = useTranslation()
   const sizes = {
     sm: 'w-8 h-8',
     md: 'w-16 h-16',
@@ -8,7 +11,7 @@ export default function Loader({ size = 'md', fullScreen = false }) {
   const loader = (
     <div className="flex flex-col items-center justify-center gap-4">
       <div className={`${sizes[size]} border-4 border-gray-700 border-t-primary rounded-full animate-spin`}></div>
-      <p className="text-gray-400">Загрузка...</p>
+      <p className="text-gray-400">{t('common.loading')}</p>
     </div>
   )
 

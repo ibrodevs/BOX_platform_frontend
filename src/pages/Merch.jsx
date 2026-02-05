@@ -8,258 +8,11 @@ import {
 } from 'lucide-react'
 import { useCart } from '../hooks/useCart'
 import MerchCard from '../components/MerchCard'
-
-// Обновлённые данные для мерча с более подробной информацией
-const merchItems = [
-  {
-    id: 1,
-    name: 'Фирменная футболка "Чемпион"',
-    description: 'Премиум футболка из 100% органического хлопка с вышитым логотипом академии. Ограниченная серия.',
-    price: 2490,
-    originalPrice: 3490,
-    image: '👕',
-    category: 'одежда',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Черный', 'Белый', 'Красный'],
-    rating: 4.8,
-    reviews: 127,
-    isNew: true,
-    isBestseller: true,
-    isLimited: false,
-    material: '100% хлопок',
-    stock: 42,
-    tags: ['хит', 'новинка', 'эксклюзив']
-  },
-  {
-    id: 2,
-    name: 'Профессиональные боксёрские перчатки',
-    description: 'Перчатки премиум-класса из натуральной кожи для профессиональных тренировок. Технология AirFlow.',
-    price: 12990,
-    originalPrice: 15990,
-    image: '🥊',
-    category: 'экипировка',
-    sizes: ['8 oz', '10 oz', '12 oz', '14 oz', '16 oz'],
-    colors: ['Черный/Золотой', 'Красный/Черный', 'Синий/Белый'],
-    rating: 4.9,
-    reviews: 89,
-    isNew: false,
-    isBestseller: true,
-    isLimited: true,
-    material: 'Натуральная кожа',
-    stock: 15,
-    tags: ['профессиональные', 'лимит']
-  },
-  {
-    id: 3,
-    name: 'Худи с капюшоном "Night Training"',
-    description: 'Тёплое худи премиум-качества для тренировок в прохладную погоду. Встроенные наушники.',
-    price: 5990,
-    originalPrice: 7990,
-    image: '🧥',
-    category: 'одежда',
-    sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Черный', 'Серый хаки', 'Тёмно-синий'],
-    rating: 4.7,
-    reviews: 56,
-    isNew: true,
-    isBestseller: false,
-    isLimited: false,
-    material: 'Хлопок 80%, Полиэстер 20%',
-    stock: 28,
-    tags: ['новинка', 'технология']
-  },
-  {
-    id: 4,
-    name: 'Эластичные бинты для рук Pro',
-    description: 'Профессиональные эластичные бинты с усиленной защитой суставов. Длина 4.5 метра.',
-    price: 1290,
-    originalPrice: 1890,
-    image: '🎗️',
-    category: 'экипировка',
-    sizes: ['4.5м'],
-    colors: ['Черный', 'Красный', 'Синий'],
-    rating: 4.6,
-    reviews: 203,
-    isNew: false,
-    isBestseller: true,
-    isLimited: false,
-    material: 'Хлопок/Лайкра',
-    stock: 150,
-    tags: ['хит', 'эконом']
-  },
-  {
-    id: 5,
-    name: 'Умная спортивная бутылка',
-    description: 'Бутылка с сенсорным дисплеем, отслеживающим потребление воды. Автоматическая стерилизация.',
-    price: 3490,
-    originalPrice: 4990,
-    image: '🍶',
-    category: 'аксессуары',
-    sizes: ['750ml', '1000ml'],
-    colors: ['Черный', 'Белый', 'Прозрачный'],
-    rating: 4.5,
-    reviews: 78,
-    isNew: true,
-    isBestseller: false,
-    isLimited: true,
-    material: 'Тритан',
-    stock: 8,
-    tags: ['умный', 'технология', 'лимит']
-  },
-  {
-    id: 6,
-    name: 'Шорты для тренировок "AirFlex"',
-    description: 'Ультралёгкие шорты с технологией быстрого высыхания и вентиляцией.',
-    price: 3990,
-    originalPrice: 4990,
-    image: '🩳',
-    category: 'одежда',
-    sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Чёрный', 'Серый', 'Тёмно-синий'],
-    rating: 4.4,
-    reviews: 92,
-    isNew: false,
-    isBestseller: true,
-    isLimited: false,
-    material: 'Полиэстер 92%, Эластан 8%',
-    stock: 64,
-    tags: ['хит', 'технология']
-  },
-  {
-    id: 7,
-    name: 'Капа с защитой челюсти',
-    description: 'Анатомическая капа с двойной защитой и системой вентиляции. Профессиональный уровень.',
-    price: 2490,
-    originalPrice: 3290,
-    image: '🦷',
-    category: 'экипировка',
-    sizes: ['S', 'M', 'L'],
-    colors: ['Прозрачный', 'Цветной'],
-    rating: 4.8,
-    reviews: 45,
-    isNew: true,
-    isBestseller: false,
-    isLimited: false,
-    material: 'Медицинский силикон',
-    stock: 36,
-    tags: ['новинка', 'безопасность']
-  },
-  {
-    id: 8,
-    name: 'Рюкзак для экипировки Pro',
-    description: 'Вместительный рюкзак с отделениями для экипировки, ноутбука и обуви. Водонепроницаемый.',
-    price: 5990,
-    originalPrice: 7990,
-    image: '🎒',
-    category: 'аксессуары',
-    sizes: ['30L', '40L', '50L'],
-    colors: ['Чёрный', 'Камуфляж', 'Серый'],
-    rating: 4.7,
-    reviews: 67,
-    isNew: false,
-    isBestseller: true,
-    isLimited: true,
-    material: 'Полиэстер 600D',
-    stock: 12,
-    tags: ['профессиональный', 'лимит']
-  },
-  {
-    id: 9,
-    name: 'Бейсболка "Champion Edition"',
-    description: 'Эксклюзивная бейсболка с вышивкой золотыми нитками. Ограниченный тираж.',
-    price: 1990,
-    originalPrice: 2990,
-    image: '🧢',
-    category: 'аксессуары',
-    sizes: ['Универсальный'],
-    colors: ['Чёрный', 'Белый', 'Красный'],
-    rating: 4.9,
-    reviews: 112,
-    isNew: false,
-    isBestseller: true,
-    isLimited: true,
-    material: 'Хлопок/Полиэстер',
-    stock: 5,
-    tags: ['эксклюзив', 'лимит', 'хит']
-  },
-  {
-    id: 10,
-    name: 'Толстовка "Victory"',
-    description: 'Толстовка премиум-класса с капюшоном и внутренним флисом. Ограниченная коллекция.',
-    price: 7990,
-    originalPrice: 9990,
-    image: '🧶',
-    category: 'одежда',
-    sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Чёрный', 'Серый меланж', 'Бордовый'],
-    rating: 4.6,
-    reviews: 34,
-    isNew: true,
-    isBestseller: false,
-    isLimited: true,
-    material: 'Хлопок 70%, Флис 30%',
-    stock: 3,
-    tags: ['эксклюзив', 'лимит', 'новинка']
-  },
-  {
-    id: 11,
-    name: 'Скакалка скоростная Pro',
-    description: 'Профессиональная скакалка с подшипниками и регулируемой длиной. Для интенсивных тренировок.',
-    price: 1890,
-    originalPrice: 2490,
-    image: '🔄',
-    category: 'экипировка',
-    sizes: ['Регулируемая'],
-    colors: ['Чёрный', 'Красный', 'Синий'],
-    rating: 4.5,
-    reviews: 89,
-    isNew: false,
-    isBestseller: true,
-    isLimited: false,
-    material: 'ПВХ, сталь',
-    stock: 47,
-    tags: ['хит', 'профессиональный']
-  },
-  {
-    id: 12,
-    name: 'Набор подарочный "Champion"',
-    description: 'Подарочный набор: футболка, бейсболка, бутылка и боксёрские бинты в фирменной упаковке.',
-    price: 9990,
-    originalPrice: 14990,
-    image: '🎁',
-    category: 'наборы',
-    sizes: ['Набор'],
-    colors: ['Чёрный/Золотой'],
-    rating: 4.9,
-    reviews: 23,
-    isNew: true,
-    isBestseller: true,
-    isLimited: true,
-    material: 'Различные',
-    stock: 7,
-    tags: ['подарок', 'эксклюзив', 'лимит']
-  }
-]
-
-const categories = [
-  { id: 'all', label: 'Все товары', icon: ShoppingBag, count: 12 },
-  { id: 'clothing', label: 'Одежда', icon: '👕', count: 4 },
-  { id: 'equipment', label: 'Экипировка', icon: '🥊', count: 5 },
-  { id: 'accessories', label: 'Аксессуары', icon: '🧢', count: 3 },
-  { id: 'sets', label: 'Наборы', icon: '🎁', count: 1 }
-]
-
-const sortOptions = [
-  { id: 'popular', label: 'Популярные', icon: TrendingUp },
-  { id: 'new', label: 'Новинки', icon: Sparkles },
-  { id: 'price-low', label: 'Цена: по возрастанию', icon: '↑' },
-  { id: 'price-high', label: 'Цена: по убыванию', icon: '↓' },
-  { id: 'rating', label: 'По рейтингу', icon: StarIcon },
-  { id: 'discount', label: 'Скидки', icon: Tag }
-]
+import { useTranslation } from 'react-i18next'
 
 export default function Merch() {
   const { addToCart, items: cartItems } = useCart()
+  const { t } = useTranslation()
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedItem, setSelectedItem] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
@@ -280,13 +33,265 @@ export default function Merch() {
     }
   }, [notification])
 
+  const merchItems = [
+    {
+      id: 1,
+      name: t('shop.items.item1.name'),
+      description: t('shop.items.item1.description'),
+      price: 2490,
+      originalPrice: 3490,
+      image: '👕',
+      category: 'clothing',
+      sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+      colors: [t('shop.colors.black'), t('shop.colors.white'), t('shop.colors.red')],
+      rating: 4.8,
+      reviews: 127,
+      isNew: true,
+      isBestseller: true,
+      isLimited: false,
+      material: t('shop.items.item1.material'),
+      stock: 42,
+      tags: [t('shop.tags.hit'), t('shop.tags.new'), t('shop.tags.exclusive')]
+    },
+    {
+      id: 2,
+      name: t('shop.items.item2.name'),
+      description: t('shop.items.item2.description'),
+      price: 12990,
+      originalPrice: 15990,
+      image: '🥊',
+      category: 'equipment',
+      sizes: ['8 oz', '10 oz', '12 oz', '14 oz', '16 oz'],
+      colors: [t('shop.colors.blackGold'), t('shop.colors.redBlack'), t('shop.colors.blueWhite')],
+      rating: 4.9,
+      reviews: 89,
+      isNew: false,
+      isBestseller: true,
+      isLimited: true,
+      material: t('shop.items.item2.material'),
+      stock: 15,
+      tags: [t('shop.tags.pro'), t('shop.tags.limited')]
+    },
+    {
+      id: 3,
+      name: t('shop.items.item3.name'),
+      description: t('shop.items.item3.description'),
+      price: 5990,
+      originalPrice: 7990,
+      image: '🧥',
+      category: 'clothing',
+      sizes: ['S', 'M', 'L', 'XL'],
+      colors: [t('shop.colors.black'), t('shop.colors.khakiGray'), t('shop.colors.darkBlue')],
+      rating: 4.7,
+      reviews: 56,
+      isNew: true,
+      isBestseller: false,
+      isLimited: false,
+      material: t('shop.items.item3.material'),
+      stock: 28,
+      tags: [t('shop.tags.new'), t('shop.tags.tech')]
+    },
+    {
+      id: 4,
+      name: t('shop.items.item4.name'),
+      description: t('shop.items.item4.description'),
+      price: 1290,
+      originalPrice: 1890,
+      image: '🎗️',
+      category: 'equipment',
+      sizes: [t('shop.sizes.wraps45m')],
+      colors: [t('shop.colors.black'), t('shop.colors.red'), t('shop.colors.blue')],
+      rating: 4.6,
+      reviews: 203,
+      isNew: false,
+      isBestseller: true,
+      isLimited: false,
+      material: t('shop.items.item4.material'),
+      stock: 150,
+      tags: [t('shop.tags.hit'), t('shop.tags.economy')]
+    },
+    {
+      id: 5,
+      name: t('shop.items.item5.name'),
+      description: t('shop.items.item5.description'),
+      price: 3490,
+      originalPrice: 4990,
+      image: '🍶',
+      category: 'accessories',
+      sizes: ['750ml', '1000ml'],
+      colors: [t('shop.colors.black'), t('shop.colors.white'), t('shop.colors.transparent')],
+      rating: 4.5,
+      reviews: 78,
+      isNew: true,
+      isBestseller: false,
+      isLimited: true,
+      material: t('shop.items.item5.material'),
+      stock: 8,
+      tags: [t('shop.tags.smart'), t('shop.tags.tech'), t('shop.tags.limited')]
+    },
+    {
+      id: 6,
+      name: t('shop.items.item6.name'),
+      description: t('shop.items.item6.description'),
+      price: 3990,
+      originalPrice: 4990,
+      image: '🩳',
+      category: 'clothing',
+      sizes: ['S', 'M', 'L', 'XL'],
+      colors: [t('shop.colors.black'), t('shop.colors.gray'), t('shop.colors.darkBlue')],
+      rating: 4.4,
+      reviews: 92,
+      isNew: false,
+      isBestseller: true,
+      isLimited: false,
+      material: t('shop.items.item6.material'),
+      stock: 64,
+      tags: [t('shop.tags.hit'), t('shop.tags.tech')]
+    },
+    {
+      id: 7,
+      name: t('shop.items.item7.name'),
+      description: t('shop.items.item7.description'),
+      price: 2490,
+      originalPrice: 3290,
+      image: '🦷',
+      category: 'equipment',
+      sizes: ['S', 'M', 'L'],
+      colors: [t('shop.colors.transparent'), t('shop.colors.multicolor')],
+      rating: 4.8,
+      reviews: 45,
+      isNew: true,
+      isBestseller: false,
+      isLimited: false,
+      material: t('shop.items.item7.material'),
+      stock: 36,
+      tags: [t('shop.tags.new'), t('shop.tags.safety')]
+    },
+    {
+      id: 8,
+      name: t('shop.items.item8.name'),
+      description: t('shop.items.item8.description'),
+      price: 5990,
+      originalPrice: 7990,
+      image: '🎒',
+      category: 'accessories',
+      sizes: ['30L', '40L', '50L'],
+      colors: [t('shop.colors.black'), t('shop.colors.camouflage'), t('shop.colors.gray')],
+      rating: 4.7,
+      reviews: 67,
+      isNew: false,
+      isBestseller: true,
+      isLimited: true,
+      material: t('shop.items.item8.material'),
+      stock: 12,
+      tags: [t('shop.tags.pro'), t('shop.tags.limited')]
+    },
+    {
+      id: 9,
+      name: t('shop.items.item9.name'),
+      description: t('shop.items.item9.description'),
+      price: 1990,
+      originalPrice: 2990,
+      image: '🧢',
+      category: 'accessories',
+      sizes: [t('shop.sizes.oneSize')],
+      colors: [t('shop.colors.black'), t('shop.colors.white'), t('shop.colors.red')],
+      rating: 4.9,
+      reviews: 112,
+      isNew: false,
+      isBestseller: true,
+      isLimited: true,
+      material: t('shop.items.item9.material'),
+      stock: 5,
+      tags: [t('shop.tags.exclusive'), t('shop.tags.limited'), t('shop.tags.hit')]
+    },
+    {
+      id: 10,
+      name: t('shop.items.item10.name'),
+      description: t('shop.items.item10.description'),
+      price: 7990,
+      originalPrice: 9990,
+      image: '🧶',
+      category: 'clothing',
+      sizes: ['S', 'M', 'L', 'XL'],
+      colors: [t('shop.colors.black'), t('shop.colors.grayMelange'), t('shop.colors.burgundy')],
+      rating: 4.6,
+      reviews: 34,
+      isNew: true,
+      isBestseller: false,
+      isLimited: true,
+      material: t('shop.items.item10.material'),
+      stock: 3,
+      tags: [t('shop.tags.exclusive'), t('shop.tags.limited'), t('shop.tags.new')]
+    },
+    {
+      id: 11,
+      name: t('shop.items.item11.name'),
+      description: t('shop.items.item11.description'),
+      price: 1890,
+      originalPrice: 2490,
+      image: '🔄',
+      category: 'equipment',
+      sizes: [t('shop.sizes.adjustable')],
+      colors: [t('shop.colors.black'), t('shop.colors.red'), t('shop.colors.blue')],
+      rating: 4.5,
+      reviews: 89,
+      isNew: false,
+      isBestseller: true,
+      isLimited: false,
+      material: t('shop.items.item11.material'),
+      stock: 47,
+      tags: [t('shop.tags.hit'), t('shop.tags.pro')]
+    },
+    {
+      id: 12,
+      name: t('shop.items.item12.name'),
+      description: t('shop.items.item12.description'),
+      price: 9990,
+      originalPrice: 14990,
+      image: '🎁',
+      category: 'sets',
+      sizes: [t('shop.sizes.set')],
+      colors: [t('shop.colors.blackGold')],
+      rating: 4.9,
+      reviews: 23,
+      isNew: true,
+      isBestseller: true,
+      isLimited: true,
+      material: t('shop.items.item12.material'),
+      stock: 7,
+      tags: [t('shop.tags.gift'), t('shop.tags.exclusive'), t('shop.tags.limited')]
+    }
+  ]
+
+  const categories = [
+    { id: 'all', label: t('shop.categories.all'), icon: ShoppingBag, count: 12 },
+    { id: 'clothing', label: t('shop.categories.clothing'), icon: '👕', count: 4 },
+    { id: 'equipment', label: t('shop.categories.equipment'), icon: '🥊', count: 5 },
+    { id: 'accessories', label: t('shop.categories.accessories'), icon: '🧢', count: 3 },
+    { id: 'sets', label: t('shop.categories.sets'), icon: '🎁', count: 1 }
+  ]
+
+  const sortOptions = [
+    { id: 'popular', label: t('shop.sort.popular'), icon: TrendingUp },
+    { id: 'new', label: t('shop.sort.new'), icon: Sparkles },
+    { id: 'price-low', label: t('shop.sort.priceLow'), icon: '↑' },
+    { id: 'price-high', label: t('shop.sort.priceHigh'), icon: '↓' },
+    { id: 'rating', label: t('shop.sort.rating'), icon: StarIcon },
+    { id: 'discount', label: t('shop.sort.discount'), icon: Tag }
+  ]
+
+  const stats = [
+    { icon: Shield, label: t('shop.stats.qualityGuarantee'), value: t('shop.stats.qualityGuaranteeValue'), color: 'text-green-500' },
+    { icon: Truck, label: t('shop.stats.freeDelivery'), value: t('shop.stats.freeDeliveryValue'), color: 'text-blue-500' },
+    { icon: Clock, label: t('shop.stats.deliveryTime'), value: t('shop.stats.deliveryTimeValue'), color: 'text-yellow-500' },
+    { icon: Users, label: t('shop.stats.happyClients'), value: t('shop.stats.happyClientsValue'), color: 'text-primary' },
+  ]
+
   // Фильтрация товаров
   const filteredItems = merchItems.filter(item => {
     const matchesCategory = selectedCategory === 'all' || 
-      (selectedCategory === 'clothing' && item.category === 'одежда') ||
-      (selectedCategory === 'equipment' && item.category === 'экипировка') ||
-      (selectedCategory === 'accessories' && item.category === 'аксессуары') ||
-      (selectedCategory === 'sets' && item.category === 'наборы')
+      item.category === selectedCategory
     
     const matchesSearch = searchTerm === '' || 
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -326,7 +331,7 @@ export default function Merch() {
     addToCart(item)
     setNotification({
       type: 'success',
-      title: 'Добавлено в корзину',
+      title: t('shop.notification.addedTitle'),
       message: item.name,
       image: item.image
     })
@@ -386,7 +391,7 @@ export default function Merch() {
             <motion.div variants={fadeInUp} className="inline-block mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-red-600/20 rounded-full border border-primary/30">
                 <Crown className="w-4 h-4 text-yellow-500" />
-                <span className="text-yellow-500 text-sm font-semibold">ЭКСКЛЮЗИВНЫЙ МАГАЗИН</span>
+                <span className="text-yellow-500 text-sm font-semibold">{t('shop.hero.badge')}</span>
               </span>
             </motion.div>
 
@@ -394,9 +399,9 @@ export default function Merch() {
               variants={fadeInUp}
               className="text-5xl md:text-7xl font-black mb-6"
             >
-              <span className="block text-white">Одежда и экипировка</span>
+              <span className="block text-white">{t('shop.hero.titleLine1')}</span>
               <span className="bg-gradient-to-r from-primary via-yellow-500 to-primary bg-[length:200%_auto] bg-clip-text text-transparent">
-                ЧЕМПИОНОВ
+                {t('shop.hero.titleLine2')}
               </span>
             </motion.h1>
 
@@ -404,7 +409,7 @@ export default function Merch() {
               variants={fadeInUp}
               className="text-xl text-gray-400 max-w-2xl mx-auto mb-10"
             >
-              Эксклюзивные товары от академии Дмитрия Бивола. Качество, проверенное в бою.
+              {t('shop.hero.subtitle')}
             </motion.p>
 
             {/* Search Bar */}
@@ -418,7 +423,7 @@ export default function Merch() {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Поиск товаров по названию, описанию или тегам..."
+                  placeholder={t('shop.searchPlaceholder')}
                   className="w-full pl-14 pr-6 py-4 bg-black/50 border border-gray-800 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors backdrop-blur-xl"
                 />
                 <button
@@ -426,7 +431,7 @@ export default function Merch() {
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
                 >
                   <Filter className="w-5 h-5" />
-                  <span>Фильтры</span>
+                  <span>{t('common.filter')}</span>
                 </button>
               </div>
             </motion.div>
@@ -450,7 +455,7 @@ export default function Merch() {
                   <div className="flex-1">
                     <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                       <ShoppingBag className="w-5 h-5" />
-                      Категории
+                      {t('shop.filters.categories')}
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                       {categories.map(category => (
@@ -475,11 +480,11 @@ export default function Merch() {
 
                   {/* Price Range */}
                   <div className="flex-1">
-                    <h3 className="font-bold text-lg mb-4">Цена, с</h3>
+                    <h3 className="font-bold text-lg mb-4">{t('shop.filters.price', { currency: t('common.currency') })}</h3>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between text-sm text-gray-400">
-                        <span>0 с</span>
-                        <span>20,000 с</span>
+                        <span>0 {t('common.currency')}</span>
+                        <span>20,000 {t('common.currency')}</span>
                       </div>
                       <input
                         type="range"
@@ -520,7 +525,7 @@ export default function Merch() {
 
                 {/* Sort Options */}
                 <div className="mt-8 pt-6 border-t border-gray-800">
-                  <h3 className="font-bold text-lg mb-4">Сортировка</h3>
+                  <h3 className="font-bold text-lg mb-4">{t('common.sort')}</h3>
                   <div className="flex flex-wrap gap-3">
                     {sortOptions.map(option => (
                       <motion.button
@@ -553,12 +558,7 @@ export default function Merch() {
       {/* Stats Banner */}
       <section className="container-custom mb-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[
-            { icon: Shield, label: 'Гарантия качества', value: '100%', color: 'text-green-500' },
-            { icon: Truck, label: 'Бесплатная доставка', value: 'от 5000с', color: 'text-blue-500' },
-            { icon: Clock, label: 'Доставка', value: '3-7 дней', color: 'text-yellow-500' },
-            { icon: Users, label: 'Довольных клиентов', value: '5000+', color: 'text-primary' },
-          ].map((stat, index) => (
+          {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 30 }}
@@ -587,18 +587,18 @@ export default function Merch() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
             <h2 className="text-3xl font-bold text-white">
-              {sortedItems.length} {sortedItems.length === 1 ? 'товар' : sortedItems.length > 1 && sortedItems.length < 5 ? 'товара' : 'товаров'}
+              {t('shop.results.items', { count: sortedItems.length })}
             </h2>
             {searchTerm && (
               <p className="text-gray-400">
-                По запросу: <span className="text-primary">{searchTerm}</span>
+                {t('shop.results.byQuery')} <span className="text-primary">{searchTerm}</span>
               </p>
             )}
           </div>
           
           <div className="flex items-center gap-4">
             <div className="text-sm text-gray-400">
-              Показано <span className="text-white font-semibold">{sortedItems.length}</span> из <span className="text-white font-semibold">{merchItems.length}</span>
+              {t('shop.results.shown', { shown: sortedItems.length, total: merchItems.length })}
             </div>
           </div>
         </div>
@@ -631,11 +631,11 @@ export default function Merch() {
               <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-primary/20 to-red-600/20 flex items-center justify-center">
                 <ShoppingBag className="w-12 h-12 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Товары не найдены</h3>
+              <h3 className="text-2xl font-bold text-white mb-3">{t('shop.empty.title')}</h3>
               <p className="text-gray-400 mb-6">
                 {searchTerm 
-                  ? `По запросу "${searchTerm}" ничего не найдено. Попробуйте изменить поисковый запрос.`
-                  : 'Попробуйте изменить фильтры или выберите другую категорию.'
+                  ? t('shop.empty.withQuery', { query: searchTerm })
+                  : t('shop.empty.noFilters')
                 }
               </p>
               <div className="flex flex-wrap justify-center gap-4">
@@ -643,7 +643,7 @@ export default function Merch() {
                   onClick={() => setSearchTerm('')}
                   className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-white font-medium transition-colors"
                 >
-                  Сбросить поиск
+                  {t('shop.empty.resetSearch')}
                 </button>
                 <button
                   onClick={() => {
@@ -653,7 +653,7 @@ export default function Merch() {
                   }}
                   className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl text-white font-medium hover:from-red-600 hover:to-primary transition-all"
                 >
-                  Смотреть все товары
+                  {t('shop.empty.viewAll')}
                 </button>
               </div>
             </div>
@@ -673,8 +673,8 @@ export default function Merch() {
                 <Package className="w-8 h-8 text-blue-500" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-2">Бесплатная доставка</h3>
-                <p className="text-gray-400 text-sm">При заказе от 5000 с по всему Кыргызстану</p>
+                <h3 className="font-bold text-lg mb-2">{t('shop.features.freeDeliveryTitle')}</h3>
+                <p className="text-gray-400 text-sm">{t('shop.features.freeDeliveryDesc')}</p>
               </div>
             </div>
             
@@ -683,8 +683,8 @@ export default function Merch() {
                 <Shield className="w-8 h-8 text-green-500" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-2">Гарантия качества</h3>
-                <p className="text-gray-400 text-sm">Возврат и обмен в течение 14 дней</p>
+                <h3 className="font-bold text-lg mb-2">{t('shop.features.qualityTitle')}</h3>
+                <p className="text-gray-400 text-sm">{t('shop.features.qualityDesc')}</p>
               </div>
             </div>
             
@@ -693,8 +693,8 @@ export default function Merch() {
                 <Award className="w-8 h-8 text-yellow-500" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-2">Оригинальная продукция</h3>
-                <p className="text-gray-400 text-sm">Только лицензированные товары</p>
+                <h3 className="font-bold text-lg mb-2">{t('shop.features.originalTitle')}</h3>
+                <p className="text-gray-400 text-sm">{t('shop.features.originalDesc')}</p>
               </div>
             </div>
           </div>
@@ -721,7 +721,7 @@ export default function Merch() {
                       <span className="font-bold text-white">{notification.title}</span>
                     </div>
                     <p className="text-sm text-gray-300">{notification.message}</p>
-                    <p className="text-xs text-gray-500 mt-2">Перейдите в корзину для оформления</p>
+                    <p className="text-xs text-gray-500 mt-2">{t('shop.notification.goToCart')}</p>
                   </div>
                   <button
                     onClick={() => setNotification(null)}

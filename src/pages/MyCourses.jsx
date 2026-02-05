@@ -4,26 +4,28 @@ import { motion } from 'framer-motion'
 import { getMyCourses } from '../services/apiService'
 import { useAuthStore } from '../store/authStore'
 import CourseCard from '../components/CourseCard'
+import { useTranslation } from 'react-i18next'
 
 // Демо данные для незарегистрированных/новых пользователей
-const mockMyCourses = [
-  {
-    id: 1,
-    title: 'Основы бокса для начинающих',
-    description: 'Изучите базовые техники бокса',
-    level: 'beginner',
-    price: 2990,
-    total_lessons: 12,
-    completed_lessons: 3,
-    thumbnail: null,
-    slug: 'basics-for-beginners'
-  }
-]
-
 export default function MyCourses() {
+  const { t } = useTranslation()
   const { isAuthenticated } = useAuthStore()
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(true)
+
+  const mockMyCourses = [
+    {
+      id: 1,
+      title: t('myCoursesPage.demo.0.title'),
+      description: t('myCoursesPage.demo.0.description'),
+      level: 'beginner',
+      price: 2990,
+      total_lessons: 12,
+      completed_lessons: 3,
+      thumbnail: null,
+      slug: 'basics-for-beginners'
+    }
+  ]
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -58,7 +60,7 @@ export default function MyCourses() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">⏳</div>
-          <p className="text-gray-400">Загрузка...</p>
+          <p className="text-gray-400">{t('common.loading')}</p>
         </div>
       </div>
     )
@@ -73,10 +75,10 @@ export default function MyCourses() {
           className="mb-12"
         >
           <h1 className="text-5xl md:text-7xl font-black mb-6">
-            МОИ <span className="text-primary">КУРСЫ</span>
+            {t('myCoursesPage.titlePrimary')} <span className="text-primary">{t('myCoursesPage.titleSecondary')}</span>
           </h1>
           <p className="text-xl text-gray-400">
-            Курсы, которые вы приобрели
+            {t('myCoursesPage.subtitle')}
           </p>
         </motion.div>
 
@@ -88,10 +90,10 @@ export default function MyCourses() {
           >
             <div className="text-6xl mb-4">📚</div>
             <p className="text-gray-400 mb-6 text-xl">
-              У вас пока нет купленных курсов
+              {t('myCoursesPage.empty')}
             </p>
             <Link to="/courses" className="btn-primary">
-              Перейти к каталогу
+              {t('myCoursesPage.emptyCta')}
             </Link>
           </motion.div>
         ) : (

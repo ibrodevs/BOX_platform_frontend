@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import Loader from '../components/ui/Loader'
+import { useTranslation } from 'react-i18next'
 
 export default function Payments() {
+  const { t, i18n } = useTranslation()
   const [loading, setLoading] = useState(true)
   const [payments, setPayments] = useState([])
 
@@ -19,19 +21,19 @@ export default function Payments() {
       setPayments([
         {
           id: 1,
-          course_title: 'Основы бокса для начинающих',
+          course_title: t('payments.demo.0.title'),
           amount: 2990,
           status: 'completed',
           date: '2026-01-15T10:30:00',
-          payment_method: 'Банковская карта'
+          payment_method: t('payments.methods.card')
         },
         {
           id: 2,
-          course_title: 'Продвинутые техники',
+          course_title: t('payments.demo.1.title'),
           amount: 4990,
           status: 'completed',
           date: '2026-01-20T14:15:00',
-          payment_method: 'Банковская карта'
+          payment_method: t('payments.methods.card')
         },
       ])
     } catch (error) {
@@ -43,9 +45,9 @@ export default function Payments() {
 
   const getStatusBadge = (status) => {
     const badges = {
-      completed: { text: 'Оплачен', className: 'bg-green-600/20 text-green-400' },
-      pending: { text: 'Ожидание', className: 'bg-yellow-600/20 text-yellow-400' },
-      failed: { text: 'Отклонен', className: 'bg-red-600/20 text-red-400' },
+      completed: { text: t('payments.status.completed'), className: 'bg-green-600/20 text-green-400' },
+      pending: { text: t('payments.status.pending'), className: 'bg-yellow-600/20 text-yellow-400' },
+      failed: { text: t('payments.status.failed'), className: 'bg-red-600/20 text-red-400' },
     }
     const badge = badges[status] || badges.completed
     return (
@@ -57,7 +59,7 @@ export default function Payments() {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString)
-    return date.toLocaleDateString('ru-RU', {
+    return date.toLocaleDateString(i18n.language || 'ru', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -67,7 +69,7 @@ export default function Payments() {
   }
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('ru-RU', {
+    return new Intl.NumberFormat(i18n.language || 'ru', {
       style: 'currency',
       currency: 'KGS',
       minimumFractionDigits: 0
@@ -85,7 +87,7 @@ export default function Payments() {
       className="min-h-screen py-20"
     >
       <div className="container-custom">
-        <h1 className="text-4xl font-black mb-8">История платежей</h1>
+        <h1 className="text-4xl font-black mb-8">{t('payments.title')}</h1>
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -93,19 +95,19 @@ export default function Payments() {
             <div className="text-3xl font-black mb-2">
               {formatPrice(payments.reduce((sum, p) => sum + (p.status === 'completed' ? p.amount : 0), 0))}
             </div>
-            <div className="text-gray-400">Всего потрачено</div>
+            <div className="text-gray-400">{t('payments.summary.totalSpent')}</div>
           </div>
           <div className="card bg-gradient-to-br from-green-600/20 to-transparent">
             <div className="text-3xl font-black mb-2">
               {payments.filter(p => p.status === 'completed').length}
             </div>
-            <div className="text-gray-400">Успешных платежей</div>
+            <div className="text-gray-400">{t('payments.summary.successful')}</div>
           </div>
           <div className="card bg-gradient-to-br from-blue-600/20 to-transparent">
             <div className="text-3xl font-black mb-2">
               {payments.length}
             </div>
-            <div className="text-gray-400">Всего транзакций</div>
+            <div className="text-gray-400">{t('payments.summary.totalTransactions')}</div>
           </div>
         </div>
 
@@ -141,12 +143,12 @@ export default function Payments() {
           ) : (
             <div className="card text-center py-12">
               <div className="text-6xl mb-4">💳</div>
-              <h3 className="text-xl font-bold mb-2">Нет платежей</h3>
+              <h3 className="text-xl font-bold mb-2">{t('payments.empty.title')}</h3>
               <p className="text-gray-400 mb-6">
-                У вас пока нет истории платежей
+                {t('payments.empty.subtitle')}
               </p>
               <a href="/courses" className="btn-primary inline-block">
-                Купить курс
+                {t('payments.empty.cta')}
               </a>
             </div>
           )}
@@ -157,12 +159,12 @@ export default function Payments() {
           <div className="flex items-start gap-4">
             <div className="text-4xl">💡</div>
             <div>
-              <h3 className="font-bold mb-2">Нужна помощь?</h3>
+              <h3 className="font-bold mb-2">{t('payments.help.title')}</h3>
               <p className="text-gray-400 mb-4">
-                Если у вас возникли вопросы по платежам, свяжитесь с нашей поддержкой
+                {t('payments.help.subtitle')}
               </p>
               <button className="text-primary hover:underline">
-                Связаться с поддержкой →
+                {t('payments.help.cta')}
               </button>
             </div>
           </div>

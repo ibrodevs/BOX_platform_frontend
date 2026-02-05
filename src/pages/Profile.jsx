@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react'
 import { useAuthStore } from '../store/authStore'
 import Input from '../components/ui/Input'
 import Button from '../components/ui/Button'
+import { useTranslation } from 'react-i18next'
 
 export default function Profile() {
+  const { t } = useTranslation()
   const { user } = useAuthStore()
   const [formData, setFormData] = useState({
     username: '',
@@ -38,9 +40,9 @@ export default function Profile() {
     try {
       // API call to update profile would go here
       await new Promise(resolve => setTimeout(resolve, 1000)) // Mock delay
-      setMessage({ type: 'success', text: 'Профиль успешно обновлен' })
+      setMessage({ type: 'success', text: t('profile.updateSuccess') })
     } catch (error) {
-      setMessage({ type: 'error', text: 'Ошибка при обновлении профиля' })
+      setMessage({ type: 'error', text: t('profile.updateError') })
     } finally {
       setLoading(false)
     }
@@ -53,7 +55,7 @@ export default function Profile() {
       className="min-h-screen py-20"
     >
       <div className="container-custom max-w-3xl">
-        <h1 className="text-4xl font-black mb-8">Профиль</h1>
+        <h1 className="text-4xl font-black mb-8">{t('profile.title')}</h1>
 
         {/* Profile Picture */}
         <div className="card mb-8">
@@ -70,7 +72,7 @@ export default function Profile() {
 
         {/* Profile Form */}
         <div className="card">
-          <h3 className="text-xl font-bold mb-6">Личные данные</h3>
+          <h3 className="text-xl font-bold mb-6">{t('profile.personalData')}</h3>
           
           {message && (
             <div className={`p-4 rounded-lg mb-6 ${
@@ -83,13 +85,13 @@ export default function Profile() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Input
-                label="Имя"
+                label={t('auth.firstName')}
                 name="first_name"
                 value={formData.first_name}
                 onChange={handleChange}
               />
               <Input
-                label="Фамилия"
+                label={t('auth.lastName')}
                 name="last_name"
                 value={formData.last_name}
                 onChange={handleChange}
@@ -97,7 +99,7 @@ export default function Profile() {
             </div>
 
             <Input
-              label="Имя пользователя"
+              label={t('auth.username')}
               name="username"
               value={formData.username}
               onChange={handleChange}
@@ -105,7 +107,7 @@ export default function Profile() {
             />
 
             <Input
-              label="Email"
+              label={t('auth.email')}
               type="email"
               name="email"
               value={formData.email}
@@ -114,44 +116,44 @@ export default function Profile() {
             />
 
             <Button type="submit" loading={loading} className="w-full">
-              Сохранить изменения
+              {t('profile.saveChanges')}
             </Button>
           </form>
         </div>
 
         {/* Change Password */}
         <div className="card mt-8">
-          <h3 className="text-xl font-bold mb-6">Изменить пароль</h3>
+          <h3 className="text-xl font-bold mb-6">{t('profile.changePassword')}</h3>
           <form className="space-y-6">
             <Input
-              label="Текущий пароль"
+              label={t('profile.currentPassword')}
               type="password"
-              placeholder="Введите текущий пароль"
+              placeholder={t('profile.currentPasswordPlaceholder')}
             />
             <Input
-              label="Новый пароль"
+              label={t('profile.newPassword')}
               type="password"
-              placeholder="Введите новый пароль"
+              placeholder={t('profile.newPasswordPlaceholder')}
             />
             <Input
-              label="Подтверждение пароля"
+              label={t('profile.confirmPassword')}
               type="password"
-              placeholder="Повторите новый пароль"
+              placeholder={t('profile.confirmPasswordPlaceholder')}
             />
             <Button variant="outline" className="w-full">
-              Изменить пароль
+              {t('profile.updatePassword')}
             </Button>
           </form>
         </div>
 
         {/* Danger Zone */}
         <div className="card mt-8 border-red-600">
-          <h3 className="text-xl font-bold mb-4 text-red-500">Опасная зона</h3>
+          <h3 className="text-xl font-bold mb-4 text-red-500">{t('profile.dangerZone')}</h3>
           <p className="text-gray-400 mb-4">
-            Удаление аккаунта необратимо. Все ваши данные будут потеряны.
+            {t('profile.deleteWarning')}
           </p>
           <Button variant="outline" className="border-red-600 text-red-500 hover:bg-red-600 hover:text-white">
-            Удалить аккаунт
+            {t('profile.deleteAccount')}
           </Button>
         </div>
       </div>

@@ -35,9 +35,9 @@ export default function CourseCard({ course }) {
       purchaseUtils.purchaseCourse(course.id)
       
       setIsPurchased(true)
-      alert('🎉 Курс успешно куплен!')
+      alert(t('courses.purchaseSuccess'))
     } catch (error) {
-      alert('Ошибка при покупке')
+      alert(t('courses.purchaseError'))
     } finally {
       setPurchasing(false)
     }
@@ -78,10 +78,10 @@ export default function CourseCard({ course }) {
           {isPurchased ? (
             <span className="flex items-center gap-1">
               <Check className="w-4 h-4" />
-              Куплен
+              {t('courses.purchased')}
             </span>
           ) : (
-            `${course.price.toLocaleString()} с`
+            `${course.price.toLocaleString()} ${t('common.currency')}`
           )}
         </div>
         
@@ -110,7 +110,7 @@ export default function CourseCard({ course }) {
               <Star className="w-4 h-4 text-yellow-500 fill-current" />
               <span className="text-sm font-semibold">{course.rating}</span>
             </div>
-            <span className="text-xs text-gray-500">({course.reviews_count} {t('courseDetail.reviews', { defaultValue: 'отзывов' })})</span>
+            <span className="text-xs text-gray-500">{t('courseDetail.reviewsCount_one', { count: course.reviews_count })}</span>
           </div>
         )}
         
@@ -118,11 +118,11 @@ export default function CourseCard({ course }) {
         <div className="flex items-center gap-4 mb-4 text-sm text-gray-400">
           <div className="flex items-center gap-1">
             <Clock className="w-4 h-4" />
-            <span>{course.duration_hours}{t('courses.hours', { defaultValue: 'ч' })}</span>
+            <span>{course.duration_hours} {t('courses.hoursShort')}</span>
           </div>
           <div className="flex items-center gap-1">
             <BookOpen className="w-4 h-4" />
-            <span>{course.lessons_count || 0} {t('courses.lessons', { defaultValue: 'уроков' })}</span>
+            <span>{t('courses.lessonsCount', { count: course.lessons_count || 0 })}</span>
           </div>
         </div>
 
@@ -133,7 +133,7 @@ export default function CourseCard({ course }) {
               to={`/courses/${course.slug}`}
               className="flex-1 text-center btn-primary"
             >
-              {t('common.view', { defaultValue: 'Открыть курс' })}
+              {t('courses.openCourse')}
             </Link>
           ) : (
             <>
@@ -145,7 +145,7 @@ export default function CourseCard({ course }) {
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Play className="w-4 h-4" />
-                  Смотреть
+                  {t('courses.watchFree')}
                 </Link>
               )}
               
@@ -162,12 +162,12 @@ export default function CourseCard({ course }) {
                     >
                       ⚡
                     </motion.div>
-                    Покупка...
+                    {t('courses.purchasing')}
                   </>
                 ) : (
                   <>
                     <ShoppingCart className="w-4 h-4" />
-                    Купить
+                    {t('courses.buy')}
                   </>
                 )}
               </button>

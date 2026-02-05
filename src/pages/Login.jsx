@@ -34,7 +34,7 @@ export default function Login() {
       login(tokens, profileRes.data)
       navigate('/dashboard')
     } catch (err) {
-      setError(err.response?.data?.detail || 'Неверный логин или пароль')
+      setError(err.response?.data?.detail || t('errors.invalidCredentials'))
     } finally {
       setLoading(false)
     }
@@ -53,7 +53,7 @@ export default function Login() {
           </h1>
           
           <p className="text-center text-gray-400 mb-8">
-            {t('auth.loginSubtitle', { defaultValue: 'Войдите, чтобы получить доступ к курсам, магазину и личному кабинету' })}
+            {t('auth.loginSubtitle')}
           </p>
 
           {error && (

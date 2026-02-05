@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { getCourses } from '../services/apiService'
 import CourseCard from '../components/CourseCard'
 import { Sparkles, Trophy, Target, Clock, Brain, Star, ChevronRight, Play, Shield, Zap } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export default function Home() {
+  const { t } = useTranslation()
   const [courses, setCourses] = useState([])
   const containerRef = useRef(null)
   const heroRef = useRef(null)
@@ -34,6 +36,64 @@ export default function Home() {
     })
       .catch(err => console.error(err))
   }, [])
+
+  const statsItems = useMemo(() => ([
+    { value: t('homePage.stats.items.0.value'), label: t('homePage.stats.items.0.label'), icon: Trophy },
+    { value: t('homePage.stats.items.1.value'), label: t('homePage.stats.items.1.label'), icon: Star },
+    { value: t('homePage.stats.items.2.value'), label: t('homePage.stats.items.2.label'), icon: Target },
+    { value: t('homePage.stats.items.3.value'), label: t('homePage.stats.items.3.label'), icon: Shield }
+  ]), [t])
+
+  const benefits = useMemo(() => ([
+    {
+      icon: Target,
+      title: t('homePage.benefits.items.0.title'),
+      description: t('homePage.benefits.items.0.description'),
+      color: "from-red-500 to-orange-500"
+    },
+    {
+      icon: Brain,
+      title: t('homePage.benefits.items.1.title'),
+      description: t('homePage.benefits.items.1.description'),
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: Clock,
+      title: t('homePage.benefits.items.2.title'),
+      description: t('homePage.benefits.items.2.description'),
+      color: "from-green-500 to-emerald-500"
+    },
+    {
+      icon: Shield,
+      title: t('homePage.benefits.items.3.title'),
+      description: t('homePage.benefits.items.3.description'),
+      color: "from-purple-500 to-pink-500"
+    }
+  ]), [t])
+
+  const testimonials = useMemo(() => ([
+    {
+      name: t('homePage.testimonials.items.0.name'),
+      course: t('homePage.testimonials.items.0.course'),
+      rating: 5,
+      text: t('homePage.testimonials.items.0.text'),
+      progress: t('homePage.testimonials.items.0.progress')
+    },
+    {
+      name: t('homePage.testimonials.items.1.name'),
+      course: t('homePage.testimonials.items.1.course'),
+      rating: 5,
+      text: t('homePage.testimonials.items.1.text'),
+      progress: t('homePage.testimonials.items.1.progress')
+    },
+    {
+      name: t('homePage.testimonials.items.2.name'),
+      course: t('homePage.testimonials.items.2.course'),
+      rating: 5,
+      text: t('homePage.testimonials.items.2.text'),
+      progress: t('homePage.testimonials.items.2.progress')
+    }
+  ]), [t])
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -140,7 +200,7 @@ export default function Home() {
           >
             <motion.div variants={fadeInUp} className="relative inline-block mb-8">
               <span className="inline-block px-4 py-2 bg-primary/20 border border-primary/40 rounded-full text-sm md:text-base text-primary mb-4">
-                ОНЛАЙН-ШКОЛА БОКСА
+                {t('homePage.hero.badge')}
               </span>
             </motion.div>
 
@@ -148,14 +208,14 @@ export default function Home() {
               variants={fadeInUp}
               className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-6 leading-tight"
             >
-              <span className="block text-white drop-shadow-glow">СТАНЬ</span>
+              <span className="block text-white drop-shadow-glow">{t('homePage.hero.titleLine1')}</span>
               <span className="block relative">
                 <motion.span
                   animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                   transition={{ duration: 5, repeat: Infinity }}
                   className="bg-gradient-to-r from-primary via-yellow-500 to-primary bg-[length:200%_auto] bg-clip-text text-transparent"
                 >
-                  ЧЕМПИОНОМ
+                  {t('homePage.hero.titleLine2')}
                 </motion.span>
                 <motion.div
                   animate={{ scale: [1, 1.1, 1] }}
@@ -171,9 +231,7 @@ export default function Home() {
               variants={fadeInUp}
               className="text-lg md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-light"
             >
-              <span className="text-primary font-semibold">Дмитрий Бивол</span> - абсолютный чемпион мира 
-              раскрывает секреты профессионального бокса. Инновационная платформа с{' '}
-              <span className="text-yellow-500 font-semibold">AI-тренером</span> и персональным подходом.
+              {t('homePage.hero.subtitle')}
             </motion.p>
 
             <motion.div
@@ -186,7 +244,7 @@ export default function Home() {
                   className="group relative px-8 py-4 bg-gradient-to-r from-primary to-red-700 rounded-xl font-bold text-lg flex items-center gap-3 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-primary to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative z-10">🥊 Начать тренировки</span>
+                  <span className="relative z-10">{t('homePage.hero.cta')}</span>
                   <ChevronRight className="relative z-10 w-5 h-5 group-hover:translate-x-2 transition-transform" />
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -208,7 +266,7 @@ export default function Home() {
                   className="group px-8 py-4 bg-transparent border-2 border-primary/50 rounded-xl font-bold text-lg flex items-center gap-3 hover:bg-primary/10 transition-all duration-300"
                 >
                   <Play className="w-5 h-5" />
-                  <span>Смотреть видео</span>
+                  <span>{t('homePage.hero.watchVideo')}</span>
                 </Link>
               </motion.div>
             </motion.div>
@@ -219,15 +277,15 @@ export default function Home() {
             >
               <div className="flex items-center gap-2">
                 <Shield className="w-5 h-5 text-green-500" />
-                <span className="text-sm text-gray-400">Гарантия результата</span>
+                <span className="text-sm text-gray-400">{t('homePage.hero.features.0')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Star className="w-5 h-5 text-yellow-500" />
-                <span className="text-sm text-gray-400">Персональный AI-тренер</span>
+                <span className="text-sm text-gray-400">{t('homePage.hero.features.1')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Zap className="w-5 h-5 text-blue-500" />
-                <span className="text-sm text-gray-400">Мобильное приложение</span>
+                <span className="text-sm text-gray-400">{t('homePage.hero.features.2')}</span>
               </div>
             </motion.div>
           </motion.div>
@@ -258,12 +316,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-4 gap-8"
           >
-            {[
-              { value: "24-1", label: "Проф. рекорд", icon: Trophy },
-              { value: "4", label: "Титула чемпиона", icon: Star },
-              { value: "268", label: "Любительских побед", icon: Target },
-              { value: "100%", label: "Гарантия прогресса", icon: Shield }
-            ].map((stat, index) => (
+            {statsItems.map((stat, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -298,13 +351,13 @@ export default function Home() {
               className="text-center mb-20"
             >
               <div className="inline-block px-6 py-2 bg-primary/20 rounded-full mb-6">
-                <span className="text-primary text-sm font-semibold">ПОПУЛЯРНОЕ</span>
+                <span className="text-primary text-sm font-semibold">{t('homePage.popular.badge')}</span>
               </div>
               <h2 className="text-5xl md:text-6xl font-black mb-6">
-                КУРСЫ <span className="text-primary">ПРЕМИУМ</span> УРОВНЯ
+                {t('homePage.popular.title')}
               </h2>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Эксклюзивные программы тренировок с персональной обратной связью
+                {t('homePage.popular.subtitle')}
               </p>
             </motion.div>
 
@@ -351,7 +404,7 @@ export default function Home() {
               className="text-center"
             >
               <Link to="/courses" className="group inline-flex items-center gap-3 text-lg font-bold">
-                <span>Смотреть все программы</span>
+                <span>{t('homePage.popular.viewAll')}</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </Link>
             </motion.div>
@@ -368,40 +421,15 @@ export default function Home() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl md:text-6xl font-black mb-6">
-              <span className="text-primary">ИННОВАЦИОННЫЙ</span> ПОДХОД
+              <span className="text-primary">{t('homePage.benefits.titlePrimary')}</span> {t('homePage.benefits.titleSecondary')}
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Объединяем традиции чемпионского бокса с современными технологиями
+              {t('homePage.benefits.subtitle')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: Target,
-                title: "Индивидуальный план",
-                description: "AI-система создает персонализированные программы на основе ваших целей",
-                color: "from-red-500 to-orange-500"
-              },
-              {
-                icon: Brain,
-                title: "Нейросеть-тренер",
-                description: "24/7 доступ к искусственному интеллекту для анализа техники",
-                color: "from-blue-500 to-cyan-500"
-              },
-              {
-                icon: Clock,
-                title: "Гибкий график",
-                description: "Тренируйтесь когда удобно с синхронизацией на всех устройствах",
-                color: "from-green-500 to-emerald-500"
-              },
-              {
-                icon: Shield,
-                title: "Мотивация",
-                description: "Геймификация и челленджи для поддержания прогресса",
-                color: "from-purple-500 to-pink-500"
-              }
-            ].map((benefit, index) => (
+            {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -443,34 +471,12 @@ export default function Home() {
               <span className="text-gray-400 text-lg">/ 5.0</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-black mb-6">
-              ИСТОРИИ <span className="text-primary">УСПЕХА</span>
+              {t('homePage.testimonials.title')}
             </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Алексей Иванов",
-                course: "Курс 'Основы бокса'",
-                rating: 5,
-                text: "За 3 месяца полностью изменил технику. AI-тренер заметил ошибки, которые не видели реальные тренеры.",
-                progress: "+40% к силе удара"
-              },
-              {
-                name: "Мария Петрова",
-                course: "Курс 'Продвинутая техника'",
-                rating: 5,
-                text: "Прошла путь от новичка до победителя региональных соревнований. Платформа — лучшая инвестиция в себя.",
-                progress: "1 место на турнире"
-              },
-              {
-                name: "Дмитрий Соколов",
-                course: "Курс 'Спарринг'",
-                rating: 5,
-                text: "Профессиональный подход чемпиона чувствуется в каждой детали. Техники, которые используют топ-боксеры.",
-                progress: "-12 кг за 2 месяца"
-              }
-            ].map((testimonial, index) => (
+            {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
@@ -549,17 +555,17 @@ export default function Home() {
               className="text-5xl md:text-7xl font-black mb-8"
             >
               <span className="bg-gradient-to-r from-primary via-yellow-500 to-primary bg-[length:200%_auto] bg-clip-text text-transparent">
-                ВАШ ПУТЬ К ТИТУЛУ
+                {t('homePage.cta.titleLine1')}
               </span>
               <br />
-              <span className="text-white">НАЧИНАЕТСЯ СЕГОДНЯ</span>
+              <span className="text-white">{t('homePage.cta.titleLine2')}</span>
             </motion.h2>
 
             <motion.p
               variants={fadeInUp}
               className="text-2xl text-gray-300 mb-12 max-w-3xl mx-auto"
             >
-              Присоединяйтесь к 10,000+ ученикам, которые уже изменили свою жизнь с нашей академией
+              {t('homePage.cta.subtitle')}
             </motion.p>
 
             <motion.div
@@ -575,7 +581,7 @@ export default function Home() {
                   to="/register" 
                   className="relative px-12 py-6 bg-gradient-to-r from-primary via-red-600 to-primary bg-[length:200%_auto] rounded-2xl font-bold text-2xl flex items-center gap-4 overflow-hidden"
                 >
-                  <span className="relative z-10">СТАТЬ ЧЕМПИОНОМ</span>
+                  <span className="relative z-10">{t('homePage.cta.primary')}</span>
                   <ChevronRight className="relative z-10 w-8 h-8 group-hover:translate-x-3 transition-transform" />
                   
                   <motion.div
@@ -603,7 +609,7 @@ export default function Home() {
                   className="px-12 py-6 bg-transparent border-2 border-white/30 rounded-2xl font-bold text-2xl flex items-center gap-4 hover:bg-white/10 transition-all duration-500"
                 >
                   <Play className="w-8 h-8" />
-                  <span>БЕСПЛАТНЫЙ УРОК</span>
+                  <span>{t('homePage.cta.secondary')}</span>
                 </Link>
               </motion.div>
             </motion.div>

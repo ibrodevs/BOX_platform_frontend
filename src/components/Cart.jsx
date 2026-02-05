@@ -110,9 +110,9 @@ export default function Cart({ isOpen, onClose }) {
                     <ShoppingBag className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-white">Корзина</h2>
+                    <h2 className="text-xl font-bold text-white">{t('cart.title')}</h2>
                     <p className="text-sm text-gray-400">
-                      {getTotalItems()} {getTotalItems() === 1 ? 'товар' : 'товара'}
+                      {t('shop.results.items', { count: getTotalItems() })}
                     </p>
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export default function Cart({ isOpen, onClose }) {
                   className="w-full mt-3 px-4 py-2 rounded-lg bg-red-600/10 border border-red-600/30 text-red-400 text-sm font-semibold hover:bg-red-600/20 transition-colors flex items-center justify-center gap-2"
                 >
                   <Trash2 className="w-4 h-4" />
-                  Очистить корзину
+                  {t('cart.clear')}
                 </motion.button>
               )}
             </div>
@@ -154,16 +154,16 @@ export default function Cart({ isOpen, onClose }) {
                   >
                     <Package className="w-12 h-12 text-gray-600" />
                   </motion.div>
-                  <h3 className="text-lg font-semibold text-gray-400 mb-2">Корзина пуста</h3>
+                  <h3 className="text-lg font-semibold text-gray-400 mb-2">{t('cart.empty')}</h3>
                   <p className="text-sm text-gray-600 mb-6">
-                    Добавьте товары из нашего магазина
+                    {t('cart.emptySubtitle')}
                   </p>
                   <Link
                     to="/merch"
                     onClick={onClose}
                     className="px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-red-600 text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all"
                   >
-                    Перейти в магазин
+                    {t('cart.goToShop')}
                   </Link>
                 </div>
               ) : (
@@ -205,7 +205,7 @@ export default function Cart({ isOpen, onClose }) {
                         {/* Price & Quantity Controls */}
                         <div className="flex items-center justify-between">
                           <span className="text-lg font-bold text-white">
-                            {(item.price * item.quantity).toLocaleString()} с
+                            {(item.price * item.quantity).toLocaleString()} {t('common.currency')}
                           </span>
 
                           <div className="flex items-center gap-2">
@@ -260,9 +260,9 @@ export default function Cart({ isOpen, onClose }) {
               <div className="p-6 border-t border-gray-800 bg-black/50">
                 {/* Total */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-gray-400">Итого:</span>
+                  <span className="text-gray-400">{t('cart.total')}:</span>
                   <span className="text-2xl font-bold text-white">
-                    {getTotalPrice().toLocaleString()} с
+                    {getTotalPrice().toLocaleString()} {t('common.currency')}
                   </span>
                 </div>
 
@@ -274,7 +274,7 @@ export default function Cart({ isOpen, onClose }) {
                   onClick={handleCheckout}
                   className="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-red-600 text-white font-bold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/50 transition-all relative overflow-hidden group"
                 >
-                  <span>Оформить заказ</span>
+                  <span>{t('cart.checkout')}</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   
                   {/* Shine effect */}
@@ -297,7 +297,7 @@ export default function Cart({ isOpen, onClose }) {
                   onClick={onClose}
                   className="block mt-3 text-center text-sm text-gray-400 hover:text-white transition-colors"
                 >
-                  Продолжить покупки
+                  {t('cart.continue')}
                 </Link>
               </div>
             )}
@@ -324,8 +324,8 @@ export default function Cart({ isOpen, onClose }) {
                         <CreditCard className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <h2 className="text-xl font-bold text-white">Оформление заказа</h2>
-                        <p className="text-sm text-gray-400">Заполните данные для доставки</p>
+                        <h2 className="text-xl font-bold text-white">{t('checkout.title')}</h2>
+                        <p className="text-sm text-gray-400">{t('checkout.subtitle')}</p>
                       </div>
                     </div>
                     <button
@@ -343,12 +343,12 @@ export default function Cart({ isOpen, onClose }) {
                     <div>
                       <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                         <User className="w-5 h-5 text-primary" />
-                        Контактные данные
+                        {t('checkout.contactTitle')}
                       </h3>
                       <div className="space-y-4">
                         <div>
                           <label className="block text-sm font-semibold text-gray-400 mb-2">
-                            Полное имя *
+                            {t('checkout.fullName')} *
                           </label>
                           <input
                             type="text"
@@ -357,12 +357,12 @@ export default function Cart({ isOpen, onClose }) {
                             onChange={handleInputChange}
                             required
                             className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
-                            placeholder="Иванов Иван Иванович"
+                            placeholder={t('checkout.fullNamePlaceholder')}
                           />
                         </div>
                         <div>
                           <label className="block text-sm font-semibold text-gray-400 mb-2">
-                            Телефон *
+                            {t('checkout.phone')} *
                           </label>
                           <input
                             type="tel"
@@ -371,7 +371,7 @@ export default function Cart({ isOpen, onClose }) {
                             onChange={handleInputChange}
                             required
                             className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
-                            placeholder="+996 XXX XXX XXX"
+                            placeholder={t('checkout.phonePlaceholder')}
                           />
                         </div>
                       </div>
@@ -381,12 +381,12 @@ export default function Cart({ isOpen, onClose }) {
                     <div>
                       <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                         <MapPin className="w-5 h-5 text-primary" />
-                        Адрес доставки
+                        {t('checkout.deliveryAddressTitle')}
                       </h3>
                       <div className="space-y-4">
                         <div>
                           <label className="block text-sm font-semibold text-gray-400 mb-2">
-                            Город *
+                            {t('checkout.city')} *
                           </label>
                           <select
                             name="city"
@@ -395,17 +395,17 @@ export default function Cart({ isOpen, onClose }) {
                             required
                             className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
                           >
-                            <option value="Бишкек">Бишкек</option>
-                            <option value="Ош">Ош</option>
-                            <option value="Джалал-Абад">Джалал-Абад</option>
-                            <option value="Каракол">Каракол</option>
-                            <option value="Токмок">Токмок</option>
-                            <option value="Балыкчы">Балыкчы</option>
+                            <option value={t('checkout.cities.bishkek')}>{t('checkout.cities.bishkek')}</option>
+                            <option value={t('checkout.cities.osh')}>{t('checkout.cities.osh')}</option>
+                            <option value={t('checkout.cities.jalalAbad')}>{t('checkout.cities.jalalAbad')}</option>
+                            <option value={t('checkout.cities.karakol')}>{t('checkout.cities.karakol')}</option>
+                            <option value={t('checkout.cities.tokmok')}>{t('checkout.cities.tokmok')}</option>
+                            <option value={t('checkout.cities.balykchy')}>{t('checkout.cities.balykchy')}</option>
                           </select>
                         </div>
                         <div>
                           <label className="block text-sm font-semibold text-gray-400 mb-2">
-                            Адрес *
+                            {t('checkout.address')} *
                           </label>
                           <textarea
                             name="address"
@@ -414,7 +414,7 @@ export default function Cart({ isOpen, onClose }) {
                             required
                             rows="3"
                             className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors resize-none"
-                            placeholder="Улица, дом, квартира"
+                            placeholder={t('checkout.addressPlaceholder')}
                           />
                         </div>
                       </div>
@@ -424,12 +424,12 @@ export default function Cart({ isOpen, onClose }) {
                     <div>
                       <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                         <CreditCard className="w-5 h-5 text-primary" />
-                        Данные карты
+                        {t('checkout.paymentTitle')}
                       </h3>
                       <div className="space-y-4">
                         <div>
                           <label className="block text-sm font-semibold text-gray-400 mb-2">
-                            Номер карты *
+                            {t('checkout.cardNumber')} *
                           </label>
                           <input
                             type="text"
@@ -439,13 +439,13 @@ export default function Cart({ isOpen, onClose }) {
                             required
                             maxLength="19"
                             className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
-                            placeholder="XXXX XXXX XXXX XXXX"
+                            placeholder={t('checkout.cardNumberPlaceholder')}
                           />
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div>
                             <label className="block text-sm font-semibold text-gray-400 mb-2">
-                              Срок действия *
+                              {t('checkout.expiryDate')} *
                             </label>
                             <input
                               type="text"
@@ -455,12 +455,12 @@ export default function Cart({ isOpen, onClose }) {
                               required
                               maxLength="5"
                               className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
-                              placeholder="MM/YY"
+                              placeholder={t('checkout.expiryPlaceholder')}
                             />
                           </div>
                           <div>
                             <label className="block text-sm font-semibold text-gray-400 mb-2">
-                              CVV *
+                              {t('checkout.cvv')} *
                             </label>
                             <input
                               type="text"
@@ -470,7 +470,7 @@ export default function Cart({ isOpen, onClose }) {
                               required
                               maxLength="3"
                               className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
-                              placeholder="XXX"
+                              placeholder={t('checkout.cvvPlaceholder')}
                             />
                           </div>
                         </div>
@@ -480,17 +480,17 @@ export default function Cart({ isOpen, onClose }) {
                     {/* Итого */}
                     <div className="bg-gradient-to-r from-primary/10 to-transparent rounded-lg p-4 border border-primary/20">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-gray-400">Товары ({getTotalItems()}):</span>
-                        <span className="text-white font-semibold">{getTotalPrice().toLocaleString()} с</span>
+                        <span className="text-gray-400">{t('checkout.items', { count: getTotalItems() })}</span>
+                        <span className="text-white font-semibold">{getTotalPrice().toLocaleString()} {t('common.currency')}</span>
                       </div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-gray-400">Доставка:</span>
-                        <span className="text-green-400 font-semibold">Бесплатно</span>
+                        <span className="text-gray-400">{t('checkout.delivery')}:</span>
+                        <span className="text-green-400 font-semibold">{t('checkout.freeDelivery')}</span>
                       </div>
                       <div className="border-t border-gray-700 my-3"></div>
                       <div className="flex items-center justify-between">
-                        <span className="text-lg font-bold text-white">Итого к оплате:</span>
-                        <span className="text-2xl font-black text-primary">{getTotalPrice().toLocaleString()} с</span>
+                        <span className="text-lg font-bold text-white">{t('checkout.totalToPay')}</span>
+                        <span className="text-2xl font-black text-primary">{getTotalPrice().toLocaleString()} {t('common.currency')}</span>
                       </div>
                     </div>
 
@@ -501,19 +501,19 @@ export default function Cart({ isOpen, onClose }) {
                         onClick={() => setShowCheckout(false)}
                         className="flex-1 py-3 rounded-xl bg-gray-800 text-white font-semibold hover:bg-gray-700 transition-colors"
                       >
-                        Отмена
+                        {t('checkout.cancel')}
                       </button>
                       <button
                         type="submit"
                         disabled={isProcessing}
                         className="flex-1 py-3 rounded-xl bg-gradient-to-r from-primary to-red-600 text-white font-bold hover:shadow-lg hover:shadow-primary/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {isProcessing ? 'Обработка...' : 'Оплатить'}
+                        {isProcessing ? t('checkout.processing') : t('checkout.pay')}
                       </button>
                     </div>
 
                     <p className="text-xs text-center text-gray-500">
-                      Нажимая "Оплатить", вы соглашаетесь с условиями использования и политикой конфиденциальности
+                      {t('checkout.terms')}
                     </p>
                   </form>
                 </div>
@@ -546,14 +546,13 @@ export default function Cart({ isOpen, onClose }) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
                   >
-                    <h2 className="text-2xl font-bold text-white mb-3">Заказ оформлен!</h2>
+                    <h2 className="text-2xl font-bold text-white mb-3">{t('checkout.successTitle')}</h2>
                     <p className="text-gray-400 mb-6">
-                      Ваш заказ успешно оплачен и передан в доставку. 
-                      Мы свяжемся с вами в ближайшее время для подтверждения.
+                      {t('checkout.successSubtitle')}
                     </p>
                     <div className="bg-green-600/10 rounded-lg p-4 mb-6">
-                      <p className="text-sm text-gray-400 mb-1">Сумма заказа:</p>
-                      <p className="text-3xl font-black text-green-400">{getTotalPrice().toLocaleString()} с</p>
+                      <p className="text-sm text-gray-400 mb-1">{t('checkout.orderAmountLabel')}</p>
+                      <p className="text-3xl font-black text-green-400">{getTotalPrice().toLocaleString()} {t('common.currency')}</p>
                     </div>
                     <button
                       type="button"
@@ -563,7 +562,7 @@ export default function Cart({ isOpen, onClose }) {
                       }}
                       className="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-red-600 text-white font-bold hover:shadow-lg hover:shadow-primary/50 transition-all"
                     >
-                      Отлично!
+                      {t('checkout.successButton')}
                     </button>
                   </motion.div>
                 </div>
