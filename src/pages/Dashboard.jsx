@@ -51,7 +51,9 @@ export default function Dashboard() {
 
   const fetchDashboardData = async () => {
     try {
-      const courses = await getMyCourses()
+      const response = await getMyCourses()
+      const coursesData = response?.data?.results || response?.data || response || []
+      const courses = Array.isArray(coursesData) ? coursesData : []
       
       // Используем реальные данные из API
       const enrichedCourses = courses.map(course => ({
@@ -92,6 +94,9 @@ export default function Dashboard() {
       setRecentCourses(enrichedCourses.slice(0, 3))
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error)
+      console.error('Error details:', error.response?.data || error.message)
+      // Устанавливаем пустой массив при ошибке
+      setRecentCourses([])
     } finally {
       setLoading(false)
     }

@@ -27,7 +27,11 @@ export default function Home() {
   const testimonialsInView = useInView(testimonialsRef, { once: true, amount: 0.3 })
 
   useEffect(() => {
-    getCourses().then(res => setCourses(res.data.slice(0, 3)))
+    getCourses().then(res => {
+      const coursesData = res.data?.results || res.data || []
+      const coursesArray = Array.isArray(coursesData) ? coursesData : []
+      setCourses(coursesArray.slice(0, 3))
+    })
       .catch(err => console.error(err))
   }, [])
 

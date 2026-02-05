@@ -29,8 +29,11 @@ export default function MyCourses() {
     if (isAuthenticated) {
       getMyCourses()
         .then(res => {
-          if (res.data && res.data.length > 0) {
-            setCourses(res.data)
+          const coursesData = res?.data?.results || res?.data || []
+          const coursesArray = Array.isArray(coursesData) ? coursesData : []
+          
+          if (coursesArray.length > 0) {
+            setCourses(coursesArray)
           } else {
             // Если нет купленных курсов, показываем демо
             setCourses(mockMyCourses)
