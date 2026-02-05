@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { register as registerAPI } from '../services/apiService'
 import { useAuthStore } from '../store/authStore'
 import Input from '../components/ui/Input'
@@ -9,6 +10,7 @@ import Button from '../components/ui/Button'
 export default function Register() {
   const navigate = useNavigate()
   const { login } = useAuthStore()
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -25,7 +27,7 @@ export default function Register() {
     setError('')
 
     if (formData.password !== formData.password2) {
-      setError('Пароли не совпадают')
+      setError(t('errors.passwordMismatch'))
       return
     }
 
@@ -67,11 +69,11 @@ export default function Register() {
       >
         <div className="bg-dark border-2 border-gray-800 rounded-lg p-8">
           <h1 className="text-4xl font-black mb-4 text-center">
-            РЕГИСТРАЦИЯ
+            {t('auth.register').toUpperCase()}
           </h1>
           
           <p className="text-center text-gray-400 mb-8">
-            Создайте аккаунт для доступа ко всем возможностям платформы
+            {t('auth.registerSubtitle', { defaultValue: 'Создайте аккаунт для доступа ко всем возможностям платформы' })}
           </p>
 
           {error && (
@@ -82,7 +84,7 @@ export default function Register() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
-              label="Имя пользователя"
+              label={t('auth.username')}
               type="text"
               value={formData.username}
               onChange={(e) => setFormData({ ...formData, username: e.target.value })}
@@ -90,7 +92,7 @@ export default function Register() {
             />
 
             <Input
-              label="Email"
+              label={t('auth.email')}
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -99,14 +101,14 @@ export default function Register() {
 
             <div className="grid grid-cols-2 gap-4">
               <Input
-                label="Имя"
+                label={t('auth.firstName')}
                 type="text"
                 value={formData.first_name}
                 onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
               />
 
               <Input
-                label="Фамилия"
+                label={t('auth.lastName')}
                 type="text"
                 value={formData.last_name}
                 onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
@@ -114,7 +116,7 @@ export default function Register() {
             </div>
 
             <Input
-              label="Пароль"
+              label={t('auth.password')}
               type="password"
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -122,7 +124,7 @@ export default function Register() {
             />
 
             <Input
-              label="Повторите пароль"
+              label={t('auth.confirmPassword')}
               type="password"
               value={formData.password2}
               onChange={(e) => setFormData({ ...formData, password2: e.target.value })}
@@ -134,14 +136,14 @@ export default function Register() {
               loading={loading}
               className="w-full"
             >
-              Зарегистрироваться
+              {t('auth.signUp')}
             </Button>
           </form>
 
           <p className="text-center text-gray-400 mt-6">
-            Уже есть аккаунт?{' '}
+            {t('auth.hasAccount')}{' '}
             <Link to="/login" className="text-primary hover:underline font-bold">
-              Войти
+              {t('auth.signIn')}
             </Link>
           </p>
         </div>

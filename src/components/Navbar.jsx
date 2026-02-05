@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useAuthStore } from '../store/authStore'
 import { useCart } from '../hooks/useCart'
+import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { 
   Menu, X, User, LogOut, Home, Trophy, BookOpen, ShoppingBag, 
@@ -9,10 +10,12 @@ import {
 } from 'lucide-react'
 import MobileMenu from './layout/MobileMenu'
 import Cart from './Cart'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuthStore()
   const { getTotalItems } = useCart()
+  const { t } = useTranslation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -27,22 +30,22 @@ export default function Navbar() {
   })
 
   const navItems = [
-    { path: '/', label: 'Главная', icon: Home },
-    { path: '/about', label: 'О бойце', icon: Trophy },
-    { path: '/courses', label: 'Курсы', icon: BookOpen },
-    { path: '/merch', label: 'Мерч', icon: ShoppingBag },
+    { path: '/', label: t('nav.home'), icon: Home },
+    { path: '/about', label: t('nav.about'), icon: Trophy },
+    { path: '/courses', label: t('nav.courses'), icon: BookOpen },
+    { path: '/merch', label: t('nav.shop'), icon: ShoppingBag },
     ...(isAuthenticated ? [
-      { path: '/dashboard', label: 'Кабинет', icon: User },
-      { path: '/dashboard/my-courses', label: 'Мои курсы', icon: Shield }
+      { path: '/dashboard', label: t('nav.dashboard'), icon: User },
+      { path: '/dashboard/my-courses', label: t('nav.myCourses'), icon: Shield }
     ] : [])
   ]
 
   const userMenuItems = [
-    { label: 'Профиль', path: '/dashboard/profile', icon: User },
-    { label: 'Личный кабинет', path: '/dashboard', icon: Shield },
-    { label: 'Мои заказы', path: '/dashboard/orders', icon: ShoppingBag },
-    { label: 'Покупки', action: () => setCartOpen(true), icon: ShoppingCart },
-    { label: 'Выйти', action: logout, icon: LogOut }
+    { label: t('nav.profile'), path: '/dashboard/profile', icon: User },
+    { label: t('nav.dashboard'), path: '/dashboard', icon: Shield },
+    { label: t('nav.orders'), path: '/dashboard/orders', icon: ShoppingBag },
+    { label: t('nav.cart'), action: () => setCartOpen(true), icon: ShoppingCart },
+    { label: t('nav.logout'), action: logout, icon: LogOut }
   ]
 
   return (
@@ -93,7 +96,7 @@ export default function Navbar() {
                   <span className="text-2xl font-black bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent">
                     BIVOL
                   </span>
-                  <span className="text-xs font-semibold text-primary tracking-widest">BOXING ACADEMY</span>
+                  <span className="text-xs font-semibold text-primary tracking-widest">SCHOOL</span>
                 </div>
               </Link>
               
@@ -153,6 +156,9 @@ export default function Navbar() {
                 <Search className="w-5 h-5 text-gray-400" />
               </motion.button>
 
+              {/* Language Switcher */}
+              <LanguageSwitcher />
+
               {/* Shopping Cart - только для авторизованных */}
               {isAuthenticated && (
                 <motion.button
@@ -193,10 +199,10 @@ export default function Navbar() {
                     
                     <div className="flex flex-col items-start">
                       <span className="text-sm font-semibold text-white">
-                        {user?.username || 'Пользователь'}
+                        {user?.username || t('user.username')}
                       </span>
                       <span className="text-xs text-gray-400">
-                        {user?.isPremium ? 'PREMIUM' : 'STANDARD'}
+                        {user?.isPremium ? t('user.premium') : t('user.standard')}
                       </span>
                     </div>
                     
@@ -263,7 +269,7 @@ export default function Navbar() {
                             >
                               <div className="flex items-center gap-2">
                                 <Crown className="w-4 h-4 text-yellow-500" />
-                                <span className="text-sm font-semibold text-white">Upgrade to Premium</span>
+                                <span className="text-sm font-semibold text-white">{t('nav.premiumUpgrade')}</span>
                               </div>
                               <Sparkles className="w-4 h-4 text-yellow-500 group-hover:scale-110 transition-transform" />
                             </Link>
@@ -283,7 +289,7 @@ export default function Navbar() {
                       to="/login"
                       className="px-6 py-2 rounded-xl border border-gray-700 text-gray-400 hover:text-white hover:border-primary/50 transition-all duration-300 group"
                     >
-                      <span className="font-medium">Вход</span>
+                      <span className="font-medium">{t('nav.login')}</span>
                     </Link>
                   </motion.div>
                   
@@ -297,7 +303,7 @@ export default function Navbar() {
                       className="group px-6 py-2 rounded-xl bg-gradient-to-r from-primary to-red-600 font-medium text-white flex items-center gap-2 overflow-hidden"
                     >
                       <Sparkles className="w-4 h-4" />
-                      <span>Начать путь</span>
+                      <span>{t('nav.register')}</span>
                       
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -341,7 +347,7 @@ export default function Navbar() {
                     <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                       type="text"
-                      placeholder="Поиск курсов, уроков, статей..."
+                      placeholder={t('nav.search')}
                       className="w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
                       autoFocus
                     />

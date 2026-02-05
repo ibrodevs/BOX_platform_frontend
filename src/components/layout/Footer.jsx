@@ -30,7 +30,7 @@ export default function Footer() {
 
   const footerLinks = [
     {
-      title: 'Академия',
+      title: 'Школа',
       links: [
         { label: 'О Дмитрии Биволе', to: '/about' },
         { label: 'Наша миссия', to: '/mission' },
@@ -131,13 +131,12 @@ export default function Footer() {
                   <Trophy className="w-6 h-6 text-white" />
                 </motion.div>
                 <div>
-                  <div className="text-3xl font-black text-white">BIVOL BOXING</div>
-                  <div className="text-sm text-primary font-semibold tracking-widest">ACADEMY</div>
+                  <div className="text-3xl font-black text-white">BIVOL SCHOOL</div>
                 </div>
               </Link>
               
               <p className="text-gray-400 mb-6 max-w-md">
-                Ведущая онлайн-академия бокса под руководством абсолютного чемпиона мира Дмитрия Бивола. 
+                Ведущая школа бокса под руководством абсолютного чемпиона мира Дмитрия Бивола. 
                 Объединяем традиции чемпионского бокса с инновационными технологиями обучения.
               </p>
               
@@ -280,7 +279,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-gray-800/50">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-gray-400 text-sm">
-              <p>&copy; 2026 Bivol Boxing Academy. Все права защищены.</p>
+              <p>&copy; 2026 Bivol School. Все права защищены.</p>
             </div>
             
             <div className="flex items-center gap-6">

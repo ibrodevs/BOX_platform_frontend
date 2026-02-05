@@ -1,0 +1,256 @@
+{
+  "nav": {
+    "home": "Башкы бет",
+    "about": "Боксчу жөнүндө",
+    "courses": "Курстар",
+    "shop": "Дүкөн",
+    "dashboard": "Кабинет",
+    "myCourses": "Менин курстарым",
+    "profile": "Профиль",
+    "orders": "Менин заказдарым",
+    "cart": "Себет",
+    "logout": "Чыгуу",
+    "login": "Кирүү",
+    "register": "Баштоо",
+    "search": "Курстарды, сабактарды издөө...",
+    "premiumUpgrade": "Премиумга өтүү"
+  },
+  "user": {
+    "username": "Колдонуучу",
+    "premium": "ПРЕМИУМ",
+    "standard": "СТАНДАРТ"
+  },
+  "home": {
+    "hero": {
+      "title": "ЛЕГЕНДА МЕНЕН БОКС ЖОЛУҢУЗДУ БАШТАҢЫЗ",
+      "subtitle": "Дүйнө чемпиону менен машыгып, бокс искусствосун үйрөнүңүз",
+      "cta": "Окууну баштоо",
+      "watchDemo": "Демону көрүү"
+    },
+    "stats": {
+      "students": "Окуучулар",
+      "courses": "Курстар",
+      "hours": "Саат мазмун"
+    },
+    "features": {
+      "title": "ЭМНЕ ҮЧҮН БИЗДИ ТАНДАЙСЫЗ",
+      "subtitle": "Бокс легендасы менен машыгуунун артыкчылыктары",
+      "professional": {
+        "title": "Профессионалдык машыгуулар",
+        "description": "Дүйнө чемпионунун техникасы"
+      },
+      "flexible": {
+        "title": "Ыңгайлуу график",
+        "description": "Өзүңүзгө ыңгайлуу убакта үйрөнүңүз"
+      },
+      "support": {
+        "title": "24/7 Колдоо",
+        "description": "Ар дайым байланышта"
+      }
+    },
+    "courses": {
+      "title": "ПОПУЛЯРДУУ КУРСТАР",
+      "subtitle": "Чеберчиликке жол баштаңыз",
+      "viewAll": "Бардык курстар"
+    },
+    "testimonials": {
+      "title": "ОКУУЧУЛАР ЭМНЕ ДЕЙТ",
+      "subtitle": "Биздин студенттердин ийгилик окуялары"
+    }
+  },
+  "about": {
+    "title": "БОКСЧУ ЖӨНҮНДӨ",
+    "subtitle": "Дүйнөлүк бокс легендасы менен таанышыңыз",
+    "biography": "Биография",
+    "achievements": "Жетишкендиктер",
+    "philosophy": "Философия",
+    "records": "Рекорддор"
+  },
+  "courses": {
+    "title": "КУРСТАР",
+    "subtitle": "Чеберчиликке жолуңузду тандаңыз",
+    "all": "Бардык курстар",
+    "beginner": "Башталгыч",
+    "intermediate": "Орто",
+    "advanced": "Өнүккөн",
+    "filter": "Фильтр",
+    "sort": "Иреттөө",
+    "lessons": "сабактар",
+    "hours": "саат",
+    "students": "студенттер",
+    "startCourse": "Курсту баштоо",
+    "continue": "Улантуу",
+    "buy": "Сатып алуу",
+    "addToCart": "Себетке кошуу",
+    "free": "Акысыз"
+  },
+  "courseDetail": {
+    "overview": "Көз карашы",
+    "curriculum": "Программа",
+    "instructor": "Инструктор",
+    "reviews": "Пикирлер",
+    "whatYouLearn": "Эмнени үйрөнөсүз",
+    "requirements": "Талаптар",
+    "description": "Сүрөттөмө",
+    "enroll": "Жазылуу",
+    "enrolled": "Сиз жазылгансыз"
+  },
+  "dashboard": {
+    "welcome": "Кош келиңиз",
+    "overview": "Көз карашы",
+    "myCourses": "Менин курстарым",
+    "progress": "Прогресс",
+    "certificates": "Сертификаттар",
+    "settings": "Жөндөөлөр",
+    "stats": {
+      "coursesInProgress": "Өтүлүүчү курстар",
+      "completedCourses": "Аяктаган курстар",
+      "totalHours": "Жалпы саат",
+      "certificates": "Сертификаттар"
+    }
+  },
+  "profile": {
+    "title": "Профиль",
+    "personalInfo": "Жеке маалымат",
+    "email": "Email",
+    "phone": "Телефон",
+    "location": "Жайгашкан жер",
+    "bio": "Өзүм жөнүндө",
+    "save": "Сактоо",
+    "cancel": "Жокко чыгаруу",
+    "changePassword": "Сырсөздү өзгөртүү",
+    "currentPassword": "Учурдагы сырсөз",
+    "newPassword": "Жаңы сырсөз",
+    "confirmPassword": "Сырсөздү ырастаңыз"
+  },
+  "cart": {
+    "title": "Себет",
+    "empty": "Себет бош",
+    "total": "Жыйынтык",
+    "checkout": "Тапшыруу",
+    "remove": "Өчүрүү",
+    "continue": "Соода улантуу"
+  },
+  "shop": {
+    "title": "ДҮКӨН",
+    "subtitle": "Дмитрий Биволдон расмий товарлар",
+    "categories": {
+      "all": "Бардык товарлар",
+      "clothing": "Кийимдер",
+      "equipment": "Жабдуулар",
+      "accessories": "Аксессуарлар"
+    },
+    "addToCart": "Себетке кошуу",
+    "outOfStock": "Жок",
+    "inStock": "Бар"
+  },
+  "payments": {
+    "title": "Төлөм",
+    "selectMethod": "Төлөм ыкмасын тандаңыз",
+    "cardNumber": "Карта номери",
+    "expiryDate": "Мөөнөт",
+    "cvv": "CVV",
+    "payNow": "Төлөө",
+    "orderSummary": "Заказ корутундусу",
+    "subtotal": "Аралык жыйынтык",
+    "tax": "Салык",
+    "total": "Жыйынтык"
+  },
+  "auth": {
+    "login": "Кирүү",
+    "register": "Катталуу",
+    "email": "Email",
+    "password": "Сырсөз",
+    "confirmPassword": "Сырсөздү ырастаңыз",
+    "username": "Колдонуучу аты",
+    "firstName": "Аты",
+    "lastName": "Фамилиясы",
+    "forgotPassword": "Сырсөздү унуттуңузбу?",
+    "noAccount": "Аккаунт жокпу?",
+    "hasAccount": "Аккаунт барбы?",
+    "signUp": "Катталуу",
+    "signIn": "Кирүү"
+  },
+  "common": {
+    "loading": "Жүктөлүүдө...",
+    "error": "Ката",
+    "success": "Ийгиликтүү",
+    "save": "Сактоо",
+    "cancel": "Жокко чыгаруу",
+    "delete": "Өчүрүү",
+    "edit": "Өзгөртүү",
+    "view": "Көрүү",
+    "back": "Артка",
+    "next": "Кийинки",
+    "previous": "Мурунку",
+    "close": "Жабуу",
+    "search": "Издөө",
+    "filter": "Фильтр",
+    "sort": "Иреттөө",
+    "showMore": "Көбүрөөк көрсөтүү",
+    "showLess": "Азыраак көрсөтүү"
+  },
+  "errors": {
+    "required": "Бул талаа милдеттүү",
+    "invalidEmail": "Жараксыз email",
+    "passwordMismatch": "Сырсөздөр дал келбейт",
+    "networkError": "Тармак катасы",
+    "unauthorized": "Уруксат жок",
+    "notFound": "Табылган жок"
+  },
+  "lesson": {
+    "completed": "Аяктаган",
+    "inProgress": "Процесстe",
+    "locked": "Кулпуланган",
+    "startLesson": "Сабакты баштоо",
+    "continueLesson": "Сабакты улантуу",
+    "nextLesson": "Кийинки сабак",
+    "previousLesson": "Мурунку сабак",
+    "videoNotAvailable": "Видео жеткиликсиз",
+    "downloadMaterials": "Материалдарды жүктөп алуу",
+    "markComplete": "Аяктаган деп белгилөө"
+  },
+  "coursePlayer": {
+    "overview": "Көз карашы",
+    "lessons": "Сабактар",
+    "resources": "Ресурстар",
+    "progress": "Прогресс",
+    "certificate": "Сертификат",
+    "shareProgress": "Прогрессти бөлүшүү"
+  },
+  "merch": {
+    "size": "Өлчөмү",
+    "color": "Түсү",
+    "quantity": "Саны",
+    "selectSize": "Өлчөмдү тандаңыз",
+    "selectColor": "Түстү тандаңыз"
+  },
+  "orders": {
+    "orderNumber": "Заказ номери",
+    "orderDate": "Заказ датасы",
+    "orderStatus": "Заказ статусу",
+    "totalAmount": "Жалпы сумма",
+    "viewDetails": "Деталдарды көрүү",
+    "trackOrder": "Заказды көзөмөлдөө",
+    "cancelOrder": "Заказды жокко чыгаруу",
+    "pending": "Күтүүдө",
+    "processing": "Иштетилүүдө",
+    "shipped": "Жөнөтүлдү",
+    "delivered": "Жеткирилди",
+    "cancelled": "Жокко чыгарылды"
+  },
+  "aiChat": {
+    "title": "AI Машыктыргыч",
+    "placeholder": "Суроо бериңиз...",
+    "send": "Жөнөтүү",
+    "typing": "Жазууда...",
+    "clearChat": "Чатты тазалоо",
+    "suggestions": "Сунуштар",
+    "askQuestion": "Суроо берүү"
+  },
+  "notFound": {
+    "title": "404 - Бет табылган жок",
+    "subtitle": "Упс! Сиз издеген бет жок.",
+    "goHome": "Башкы бетке кайтуу"
+  }
+}

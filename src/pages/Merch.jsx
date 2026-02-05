@@ -386,7 +386,7 @@ export default function Merch() {
             <motion.div variants={fadeInUp} className="inline-block mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-red-600/20 rounded-full border border-primary/30">
                 <Crown className="w-4 h-4 text-yellow-500" />
-                <span className="text-yellow-500 text-sm font-semibold">ЭКСКЛЮЗИВНЫЙ МЕРЧ</span>
+                <span className="text-yellow-500 text-sm font-semibold">ЭКСКЛЮЗИВНЫЙ МАГАЗИН</span>
               </span>
             </motion.div>
 

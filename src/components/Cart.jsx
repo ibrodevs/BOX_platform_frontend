@@ -1,11 +1,13 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Plus, Minus, Trash2, ShoppingBag, ArrowRight, Package, CreditCard, User, Phone, MapPin, CheckCircle } from 'lucide-react'
 import { useCart } from '../hooks/useCart'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 export default function Cart({ isOpen, onClose }) {
   const { items, removeItem, updateQuantity, getTotalPrice, getTotalItems, clearCart } = useCart()
+  const { t } = useTranslation()
   const [showCheckout, setShowCheckout] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)

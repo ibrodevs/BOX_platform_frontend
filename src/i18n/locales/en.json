@@ -1,0 +1,256 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "courses": "Courses",
+    "shop": "Shop",
+    "dashboard": "Dashboard",
+    "myCourses": "My Courses",
+    "profile": "Profile",
+    "orders": "My Orders",
+    "cart": "Cart",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Get Started",
+    "search": "Search courses, lessons, articles...",
+    "premiumUpgrade": "Upgrade to Premium"
+  },
+  "user": {
+    "username": "User",
+    "premium": "PREMIUM",
+    "standard": "STANDARD"
+  },
+  "home": {
+    "hero": {
+      "title": "START YOUR BOXING JOURNEY WITH A LEGEND",
+      "subtitle": "Train with a world champion and master the art of boxing",
+      "cta": "Start Training",
+      "watchDemo": "Watch Demo"
+    },
+    "stats": {
+      "students": "Students",
+      "courses": "Courses",
+      "hours": "Hours of Content"
+    },
+    "features": {
+      "title": "WHY CHOOSE US",
+      "subtitle": "Benefits of training with a boxing legend",
+      "professional": {
+        "title": "Professional Training",
+        "description": "Techniques from a world champion"
+      },
+      "flexible": {
+        "title": "Flexible Schedule",
+        "description": "Learn at your own pace"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Always here to help"
+      }
+    },
+    "courses": {
+      "title": "POPULAR COURSES",
+      "subtitle": "Start your path to mastery",
+      "viewAll": "All Courses"
+    },
+    "testimonials": {
+      "title": "WHAT STUDENTS SAY",
+      "subtitle": "Success stories of our students"
+    }
+  },
+  "about": {
+    "title": "ABOUT THE FIGHTER",
+    "subtitle": "Meet the world boxing legend",
+    "biography": "Biography",
+    "achievements": "Achievements",
+    "philosophy": "Philosophy",
+    "records": "Records"
+  },
+  "courses": {
+    "title": "COURSES",
+    "subtitle": "Choose your path to mastery",
+    "all": "All Courses",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "filter": "Filter",
+    "sort": "Sort",
+    "lessons": "lessons",
+    "hours": "hours",
+    "students": "students",
+    "startCourse": "Start Course",
+    "continue": "Continue",
+    "buy": "Buy",
+    "addToCart": "Add to Cart",
+    "free": "Free"
+  },
+  "courseDetail": {
+    "overview": "Overview",
+    "curriculum": "Curriculum",
+    "instructor": "Instructor",
+    "reviews": "Reviews",
+    "whatYouLearn": "What You'll Learn",
+    "requirements": "Requirements",
+    "description": "Description",
+    "enroll": "Enroll Now",
+    "enrolled": "You're Enrolled"
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "overview": "Overview",
+    "myCourses": "My Courses",
+    "progress": "Progress",
+    "certificates": "Certificates",
+    "settings": "Settings",
+    "stats": {
+      "coursesInProgress": "Courses in Progress",
+      "completedCourses": "Completed Courses",
+      "totalHours": "Total Hours",
+      "certificates": "Certificates"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "personalInfo": "Personal Information",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "bio": "About",
+    "save": "Save",
+    "cancel": "Cancel",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Cart is empty",
+    "total": "Total",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "continue": "Continue Shopping"
+  },
+  "shop": {
+    "title": "SHOP",
+    "subtitle": "Official merch from Dmitry Bivol",
+    "categories": {
+      "all": "All Items",
+      "clothing": "Clothing",
+      "equipment": "Equipment",
+      "accessories": "Accessories"
+    },
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "inStock": "In Stock"
+  },
+  "payments": {
+    "title": "Payment",
+    "selectMethod": "Select Payment Method",
+    "cardNumber": "Card Number",
+    "expiryDate": "Expiry Date",
+    "cvv": "CVV",
+    "payNow": "Pay Now",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "total": "Total"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "username": "Username",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signUp": "Sign Up",
+    "signIn": "Sign In"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "showMore": "Show More",
+    "showLess": "Show Less"
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email",
+    "passwordMismatch": "Passwords do not match",
+    "networkError": "Network error",
+    "unauthorized": "Unauthorized",
+    "notFound": "Not Found"
+  },
+  "lesson": {
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "locked": "Locked",
+    "startLesson": "Start Lesson",
+    "continueLesson": "Continue Lesson",
+    "nextLesson": "Next Lesson",
+    "previousLesson": "Previous Lesson",
+    "videoNotAvailable": "Video Unavailable",
+    "downloadMaterials": "Download Materials",
+    "markComplete": "Mark as Complete"
+  },
+  "coursePlayer": {
+    "overview": "Overview",
+    "lessons": "Lessons",
+    "resources": "Resources",
+    "progress": "Progress",
+    "certificate": "Certificate",
+    "shareProgress": "Share Progress"
+  },
+  "merch": {
+    "size": "Size",
+    "color": "Color",
+    "quantity": "Quantity",
+    "selectSize": "Select Size",
+    "selectColor": "Select Color"
+  },
+  "orders": {
+    "orderNumber": "Order Number",
+    "orderDate": "Order Date",
+    "orderStatus": "Order Status",
+    "totalAmount": "Total Amount",
+    "viewDetails": "View Details",
+    "trackOrder": "Track Order",
+    "cancelOrder": "Cancel Order",
+    "pending": "Pending",
+    "processing": "Processing",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
+  },
+  "aiChat": {
+    "title": "AI Coach",
+    "placeholder": "Ask a question...",
+    "send": "Send",
+    "typing": "Typing...",
+    "clearChat": "Clear Chat",
+    "suggestions": "Suggestions",
+    "askQuestion": "Ask Question"
+  },
+  "notFound": {
+    "title": "404 - Page Not Found",
+    "subtitle": "Oops! The page you're looking for doesn't exist.",
+    "goHome": "Go Home"
+  }
+}

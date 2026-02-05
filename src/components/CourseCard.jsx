@@ -1,12 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { Star, Clock, BookOpen, Tag } from 'lucide-react'
-
-const levelLabels = {
-  beginner: 'Beginner',
-  intermediate: 'Intermediate',
-  pro: 'Pro'
-}
 
 const levelColors = {
   beginner: 'bg-green-600',
@@ -15,6 +10,14 @@ const levelColors = {
 }
 
 export default function CourseCard({ course }) {
+  const { t } = useTranslation()
+  
+  const levelLabels = {
+    beginner: t('courses.beginner'),
+    intermediate: t('courses.intermediate'),
+    pro: t('courses.advanced')
+  }
+  
   return (
     <motion.div
       whileHover={{ y: -10 }}
@@ -65,7 +68,7 @@ export default function CourseCard({ course }) {
               <Star className="w-4 h-4 text-yellow-500 fill-current" />
               <span className="text-sm font-semibold">{course.rating}</span>
             </div>
-            <span className="text-xs text-gray-500">({course.reviews_count} отзывов)</span>
+            <span className="text-xs text-gray-500">({course.reviews_count} {t('courseDetail.reviews', { defaultValue: 'отзывов' })})</span>
           </div>
         )}
         
@@ -73,11 +76,11 @@ export default function CourseCard({ course }) {
         <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
           <div className="flex items-center gap-1">
             <BookOpen className="w-4 h-4" />
-            <span>{course.lessons_count} уроков</span>
+            <span>{course.lessons_count} {t('courses.lessons')}</span>
           </div>
           <div className="flex items-center gap-1">
             <Clock className="w-4 h-4" />
-            <span>{course.duration_hours}ч</span>
+            <span>{course.duration_hours}{t('courses.hours', { defaultValue: 'ч' })}</span>
           </div>
         </div>
 
@@ -85,7 +88,7 @@ export default function CourseCard({ course }) {
           to={`/courses/${course.slug}`}
           className="block w-full text-center btn-primary"
         >
-          Подробнее
+          {t('common.view', { defaultValue: 'Подробнее' })}
         </Link>
       </div>
     </motion.div>

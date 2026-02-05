@@ -78,7 +78,7 @@ export default function MobileMenu({ isOpen, onClose }) {
                   onClick={onClose}
                   className="block py-3 text-lg hover:text-primary transition-colors"
                 >
-                  Мерч
+                  Магазин
                 </Link>
                 
                 {isAuthenticated && (

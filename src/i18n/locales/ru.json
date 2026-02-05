@@ -1,0 +1,256 @@
+{
+  "nav": {
+    "home": "Главная",
+    "about": "О бойце",
+    "courses": "Курсы",
+    "shop": "Магазин",
+    "dashboard": "Кабинет",
+    "myCourses": "Мои курсы",
+    "profile": "Профиль",
+    "orders": "Мои заказы",
+    "cart": "Покупки",
+    "logout": "Выйти",
+    "login": "Вход",
+    "register": "Начать путь",
+    "search": "Поиск курсов, уроков, статей...",
+    "premiumUpgrade": "Upgrade to Premium"
+  },
+  "user": {
+    "username": "Пользователь",
+    "premium": "PREMIUM",
+    "standard": "STANDARD"
+  },
+  "home": {
+    "hero": {
+      "title": "НАЧНИТЕ СВОЙ ПУТЬ В БОКСЕ С ЛЕГЕНДОЙ",
+      "subtitle": "Тренируйтесь с чемпионом мира и освойте искусство бокса",
+      "cta": "Начать обучение",
+      "watchDemo": "Смотреть демо"
+    },
+    "stats": {
+      "students": "Учеников",
+      "courses": "Курсов",
+      "hours": "Часов контента"
+    },
+    "features": {
+      "title": "ПОЧЕМУ ВЫБИРАЮТ НАС",
+      "subtitle": "Преимущества обучения с легендой бокса",
+      "professional": {
+        "title": "Профессиональные тренировки",
+        "description": "Техники от чемпиона мира"
+      },
+      "flexible": {
+        "title": "Гибкий график",
+        "description": "Учитесь в удобное время"
+      },
+      "support": {
+        "title": "Поддержка 24/7",
+        "description": "Всегда на связи"
+      }
+    },
+    "courses": {
+      "title": "ПОПУЛЯРНЫЕ КУРСЫ",
+      "subtitle": "Начните свой путь к мастерству",
+      "viewAll": "Все курсы"
+    },
+    "testimonials": {
+      "title": "ЧТО ГОВОРЯТ УЧЕНИКИ",
+      "subtitle": "Истории успеха наших студентов"
+    }
+  },
+  "about": {
+    "title": "О БОЙЦЕ",
+    "subtitle": "Познакомьтесь с легендой мирового бокса",
+    "biography": "Биография",
+    "achievements": "Достижения",
+    "philosophy": "Философия",
+    "records": "Рекорды"
+  },
+  "courses": {
+    "title": "КУРСЫ",
+    "subtitle": "Выберите свой путь к мастерству",
+    "all": "Все курсы",
+    "beginner": "Начинающий",
+    "intermediate": "Средний",
+    "advanced": "Продвинутый",
+    "filter": "Фильтр",
+    "sort": "Сортировка",
+    "lessons": "уроков",
+    "hours": "часов",
+    "students": "студентов",
+    "startCourse": "Начать курс",
+    "continue": "Продолжить",
+    "buy": "Купить",
+    "addToCart": "В корзину",
+    "free": "Бесплатно"
+  },
+  "courseDetail": {
+    "overview": "Обзор",
+    "curriculum": "Программа",
+    "instructor": "Инструктор",
+    "reviews": "Отзывы",
+    "whatYouLearn": "Чему вы научитесь",
+    "requirements": "Требования",
+    "description": "Описание",
+    "enroll": "Записаться",
+    "enrolled": "Вы записаны"
+  },
+  "dashboard": {
+    "welcome": "Добро пожаловать",
+    "overview": "Обзор",
+    "myCourses": "Мои курсы",
+    "progress": "Прогресс",
+    "certificates": "Сертификаты",
+    "settings": "Настройки",
+    "stats": {
+      "coursesInProgress": "Курсов в процессе",
+      "completedCourses": "Завершено курсов",
+      "totalHours": "Всего часов",
+      "certificates": "Сертификатов"
+    }
+  },
+  "profile": {
+    "title": "Профиль",
+    "personalInfo": "Личная информация",
+    "email": "Email",
+    "phone": "Телефон",
+    "location": "Местоположение",
+    "bio": "О себе",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "changePassword": "Сменить пароль",
+    "currentPassword": "Текущий пароль",
+    "newPassword": "Новый пароль",
+    "confirmPassword": "Подтвердите пароль"
+  },
+  "cart": {
+    "title": "Корзина",
+    "empty": "Корзина пуста",
+    "total": "Итого",
+    "checkout": "Оформить заказ",
+    "remove": "Удалить",
+    "continue": "Продолжить покупки"
+  },
+  "shop": {
+    "title": "МАГАЗИН",
+    "subtitle": "Официальный мерч от Дмитрия Бивола",
+    "categories": {
+      "all": "Все товары",
+      "clothing": "Одежда",
+      "equipment": "Экипировка",
+      "accessories": "Аксессуары"
+    },
+    "addToCart": "В корзину",
+    "outOfStock": "Нет в наличии",
+    "inStock": "В наличии"
+  },
+  "payments": {
+    "title": "Оплата",
+    "selectMethod": "Выберите способ оплаты",
+    "cardNumber": "Номер карты",
+    "expiryDate": "Срок действия",
+    "cvv": "CVV",
+    "payNow": "Оплатить",
+    "orderSummary": "Сводка заказа",
+    "subtotal": "Промежуточный итог",
+    "tax": "Налог",
+    "total": "Итого"
+  },
+  "auth": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "email": "Email",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "username": "Имя пользователя",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "forgotPassword": "Забыли пароль?",
+    "noAccount": "Нет аккаунта?",
+    "hasAccount": "Уже есть аккаунт?",
+    "signUp": "Зарегистрироваться",
+    "signIn": "Войти"
+  },
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успешно",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "view": "Просмотр",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Назад",
+    "close": "Закрыть",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "sort": "Сортировка",
+    "showMore": "Показать еще",
+    "showLess": "Показать меньше"
+  },
+  "errors": {
+    "required": "Это поле обязательно",
+    "invalidEmail": "Неверный email",
+    "passwordMismatch": "Пароли не совпадают",
+    "networkError": "Ошибка сети",
+    "unauthorized": "Неавторизован",
+    "notFound": "Не найдено"
+  },
+  "lesson": {
+    "completed": "Завершено",
+    "inProgress": "В процессе",
+    "locked": "Заблокировано",
+    "startLesson": "Начать урок",
+    "continueLesson": "Продолжить урок",
+    "nextLesson": "Следующий урок",
+    "previousLesson": "Предыдущий урок",
+    "videoNotAvailable": "Видео недоступно",
+    "downloadMaterials": "Скачать материалы",
+    "markComplete": "Отметить как завершенное"
+  },
+  "coursePlayer": {
+    "overview": "Обзор",
+    "lessons": "Уроки",
+    "resources": "Ресурсы",
+    "progress": "Прогресс",
+    "certificate": "Сертификат",
+    "shareProgress": "Поделиться прогрессом"
+  },
+  "merch": {
+    "size": "Размер",
+    "color": "Цвет",
+    "quantity": "Количество",
+    "selectSize": "Выберите размер",
+    "selectColor": "Выберите цвет"
+  },
+  "orders": {
+    "orderNumber": "Номер заказа",
+    "orderDate": "Дата заказа",
+    "orderStatus": "Статус заказа",
+    "totalAmount": "Общая сумма",
+    "viewDetails": "Посмотреть детали",
+    "trackOrder": "Отследить заказ",
+    "cancelOrder": "Отменить заказ",
+    "pending": "Ожидает",
+    "processing": "Обрабатывается",
+    "shipped": "Отправлено",
+    "delivered": "Доставлено",
+    "cancelled": "Отменено"
+  },
+  "aiChat": {
+    "title": "AI Тренер",
+    "placeholder": "Задайте вопрос...",
+    "send": "Отправить",
+    "typing": "Печатает...",
+    "clearChat": "Очистить чат",
+    "suggestions": "Предложения",
+    "askQuestion": "Задать вопрос"
+  },
+  "notFound": {
+    "title": "404 - Страница не найдена",
+    "subtitle": "Упс! Страница, которую вы ищете, не существует.",
+    "goHome": "Вернуться на главную"
+  }
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import { 
   Search, Filter, Grid, List, Star, TrendingUp, Clock, 
@@ -9,9 +10,10 @@ import {
 import CourseCard from '../components/CourseCard'
 import Loader from '../components/ui/Loader'
 
-const API_URL = 'http://127.0.0.1:8000/api'
+const API_URL = 'https://box-platform-backend.onrender.com/api'
 
 export default function Courses() {
+  const { t } = useTranslation()
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')
@@ -24,12 +26,12 @@ export default function Courses() {
   const containerRef = useRef(null)
 
   const categories = [
-    { id: 'beginner', label: 'Для начинающих', icon: Target, count: 0 },
-    { id: 'intermediate', label: 'Средний уровень', icon: TrendingUp, count: 0 },
-    { id: 'advanced', label: 'Продвинутые', icon: Trophy, count: 0 },
-    { id: 'pro', label: 'Профессиональные', icon: Crown, count: 0 },
-    { id: 'new', label: 'Новые курсы', icon: Sparkles, count: 0 },
-    { id: 'popular', label: 'Популярные', icon: TrendingUp, count: 0 },
+    { id: 'beginner', label: t('courses.beginner'), icon: Target, count: 0 },
+    { id: 'intermediate', label: t('courses.intermediate'), icon: TrendingUp, count: 0 },
+    { id: 'advanced', label: t('courses.advanced'), icon: Trophy, count: 0 },
+    { id: 'pro', label: t('courses.advanced'), icon: Crown, count: 0 },
+    { id: 'new', label: t('courses.newCourses', { defaultValue: 'Новые курсы' }), icon: Sparkles, count: 0 },
+    { id: 'popular', label: t('courses.popular', { defaultValue: 'Популярные' }), icon: TrendingUp, count: 0 },
   ]
 
   useEffect(() => {

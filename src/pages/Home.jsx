@@ -136,7 +136,7 @@ export default function Home() {
           >
             <motion.div variants={fadeInUp} className="relative inline-block mb-8">
               <span className="inline-block px-4 py-2 bg-primary/20 border border-primary/40 rounded-full text-sm md:text-base text-primary mb-4">
-                ОНЛАЙН-АКАДЕМИЯ БОКСА
+                ОНЛАЙН-ШКОЛА БОКСА
               </span>
             </motion.div>
 
