@@ -132,7 +132,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="container-custom relative z-10 text-center px-4">
+        <div className="container-custom relative z-10 text-center">
           <motion.div
             variants={staggerContainer}
             initial="initial"

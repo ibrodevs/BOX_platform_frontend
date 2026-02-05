@@ -38,9 +38,12 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             
+            {/* Public Routes - доступны всем */}
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/courses/:slug" element={<CourseDetail />} />
+            <Route path="/lessons/:id" element={<Lesson />} />
+            
             {/* Protected Routes - требуют авторизации */}
-            <Route path="/courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
-            <Route path="/courses/:slug" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
             <Route path="/merch" element={<ProtectedRoute><Merch /></ProtectedRoute>} />
             
             {/* Dashboard Routes - требуют авторизации */}

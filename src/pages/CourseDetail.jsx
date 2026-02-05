@@ -11,6 +11,8 @@ import { getCourse, createOrder, completePayment } from '../services/apiService'
 import { useAuthStore } from '../store/authStore'
 import CoursePlayer from '../components/courses/CoursePlayer'
 import CurriculumSection from '../components/courses/CurriculumSection'
+import { getCourseBySlug } from '../data/staticLessons'
+import { purchaseUtils } from '../utils/purchaseUtils'
 
 export default function CourseDetail() {
   const { slug } = useParams()
@@ -35,13 +37,21 @@ export default function CourseDetail() {
 
   const fetchCourseData = async () => {
     try {
-      const response = await getCourse(slug)
-      const courseData = response.data
+      setLoading(true)
       
-      // Enhanced course data with mock details
-      const enhancedCourse = {
-        ...courseData,
-        full_description: courseData.full_description || `Профессиональный курс от абсолютного чемпиона мира Дмитрия Бивола. В этом курсе вы освоите все ключевые техники и стратегии, которые привели Дмитрия к мировому титулу. Программа включает как теоретические знания, так и практические упражнения с пошаговой инструкцией.`,
+      // Сначала пробуем загрузить с API
+      try {
+        const response = await getCourse(slug)
+        const courseData = response.data
+        
+        // Проверяем, куплен ли курс локально
+        const isPurchasedLocally = purchaseUtils.isPurchased(courseData.id)
+        
+        // Enhanced course data with mock details
+        const enhancedCourse = {
+          ...courseData,
+          is_purchased: courseData.is_purchased || isPurchasedLocally,
+          full_description: courseData.full_description || `Профессиональный курс от абсолютного чемпиона мира Дмитрия Бивола. В этом курсе вы освоите все ключевые техники и стратегии, которые привели Дмитрия к мировому титулу. Программа включает как теоретические знания, так и практические упражнения с пошаговой инструкцией.`,
         
         // Mock additional details
         instructor: {
@@ -113,33 +123,94 @@ export default function CourseDetail() {
       }
       
       setCourse(enhancedCourse)
+      } catch (apiError) {
+        console.log('API не доступен, используем статичные данные')
+        
+        // Используем статичные данные если API недоступен
+        const staticCourse = getCourseBySlug(slug)
+        if (staticCourse) {
+          // Проверяем, куплен ли курс локально
+          const isPurchasedLocally = purchaseUtils.isPurchased(staticCourse.id)
+          
+          const enhancedStaticCourse = {
+            ...staticCourse,
+            is_purchased: isPurchasedLocally,
+            full_description: `Профессиональный курс от абсолютного чемпиона мира Дмитрия Бивола. В этом курсе вы освоите все ключевые техники и стратегии, которые привели Дмитрия к мировому титулу. Программа включает как теоретические знания, так и практические упражнения с пошаговой инструкцией.`,
+            stats: {
+              rating: staticCourse.rating || 4.8,
+              totalReviews: 342,
+              studentsEnrolled: staticCourse.studentsCount || 2843,
+              completionRate: 87,
+              satisfactionRate: 94
+            },
+            features: [
+              'Доступ к AI-тренеру 24/7',
+              'Сертификат об окончании',
+              'Пожизненный доступ к материалам',
+              'Мобильное приложение',
+              'Закрытое сообщество',
+              'Персональные консультации'
+            ],
+            requirements: [
+              'Наличие боксёрских перчаток',
+              'Спортивная форма',
+              'Готовность учиться',
+              '30 минут в день для тренировок'
+            ],
+            reviews: [
+              {
+                id: 1,
+                user: 'Алексей Иванов',
+                avatar: '👤',
+                rating: 5,
+                date: '2 недели назад',
+                comment: 'Лучший курс по боксу! Особенно понравился AI-тренер, который помогает с техникой.',
+                helpful: 24
+              },
+              {
+                id: 2,
+                user: 'Мария Петрова',
+                avatar: '👩',
+                rating: 5,
+                date: '1 месяц назад',
+                comment: 'За 2 месяца прошла путь от новичка до уверенного бойца. Методика Бивола работает!',
+                helpful: 18
+              }
+            ]
+          }
+          setCourse(enhancedStaticCourse)
+        } else {
+          throw new Error('Курс не найден')
+        }
+      }
     } catch (error) {
       console.error('Failed to fetch course:', error)
+      navigate('/courses')
     } finally {
       setLoading(false)
     }
   }
 
   const handlePurchase = async () => {
-    if (!isAuthenticated) {
-      navigate('/login', { state: { from: `/courses/${slug}` } })
-      return
-    }
-
+    // Упрощенная покупка - просто добавляем курс в localStorage
     setPurchasing(true)
+    
     try {
-      const orderRes = await createOrder(course.id)
-      await completePayment(orderRes.data.id)
+      // Имитируем процесс оплаты с небольшой задержкой
+      await new Promise(resolve => setTimeout(resolve, 1500))
       
-      // Show success animation
-      const timer = setTimeout(() => {
-        alert('🎉 Поздравляем! Курс успешно куплен! Теперь вам доступны все уроки.')
-        window.location.reload()
-      }, 1000)
+      // Покупаем курс через утилиту
+      purchaseUtils.purchaseCourse(course.id)
       
-      return () => clearTimeout(timer)
+      // Обновляем состояние курса
+      setCourse({ ...course, is_purchased: true })
+      
+      // Показываем успешное сообщение
+      alert('🎉 Поздравляем! Курс успешно куплен! Теперь вам доступны все уроки.')
+      
     } catch (error) {
-      alert(error.response?.data?.detail || 'Ошибка при покупке. Пожалуйста, попробуйте позже.')
+      console.error('Purchase error:', error)
+      alert('Произошла ошибка при покупке. Попробуйте еще раз.')
     } finally {
       setPurchasing(false)
     }
@@ -229,6 +300,35 @@ export default function CourseDetail() {
               <h1 className="text-4xl md:text-6xl font-black mb-6">
                 {course.title}
               </h1>
+              
+              {/* Бесплатные уроки баннер */}
+              {course.lessons && course.lessons.filter(l => l.is_free).length > 0 && !course.is_purchased && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6 p-4 bg-gradient-to-r from-blue-600/20 to-blue-700/20 border-2 border-blue-500/50 rounded-xl"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
+                      <Play className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-bold text-white mb-1">
+                        🎁 {course.lessons.filter(l => l.is_free).length} {course.lessons.filter(l => l.is_free).length === 1 ? 'урок' : 'уроков'} доступно бесплатно!
+                      </div>
+                      <div className="text-sm text-gray-300">
+                        Начните обучение прямо сейчас без регистрации
+                      </div>
+                    </div>
+                    <Link
+                      to={`/lessons/${course.lessons.find(l => l.is_free)?.id}`}
+                      className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold text-white transition-colors whitespace-nowrap"
+                    >
+                      Смотреть →
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
               
               <p className="text-xl text-gray-300 mb-8 leading-relaxed">
                 {course.description}
@@ -334,6 +434,30 @@ export default function CourseDetail() {
                       </Link>
                     ) : (
                       <>
+                        {/* Кнопка смотреть бесплатные уроки */}
+                        {course.lessons && course.lessons.filter(l => l.is_free).length > 0 && (
+                          <Link
+                            to={`/lessons/${course.lessons.find(l => l.is_free)?.id}`}
+                            className="block w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl font-bold text-lg text-white text-center hover:from-blue-700 hover:to-blue-600 transition-all mb-4 relative overflow-hidden"
+                          >
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                              <Play className="w-5 h-5" />
+                              Смотреть бесплатно ({course.lessons.filter(l => l.is_free).length} {course.lessons.filter(l => l.is_free).length === 1 ? 'урок' : 'уроков'})
+                            </span>
+                            <motion.div
+                              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                              animate={{
+                                x: ['-100%', '100%'],
+                              }}
+                              transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                repeatType: "loop",
+                              }}
+                            />
+                          </Link>
+                        )}
+                        
                         <button
                           onClick={handlePurchase}
                           disabled={purchasing}

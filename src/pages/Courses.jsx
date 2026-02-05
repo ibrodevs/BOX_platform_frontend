@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import CourseCard from '../components/CourseCard'
 import Loader from '../components/ui/Loader'
+import { getAllCourses } from '../data/staticLessons'
 
 const API_URL = 'https://box-platform-backend.onrender.com/api'
 
@@ -41,28 +42,50 @@ export default function Courses() {
   const fetchCourses = async () => {
     try {
       setLoading(true)
-      const response = await axios.get(`${API_URL}/courses/`)
-      console.log('API Response:', response.data)
       
-      const data = response.data.results ? response.data.results : (Array.isArray(response.data) ? response.data : [])
-      console.log('Courses data:', data)
+      // Сначала пробуем загрузить с API
+      try {
+        const response = await axios.get(`${API_URL}/courses/`)
+        const data = response.data.results ? response.data.results : (Array.isArray(response.data) ? response.data : [])
+        
+        if (data.length > 0) {
+          const enhancedData = data.map(course => ({
+            ...course,
+            rating: course.rating || (4.5 + Math.random() * 0.5),
+            studentsCount: course.studentsCount || Math.floor(Math.random() * 1000) + 100,
+            duration: course.duration || `${Math.floor(Math.random() * 10) + 1} часов`,
+            isNew: Math.random() > 0.7,
+            isBestseller: Math.random() > 0.8,
+          }))
+          
+          setCourses(enhancedData)
+          setError(null)
+          return
+        }
+      } catch (apiError) {
+        console.log('API не доступен, используем статичные данные')
+      }
       
-      // Добавляем mock данные для демонстрации
-      const enhancedData = data.map(course => ({
+      // Если API недоступен или нет данных, используем статичные данные
+      const staticData = getAllCourses().map(course => ({
         ...course,
-        rating: course.rating || (4.5 + Math.random() * 0.5),
-        studentsCount: course.studentsCount || Math.floor(Math.random() * 1000) + 100,
-        duration: course.duration || `${Math.floor(Math.random() * 10) + 1} часов`,
         isNew: Math.random() > 0.7,
         isBestseller: Math.random() > 0.8,
       }))
       
-      setCourses(enhancedData)
+      setCourses(staticData)
       setError(null)
     } catch (err) {
       console.error('Failed to fetch courses:', err)
       setError('Не удалось загрузить курсы')
-      setCourses([])
+      
+      // В случае ошибки всё равно показываем статичные данные
+      const staticData = getAllCourses().map(course => ({
+        ...course,
+        isNew: Math.random() > 0.7,
+        isBestseller: Math.random() > 0.8,
+      }))
+      setCourses(staticData)
     } finally {
       setLoading(false)
     }
