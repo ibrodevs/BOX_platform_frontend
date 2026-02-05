@@ -1,0 +1,151 @@
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { register as registerAPI } from '../services/apiService'
+import { useAuthStore } from '../store/authStore'
+import Input from '../components/ui/Input'
+import Button from '../components/ui/Button'
+
+export default function Register() {
+  const navigate = useNavigate()
+  const { login } = useAuthStore()
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    password2: '',
+    first_name: '',
+    last_name: '',
+  })
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setError('')
+
+    if (formData.password !== formData.password2) {
+      setError('Пароли не совпадают')
+      return
+    }
+
+    setLoading(true)
+
+    try {
+      const res = await registerAPI(formData)
+      console.log('Registration response:', res.data)
+      
+      // Сохраняем токены
+      if (res.data.tokens && res.data.user) {
+        localStorage.setItem('access_token', res.data.tokens.access)
+        localStorage.setItem('refresh_token', res.data.tokens.refresh)
+        login(res.data.tokens, res.data.user)
+        navigate('/dashboard')
+      } else {
+        setError('Ошибка получения данных авторизации')
+      }
+    } catch (err) {
+      console.error('Registration error:', err)
+      const errors = err.response?.data
+      if (errors) {
+        const errorMessages = Object.values(errors).flat().join('. ')
+        setError(errorMessages || 'Ошибка регистрации')
+      } else {
+        setError(err.message || 'Ошибка регистрации. Попробуйте позже.')
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center py-20">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-md"
+      >
+        <div className="bg-dark border-2 border-gray-800 rounded-lg p-8">
+          <h1 className="text-4xl font-black mb-4 text-center">
+            РЕГИСТРАЦИЯ
+          </h1>
+          
+          <p className="text-center text-gray-400 mb-8">
+            Создайте аккаунт для доступа ко всем возможностям платформы
+          </p>
+
+          {error && (
+            <div className="bg-red-900/50 border border-red-500 text-white p-4 rounded mb-6">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <Input
+              label="Имя пользователя"
+              type="text"
+              value={formData.username}
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+              required
+            />
+
+            <Input
+              label="Email"
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              required
+            />
+
+            <div className="grid grid-cols-2 gap-4">
+              <Input
+                label="Имя"
+                type="text"
+                value={formData.first_name}
+                onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+              />
+
+              <Input
+                label="Фамилия"
+                type="text"
+                value={formData.last_name}
+                onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
+              />
+            </div>
+
+            <Input
+              label="Пароль"
+              type="password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              required
+            />
+
+            <Input
+              label="Повторите пароль"
+              type="password"
+              value={formData.password2}
+              onChange={(e) => setFormData({ ...formData, password2: e.target.value })}
+              required
+            />
+
+            <Button
+              type="submit"
+              loading={loading}
+              className="w-full"
+            >
+              Зарегистрироваться
+            </Button>
+          </form>
+
+          <p className="text-center text-gray-400 mt-6">
+            Уже есть аккаунт?{' '}
+            <Link to="/login" className="text-primary hover:underline font-bold">
+              Войти
+            </Link>
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  )
+}

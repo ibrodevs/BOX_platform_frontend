@@ -1,0 +1,99 @@
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { login as loginAPI, getProfile } from '../services/apiService'
+import { useAuthStore } from '../store/authStore'
+import Input from '../components/ui/Input'
+import Button from '../components/ui/Button'
+
+export default function Login() {
+  const navigate = useNavigate()
+  const { login } = useAuthStore()
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  })
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+
+    try {
+      const res = await loginAPI(formData)
+      const tokens = res.data
+      
+      // Получаем профиль пользователя
+      localStorage.setItem('access_token', tokens.access)
+      const profileRes = await getProfile()
+      
+      login(tokens, profileRes.data)
+      navigate('/dashboard')
+    } catch (err) {
+      setError(err.response?.data?.detail || 'Неверный логин или пароль')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center py-20">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-md"
+      >
+        <div className="bg-dark border-2 border-gray-800 rounded-lg p-8">
+          <h1 className="text-4xl font-black mb-4 text-center">
+            ВХОД
+          </h1>
+          
+          <p className="text-center text-gray-400 mb-8">
+            Войдите, чтобы получить доступ к курсам, мерчу и личному кабинету
+          </p>
+
+          {error && (
+            <div className="bg-red-900/50 border border-red-500 text-white p-4 rounded mb-6">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <Input
+              label="Имя пользователя"
+              type="text"
+              value={formData.username}
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+              required
+            />
+
+            <Input
+              label="Пароль"
+              type="password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              required
+            />
+
+            <Button
+              type="submit"
+              loading={loading}
+              className="w-full"
+            >
+              Войти
+            </Button>
+          </form>
+
+          <p className="text-center text-gray-400 mt-6">
+            Нет аккаунта?{' '}
+            <Link to="/register" className="text-primary hover:underline font-bold">
+              Зарегистрироваться
+            </Link>
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  )
+}

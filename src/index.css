@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-white font-sans;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary hover:bg-red-700 text-white font-bold py-3 px-8 rounded transition-colors duration-300;
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-white hover:bg-white hover:text-black text-white font-bold py-3 px-8 rounded transition-all duration-300;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .input-field {
+    @apply w-full bg-dark border border-gray-700 rounded px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors;
+  }
+  
+  .card {
+    @apply bg-dark border border-gray-800 rounded-lg overflow-hidden transition-transform hover:scale-105;
+  }
+}
