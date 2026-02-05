@@ -5,12 +5,6 @@
   "framework": "vite",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "env": {
-    "VITE_API_URL": {
-      "description": "URL вашего backend API",
-      "required": true
-    }
-  },
   "rewrites": [
     {
       "source": "/(.*)",
