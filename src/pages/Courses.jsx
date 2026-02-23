@@ -23,17 +23,7 @@ export default function Courses() {
   const [viewMode, setViewMode] = useState('grid')
   const [showFilters, setShowFilters] = useState(false)
   const [sortBy, setSortBy] = useState('popular')
-  const [selectedCategories, setSelectedCategories] = useState([])
   const containerRef = useRef(null)
-
-  const categories = [
-    { id: 'beginner', label: t('courses.beginner'), icon: Target, count: 0 },
-    { id: 'intermediate', label: t('courses.intermediate'), icon: TrendingUp, count: 0 },
-    { id: 'advanced', label: t('courses.advanced'), icon: Trophy, count: 0 },
-    { id: 'pro', label: t('courses.advanced'), icon: Crown, count: 0 },
-    { id: 'new', label: t('courses.newCourses'), icon: Sparkles, count: 0 },
-    { id: 'popular', label: t('courses.popular'), icon: TrendingUp, count: 0 },
-  ]
 
   useEffect(() => {
     fetchCourses()
@@ -56,6 +46,10 @@ export default function Courses() {
             duration: course.duration || `${Math.floor(Math.random() * 10) + 1} часов`,
             isNew: Math.random() > 0.7,
             isBestseller: Math.random() > 0.8,
+            // Force free
+            price: 0,
+            isFree: true,
+            originalPrice: undefined
           }))
           
           setCourses(enhancedData)
@@ -71,6 +65,10 @@ export default function Courses() {
         ...course,
         isNew: Math.random() > 0.7,
         isBestseller: Math.random() > 0.8,
+        // Ensure static courses are free
+        price: 0,
+        isFree: true,
+        originalPrice: undefined
       }))
       
       setCourses(staticData)
@@ -84,6 +82,10 @@ export default function Courses() {
         ...course,
         isNew: Math.random() > 0.7,
         isBestseller: Math.random() > 0.8,
+        // Ensure static courses are free on error
+        price: 0,
+        isFree: true,
+        originalPrice: undefined
       }))
       setCourses(staticData)
     } finally {
@@ -101,19 +103,7 @@ export default function Courses() {
     // Фильтр по уровню
     const matchesFilter = filter === 'all' || course.level === filter
     
-    // Фильтр по категориям
-    const matchesCategories = selectedCategories.length === 0 || 
-      selectedCategories.some(cat => {
-        if (cat === 'new') return course.isNew
-        if (cat === 'popular') return course.isBestseller
-        if (cat === 'beginner') return course.level === 'beginner'
-        if (cat === 'intermediate') return course.level === 'intermediate'
-        if (cat === 'advanced') return course.level === 'advanced'
-        if (cat === 'pro') return course.level === 'pro'
-        return true
-      })
-    
-    return matchesSearch && matchesFilter && matchesCategories
+    return matchesSearch && matchesFilter
   })
 
   // Сортировка
@@ -239,26 +229,9 @@ export default function Courses() {
               className="overflow-hidden"
             >
               <div className="bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-gray-800 p-6 mb-6">
-                <div className="flex flex-wrap gap-4 mb-6">
-                  {categories.map(category => (
-                    <motion.button
-                      key={category.id}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleCategoryToggle(category.id)}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${
-                        selectedCategories.includes(category.id)
-                          ? 'bg-gradient-to-r from-primary to-red-600 border-primary text-white'
-                          : 'bg-gray-800/50 border-gray-700 text-gray-400 hover:border-primary/50'
-                      }`}
-                    >
-                      <category.icon className="w-4 h-4" />
-                      <span>{category.label}</span>
-                    </motion.button>
-                  ))}
-                </div>
+                {/* Categories removed */}
                 
-                <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div className="flex items-center gap-4">
                     <span className="text-gray-400">{t('common.sort')}:</span>
                     <select
@@ -332,8 +305,8 @@ export default function Courses() {
         )}
 
         {/* Courses Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+          <div className="w-full md:w-auto">
             <h2 className="text-3xl font-bold text-white">
               {t('coursesPage.results.found', { count: filteredCourses.length })}
             </h2>
@@ -343,56 +316,6 @@ export default function Courses() {
               </p>
             )}
           </div>
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex items-center gap-3"
-          >
-            <span className="text-gray-400 text-sm">{t('coursesPage.viewMode')}:</span>
-            <div className="flex bg-gray-900 rounded-lg p-1">
-              <button
-                onClick={() => setFilter('all')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  filter === 'all'
-                    ? 'bg-primary text-white'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                {t('courses.all')}
-              </button>
-              <button
-                onClick={() => setFilter('beginner')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  filter === 'beginner'
-                    ? 'bg-primary text-white'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                {t('courses.beginner')}
-              </button>
-              <button
-                onClick={() => setFilter('intermediate')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  filter === 'intermediate'
-                    ? 'bg-primary text-white'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                {t('courses.intermediate')}
-              </button>
-              <button
-                onClick={() => setFilter('advanced')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  filter === 'advanced'
-                    ? 'bg-primary text-white'
-                    : 'text-gray-400 hover:text-white'
-                }`
-              }>
-                {t('courses.advanced')}
-              </button>
-            </div>
-          </motion.div>
         </div>
 
         {/* Courses Grid/List */}
@@ -515,10 +438,7 @@ export default function Courses() {
                             <Users className="w-4 h-4 text-green-500" />
                             <span>{course.studentsCount} {t('courses.students')}</span>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Target className="w-4 h-4 text-primary" />
-                            <span>{course.category}</span>
-                          </div>
+                          {/* category removed */}
                         </div>
                         
                         {/* Progress Bar (for enrolled users) */}
@@ -539,7 +459,7 @@ export default function Courses() {
                         )}
                         
                         {/* Price & CTA */}
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                           <div>
                             <div className="text-3xl font-bold text-white">{course.price} {t('common.currency')}</div>
                             {course.originalPrice && (

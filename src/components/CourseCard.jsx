@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
-import { Star, Clock, BookOpen, Tag, Check, ShoppingCart, Play } from 'lucide-react'
+import { Star, Clock, BookOpen, Check, Play } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { purchaseUtils } from '../utils/purchaseUtils'
 
@@ -14,34 +14,11 @@ const levelColors = {
 export default function CourseCard({ course }) {
   const { t } = useTranslation()
   const [isPurchased, setIsPurchased] = useState(false)
-  const [purchasing, setPurchasing] = useState(false)
   
   useEffect(() => {
-    // Проверяем, куплен ли курс
+    // Проверяем, куплен ли курс (для визуального индикатора, если применимо)
     setIsPurchased(purchaseUtils.isPurchased(course.id))
   }, [course.id])
-  
-  const handleQuickPurchase = async (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    
-    setPurchasing(true)
-    
-    try {
-      // Имитируем процесс оплаты
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      // Покупаем курс
-      purchaseUtils.purchaseCourse(course.id)
-      
-      setIsPurchased(true)
-      alert(t('courses.purchaseSuccess'))
-    } catch (error) {
-      alert(t('courses.purchaseError'))
-    } finally {
-      setPurchasing(false)
-    }
-  }
   
   const levelLabels = {
     beginner: t('courses.beginner'),
@@ -74,14 +51,16 @@ export default function CourseCard({ course }) {
         </div>
         
         {/* Price */}
-        <div className="absolute top-3 right-3 bg-red-600 px-3 py-1 rounded-full text-sm font-bold">
+        <div className="absolute top-3 right-3 px-3 py-1 rounded-full text-sm font-bold" style={{ background: isPurchased ? undefined : 'transparent' }}>
           {isPurchased ? (
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1 bg-green-600 px-3 py-1 rounded-full text-white">
               <Check className="w-4 h-4" />
               {t('courses.purchased')}
             </span>
           ) : (
-            `${course.price.toLocaleString()} ${t('common.currency')}`
+            <span className="bg-red-600 px-3 py-1 rounded-full text-white">
+              { (course.price === 0 || course.isFree) ? (t('courses.free') || 'Free') : `${course.price.toLocaleString()} ${t('common.currency')}` }
+            </span>
           )}
         </div>
         
@@ -92,13 +71,7 @@ export default function CourseCard({ course }) {
 
       {/* Content */}
       <div className="p-6">
-        {/* Category */}
-        {course.category && (
-          <div className="flex items-center gap-2 text-xs text-red-500 mb-2">
-            <Tag className="w-3 h-3" />
-            {course.category}
-          </div>
-        )}
+        {/* Category removed */}
         
         <h3 className="text-xl font-bold mb-2 line-clamp-2">{course.title}</h3>
         <p className="text-gray-400 mb-4 line-clamp-2 text-sm">{course.description}</p>
@@ -126,53 +99,22 @@ export default function CourseCard({ course }) {
           </div>
         </div>
 
-        {/* Action Buttons */}
+        {/* Single Watch Button */}
         <div className="flex gap-2">
-          {isPurchased ? (
-            <Link
-              to={`/courses/${course.slug}`}
-              className="flex-1 text-center btn-primary"
-            >
-              {t('courses.openCourse')}
-            </Link>
-          ) : (
-            <>
-              {/* Кнопка смотреть бесплатно */}
-              {course.lessons && course.lessons.filter(l => l.is_free).length > 0 && (
-                <Link
-                  to={`/lessons/${course.lessons.find(l => l.is_free)?.id}`}
-                  className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-600 text-white font-semibold py-3 rounded-lg transition-all duration-300"
-                  onClick={(e) => e.stopPropagation()}
+          {(() => {
+            const firstFree = course.lessons && course.lessons.find(l => l.is_free || l.isFree)
+            const to = firstFree ? `/lessons/${firstFree.id}` : `/courses/${course.slug}`
+            return (
+              <Link
+                  to={to}
+                  onClick={() => console.log('CourseCard: navigate to', to)}
+                  className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-red-600 hover:from-red-600 hover:to-primary text-white font-semibold py-3 rounded-lg transition-all duration-300"
                 >
                   <Play className="w-4 h-4" />
-                  {t('courses.watchFree')}
+                  {t('courses.watch') || 'Смотреть'}
                 </Link>
-              )}
-              
-              <button
-                onClick={handleQuickPurchase}
-                disabled={purchasing}
-                className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-red-600 hover:from-red-600 hover:to-primary text-white font-semibold py-3 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {purchasing ? (
-                  <>
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    >
-                      ⚡
-                    </motion.div>
-                    {t('courses.purchasing')}
-                  </>
-                ) : (
-                  <>
-                    <ShoppingCart className="w-4 h-4" />
-                    {t('courses.buy')}
-                  </>
-                )}
-              </button>
-            </>
-          )}
+            )
+          })()}
         </div>
       </div>
     </motion.div>
