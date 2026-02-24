@@ -23,7 +23,7 @@ export const staticCourses = [
         duration_minutes: 12,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2080.MOV',
         video_format: '9:16'
       },
       {
@@ -32,7 +32,7 @@ export const staticCourses = [
         duration_minutes: 15,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2081.MOV',
         video_format: '16:9'
       },
       {
@@ -41,7 +41,7 @@ export const staticCourses = [
         duration_minutes: 18,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2084.MOV',
         video_format: '9:16'
       },
       {
@@ -50,7 +50,7 @@ export const staticCourses = [
         duration_minutes: 16,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2085.MOV',
         video_format: '16:9'
       },
       {
@@ -59,7 +59,7 @@ export const staticCourses = [
         duration_minutes: 20,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2080.MOV',
         video_format: '16:9'
       }
     ]
@@ -84,7 +84,7 @@ export const staticCourses = [
         duration_minutes: 22,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2081.MOV',
         video_format: '16:9'
       },
       {
@@ -93,7 +93,7 @@ export const staticCourses = [
         duration_minutes: 25,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2084.MOV',
         video_format: '16:9'
       },
       {
@@ -102,7 +102,7 @@ export const staticCourses = [
         duration_minutes: 28,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2085.MOV',
         video_format: '16:9'
       }
     ]
@@ -127,7 +127,7 @@ export const staticCourses = [
         duration_minutes: 18,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2080.MOV',
         video_format: '16:9'
       },
       {
@@ -136,7 +136,7 @@ export const staticCourses = [
         duration_minutes: 21,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2081.MOV',
         video_format: '16:9'
       },
       {
@@ -145,7 +145,7 @@ export const staticCourses = [
         duration_minutes: 24,
         is_free: true,
         completed: false,
-        video_url: 'https://youtube.com/shorts/h__6YzTTSRE?si=CDa-Mdm26svG3TLY',
+        video_url: '/IMG_2084.MOV',
         video_format: '16:9'
       }
     ]

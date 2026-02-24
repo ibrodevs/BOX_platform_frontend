@@ -29,11 +29,15 @@ export default function Login() {
       
       // Получаем профиль пользователя
       localStorage.setItem('access_token', tokens.access)
+      localStorage.setItem('refresh_token', tokens.refresh)
       const profileRes = await getProfile()
       
       login(tokens, profileRes.data)
       navigate('/dashboard')
     } catch (err) {
+      // Если логин оборвался после частичного сохранения токенов, очищаем их
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('refresh_token')
       setError(err.response?.data?.detail || t('errors.invalidCredentials'))
     } finally {
       setLoading(false)

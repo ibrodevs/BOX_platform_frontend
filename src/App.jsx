@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/layout/Footer'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -24,7 +24,11 @@ import { useAuthStore } from './store/authStore'
 
 function App() {
   const [showContent, setShowContent] = useState(false)
-  const { isAuthenticated } = useAuthStore()
+  const { isAuthenticated, initAuth } = useAuthStore()
+
+  useEffect(() => {
+    initAuth()
+  }, [initAuth])
 
   return (
     <Router>

@@ -22,7 +22,7 @@ const LEARNING_PAGES = [
     description: 'Изучите базовую стойку, передвижения и дыхание',
     icon: Home,
     color: 'from-blue-500 to-blue-600',
-    videoUrl: 'https://www.youtube.com/embed/h__6YzTTSRE',
+    videoUrl: '/IMG_2080.MOV',
     videoTitle: 'Основы бокса для начинающих',
     content: {
       title: 'Боксерская стойка',
@@ -63,7 +63,7 @@ const LEARNING_PAGES = [
     description: 'Джебы, кроссы, хуки и апперкоты',
     icon: Target,
     color: 'from-red-500 to-red-600',
-    videoUrl: 'https://www.youtube.com/embed/7TzJp-SNRR4',
+    videoUrl: '/IMG_2081.MOV',
     videoTitle: 'Техника ударов в боксе',
     content: {
       title: 'Основные удары',
@@ -104,7 +104,7 @@ const LEARNING_PAGES = [
     description: 'Блоки, уклоны, нырки и ответные удары',
     icon: Swords,
     color: 'from-purple-500 to-purple-600',
-    videoUrl: 'https://www.youtube.com/embed/8q8Jp1wYh5Y',
+    videoUrl: '/IMG_2084.MOV',
     videoTitle: 'Защита в боксе',
     content: {
       title: 'Элементы защиты',
@@ -145,7 +145,7 @@ const LEARNING_PAGES = [
     description: 'Связки ударов и тактические схемы',
     icon: GraduationCap,
     color: 'from-yellow-500 to-yellow-600',
-    videoUrl: 'https://www.youtube.com/embed/3tLJ9Ys9p3o',
+    videoUrl: '/IMG_2085.MOV',
     videoTitle: 'Боксерские комбинации',
     content: {
       title: 'Боевые комбинации',
@@ -186,7 +186,7 @@ const LEARNING_PAGES = [
     description: 'Работа в спарринге и ментальная подготовка',
     icon: Dumbbell,
     color: 'from-green-500 to-green-600',
-    videoUrl: 'https://www.youtube.com/embed/l9M_x-1uJxY',
+    videoUrl: '/IMG_2086.MOV',
     videoTitle: 'Спарринг в боксе',
     content: {
       title: 'Подготовка к спаррингу',
@@ -355,7 +355,17 @@ export default function Lesson() {
     }))
   }
 
-  const currentPageData = LEARNING_PAGES[currentPage - 1]
+  const isExternalVideoUrl = (url = '') =>
+    ['youtube.com', 'youtu.be', 'vimeo.com', 'rutube.ru'].some(domain => url.includes(domain))
+
+  const learningPages = LEARNING_PAGES.map((page, index) => ({
+    ...page,
+    videoTitle: lesson?.title
+      ? `${lesson.title} • ${page.title}`
+      : page.videoTitle
+  }))
+
+  const currentPageData = learningPages[currentPage - 1]
   const PageIcon = currentPageData.icon
 
   // Закрытие модального окна по клику вне его
@@ -423,7 +433,11 @@ export default function Lesson() {
             >
               <div className="p-4 bg-gray-800 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Youtube className="w-5 h-5 text-red-500" />
+                  {isExternalVideoUrl(selectedVideo.videoUrl) ? (
+                    <Youtube className="w-5 h-5 text-red-500" />
+                  ) : (
+                    <Film className="w-5 h-5 text-red-500" />
+                  )}
                   <h3 className="text-white font-semibold">{selectedVideo.videoTitle}</h3>
                 </div>
                 <button
@@ -433,14 +447,24 @@ export default function Lesson() {
                   ✕
                 </button>
               </div>
-              <div className="aspect-video">
-                <iframe
-                  src={selectedVideo.videoUrl}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title={selectedVideo.title}
-                />
+              <div className="aspect-video bg-black">
+                {isExternalVideoUrl(selectedVideo.videoUrl) ? (
+                  <iframe
+                    src={selectedVideo.videoUrl}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={selectedVideo.title}
+                  />
+                ) : (
+                  <video
+                    src={selectedVideo.videoUrl}
+                    className="w-full h-full object-contain bg-black"
+                    controls
+                    autoPlay
+                    playsInline
+                  />
+                )}
               </div>
             </motion.div>
           </motion.div>
@@ -515,7 +539,7 @@ export default function Lesson() {
             </div>
             <div className="flex gap-2">
               {[1, 2, 3, 4, 5].map((page) => {
-                const pageData = LEARNING_PAGES[page-1]
+                const pageData = learningPages[page-1]
                 const PageIconSmall = pageData.icon
                 
                 return (
@@ -550,7 +574,7 @@ export default function Lesson() {
 
           {/* Карточки страниц в виде сетки */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {LEARNING_PAGES.map((page) => {
+            {learningPages.map((page) => {
               const Icon = page.icon
               const isCompleted = isPageCompleted(page.id)
               const isCurrent = currentPage === page.id
@@ -590,7 +614,7 @@ export default function Lesson() {
                       }}
                       className="flex items-center gap-2 text-red-500 hover:text-red-400 transition group"
                     >
-                      <Youtube className="w-4 h-4 group-hover:scale-110 transition" />
+                      <Play className="w-4 h-4 group-hover:scale-110 transition" />
                       <span className="text-sm">Смотреть видео</span>
                     </button>
                     
@@ -628,7 +652,11 @@ export default function Lesson() {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                <Youtube className="w-5 h-5 text-red-500" />
+                {isExternalVideoUrl(currentPageData.videoUrl) ? (
+                  <Youtube className="w-5 h-5 text-red-500" />
+                ) : (
+                  <Film className="w-5 h-5 text-red-500" />
+                )}
                 Видеоурок: {currentPageData.videoTitle}
               </h3>
               <button
@@ -640,13 +668,22 @@ export default function Lesson() {
               </button>
             </div>
             <div className="aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
-              <iframe
-                src={currentPageData.videoUrl}
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title={currentPageData.title}
-              />
+              {isExternalVideoUrl(currentPageData.videoUrl) ? (
+                <iframe
+                  src={currentPageData.videoUrl}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={currentPageData.title}
+                />
+              ) : (
+                <video
+                  src={currentPageData.videoUrl}
+                  className="w-full h-full object-contain bg-black"
+                  controls
+                  playsInline
+                />
+              )}
             </div>
           </div>
 

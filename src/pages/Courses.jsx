@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
@@ -14,6 +15,7 @@ import { getAllCourses } from '../data/staticLessons'
 const API_URL = 'https://box-platform-backend.onrender.com/api'
 
 export default function Courses() {
+  const COURSES_PER_PAGE = 6
   const { t } = useTranslation()
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(true)
@@ -23,6 +25,7 @@ export default function Courses() {
   const [viewMode, setViewMode] = useState('grid')
   const [showFilters, setShowFilters] = useState(false)
   const [sortBy, setSortBy] = useState('popular')
+  const [currentPage, setCurrentPage] = useState(1)
   const containerRef = useRef(null)
 
   useEffect(() => {
@@ -126,13 +129,24 @@ export default function Courses() {
     }
   })
 
-  const handleCategoryToggle = (categoryId) => {
-    setSelectedCategories(prev => 
-      prev.includes(categoryId) 
-        ? prev.filter(c => c !== categoryId)
-        : [...prev, categoryId]
-    )
-  }
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchTerm, filter, sortBy])
+
+  const totalPages = Math.max(1, Math.ceil(sortedCourses.length / COURSES_PER_PAGE))
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages)
+    }
+  }, [currentPage, totalPages])
+
+  const paginatedCourses = sortedCourses.slice(
+    (currentPage - 1) * COURSES_PER_PAGE,
+    currentPage * COURSES_PER_PAGE
+  )
+
+  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1)
 
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -329,7 +343,7 @@ export default function Courses() {
                 exit={{ opacity: 0 }}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               >
-                {sortedCourses.map((course, idx) => (
+                {paginatedCourses.map((course, idx) => (
                   <motion.div
                     key={course.id}
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -370,7 +384,11 @@ export default function Courses() {
                 exit={{ opacity: 0 }}
                 className="space-y-4"
               >
-                {sortedCourses.map((course, idx) => (
+                {paginatedCourses.map((course, idx) => {
+                  const firstFreeLesson = course.lessons?.find((lesson) => lesson.is_free || lesson.isFree)
+                  const watchTarget = firstFreeLesson ? `/lessons/${firstFreeLesson.id}` : `/courses/${course.slug}`
+
+                  return (
                   <motion.div
                     key={course.id}
                     initial={{ opacity: 0, x: -20 }}
@@ -471,15 +489,19 @@ export default function Courses() {
                             <button className="p-2 rounded-lg border border-gray-700 text-gray-400 hover:text-white hover:border-primary transition-colors">
                               <Heart className="w-5 h-5" />
                             </button>
-                            <button className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl font-semibold text-white hover:from-red-600 hover:to-primary transition-all duration-300">
-                              {t('coursesPage.actions.details')}
-                            </button>
+                            <Link
+                              to={watchTarget}
+                              className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl font-semibold text-white hover:from-red-600 hover:to-primary transition-all duration-300"
+                            >
+                              {t('courses.watch') || t('coursesPage.actions.details')}
+                            </Link>
                           </div>
                         </div>
                       </div>
                     </div>
                   </motion.div>
-                ))}
+                  )
+                })}
               </motion.div>
             )}
           </AnimatePresence>
@@ -510,8 +532,8 @@ export default function Courses() {
                 <button
                   onClick={() => {
                     setSearchTerm('')
-                    setSelectedCategories([])
                     setFilter('all')
+                    setCurrentPage(1)
                   }}
                   className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl text-white font-medium hover:from-red-600 hover:to-primary transition-all"
                 >
@@ -523,26 +545,41 @@ export default function Courses() {
         )}
 
         {/* Pagination */}
-        {sortedCourses.length > 0 && (
+        {sortedCourses.length > 0 && totalPages > 1 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex justify-center mt-12"
           >
             <div className="flex items-center gap-2">
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-gray-400 hover:text-white transition-colors">
+              <button
+                type="button"
+                onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-gray-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
                 ←
               </button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white">
-                1
-              </button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-gray-400 hover:text-white transition-colors">
-                2
-              </button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-gray-400 hover:text-white transition-colors">
-                3
-              </button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-gray-400 hover:text-white transition-colors">
+              {pageNumbers.map((page) => (
+                <button
+                  key={page}
+                  type="button"
+                  onClick={() => setCurrentPage(page)}
+                  className={`w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${
+                    currentPage === page
+                      ? 'bg-primary text-white'
+                      : 'bg-gray-800 text-gray-400 hover:text-white'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                type="button"
+                onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages}
+                className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-gray-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
                 →
               </button>
             </div>
