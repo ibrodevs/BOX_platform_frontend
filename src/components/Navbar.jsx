@@ -36,7 +36,7 @@ export default function Navbar() {
     { path: '/merch', label: t('nav.shop'), icon: ShoppingBag },
     ...(isAuthenticated ? [
       { path: '/dashboard', label: t('nav.dashboard'), icon: User },
-      { path: '/dashboard/my-courses', label: t('nav.myCourses'), icon: Shield }
+      // { path: '/dashboard/my-courses', label: t('nav.myCourses'), icon: Shield }
     ] : [])
   ]
 
