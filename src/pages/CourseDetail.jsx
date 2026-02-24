@@ -5,7 +5,7 @@ import {
   Play, Clock, BookOpen, Users, Star, Award, Shield, 
   CheckCircle, Lock, Download, Share2, Heart, ChevronRight,
   TrendingUp, Target, Zap, Crown, Sparkles, Calendar,
-  MessageCircle, Bookmark, BarChart3, Trophy, HelpCircle
+  MessageCircle, Bookmark, BarChart3, Trophy, HelpCircle, ArrowLeft
 } from 'lucide-react'
 import { getCourse, createOrder, completePayment } from '../services/apiService'
 import { useAuthStore } from '../store/authStore'
@@ -294,6 +294,14 @@ export default function CourseDetail() {
           >
             {/* Left Column - Course Info */}
             <motion.div variants={fadeInUp} className="lg:col-span-2">
+              <button
+                onClick={() => navigate('/courses')}
+                className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg transition-colors"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                <span>{t('common.back')}</span>
+              </button>
+
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-primary/20 to-red-600/20 rounded-full border border-primary/30 mb-6">
                 <Sparkles className="w-4 h-4 text-primary" />
                 <span className="text-primary text-sm font-semibold">
