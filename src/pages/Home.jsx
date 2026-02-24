@@ -240,7 +240,7 @@ export default function Home() {
             >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link 
-                  to="/register" 
+                  to="/courses" 
                   className="group relative px-8 py-4 bg-gradient-to-r from-primary to-red-700 rounded-xl font-bold text-lg flex items-center gap-3 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-primary to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -262,11 +262,11 @@ export default function Home() {
 
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link 
-                  to="/about" 
+                  to="/merch" 
                   className="group px-8 py-4 bg-transparent border-2 border-primary/50 rounded-xl font-bold text-lg flex items-center gap-3 hover:bg-primary/10 transition-all duration-300"
                 >
                   <Play className="w-5 h-5" />
-                  <span>{t('homePage.hero.watchVideo')}</span>
+                  <span>{t('homePage.hero.buyMerch')}</span>
                 </Link>
               </motion.div>
             </motion.div>
