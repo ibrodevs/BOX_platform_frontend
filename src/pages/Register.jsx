@@ -61,23 +61,23 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-20">
+    <div className="min-h-screen flex items-center justify-center py-20 bg-white text-gray-900">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
       >
-        <div className="bg-dark border-2 border-gray-800 rounded-lg p-8">
+        <div className="bg-white border border-gray-200 rounded-lg p-8">
           <h1 className="text-4xl font-black mb-4 text-center">
             {t('auth.register').toUpperCase()}
           </h1>
           
-          <p className="text-center text-gray-400 mb-8">
+          <p className="text-center text-gray-700 mb-8">
             {t('auth.registerSubtitle')}
           </p>
 
           {error && (
-            <div className="bg-red-900/50 border border-red-500 text-white p-4 rounded mb-6">
+            <div className="bg-gray-100 border border-gray-300 text-gray-900 p-4 rounded mb-6">
               {error}
             </div>
           )}
@@ -140,9 +140,9 @@ export default function Register() {
             </Button>
           </form>
 
-          <p className="text-center text-gray-400 mt-6">
+          <p className="text-center text-gray-700 mt-6">
             {t('auth.hasAccount')}{' '}
-            <Link to="/login" className="text-primary hover:underline font-bold">
+            <Link to="/login" className="text-gray-900 hover:underline font-bold">
               {t('auth.signIn')}
             </Link>
           </p>

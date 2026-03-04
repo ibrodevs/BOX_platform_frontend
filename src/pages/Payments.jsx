@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Calendar, CreditCard, Lightbulb } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Loader from '../components/ui/Loader'
 import { useTranslation } from 'react-i18next'
@@ -128,8 +129,8 @@ export default function Payments() {
                       {getStatusBadge(payment.status)}
                     </div>
                     <div className="flex flex-wrap gap-4 text-sm text-gray-400">
-                      <span>📅 {formatDate(payment.date)}</span>
-                      <span>💳 {payment.payment_method}</span>
+                      <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> {formatDate(payment.date)}</span>
+                      <span className="flex items-center gap-2"><CreditCard className="w-4 h-4" /> {payment.payment_method}</span>
                     </div>
                   </div>
                   <div className="text-right">
@@ -142,7 +143,11 @@ export default function Payments() {
             ))
           ) : (
             <div className="card text-center py-12">
-              <div className="text-6xl mb-4">💳</div>
+              <div className="flex justify-center mb-4">
+                <div className="w-14 h-14 rounded-2xl bg-gray-900 flex items-center justify-center">
+                  <CreditCard className="w-7 h-7 text-white" />
+                </div>
+              </div>
               <h3 className="text-xl font-bold mb-2">{t('payments.empty.title')}</h3>
               <p className="text-gray-400 mb-6">
                 {t('payments.empty.subtitle')}
@@ -155,15 +160,17 @@ export default function Payments() {
         </div>
 
         {/* Help Section */}
-        <div className="card mt-12 bg-gradient-to-r from-primary/10 to-transparent">
+        <div className="card mt-12">
           <div className="flex items-start gap-4">
-            <div className="text-4xl">💡</div>
+            <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center">
+              <Lightbulb className="w-5 h-5 text-white" />
+            </div>
             <div>
               <h3 className="font-bold mb-2">{t('payments.help.title')}</h3>
               <p className="text-gray-400 mb-4">
                 {t('payments.help.subtitle')}
               </p>
-              <button className="text-primary hover:underline">
+              <button className="text-gray-900 hover:underline">
                 {t('payments.help.cta')}
               </button>
             </div>

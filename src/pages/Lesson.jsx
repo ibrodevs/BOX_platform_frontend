@@ -8,7 +8,7 @@ import {
   Award, Star, Trophy, Sparkles, Lock, Check,
   Home, Swords, Dumbbell, GraduationCap,
   Play, Pause, Volume2, VolumeX, Maximize2, Minimize2,
-  Youtube, Film, Info
+  Youtube, Film, Info, X
 } from 'lucide-react'
 import { getLesson, updateLessonProgress } from '../services/apiService'
 import { getLessonById } from '../data/staticLessons'
@@ -414,7 +414,7 @@ export default function Lesson() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-20">
+    <div className="min-h-screen bg-white text-gray-900 py-20">
       {/* Модальное окно с видео */}
       <AnimatePresence>
         {showVideoModal && selectedVideo && (
@@ -444,7 +444,7 @@ export default function Lesson() {
                   onClick={closeVideo}
                   className="text-gray-400 hover:text-white transition"
                 >
-                  ✕
+                  <X className="w-4 h-4" />
                 </button>
               </div>
               <div className="aspect-video bg-black">

@@ -134,7 +134,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-20">
+    <div className="min-h-screen bg-white text-gray-900 py-20">
       <div className="container-custom">
         {/* Header */}
         <motion.div
@@ -146,11 +146,9 @@ export default function Dashboard() {
           <motion.div variants={fadeInUp} className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
             <div>
               <h1 className="text-4xl md:text-5xl font-black mb-2">
-                <span className="bg-gradient-to-r from-primary via-white to-primary bg-[length:200%_auto] bg-clip-text text-transparent">
-                  {t('dashboardPage.title')}
-                </span>
+                <span className="text-gray-900">{t('dashboardPage.title')}</span>
               </h1>
-              <p className="text-gray-400">{t('dashboardPage.subtitle')}</p>
+              <p className="text-gray-700">{t('dashboardPage.subtitle')}</p>
             </div>
             
             <div className="flex items-center gap-4">
@@ -171,7 +169,7 @@ export default function Dashboard() {
                 icon: Trophy,
                 title: t('dashboardPage.stats.currentRank'),
                 value: t(`dashboardPage.ranks.${stats.rank}`),
-                color: 'from-yellow-500 to-orange-500',
+                color: 'gray',
                 progress: (stats.xp / stats.nextLevelXp) * 100,
                 subtext: t('dashboardPage.stats.rankProgress', { xp: stats.xp, next: stats.nextLevelXp })
               },
@@ -179,7 +177,7 @@ export default function Dashboard() {
                 icon: ClockIcon,
                 title: t('dashboardPage.stats.streak'),
                 value: t('dashboardPage.stats.streakValue', { count: stats.streak }),
-                color: 'from-green-500 to-emerald-600',
+                color: 'gray',
                 progress: (stats.streak / 30) * 100,
                 subtext: t('dashboardPage.stats.streakRecord')
               },
@@ -187,7 +185,7 @@ export default function Dashboard() {
                 icon: TrendingUpIcon,
                 title: t('dashboardPage.stats.weeklyProgress'),
                 value: `${stats.weeklyProgress}%`,
-                color: 'from-blue-500 to-cyan-500',
+                color: 'gray',
                 progress: stats.weeklyProgress,
                 subtext: t('dashboardPage.stats.weeklyDelta', { value: 5 })
               },
@@ -195,7 +193,7 @@ export default function Dashboard() {
                 icon: Book,
                 title: t('dashboardPage.stats.totalHours'),
                 value: t('dashboardPage.stats.totalHoursValue', { hours: stats.totalHours }),
-                color: 'from-purple-500 to-pink-500',
+                color: 'gray',
                 progress: 75,
                 subtext: t('dashboardPage.stats.totalHoursGoal', { hours: 100 })
               }
@@ -204,37 +202,35 @@ export default function Dashboard() {
                 key={stat.title}
                 variants={fadeInUp}
                 whileHover={{ y: -5 }}
-                className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 p-6 group"
+                className="relative overflow-hidden rounded-2xl bg-white border border-gray-200 p-6 group"
               >
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${stat.color} rounded-full opacity-10 blur-xl group-hover:opacity-20 transition-opacity`} />
-                
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-6">
-                    <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} bg-opacity-20`}>
-                      <stat.icon className={`w-6 h-6 bg-gradient-to-br ${stat.color} bg-clip-text text-transparent`} />
+                    <div className="p-3 rounded-xl bg-gray-100">
+                      <stat.icon className="w-6 h-6 text-gray-700" />
                     </div>
-                    <TrendingUp className="w-5 h-5 text-green-500" />
+                    <TrendingUp className="w-5 h-5 text-gray-500" />
                   </div>
                   
                   <div className="mb-4">
-                    <div className="text-3xl font-black text-white mb-1">{stat.value}</div>
-                    <div className="text-sm text-gray-400">{stat.title}</div>
+                    <div className="text-3xl font-black text-gray-900 mb-1">{stat.value}</div>
+                    <div className="text-sm text-gray-700">{stat.title}</div>
                   </div>
                   
                   <div className="space-y-2">
-                    <div className="flex justify-between text-xs text-gray-500">
+                    <div className="flex justify-between text-xs text-gray-600">
                       <span>{t('dashboardPage.stats.progress')}</span>
                       <span>{Math.round(stat.progress)}%</span>
                     </div>
-                    <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${stat.progress}%` }}
                         transition={{ duration: 1, delay: index * 0.1 }}
-                        className={`h-full bg-gradient-to-r ${stat.color} rounded-full`}
+                        className="h-full bg-gray-900 rounded-full"
                       />
                     </div>
-                    <div className="text-xs text-gray-500">{stat.subtext}</div>
+                    <div className="text-xs text-gray-600">{stat.subtext}</div>
                   </div>
                 </div>
               </motion.div>
@@ -249,13 +245,13 @@ export default function Dashboard() {
             variants={fadeInUp}
             className="lg:col-span-2"
           >
-            <div className="bg-gradient-to-br from-gray-900/50 to-black rounded-2xl border border-gray-800 p-6 mb-8">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-8">
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-1">{t('dashboardPage.continueLearning.title')}</h2>
-                  <p className="text-gray-400">{t('dashboardPage.continueLearning.subtitle')}</p>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-1">{t('dashboardPage.continueLearning.title')}</h2>
+                  <p className="text-gray-700">{t('dashboardPage.continueLearning.subtitle')}</p>
                 </div>
-                <Link to="/dashboard/my-courses" className="text-primary hover:text-white transition-colors">
+                <Link to="/dashboard/my-courses" className="text-gray-900 hover:text-gray-700 transition-colors">
                   <ChevronRight className="w-6 h-6" />
                 </Link>
               </div>
@@ -272,7 +268,7 @@ export default function Dashboard() {
                       className="group"
                     >
                       <Link to={`/courses/${course.slug}`}>
-                        <div className="flex items-center gap-4 p-4 rounded-xl border border-gray-800 hover:border-primary/50 bg-gray-900/30 transition-all group-hover:bg-gray-800/50">
+                        <div className="flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-gray-300 bg-white transition-all">
                           <div className="relative flex-shrink-0">
                             <div className="w-20 h-20 rounded-lg overflow-hidden">
                               <img
@@ -282,11 +278,7 @@ export default function Dashboard() {
                               />
                             </div>
                             <div className="absolute -top-2 -right-2">
-                              <div className={`px-2 py-1 rounded-full text-xs font-bold ${
-                                course.difficulty === 'beginner' ? 'bg-green-600' :
-                                course.difficulty === 'intermediate' ? 'bg-yellow-600' :
-                                'bg-red-600'
-                              }`}>
+                              <div className="px-2 py-1 rounded-full text-xs font-bold bg-gray-900 text-white">
                                 {course.difficulty === 'beginner' ? t('courses.beginner') :
                                  course.difficulty === 'intermediate' ? t('courses.intermediate') : t('courses.advanced')}
                               </div>
@@ -295,12 +287,12 @@ export default function Dashboard() {
                           
                           <div className="flex-1">
                             <div className="flex justify-between items-start mb-2">
-                              <h3 className="font-bold text-white group-hover:text-primary transition-colors">
+                              <h3 className="font-bold text-gray-900 group-hover:text-gray-700 transition-colors">
                                 {course.title}
                               </h3>
                               <div className="flex items-center gap-2">
-                                <Clock className="w-4 h-4 text-gray-400" />
-                                <span className="text-sm text-gray-400">{course.duration}</span>
+                                <Clock className="w-4 h-4 text-gray-600" />
+                                <span className="text-sm text-gray-600">{course.duration}</span>
                               </div>
                             </div>
                             
@@ -311,7 +303,7 @@ export default function Dashboard() {
                             />
                             
                             <div className="flex items-center justify-between mt-3">
-                              <div className="flex items-center gap-4 text-sm text-gray-400">
+                              <div className="flex items-center gap-4 text-sm text-gray-600">
                                 <div className="flex items-center gap-1">
                                   <BookOpen className="w-4 h-4" />
                                   <span>{t('courses.lessonsCount', { count: course.total_lessons })}</span>
@@ -329,7 +321,7 @@ export default function Dashboard() {
                               
                               <motion.div
                                 whileHover={{ scale: 1.1 }}
-                                className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-red-600 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                                className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                               >
                                 <Play className="w-4 h-4 text-white ml-0.5" />
                               </motion.div>
@@ -342,12 +334,12 @@ export default function Dashboard() {
                 </div>
               ) : (
                 <div className="text-center py-12">
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-primary/20 to-red-600/20 flex items-center justify-center">
-                    <BookOpen className="w-10 h-10 text-primary" />
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
+                    <BookOpen className="w-10 h-10 text-gray-700" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">{t('dashboardPage.emptyCourses.title')}</h3>
-                  <p className="text-gray-400 mb-6">{t('dashboardPage.emptyCourses.subtitle')}</p>
-                  <Link to="/courses" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl font-semibold text-white hover:from-red-600 hover:to-primary transition-all">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{t('dashboardPage.emptyCourses.title')}</h3>
+                  <p className="text-gray-700 mb-6">{t('dashboardPage.emptyCourses.subtitle')}</p>
+                  <Link to="/courses" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 rounded-xl font-semibold text-white hover:bg-gray-800 transition-colors">
                     <Sparkles className="w-5 h-5" />
                     {t('dashboardPage.emptyCourses.cta')}
                   </Link>
@@ -369,15 +361,15 @@ export default function Dashboard() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -3 }}
-                  className="p-4 rounded-xl bg-gradient-to-br from-gray-900/50 to-black border border-gray-800"
+                  className="p-4 rounded-xl bg-white border border-gray-200"
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${stat.color.replace('text-', 'bg-')}/20`}>
-                      <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                    <div className="p-2 rounded-lg bg-gray-100">
+                      <stat.icon className="w-5 h-5 text-gray-700" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-white">{stat.value}</div>
-                      <div className="text-xs text-gray-400">{stat.label}</div>
+                      <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+                      <div className="text-xs text-gray-600">{stat.label}</div>
                     </div>
                   </div>
                 </motion.div>
@@ -391,33 +383,33 @@ export default function Dashboard() {
             className="space-y-6"
           >
             {/* Daily Tip */}
-            <div className="bg-gradient-to-br from-primary/10 via-black/50 to-primary/10 rounded-2xl border border-gray-800 p-6">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-xl bg-gradient-to-r from-blue-500/20 to-cyan-500/20">
-                  <Sparkles className="w-6 h-6 text-blue-500" />
+                <div className="p-2 rounded-xl bg-gray-100">
+                  <Sparkles className="w-6 h-6 text-gray-700" />
                 </div>
-                <h3 className="font-bold text-lg">{t('dashboardPage.dailyTip.title')}</h3>
+                <h3 className="font-bold text-lg text-gray-900">{t('dashboardPage.dailyTip.title')}</h3>
               </div>
-              <p className="text-gray-300 mb-4">{dailyTip}</p>
-              <div className="flex items-center justify-between text-sm text-gray-500">
+              <p className="text-gray-700 mb-4">{dailyTip}</p>
+              <div className="flex items-center justify-between text-sm text-gray-600">
                 <span>{t('dashboardPage.dailyTip.updated')}</span>
-                <button className="text-primary hover:text-white transition-colors">
+                <button className="text-gray-900 hover:text-gray-700 transition-colors">
                   {t('dashboardPage.dailyTip.showMore')}
                 </button>
               </div>
             </div>
 
             {/* Quick Actions */}
-            <div className="bg-gradient-to-br from-gray-900/50 to-black rounded-2xl border border-gray-800 p-6">
-              <h3 className="font-bold text-lg mb-4">{t('dashboardPage.quickActions.title')}</h3>
+            <div className="bg-white rounded-2xl border border-gray-200 p-6">
+              <h3 className="font-bold text-lg mb-4 text-gray-900">{t('dashboardPage.quickActions.title')}</h3>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { icon: BookOpen, label: t('dashboardPage.quickActions.myCourses'), to: '/dashboard/my-courses', color: 'from-blue-500 to-cyan-500' },
-                  { icon: User, label: t('dashboardPage.quickActions.profile'), to: '/dashboard/profile', color: 'from-purple-500 to-pink-500' },
-                  { icon: ShoppingBag, label: t('dashboardPage.quickActions.shop'), to: '/merch', color: 'from-green-500 to-emerald-500' },
-                  { icon: Trophy, label: t('dashboardPage.quickActions.orders'), to: '/dashboard/orders', color: 'from-primary to-red-600' },
-                  { icon: Download, label: t('dashboardPage.quickActions.materials'), to: '/dashboard/materials', color: 'from-yellow-500 to-orange-500' },
-                  { icon: HelpCircle, label: t('dashboardPage.quickActions.help'), to: '/help', color: 'from-red-500 to-pink-500' },
+                  { icon: BookOpen, label: t('dashboardPage.quickActions.myCourses'), to: '/dashboard/my-courses' },
+                  { icon: User, label: t('dashboardPage.quickActions.profile'), to: '/dashboard/profile' },
+                  { icon: ShoppingBag, label: t('dashboardPage.quickActions.shop'), to: '/merch' },
+                  { icon: Trophy, label: t('dashboardPage.quickActions.orders'), to: '/dashboard/orders' },
+                  { icon: Download, label: t('dashboardPage.quickActions.materials'), to: '/dashboard/materials' },
+                  { icon: HelpCircle, label: t('dashboardPage.quickActions.help'), to: '/help' },
                 ].map((action, index) => (
                   <motion.div
                     key={action.label}
@@ -428,10 +420,10 @@ export default function Dashboard() {
                   >
                     <Link
                       to={action.to}
-                      className={`block p-4 rounded-xl bg-gradient-to-br ${action.color} border border-transparent hover:border-white/20 transition-all`}
+                      className="block p-4 rounded-xl bg-gray-100 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors"
                     >
-                      <action.icon className="w-6 h-6 text-white mb-2" />
-                      <span className="text-sm font-medium text-white">{action.label}</span>
+                      <action.icon className="w-6 h-6 mb-2" />
+                      <span className="text-sm font-medium">{action.label}</span>
                     </Link>
                   </motion.div>
                 ))}
@@ -439,10 +431,10 @@ export default function Dashboard() {
             </div>
 
             {/* Monthly Goals */}
-            <div className="bg-gradient-to-br from-gray-900/50 to-black rounded-2xl border border-gray-800 p-6">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-lg">{t('dashboardPage.monthlyGoals.title')}</h3>
-                <div className="text-primary font-bold">{stats.monthlyGoals}/5</div>
+                <h3 className="font-bold text-lg text-gray-900">{t('dashboardPage.monthlyGoals.title')}</h3>
+                <div className="text-gray-900 font-bold">{stats.monthlyGoals}/5</div>
               </div>
               
               <div className="space-y-4">
@@ -456,25 +448,25 @@ export default function Dashboard() {
                   <div key={index} className="flex items-center gap-3">
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                       goal.completed 
-                        ? 'bg-green-600' 
-                        : 'bg-gray-800 border border-gray-700'
+                        ? 'bg-gray-900' 
+                        : 'bg-gray-100 border border-gray-300'
                     }`}>
                       {goal.completed && <Check className="w-4 h-4 text-white" />}
                     </div>
-                    <span className={`text-sm ${goal.completed ? 'text-gray-300' : 'text-gray-500'}`}>
+                    <span className={`text-sm ${goal.completed ? 'text-gray-900' : 'text-gray-700'}`}>
                       {goal.label}
                     </span>
                   </div>
                 ))}
               </div>
               
-              <div className="mt-6 pt-4 border-t border-gray-800">
-                <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${(stats.monthlyGoals / 5) * 100}%` }}
                     transition={{ duration: 1, delay: 0.5 }}
-                    className="h-full bg-gradient-to-r from-primary to-red-600 rounded-full"
+                    className="h-full bg-gray-900 rounded-full"
                   />
                 </div>
               </div>

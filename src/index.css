@@ -4,17 +4,17 @@
 
 @layer base {
   body {
-    @apply bg-black text-white font-sans;
+    @apply bg-slate-50 text-slate-900 font-sans;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary hover:bg-red-700 text-white font-bold py-3 px-8 rounded transition-colors duration-300;
+    @apply bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 px-6 rounded-lg transition-colors duration-200;
   }
   
   .btn-secondary {
-    @apply border-2 border-white hover:bg-white hover:text-black text-white font-bold py-3 px-8 rounded transition-all duration-300;
+    @apply border border-slate-300 hover:bg-slate-100 text-slate-900 font-semibold py-2.5 px-6 rounded-lg transition-all duration-200;
   }
   
   .container-custom {
@@ -22,10 +22,14 @@
   }
   
   .input-field {
-    @apply w-full bg-dark border border-gray-700 rounded px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors;
+    @apply w-full bg-white border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-500 focus:ring-2 focus:ring-primary/20 transition-colors;
   }
   
   .card {
-    @apply bg-dark border border-gray-800 rounded-lg overflow-hidden transition-transform hover:scale-105;
+    @apply bg-white border border-slate-200 rounded-xl overflow-hidden transition-colors shadow-sm hover:shadow-md;
+  }
+
+  .card:hover * {
+    color: inherit;
   }
 }

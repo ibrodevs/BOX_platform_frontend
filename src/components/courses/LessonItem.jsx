@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { Clock, Check, Gift } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 export default function LessonItem({ lesson, courseId, isLocked, isCompleted, index }) {
@@ -17,9 +18,22 @@ export default function LessonItem({ lesson, courseId, isLocked, isCompleted, in
       <div className="flex-1">
         <h4 className="text-lg font-bold mb-1">{lesson.title}</h4>
         <div className="flex items-center gap-4 text-sm text-gray-400">
-          <span>⏱️ {lesson.duration_minutes} {t('common.minutesShort')}</span>
-          {isCompleted && <span className="text-green-500">✓ {t('lesson.completed')}</span>}
-          {lesson.is_free && <span className="text-primary">🎁 {t('courses.free')}</span>}
+          <span className="inline-flex items-center gap-2">
+            <Clock className="w-4 h-4" />
+            {lesson.duration_minutes} {t('common.minutesShort')}
+          </span>
+          {isCompleted && (
+            <span className="text-green-500 inline-flex items-center gap-2">
+              <Check className="w-4 h-4" />
+              {t('lesson.completed')}
+            </span>
+          )}
+          {lesson.is_free && (
+            <span className="text-gray-700 inline-flex items-center gap-2">
+              <Gift className="w-4 h-4" />
+              {t('courses.free')}
+            </span>
+          )}
         </div>
       </div>
 

@@ -326,7 +326,7 @@ export default function CoursePlayer() {
   const PageIcon = currentPageData.icon
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 pt-16">
+    <div className="min-h-screen bg-white text-gray-900 pt-16">
       {/* Анимированный фон */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5"></div>

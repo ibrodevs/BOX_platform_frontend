@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { BookOpen } from 'lucide-react'
 import { getMyCourses } from '../services/apiService'
 import { useAuthStore } from '../store/authStore'
 import CourseCard from '../components/CourseCard'
@@ -74,10 +75,10 @@ export default function MyCourses() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h1 className="text-5xl md:text-7xl font-black mb-6">
-            {t('myCoursesPage.titlePrimary')} <span className="text-primary">{t('myCoursesPage.titleSecondary')}</span>
+          <h1 className="text-5xl md:text-7xl font-black mb-6 text-gray-900">
+            {t('myCoursesPage.titlePrimary')} <span className="text-gray-700">{t('myCoursesPage.titleSecondary')}</span>
           </h1>
-          <p className="text-xl text-gray-400">
+          <p className="text-xl text-gray-600">
             {t('myCoursesPage.subtitle')}
           </p>
         </motion.div>
@@ -88,8 +89,12 @@ export default function MyCourses() {
             animate={{ opacity: 1 }}
             className="text-center py-20"
           >
-            <div className="text-6xl mb-4">📚</div>
-            <p className="text-gray-400 mb-6 text-xl">
+            <div className="flex justify-center mb-4">
+              <div className="w-14 h-14 rounded-2xl bg-gray-900 flex items-center justify-center">
+                <BookOpen className="w-7 h-7 text-white" />
+              </div>
+            </div>
+            <p className="text-gray-600 mb-6 text-xl">
               {t('myCoursesPage.empty')}
             </p>
             <Link to="/courses" className="btn-primary">

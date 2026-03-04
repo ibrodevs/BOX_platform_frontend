@@ -26,14 +26,12 @@ export default function MerchCard({ item, index = 0 }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      whileHover={{ y: -10 }}
-      className="relative group bg-gradient-to-br from-gray-900/90 to-black backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col h-full"
+      whileHover={{ y: -4 }}
+      className="relative group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-gray-300 transition-all duration-300 flex flex-col h-full"
     >
-      {/* Glow Effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       
       {/* Badges */}
       <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
@@ -41,7 +39,7 @@ export default function MerchCard({ item, index = 0 }) {
           <motion.div
             initial={{ scale: 0, rotate: -45 }}
             animate={{ scale: 1, rotate: 0 }}
-            className="px-3 py-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center gap-1 shadow-lg"
+            className="px-3 py-1 rounded-full bg-gray-900 flex items-center gap-1 shadow-sm"
           >
             <Sparkles className="w-3 h-3 text-white" />
             <span className="text-xs font-bold text-white">{t('shop.badges.new')}</span>
@@ -52,7 +50,7 @@ export default function MerchCard({ item, index = 0 }) {
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 flex items-center gap-1 shadow-lg"
+            className="px-3 py-1 rounded-full bg-gray-700 flex items-center gap-1 shadow-sm"
           >
             <TrendingUp className="w-3 h-3 text-white" />
             <span className="text-xs font-bold text-white">{t('shop.badges.bestseller')}</span>
@@ -63,7 +61,7 @@ export default function MerchCard({ item, index = 0 }) {
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="px-3 py-1 rounded-full bg-gradient-to-r from-red-600 to-pink-600 flex items-center gap-1 shadow-lg"
+            className="px-3 py-1 rounded-full bg-gray-500 flex items-center gap-1 shadow-sm"
           >
             <Zap className="w-3 h-3 text-white" />
             <span className="text-xs font-bold text-white">{t('shop.badges.limited')}</span>
@@ -76,31 +74,31 @@ export default function MerchCard({ item, index = 0 }) {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsLiked(!isLiked)}
-        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center hover:bg-red-600/30 transition-colors"
+        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-gray-300 transition-colors"
       >
-        <Heart className={`w-5 h-5 ${isLiked ? 'fill-red-500 text-red-500' : 'text-white'}`} />
+        <Heart className={`w-5 h-5 ${isLiked ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
       </motion.button>
       
       {/* Discount Badge */}
       {discount > 0 && (
-        <div className="absolute top-4 right-16 z-10 px-3 py-1 rounded-full bg-gradient-to-r from-red-600 to-pink-600 shadow-lg">
+        <div className="absolute top-4 right-16 z-10 px-3 py-1 rounded-full bg-gray-900 shadow-sm">
           <span className="text-xs font-bold text-white">-{discount}%</span>
         </div>
       )}
       
       {/* Image Section */}
-      <div className="relative h-64 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center overflow-hidden">
+      <div className="relative h-64 bg-gray-50 flex items-center justify-center overflow-hidden">
         <motion.div
-          whileHover={{ scale: 1.1, rotate: 5 }}
+          whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
-          className="text-8xl"
+          className="w-16 h-16 rounded-2xl bg-gray-900 flex items-center justify-center"
         >
-          {item.image}
+          {item.icon ? <item.icon className="w-8 h-8 text-white" /> : null}
         </motion.div>
         
         {/* Stock Warning */}
         {item.stock < 10 && (
-          <div className="absolute bottom-4 left-4 px-3 py-1 rounded-lg bg-red-600/90 backdrop-blur-sm">
+          <div className="absolute bottom-4 left-4 px-3 py-1 rounded-lg bg-gray-900">
             <span className="text-xs font-semibold text-white">{t('shop.stockLeft', { count: item.stock })}</span>
           </div>
         )}
@@ -110,19 +108,19 @@ export default function MerchCard({ item, index = 0 }) {
       <div className="p-6 relative flex flex-col flex-1">
         {/* Category */}
         <div className="flex items-center gap-2 mb-3">
-          <Tag className="w-4 h-4 text-primary" />
-          <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+          <Tag className="w-4 h-4 text-gray-600" />
+          <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider">
             {t(`shop.categories.${item.category}`)}
           </span>
         </div>
         
         {/* Title */}
-        <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 min-h-[3.5rem] group-hover:text-primary transition-colors">
+        <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem] group-hover:text-gray-700 transition-colors">
           {item.name}
         </h3>
         
         {/* Description */}
-        <p className="text-sm text-gray-400 mb-4 line-clamp-2 min-h-[2.5rem]">
+        <p className="text-sm text-gray-600 mb-4 line-clamp-2 min-h-[2.5rem]">
           {item.description}
         </p>
         
@@ -130,7 +128,7 @@ export default function MerchCard({ item, index = 0 }) {
         <div className="flex items-center gap-3 mb-4">
           <div className="flex items-center gap-1">
             <Star className="w-4 h-4 text-yellow-500 fill-current" />
-            <span className="text-sm font-semibold text-white">{item.rating}</span>
+            <span className="text-sm font-semibold text-gray-900">{item.rating}</span>
           </div>
           <span className="text-xs text-gray-500">{t('shop.reviews', { count: item.reviews })}</span>
         </div>
@@ -139,7 +137,7 @@ export default function MerchCard({ item, index = 0 }) {
         <div className="mb-4">
           {item.sizes && item.sizes.length > 0 && (
             <>
-              <label className="text-xs text-gray-400 mb-2 block">{t('merch.size')}:</label>
+              <label className="text-xs text-gray-600 mb-2 block">{t('merch.size')}:</label>
               <div className="flex flex-wrap gap-2 min-h-[2rem]">
                 {item.sizes.map(size => (
                   <button
@@ -147,8 +145,8 @@ export default function MerchCard({ item, index = 0 }) {
                     onClick={() => setSelectedSize(size)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                       selectedSize === size
-                        ? 'bg-gradient-to-r from-primary to-red-600 text-white'
-                        : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                        ? 'bg-gray-900 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
                     {size}
@@ -163,7 +161,7 @@ export default function MerchCard({ item, index = 0 }) {
         <div className="mb-4">
           {item.colors && item.colors.length > 0 && (
             <>
-              <label className="text-xs text-gray-400 mb-2 block">{t('merch.color')}:</label>
+              <label className="text-xs text-gray-600 mb-2 block">{t('merch.color')}:</label>
               <div className="flex flex-wrap gap-2 min-h-[2rem]">
                 {item.colors.map(color => (
                   <button
@@ -171,8 +169,8 @@ export default function MerchCard({ item, index = 0 }) {
                     onClick={() => setSelectedColor(color)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                       selectedColor === color
-                        ? 'bg-gradient-to-r from-primary to-red-600 text-white'
-                        : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                        ? 'bg-gray-900 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
                     {color}
@@ -190,7 +188,7 @@ export default function MerchCard({ item, index = 0 }) {
         <div className="flex items-center justify-between mb-4">
           <div className="flex flex-col">
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-white">{item.price.toLocaleString()} {t('common.currency')}</span>
+              <span className="text-2xl font-bold text-gray-900">{item.price.toLocaleString()} {t('common.currency')}</span>
               {item.originalPrice && (
                 <span className="text-sm text-gray-500 line-through">{item.originalPrice.toLocaleString()} {t('common.currency')}</span>
               )}
@@ -207,8 +205,8 @@ export default function MerchCard({ item, index = 0 }) {
           disabled={inCart}
           className={`w-full py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all ${
             inCart
-              ? 'bg-green-600/20 text-green-400 border border-green-600/50'
-              : 'bg-gradient-to-r from-primary to-red-600 text-white hover:shadow-lg hover:shadow-primary/50'
+              ? 'bg-gray-100 text-gray-700 border border-gray-200'
+              : 'bg-gray-900 text-white hover:bg-gray-800'
           }`}
         >
           {inCart ? (
@@ -230,7 +228,7 @@ export default function MerchCard({ item, index = 0 }) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="absolute bottom-4 left-4 right-4 bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-lg text-center"
+            className="absolute bottom-4 left-4 right-4 bg-gray-900 text-white text-sm font-semibold py-2 px-4 rounded-lg text-center"
           >
             {t('shop.addedToCart')}
           </motion.div>
@@ -238,11 +236,11 @@ export default function MerchCard({ item, index = 0 }) {
         
         {/* Tags */}
         {item.tags && item.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-800">
+          <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-200">
             {item.tags.map(tag => (
               <span
                 key={tag}
-                className="px-2 py-1 rounded-md bg-gray-800/50 text-xs text-gray-400"
+                className="px-2 py-1 rounded-md bg-gray-100 text-xs text-gray-600"
               >
                 #{tag}
               </span>

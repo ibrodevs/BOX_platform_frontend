@@ -5,7 +5,7 @@ import {
   Play, Clock, BookOpen, Users, Star, Award, Shield, 
   CheckCircle, Lock, Download, Share2, Heart, ChevronRight,
   TrendingUp, Target, Zap, Crown, Sparkles, Calendar,
-  MessageCircle, Bookmark, BarChart3, Trophy, HelpCircle, ArrowLeft
+  MessageCircle, Bookmark, BarChart3, Trophy, HelpCircle, ArrowLeft, Gift, Mail, Smartphone
 } from 'lucide-react'
 import { getCourse, createOrder, completePayment } from '../services/apiService'
 import { useAuthStore } from '../store/authStore'
@@ -250,9 +250,11 @@ export default function CourseDetail() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-            className="text-6xl mb-4"
+            className="mb-4 flex justify-center"
           >
-            ⚡
+            <div className="w-14 h-14 rounded-2xl bg-gray-900 flex items-center justify-center">
+              <Zap className="w-7 h-7 text-white" />
+            </div>
           </motion.div>
           <p className="text-gray-400 text-lg">{t('courseDetail.loading')}</p>
         </div>
@@ -264,10 +266,14 @@ export default function CourseDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="text-6xl mb-4">🥊</div>
+          <div className="flex justify-center mb-4">
+            <div className="w-14 h-14 rounded-2xl bg-gray-900 flex items-center justify-center">
+              <Shield className="w-7 h-7 text-white" />
+            </div>
+          </div>
           <h3 className="text-2xl font-bold text-white mb-2">{t('courseDetail.notFoundTitle')}</h3>
           <p className="text-gray-400 mb-6">{t('courseDetail.notFoundSubtitle')}</p>
-          <Link to="/courses" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl font-semibold text-white hover:from-red-600 hover:to-primary transition-all">
+          <Link to="/courses" className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 rounded-xl font-semibold text-white hover:bg-slate-800 transition-all">
             <ChevronRight className="w-5 h-5 rotate-180" />
             {t('courseDetail.backToCourses')}
           </Link>
@@ -277,12 +283,12 @@ export default function CourseDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+    <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
       <section className="relative pt-20 pb-12 overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-red-600/10"></div>
-          <div className="absolute inset-0 bg-[url('https://img.freepik.com/free-vector/boxing-gloves-realistic-composition-with-dark-gradient-background-pair-red-mufflers-hanging-strings-vector-illustration_1284-78726.jpg?semt=ais_hybrid&w=740&q=80')] bg-cover bg-center opacity-5"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-200/40 via-transparent to-slate-300/30"></div>
+          <div className="absolute inset-0 bg-[url('https://img.freepik.com/free-vector/boxing-gloves-realistic-composition-with-dark-gradient-background-pair-red-mufflers-hanging-strings-vector-illustration_1284-78726.jpg?semt=ais_hybrid&w=740&q=80')] bg-cover bg-center opacity-5 grayscale"></div>
         </div>
 
         <div className="container-custom relative">
@@ -302,9 +308,9 @@ export default function CourseDetail() {
                 <span>{t('common.back')}</span>
               </button>
 
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-primary/20 to-red-600/20 rounded-full border border-primary/30 mb-6">
-                <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-primary text-sm font-semibold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-200 rounded-full border border-slate-300 mb-6">
+                <Sparkles className="w-4 h-4 text-slate-700" />
+                <span className="text-slate-800 text-sm font-semibold">
                   {course.level === 'beginner'
                     ? t('courseDetail.levels.beginner')
                     : course.level === 'intermediate'
@@ -330,10 +336,13 @@ export default function CourseDetail() {
                     </div>
                     <div className="flex-1">
                       <div className="font-bold text-white mb-1">
-                        🎁 {t('courseDetail.freeLessonsBanner', {
+                        <span className="inline-flex items-center gap-2">
+                          <Gift className="w-4 h-4" />
+                          {t('courseDetail.freeLessonsBanner', {
                           count: course.lessons.filter(l => l.is_free).length,
                           lessons: t('courses.lessonsCount', { count: course.lessons.filter(l => l.is_free).length })
                         })}
+                        </span>
                       </div>
                       <div className="text-sm text-gray-300">
                         {t('courseDetail.freeLessonsSubtitle')}
@@ -355,8 +364,12 @@ export default function CourseDetail() {
 
               {/* Instructor */}
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-red-600 flex items-center justify-center text-2xl">
-                  {course.instructor?.avatar || '🥊'}
+                <div className="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center">
+                  {course.instructor?.avatar ? (
+                    <img src={course.instructor.avatar} alt={course.instructor?.name} className="w-full h-full rounded-full object-cover" />
+                  ) : (
+                    <Shield className="w-7 h-7 text-white" />
+                  )}
                 </div>
                 <div>
                   <div className="font-bold text-white">{course.instructor?.name}</div>
@@ -415,7 +428,7 @@ export default function CourseDetail() {
                       {course.image ? (
                         <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
                       ) : (
-                        <span className="text-8xl">🥊</span>
+                        <Shield className="w-12 h-12 text-white" />
                       )}
                     </div>
                     
@@ -553,11 +566,13 @@ export default function CourseDetail() {
                               exit={{ opacity: 0, y: -10, scale: 0.95 }}
                               className="absolute right-0 mt-2 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-2 z-50"
                             >
-                              <button className="w-full px-4 py-2 text-left hover:bg-gray-800 rounded-lg transition-colors">
-                                📱 {t('courseDetail.shareCopy')}
+                              <button className="w-full px-4 py-2 text-left hover:bg-gray-800 rounded-lg transition-colors flex items-center gap-2">
+                                <Smartphone className="w-4 h-4" />
+                                {t('courseDetail.shareCopy')}
                               </button>
-                              <button className="w-full px-4 py-2 text-left hover:bg-gray-800 rounded-lg transition-colors">
-                                📧 {t('courseDetail.shareEmail')}
+                              <button className="w-full px-4 py-2 text-left hover:bg-gray-800 rounded-lg transition-colors flex items-center gap-2">
+                                <Mail className="w-4 h-4" />
+                                {t('courseDetail.shareEmail')}
                               </button>
                             </motion.div>
                           )}
@@ -573,7 +588,7 @@ export default function CourseDetail() {
       </section>
 
       {/* Navigation Tabs */}
-      <section className="sticky top-0 z-40 bg-black/80 backdrop-blur-xl border-b border-gray-800">
+      <section className="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-gray-200">
         <div className="container-custom">
           <div className="flex overflow-x-auto">
             {['overview', 'curriculum', 'instructor', 'reviews', 'faq'].map(tab => (
@@ -911,8 +926,8 @@ export default function CourseDetail() {
                 <div className="space-y-4">
                   {[1, 2, 3].map(i => (
                     <div key={i} className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800/50 transition-colors">
-                      <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                        <span className="text-2xl">🥊</span>
+                      <div className="w-16 h-16 rounded-lg bg-gray-800 flex items-center justify-center">
+                        <Shield className="w-6 h-6 text-white" />
                       </div>
                       <div>
                         <div className="font-semibold text-white text-sm mb-1">{t('courseDetail.relatedCourse', { index: i })}</div>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { MessageCircle, X, Send } from 'lucide-react'
 import { useAuthStore } from '../store/authStore'
 import { sendAIMessage } from '../services/apiService'
 import { useTranslation } from 'react-i18next'
@@ -60,9 +61,9 @@ export default function AIChat() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center shadow-2xl z-50"
+        className="fixed bottom-6 right-6 bg-gray-900 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg z-50"
       >
-        {isOpen ? '✕' : '💬'}
+        {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
       </motion.button>
 
       {/* Chat Window */}
@@ -72,11 +73,14 @@ export default function AIChat() {
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            className="fixed bottom-24 right-6 w-96 h-[500px] bg-dark border-2 border-gray-800 rounded-lg shadow-2xl z-50 flex flex-col"
+            className="fixed bottom-24 right-6 w-96 h-[500px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 flex flex-col"
           >
             {/* Header */}
-            <div className="bg-primary p-4 rounded-t-lg">
-              <h3 className="font-bold text-lg">🥊 {t('aiChat.title')}</h3>
+            <div className="bg-gray-900 p-4 rounded-t-lg text-white">
+              <h3 className="font-bold text-lg flex items-center gap-2">
+                <MessageCircle className="w-5 h-5" />
+                {t('aiChat.title')}
+              </h3>
               <p className="text-xs opacity-90">{t('aiChat.subtitle')}</p>
             </div>
 
@@ -97,8 +101,8 @@ export default function AIChat() {
                   <div
                     className={`max-w-[80%] p-3 rounded-lg ${
                       msg.role === 'user'
-                        ? 'bg-primary text-white'
-                        : 'bg-gray-800 text-white'
+                        ? 'bg-gray-900 text-white'
+                        : 'bg-gray-100 text-gray-900'
                     }`}
                   >
                     {msg.content}
@@ -108,7 +112,7 @@ export default function AIChat() {
               
               {loading && (
                 <div className="flex justify-start">
-                  <div className="bg-gray-800 p-3 rounded-lg">
+                  <div className="bg-gray-100 p-3 rounded-lg text-gray-900">
                     <span className="animate-pulse">{t('aiChat.typing')}</span>
                   </div>
                 </div>
@@ -116,7 +120,7 @@ export default function AIChat() {
             </div>
 
             {/* Input */}
-            <div className="p-4 border-t border-gray-800">
+            <div className="p-4 border-t border-gray-200">
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -124,15 +128,15 @@ export default function AIChat() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder={t('aiChat.placeholder')}
-                  className="flex-1 bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-primary"
+                  className="flex-1 bg-white border border-gray-300 rounded px-3 py-2 text-gray-900 text-sm focus:outline-none focus:border-gray-600"
                   disabled={loading}
                 />
                 <button
                   onClick={handleSend}
                   disabled={loading || !input.trim()}
-                  className="bg-primary text-white px-4 py-2 rounded font-bold hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-gray-900 text-white px-4 py-2 rounded font-bold hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  ➤
+                  <Send className="w-4 h-4" />
                 </button>
               </div>
             </div>

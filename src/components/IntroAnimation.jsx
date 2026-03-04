@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect, useRef, useMemo } from 'react'
+import { Shield } from 'lucide-react'
 
 export default function IntroAnimation({ onComplete }) {
   const [isVisible, setIsVisible] = useState(true)
@@ -68,7 +69,7 @@ export default function IntroAnimation({ onComplete }) {
           }
         }}
         ref={containerRef}
-        className="fixed inset-0 z-[9999] bg-black overflow-hidden"
+        className="fixed inset-0 z-[9999] bg-white text-gray-900 overflow-hidden"
       >
         {/* High-Tech Background Grid */}
         {showElements.includes('matrix') && (
@@ -89,9 +90,9 @@ export default function IntroAnimation({ onComplete }) {
               className="absolute inset-0 opacity-[0.02]"
               style={{
                 backgroundImage: `
-                  radial-gradient(circle at 25% 25%, rgba(209, 0, 0, 0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 75% 75%, rgba(209, 0, 0, 0.1) 0%, transparent 50%),
-                  linear-gradient(0deg, transparent 0%, rgba(255, 255, 255, 0.02) 1px, transparent 2px)
+                  radial-gradient(circle at 25% 25%, rgba(0, 0, 0, 0.06) 0%, transparent 50%),
+                  radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.06) 0%, transparent 50%),
+                  linear-gradient(0deg, transparent 0%, rgba(0, 0, 0, 0.03) 1px, transparent 2px)
                 `,
                 backgroundSize: '200px 200px, 200px 200px, 100% 20px'
               }}
@@ -124,11 +125,11 @@ export default function IntroAnimation({ onComplete }) {
                 className="absolute w-[1px] h-[1px]"
                 style={{
                   background: `radial-gradient(circle, 
-                    rgba(209, 0, 0, 1) 0%, 
-                    rgba(209, 0, 0, 0.8) 30%, 
+                    rgba(15, 23, 42, 1) 0%, 
+                    rgba(15, 23, 42, 0.8) 30%, 
                     transparent 70%)`,
                   filter: 'blur(0.5px)',
-                  boxShadow: '0 0 10px 2px rgba(209, 0, 0, 0.5)'
+                  boxShadow: '0 0 10px 2px rgba(15, 23, 42, 0.5)'
                 }}
               />
             ))}
@@ -156,8 +157,8 @@ export default function IntroAnimation({ onComplete }) {
                 className="absolute top-0 w-[0.5px] h-full"
                 style={{
                   left: `${(i * 5)}%`,
-                  background: 'linear-gradient(to bottom, transparent, #D10000, transparent)',
-                  boxShadow: '0 0 10px 1px rgba(209, 0, 0, 0.7)'
+                  background: 'linear-gradient(to bottom, transparent, #111827, transparent)',
+                  boxShadow: '0 0 10px 1px rgba(15, 23, 42, 0.7)'
                 }}
               />
             ))}
@@ -180,8 +181,8 @@ export default function IntroAnimation({ onComplete }) {
                 className="absolute left-0 h-[0.5px] w-full"
                 style={{
                   top: `${(i * 7)}%`,
-                  background: 'linear-gradient(to right, transparent, #D10000, transparent)',
-                  boxShadow: '0 0 10px 1px rgba(209, 0, 0, 0.7)'
+                  background: 'linear-gradient(to right, transparent, #111827, transparent)',
+                  boxShadow: '0 0 10px 1px rgba(15, 23, 42, 0.7)'
                 }}
               />
             ))}
@@ -221,9 +222,9 @@ export default function IntroAnimation({ onComplete }) {
                     ease: "easeInOut"
                   }
                 }}
-                className="absolute inset-0 border border-red-500/30 rounded-full"
+                className="absolute inset-0 border border-black/80 rounded-full"
                 style={{
-                  boxShadow: '0 0 100px 20px rgba(209, 0, 0, 0.2) inset'
+                  boxShadow: '0 0 100px 20px rgba(15, 23, 42, 0.2) inset'
                 }}
               />
               
@@ -245,9 +246,9 @@ export default function IntroAnimation({ onComplete }) {
                     ease: "easeInOut"
                   }
                 }}
-                className="absolute inset-[20%] border-2 border-red-600/50 rounded-full"
+                className="absolute inset-[20%] border-2 border-black/80 rounded-full"
                 style={{
-                  boxShadow: '0 0 60px 10px rgba(209, 0, 0, 0.3) inset'
+                  boxShadow: '0 0 60px 10px rgba(15, 23, 42, 0.3) inset'
                 }}
               />
             </div>
@@ -268,7 +269,7 @@ export default function IntroAnimation({ onComplete }) {
                 delay: 0.5,
                 ease: "easeOut"
               }}
-              className="absolute inset-0 m-auto w-[200px] h-[200px] bg-red-600 rounded-full blur-3xl"
+              className="absolute inset-0 m-auto w-[200px] h-[200px] bg-black/80 rounded-full blur-3xl"
             />
             
             {/* Shockwave Rings */}
@@ -285,7 +286,7 @@ export default function IntroAnimation({ onComplete }) {
                   delay: i * 0.4,
                   ease: "easeOut"
                 }}
-                className="absolute inset-0 m-auto w-[300px] h-[300px] border-2 border-red-500/40 rounded-full"
+                className="absolute inset-0 m-auto w-[300px] h-[300px] border-2 border-black/80 rounded-full"
               />
             ))}
           </>
@@ -329,7 +330,7 @@ export default function IntroAnimation({ onComplete }) {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="absolute inset-[-20px] bg-red-600/20 blur-3xl rounded-full"
+              className="absolute inset-[-20px] bg-slate-700/20 blur-3xl rounded-full"
             />
             
             <motion.div
@@ -351,7 +352,7 @@ export default function IntroAnimation({ onComplete }) {
               }}
               className="text-9xl md:text-[10rem]"
             >
-              🥊
+              <Shield className="w-24 h-24 md:w-40 md:h-40 text-white" />
             </motion.div>
           </motion.div>
 
@@ -376,7 +377,7 @@ export default function IntroAnimation({ onComplete }) {
                     ease: "backOut"
                   }
                 }}
-                className="absolute inset-[-50px] bg-gradient-to-r from-red-600/10 via-transparent to-red-600/10 blur-3xl"
+                className="absolute inset-[-50px] bg-gradient-to-r from-black/10 via-transparent to-black/10 blur-3xl"
               />
 
               <motion.h1
@@ -391,9 +392,9 @@ export default function IntroAnimation({ onComplete }) {
                 <motion.div
                   animate={{
                     textShadow: [
-                      '0 0 30px rgba(209, 0, 0, 0.3)',
-                      '0 0 60px rgba(209, 0, 0, 0.6)',
-                      '0 0 30px rgba(209, 0, 0, 0.3)'
+                      '0 0 30px rgba(0, 0, 0, 0.3)',
+                      '0 0 60px rgba(0, 0, 0, 0.6)',
+                      '0 0 30px rgba(0, 0, 0, 0.3)'
                     ]
                   }}
                   transition={{
@@ -408,7 +409,7 @@ export default function IntroAnimation({ onComplete }) {
                     transition={{ delay: 0.2, duration: 0.6 }}
                     className="relative inline-block"
                   >
-                    <span className="bg-gradient-to-r from-red-600 via-red-500 to-red-400 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-black via-gray-800 to-gray-600 bg-clip-text text-transparent">
                       BIVOL
                     </span>
                     <motion.span
@@ -422,7 +423,7 @@ export default function IntroAnimation({ onComplete }) {
                         ease: "easeInOut",
                         delay: 0.5
                       }}
-                      className="absolute bottom-0 h-[3px] bg-gradient-to-r from-transparent via-red-500 to-transparent"
+                      className="absolute bottom-0 h-[3px] bg-gradient-to-r from-transparent via-black to-transparent"
                     />
                   </motion.span>
                   
@@ -446,7 +447,7 @@ export default function IntroAnimation({ onComplete }) {
                         ease: "easeInOut",
                         delay: 0.8
                       }}
-                      className="absolute bottom-0 h-[3px] bg-gradient-to-r from-transparent via-white to-transparent"
+                      className="absolute bottom-0 h-[3px] bg-gradient-to-r from-transparent via-black to-transparent"
                     />
                   </motion.span>
                 </motion.div>
@@ -482,7 +483,7 @@ export default function IntroAnimation({ onComplete }) {
                     repeat: Infinity,
                     ease: "linear"
                   }}
-                  className="absolute right-0 top-0 h-full w-[3px] bg-red-500"
+                  className="absolute right-0 top-0 h-full w-[3px] bg-black"
                 />
               </motion.p>
               
@@ -511,7 +512,7 @@ export default function IntroAnimation({ onComplete }) {
                     className="relative h-full"
                   >
                     {/* Main Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-red-800 via-red-600 to-red-800" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-800 to-black" />
                     
                     {/* Scan Line */}
                     <motion.div
@@ -530,9 +531,9 @@ export default function IntroAnimation({ onComplete }) {
                     <motion.div
                       animate={{
                         boxShadow: [
-                          '0 0 10px rgba(209, 0, 0, 0.3)',
-                          '0 0 20px rgba(209, 0, 0, 0.6)',
-                          '0 0 10px rgba(209, 0, 0, 0.3)'
+                          '0 0 10px rgba(15, 23, 42, 0.3)',
+                          '0 0 20px rgba(15, 23, 42, 0.6)',
+                          '0 0 10px rgba(15, 23, 42, 0.3)'
                         ]
                       }}
                       transition={{
@@ -555,7 +556,7 @@ export default function IntroAnimation({ onComplete }) {
                       repeat: Infinity,
                       ease: "easeInOut"
                     }}
-                    className="text-3xl font-bold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent"
+                    className="text-3xl font-bold bg-gradient-to-r from-black via-gray-800 to-gray-600 bg-clip-text text-transparent"
                   >
                     {counter}%
                   </motion.div>
@@ -600,7 +601,7 @@ export default function IntroAnimation({ onComplete }) {
                 duration: 0.8,
                 ease: "easeOut"
               }}
-              className="absolute inset-0 m-auto bg-gradient-radial from-red-600/50 to-transparent blur-3xl"
+              className="absolute inset-0 m-auto bg-gradient-radial from-black/50 to-transparent blur-3xl"
             />
             
             {/* Multiple Shockwaves */}
@@ -617,7 +618,7 @@ export default function IntroAnimation({ onComplete }) {
                   delay: delay,
                   ease: "easeOut"
                 }}
-                className="absolute inset-0 m-auto border border-red-500/30 rounded-full"
+                className="absolute inset-0 m-auto border border-black/30 rounded-full"
                 style={{
                   width: 'min(100vh, 100vw)',
                   height: 'min(100vh, 100vw)'
@@ -645,7 +646,7 @@ export default function IntroAnimation({ onComplete }) {
                 delay: i * 0.02,
                 ease: "easeInOut"
               }}
-              className="w-1 bg-gradient-to-t from-red-600 to-red-400 rounded-full"
+              className="w-1 bg-gradient-to-t from-black/50 to-black/30 rounded-full"
             />
           ))}
         </div>

@@ -33,7 +33,7 @@ function App() {
   return (
     <Router>
       <IntroAnimation onComplete={() => setShowContent(true)} />
-      <div className={`min-h-screen bg-black flex flex-col ${showContent ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
+      <div className={`min-h-screen bg-white flex flex-col ${showContent ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
         <Navbar />
         <main className="flex-1">
           <Routes>

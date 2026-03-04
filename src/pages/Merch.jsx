@@ -4,7 +4,7 @@ import {
   ShoppingCart, Star, Package, Truck, Shield, Heart, 
   Filter, Search, TrendingUp, Zap, Crown, Sparkles,
   ChevronRight, X, ShoppingBag, Tag, Check, Clock,
-  Star as StarIcon, Award, Users, Gem
+  Star as StarIcon, Award, Users, Droplet, Layers, GraduationCap, RotateCw, Gift
 } from 'lucide-react'
 import { useCart } from '../hooks/useCart'
 import MerchCard from '../components/MerchCard'
@@ -40,7 +40,7 @@ export default function Merch() {
       description: t('shop.items.item1.description'),
       price: 2490,
       originalPrice: 3490,
-      image: '👕',
+      icon: ShoppingBag,
       category: 'clothing',
       sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
       colors: [t('shop.colors.black'), t('shop.colors.white'), t('shop.colors.red')],
@@ -59,7 +59,7 @@ export default function Merch() {
       description: t('shop.items.item2.description'),
       price: 12990,
       originalPrice: 15990,
-      image: '🥊',
+      icon: Shield,
       category: 'equipment',
       sizes: ['8 oz', '10 oz', '12 oz', '14 oz', '16 oz'],
       colors: [t('shop.colors.blackGold'), t('shop.colors.redBlack'), t('shop.colors.blueWhite')],
@@ -78,7 +78,7 @@ export default function Merch() {
       description: t('shop.items.item3.description'),
       price: 5990,
       originalPrice: 7990,
-      image: '🧥',
+      icon: ShoppingBag,
       category: 'clothing',
       sizes: ['S', 'M', 'L', 'XL'],
       colors: [t('shop.colors.black'), t('shop.colors.khakiGray'), t('shop.colors.darkBlue')],
@@ -97,7 +97,7 @@ export default function Merch() {
       description: t('shop.items.item4.description'),
       price: 1290,
       originalPrice: 1890,
-      image: '🎗️',
+      icon: Zap,
       category: 'equipment',
       sizes: [t('shop.sizes.wraps45m')],
       colors: [t('shop.colors.black'), t('shop.colors.red'), t('shop.colors.blue')],
@@ -116,7 +116,7 @@ export default function Merch() {
       description: t('shop.items.item5.description'),
       price: 3490,
       originalPrice: 4990,
-      image: '🍶',
+      icon: Droplet,
       category: 'accessories',
       sizes: ['750ml', '1000ml'],
       colors: [t('shop.colors.black'), t('shop.colors.white'), t('shop.colors.transparent')],
@@ -135,7 +135,7 @@ export default function Merch() {
       description: t('shop.items.item6.description'),
       price: 3990,
       originalPrice: 4990,
-      image: '🩳',
+      icon: Layers,
       category: 'clothing',
       sizes: ['S', 'M', 'L', 'XL'],
       colors: [t('shop.colors.black'), t('shop.colors.gray'), t('shop.colors.darkBlue')],
@@ -154,7 +154,7 @@ export default function Merch() {
       description: t('shop.items.item7.description'),
       price: 2490,
       originalPrice: 3290,
-      image: '🦷',
+      icon: Shield,
       category: 'equipment',
       sizes: ['S', 'M', 'L'],
       colors: [t('shop.colors.transparent'), t('shop.colors.multicolor')],
@@ -173,7 +173,7 @@ export default function Merch() {
       description: t('shop.items.item8.description'),
       price: 5990,
       originalPrice: 7990,
-      image: '🎒',
+      icon: Package,
       category: 'accessories',
       sizes: ['30L', '40L', '50L'],
       colors: [t('shop.colors.black'), t('shop.colors.camouflage'), t('shop.colors.gray')],
@@ -192,7 +192,7 @@ export default function Merch() {
       description: t('shop.items.item9.description'),
       price: 1990,
       originalPrice: 2990,
-      image: '🧢',
+      icon: GraduationCap,
       category: 'accessories',
       sizes: [t('shop.sizes.oneSize')],
       colors: [t('shop.colors.black'), t('shop.colors.white'), t('shop.colors.red')],
@@ -211,7 +211,7 @@ export default function Merch() {
       description: t('shop.items.item10.description'),
       price: 7990,
       originalPrice: 9990,
-      image: '🧶',
+      icon: Zap,
       category: 'clothing',
       sizes: ['S', 'M', 'L', 'XL'],
       colors: [t('shop.colors.black'), t('shop.colors.grayMelange'), t('shop.colors.burgundy')],
@@ -230,7 +230,7 @@ export default function Merch() {
       description: t('shop.items.item11.description'),
       price: 1890,
       originalPrice: 2490,
-      image: '🔄',
+      icon: RotateCw,
       category: 'equipment',
       sizes: [t('shop.sizes.adjustable')],
       colors: [t('shop.colors.black'), t('shop.colors.red'), t('shop.colors.blue')],
@@ -249,7 +249,7 @@ export default function Merch() {
       description: t('shop.items.item12.description'),
       price: 9990,
       originalPrice: 14990,
-      image: '🎁',
+      icon: Gift,
       category: 'sets',
       sizes: [t('shop.sizes.set')],
       colors: [t('shop.colors.blackGold')],
@@ -266,10 +266,10 @@ export default function Merch() {
 
   const categories = [
     { id: 'all', label: t('shop.categories.all'), icon: ShoppingBag, count: 12 },
-    { id: 'clothing', label: t('shop.categories.clothing'), icon: '👕', count: 4 },
-    { id: 'equipment', label: t('shop.categories.equipment'), icon: '🥊', count: 5 },
-    { id: 'accessories', label: t('shop.categories.accessories'), icon: '🧢', count: 3 },
-    { id: 'sets', label: t('shop.categories.sets'), icon: '🎁', count: 1 }
+    { id: 'clothing', label: t('shop.categories.clothing'), icon: ShoppingBag, count: 4 },
+    { id: 'equipment', label: t('shop.categories.equipment'), icon: Shield, count: 5 },
+    { id: 'accessories', label: t('shop.categories.accessories'), icon: Package, count: 3 },
+    { id: 'sets', label: t('shop.categories.sets'), icon: Gift, count: 1 }
   ]
 
   const sortOptions = [
@@ -333,7 +333,7 @@ export default function Merch() {
       type: 'success',
       title: t('shop.notification.addedTitle'),
       message: item.name,
-      image: item.image
+      icon: item.icon
     })
   }
 
@@ -352,34 +352,9 @@ export default function Merch() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+    <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-red-600/10"></div>
-          {/* Animated Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-32 h-32 border border-primary/20 rounded-full"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.1, 0.3, 0.1],
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: Math.random() * 2,
-                }}
-              />
-            ))}
-          </div>
-        </div>
+      <section className="relative py-16">
 
         <div className="container-custom relative z-10">
           <motion.div
@@ -389,25 +364,23 @@ export default function Merch() {
             className="text-center mb-12"
           >
             <motion.div variants={fadeInUp} className="inline-block mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-red-600/20 rounded-full border border-primary/30">
-                <Crown className="w-4 h-4 text-yellow-500" />
-                <span className="text-yellow-500 text-sm font-semibold">{t('shop.hero.badge')}</span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg border border-gray-200">
+                <Crown className="w-4 h-4 text-gray-700" />
+                <span className="text-gray-700 text-sm font-semibold">{t('shop.hero.badge')}</span>
               </span>
             </motion.div>
 
             <motion.h1 
               variants={fadeInUp}
-              className="text-5xl md:text-7xl font-black mb-6"
+              className="text-4xl md:text-6xl font-black mb-6"
             >
-              <span className="block text-white">{t('shop.hero.titleLine1')}</span>
-              <span className="bg-gradient-to-r from-primary via-yellow-500 to-primary bg-[length:200%_auto] bg-clip-text text-transparent">
-                {t('shop.hero.titleLine2')}
-              </span>
+              <span className="block text-gray-900">{t('shop.hero.titleLine1')}</span>
+              <span className="block text-gray-700">{t('shop.hero.titleLine2')}</span>
             </motion.h1>
 
             <motion.p 
               variants={fadeInUp}
-              className="text-xl text-gray-400 max-w-2xl mx-auto mb-10"
+              className="text-lg text-gray-600 max-w-2xl mx-auto mb-10"
             >
               {t('shop.hero.subtitle')}
             </motion.p>
@@ -424,11 +397,11 @@ export default function Merch() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder={t('shop.searchPlaceholder')}
-                  className="w-full pl-14 pr-6 py-4 bg-black/50 border border-gray-800 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors backdrop-blur-xl"
+                  className="w-full pl-14 pr-6 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-gray-600 transition-colors"
                 />
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
                 >
                   <Filter className="w-5 h-5" />
                   <span>{t('common.filter')}</span>
@@ -449,7 +422,7 @@ export default function Merch() {
             className="overflow-hidden"
           >
             <div className="container-custom mb-12">
-              <div className="bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-gray-800 p-6">
+              <div className="bg-white rounded-2xl border border-gray-200 p-6">
                 <div className="flex flex-col lg:flex-row gap-8">
                   {/* Categories */}
                   <div className="flex-1">
@@ -466,11 +439,11 @@ export default function Merch() {
                           onClick={() => setSelectedCategory(category.id)}
                           className={`flex flex-col items-center justify-center p-4 rounded-xl border transition-all ${
                             selectedCategory === category.id
-                              ? 'bg-gradient-to-br from-primary to-red-600 border-primary text-white'
-                              : 'bg-gray-800/50 border-gray-700 text-gray-400 hover:border-primary/50'
+                              ? 'bg-gray-900 border-gray-900 text-white'
+                              : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400'
                           }`}
                         >
-                          <span className="text-2xl mb-2">{category.icon}</span>
+                          <category.icon className="w-6 h-6 mb-2" />
                           <span className="text-sm font-medium">{category.label}</span>
                           <span className="text-xs mt-1 opacity-75">{category.count}</span>
                         </motion.button>
@@ -493,7 +466,7 @@ export default function Merch() {
                         step="100"
                         value={priceRange[0]}
                         onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1]])}
-                        className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary"
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gray-900"
                       />
                       <input
                         type="range"
@@ -502,21 +475,21 @@ export default function Merch() {
                         step="100"
                         value={priceRange[1]}
                         onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                        className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary"
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gray-900"
                       />
                       <div className="flex items-center justify-center gap-2">
                         <input
                           type="number"
                           value={priceRange[0]}
                           onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1]])}
-                          className="w-24 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-center"
+                          className="w-24 px-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 text-center"
                         />
                         <span className="text-gray-400">—</span>
                         <input
                           type="number"
                           value={priceRange[1]}
                           onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                          className="w-24 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-center"
+                          className="w-24 px-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 text-center"
                         />
                       </div>
                     </div>
@@ -535,8 +508,8 @@ export default function Merch() {
                         onClick={() => setSortBy(option.id)}
                         className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${
                           sortBy === option.id
-                            ? 'bg-primary border-primary text-white'
-                            : 'bg-gray-800 border-gray-700 text-gray-400 hover:border-primary/50'
+                            ? 'bg-gray-900 border-gray-900 text-white'
+                            : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400'
                         }`}
                       >
                         {typeof option.icon === 'string' ? (
@@ -565,15 +538,15 @@ export default function Merch() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-6"
+              className="bg-white border border-gray-200 rounded-2xl p-6"
             >
               <div className="flex items-center gap-4">
-                <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color.replace('text-', 'from-')}/20 to-transparent`}>
-                  <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                <div className="p-3 rounded-xl bg-gray-100">
+                  <stat.icon className="w-6 h-6 text-gray-700" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-white">{stat.value}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
+                  <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+                  <div className="text-sm text-gray-600">{stat.label}</div>
                 </div>
               </div>
             </motion.div>
@@ -586,18 +559,18 @@ export default function Merch() {
         {/* Results Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <h2 className="text-3xl font-bold text-white">
+            <h2 className="text-3xl font-bold text-gray-900">
               {t('shop.results.items', { count: sortedItems.length })}
             </h2>
             {searchTerm && (
-              <p className="text-gray-400">
-                {t('shop.results.byQuery')} <span className="text-primary">{searchTerm}</span>
+              <p className="text-gray-600">
+                {t('shop.results.byQuery')} <span className="text-gray-900">{searchTerm}</span>
               </p>
             )}
           </div>
           
           <div className="flex items-center gap-4">
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-gray-600">
               {t('shop.results.shown', { shown: sortedItems.length, total: merchItems.length })}
             </div>
           </div>
@@ -628,11 +601,11 @@ export default function Merch() {
             className="text-center py-20"
           >
             <div className="max-w-md mx-auto">
-              <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-primary/20 to-red-600/20 flex items-center justify-center">
-                <ShoppingBag className="w-12 h-12 text-primary" />
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
+                <ShoppingBag className="w-10 h-10 text-gray-700" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">{t('shop.empty.title')}</h3>
-              <p className="text-gray-400 mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">{t('shop.empty.title')}</h3>
+              <p className="text-gray-600 mb-6">
                 {searchTerm 
                   ? t('shop.empty.withQuery', { query: searchTerm })
                   : t('shop.empty.noFilters')
@@ -641,7 +614,7 @@ export default function Merch() {
               <div className="flex flex-wrap justify-center gap-4">
                 <button
                   onClick={() => setSearchTerm('')}
-                  className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-white font-medium transition-colors"
+                  className="px-6 py-3 bg-gray-900 hover:bg-gray-800 rounded-lg text-white font-medium transition-colors"
                 >
                   {t('shop.empty.resetSearch')}
                 </button>
@@ -651,7 +624,7 @@ export default function Merch() {
                     setSelectedCategory('all')
                     setPriceRange([0, 20000])
                   }}
-                  className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl text-white font-medium hover:from-red-600 hover:to-primary transition-all"
+                  className="px-6 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 font-medium hover:border-gray-400 transition-all"
                 >
                   {t('shop.empty.viewAll')}
                 </button>
@@ -665,36 +638,36 @@ export default function Merch() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 p-8 rounded-2xl bg-gradient-to-r from-primary/10 via-black/50 to-primary/10 border border-gray-800"
+          className="mt-16 p-8 rounded-2xl bg-gray-50 border border-gray-200"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-gradient-to-r from-blue-500/20 to-cyan-500/20">
-                <Package className="w-8 h-8 text-blue-500" />
+              <div className="p-3 rounded-xl bg-gray-100">
+                <Package className="w-8 h-8 text-gray-700" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-2">{t('shop.features.freeDeliveryTitle')}</h3>
-                <p className="text-gray-400 text-sm">{t('shop.features.freeDeliveryDesc')}</p>
+                <h3 className="font-bold text-lg mb-2 text-gray-900">{t('shop.features.freeDeliveryTitle')}</h3>
+                <p className="text-gray-600 text-sm">{t('shop.features.freeDeliveryDesc')}</p>
               </div>
             </div>
             
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-gradient-to-r from-green-500/20 to-emerald-500/20">
-                <Shield className="w-8 h-8 text-green-500" />
+              <div className="p-3 rounded-xl bg-gray-100">
+                <Shield className="w-8 h-8 text-gray-700" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-2">{t('shop.features.qualityTitle')}</h3>
-                <p className="text-gray-400 text-sm">{t('shop.features.qualityDesc')}</p>
+                <h3 className="font-bold text-lg mb-2 text-gray-900">{t('shop.features.qualityTitle')}</h3>
+                <p className="text-gray-600 text-sm">{t('shop.features.qualityDesc')}</p>
               </div>
             </div>
             
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-gradient-to-r from-yellow-500/20 to-orange-500/20">
-                <Award className="w-8 h-8 text-yellow-500" />
+              <div className="p-3 rounded-xl bg-gray-100">
+                <Award className="w-8 h-8 text-gray-700" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-2">{t('shop.features.originalTitle')}</h3>
-                <p className="text-gray-400 text-sm">{t('shop.features.originalDesc')}</p>
+                <h3 className="font-bold text-lg mb-2 text-gray-900">{t('shop.features.originalTitle')}</h3>
+                <p className="text-gray-600 text-sm">{t('shop.features.originalDesc')}</p>
               </div>
             </div>
           </div>
@@ -711,27 +684,31 @@ export default function Merch() {
             exit={{ opacity: 0, x: 100 }}
             className="fixed bottom-6 right-6 z-50"
           >
-            <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl shadow-2xl overflow-hidden min-w-80">
+            <div className="bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden min-w-80">
               <div className="p-4">
                 <div className="flex items-start gap-4">
-                  <div className="text-3xl">{notification.image}</div>
+                  <div className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center">
+                    {notification.icon && (
+                      <notification.icon className="w-5 h-5 text-white" />
+                    )}
+                  </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <Check className="w-4 h-4 text-green-500" />
-                      <span className="font-bold text-white">{notification.title}</span>
+                      <span className="font-bold text-gray-900">{notification.title}</span>
                     </div>
-                    <p className="text-sm text-gray-300">{notification.message}</p>
+                    <p className="text-sm text-gray-700">{notification.message}</p>
                     <p className="text-xs text-gray-500 mt-2">{t('shop.notification.goToCart')}</p>
                   </div>
                   <button
                     onClick={() => setNotification(null)}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-gray-700 transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
                 </div>
               </div>
-              <div className="h-1 bg-gradient-to-r from-primary to-green-500"></div>
+              <div className="h-1 bg-gray-200"></div>
             </div>
           </motion.div>
         )}

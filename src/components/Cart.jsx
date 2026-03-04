@@ -100,18 +100,18 @@ export default function Cart({ isOpen, onClose }) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-gradient-to-br from-gray-900 to-black border-l border-gray-800 shadow-2xl z-50 flex flex-col"
+            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-slate-900 border-l border-slate-800 shadow-2xl z-50 flex flex-col"
           >
             {/* Header */}
-            <div className="p-6 border-b border-gray-800">
+            <div className="p-6 border-b border-slate-800">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-red-600 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center">
                     <ShoppingBag className="w-5 h-5 text-white" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-white">{t('cart.title')}</h2>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-slate-400">
                       {t('shop.results.items', { count: getTotalItems() })}
                     </p>
                   </div>
@@ -122,9 +122,9 @@ export default function Cart({ isOpen, onClose }) {
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={onClose}
-                  className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors"
                 >
-                  <X className="w-5 h-5 text-gray-400" />
+                  <X className="w-5 h-5 text-slate-400" />
                 </motion.button>
               </div>
 
@@ -134,7 +134,7 @@ export default function Cart({ isOpen, onClose }) {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={clearCart}
-                  className="w-full mt-3 px-4 py-2 rounded-lg bg-red-600/10 border border-red-600/30 text-red-400 text-sm font-semibold hover:bg-red-600/20 transition-colors flex items-center justify-center gap-2"
+                  className="w-full mt-3 px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-sm font-semibold hover:bg-slate-700 transition-colors flex items-center justify-center gap-2"
                 >
                   <Trash2 className="w-4 h-4" />
                   {t('cart.clear')}
@@ -150,18 +150,18 @@ export default function Cart({ isOpen, onClose }) {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                    className="w-24 h-24 rounded-full bg-gray-800/50 flex items-center justify-center mb-4"
+                    className="w-24 h-24 rounded-full bg-slate-800/60 flex items-center justify-center mb-4"
                   >
-                    <Package className="w-12 h-12 text-gray-600" />
+                    <Package className="w-12 h-12 text-slate-500" />
                   </motion.div>
-                  <h3 className="text-lg font-semibold text-gray-400 mb-2">{t('cart.empty')}</h3>
-                  <p className="text-sm text-gray-600 mb-6">
+                  <h3 className="text-lg font-semibold text-slate-300 mb-2">{t('cart.empty')}</h3>
+                  <p className="text-sm text-slate-500 mb-6">
                     {t('cart.emptySubtitle')}
                   </p>
                   <Link
                     to="/merch"
                     onClick={onClose}
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-red-600 text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all"
+                    className="px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-slate-100 transition-all"
                   >
                     {t('cart.goToShop')}
                   </Link>
@@ -174,12 +174,16 @@ export default function Cart({ isOpen, onClose }) {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -50 }}
                     transition={{ delay: index * 0.05 }}
-                    className="bg-gray-800/30 rounded-xl p-4 border border-gray-800 hover:border-gray-700 transition-colors"
+                    className="bg-slate-800/40 rounded-xl p-4 border border-slate-800 hover:border-slate-700 transition-colors"
                   >
                     <div className="flex gap-4">
                       {/* Item Image */}
-                      <div className="w-20 h-20 rounded-lg bg-gradient-to-br from-gray-900 to-black flex items-center justify-center text-4xl flex-shrink-0">
-                        {item.image}
+                      <div className="w-20 h-20 rounded-lg bg-white flex items-center justify-center flex-shrink-0">
+                        {item.icon ? (
+                          <item.icon className="w-8 h-8 text-slate-800" />
+                        ) : (
+                          <span className="text-3xl">{item.image}</span>
+                        )}
                       </div>
 
                       {/* Item Details */}
@@ -191,12 +195,12 @@ export default function Cart({ isOpen, onClose }) {
                         {/* Size & Color */}
                         <div className="flex gap-2 mb-2">
                           {item.selectedSize && (
-                            <span className="px-2 py-0.5 rounded bg-gray-900 text-xs text-gray-400">
+                            <span className="px-2 py-0.5 rounded bg-slate-900 text-xs text-slate-300">
                               {item.selectedSize}
                             </span>
                           )}
                           {item.selectedColor && (
-                            <span className="px-2 py-0.5 rounded bg-gray-900 text-xs text-gray-400">
+                            <span className="px-2 py-0.5 rounded bg-slate-900 text-xs text-slate-300">
                               {item.selectedColor}
                             </span>
                           )}
@@ -215,9 +219,9 @@ export default function Cart({ isOpen, onClose }) {
                               whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 0.9 }}
                               onClick={() => updateQuantity(item.id, item.quantity - 1, item.selectedSize, item.selectedColor)}
-                              className="w-7 h-7 rounded-lg bg-gray-900 hover:bg-gray-800 flex items-center justify-center transition-colors"
+                              className="w-7 h-7 rounded-lg bg-slate-900 hover:bg-slate-800 flex items-center justify-center transition-colors"
                             >
-                              <Minus className="w-3 h-3 text-gray-400" />
+                              <Minus className="w-3 h-3 text-slate-300" />
                             </motion.button>
 
                             {/* Quantity */}
@@ -231,9 +235,9 @@ export default function Cart({ isOpen, onClose }) {
                               whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 0.9 }}
                               onClick={() => updateQuantity(item.id, item.quantity + 1, item.selectedSize, item.selectedColor)}
-                              className="w-7 h-7 rounded-lg bg-gray-900 hover:bg-gray-800 flex items-center justify-center transition-colors"
+                              className="w-7 h-7 rounded-lg bg-slate-900 hover:bg-slate-800 flex items-center justify-center transition-colors"
                             >
-                              <Plus className="w-3 h-3 text-gray-400" />
+                              <Plus className="w-3 h-3 text-slate-300" />
                             </motion.button>
 
                             {/* Remove */}
@@ -242,9 +246,9 @@ export default function Cart({ isOpen, onClose }) {
                               whileHover={{ scale: 1.1, rotate: 15 }}
                               whileTap={{ scale: 0.9 }}
                               onClick={() => removeItem(item.id, item.selectedSize, item.selectedColor)}
-                              className="ml-2 w-7 h-7 rounded-lg bg-red-600/20 hover:bg-red-600/30 flex items-center justify-center transition-colors"
+                              className="ml-2 w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors"
                             >
-                              <Trash2 className="w-3 h-3 text-red-400" />
+                              <Trash2 className="w-3 h-3 text-slate-400" />
                             </motion.button>
                           </div>
                         </div>
@@ -257,10 +261,10 @@ export default function Cart({ isOpen, onClose }) {
 
             {/* Footer - Checkout */}
             {items.length > 0 && (
-              <div className="p-6 border-t border-gray-800 bg-black/50">
+              <div className="p-6 border-t border-slate-800 bg-slate-900">
                 {/* Total */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-gray-400">{t('cart.total')}:</span>
+                  <span className="text-slate-400">{t('cart.total')}:</span>
                   <span className="text-2xl font-bold text-white">
                     {getTotalPrice().toLocaleString()} {t('common.currency')}
                   </span>
@@ -272,14 +276,14 @@ export default function Cart({ isOpen, onClose }) {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleCheckout}
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-red-600 text-white font-bold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/50 transition-all relative overflow-hidden group"
+                  className="w-full py-4 rounded-xl bg-white text-slate-900 font-bold flex items-center justify-center gap-2 hover:bg-slate-100 transition-all relative overflow-hidden group"
                 >
                   <span>{t('cart.checkout')}</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   
                   {/* Shine effect */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent"
                     animate={{
                       x: ['-100%', '100%'],
                     }}
@@ -295,7 +299,7 @@ export default function Cart({ isOpen, onClose }) {
                 <Link
                   to="/merch"
                   onClick={onClose}
-                  className="block mt-3 text-center text-sm text-gray-400 hover:text-white transition-colors"
+                  className="block mt-3 text-center text-sm text-slate-400 hover:text-white transition-colors"
                 >
                   {t('cart.continue')}
                 </Link>
@@ -314,26 +318,26 @@ export default function Cart({ isOpen, onClose }) {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div 
-                  className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                  className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Header */}
-                  <div className="p-6 border-b border-gray-800 flex items-center justify-between sticky top-0 bg-gray-900/95 backdrop-blur-lg z-10">
+                  <div className="p-6 border-b border-slate-800 flex items-center justify-between sticky top-0 bg-slate-900/95 backdrop-blur-lg z-10">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-red-600 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center">
                         <CreditCard className="w-5 h-5 text-white" />
                       </div>
                       <div>
                         <h2 className="text-xl font-bold text-white">{t('checkout.title')}</h2>
-                        <p className="text-sm text-gray-400">{t('checkout.subtitle')}</p>
+                        <p className="text-sm text-slate-400">{t('checkout.subtitle')}</p>
                       </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => setShowCheckout(false)}
-                      className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+                      className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors"
                     >
-                      <X className="w-5 h-5 text-gray-400" />
+                      <X className="w-5 h-5 text-slate-400" />
                     </button>
                   </div>
 
@@ -342,12 +346,12 @@ export default function Cart({ isOpen, onClose }) {
                     {/* Контактные данные */}
                     <div>
                       <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                        <User className="w-5 h-5 text-primary" />
+                        <User className="w-5 h-5 text-slate-300" />
                         {t('checkout.contactTitle')}
                       </h3>
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm font-semibold text-gray-400 mb-2">
+                          <label className="block text-sm font-semibold text-slate-400 mb-2">
                             {t('checkout.fullName')} *
                           </label>
                           <input
@@ -356,12 +360,12 @@ export default function Cart({ isOpen, onClose }) {
                             value={formData.name}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
+                            className="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-slate-700 text-white focus:border-slate-500 focus:outline-none transition-colors"
                             placeholder={t('checkout.fullNamePlaceholder')}
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-semibold text-gray-400 mb-2">
+                          <label className="block text-sm font-semibold text-slate-400 mb-2">
                             {t('checkout.phone')} *
                           </label>
                           <input
@@ -370,7 +374,7 @@ export default function Cart({ isOpen, onClose }) {
                             value={formData.phone}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
+                            className="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-slate-700 text-white focus:border-slate-500 focus:outline-none transition-colors"
                             placeholder={t('checkout.phonePlaceholder')}
                           />
                         </div>
@@ -380,12 +384,12 @@ export default function Cart({ isOpen, onClose }) {
                     {/* Адрес доставки */}
                     <div>
                       <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                        <MapPin className="w-5 h-5 text-primary" />
+                        <MapPin className="w-5 h-5 text-slate-300" />
                         {t('checkout.deliveryAddressTitle')}
                       </h3>
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm font-semibold text-gray-400 mb-2">
+                          <label className="block text-sm font-semibold text-slate-400 mb-2">
                             {t('checkout.city')} *
                           </label>
                           <select
@@ -393,7 +397,7 @@ export default function Cart({ isOpen, onClose }) {
                             value={formData.city}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
+                            className="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-slate-700 text-white focus:border-slate-500 focus:outline-none transition-colors"
                           >
                             <option value={t('checkout.cities.bishkek')}>{t('checkout.cities.bishkek')}</option>
                             <option value={t('checkout.cities.osh')}>{t('checkout.cities.osh')}</option>
@@ -404,7 +408,7 @@ export default function Cart({ isOpen, onClose }) {
                           </select>
                         </div>
                         <div>
-                          <label className="block text-sm font-semibold text-gray-400 mb-2">
+                          <label className="block text-sm font-semibold text-slate-400 mb-2">
                             {t('checkout.address')} *
                           </label>
                           <textarea
@@ -413,7 +417,7 @@ export default function Cart({ isOpen, onClose }) {
                             onChange={handleInputChange}
                             required
                             rows="3"
-                            className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors resize-none"
+                            className="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-slate-700 text-white focus:border-slate-500 focus:outline-none transition-colors resize-none"
                             placeholder={t('checkout.addressPlaceholder')}
                           />
                         </div>
@@ -423,12 +427,12 @@ export default function Cart({ isOpen, onClose }) {
                     {/* Данные карты */}
                     <div>
                       <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                        <CreditCard className="w-5 h-5 text-primary" />
+                        <CreditCard className="w-5 h-5 text-slate-300" />
                         {t('checkout.paymentTitle')}
                       </h3>
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm font-semibold text-gray-400 mb-2">
+                          <label className="block text-sm font-semibold text-slate-400 mb-2">
                             {t('checkout.cardNumber')} *
                           </label>
                           <input
@@ -438,13 +442,13 @@ export default function Cart({ isOpen, onClose }) {
                             onChange={handleInputChange}
                             required
                             maxLength="19"
-                            className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
+                            className="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-slate-700 text-white focus:border-slate-500 focus:outline-none transition-colors"
                             placeholder={t('checkout.cardNumberPlaceholder')}
                           />
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-sm font-semibold text-gray-400 mb-2">
+                            <label className="block text-sm font-semibold text-slate-400 mb-2">
                               {t('checkout.expiryDate')} *
                             </label>
                             <input
@@ -454,12 +458,12 @@ export default function Cart({ isOpen, onClose }) {
                               onChange={handleInputChange}
                               required
                               maxLength="5"
-                              className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
+                              className="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-slate-700 text-white focus:border-slate-500 focus:outline-none transition-colors"
                               placeholder={t('checkout.expiryPlaceholder')}
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-semibold text-gray-400 mb-2">
+                            <label className="block text-sm font-semibold text-slate-400 mb-2">
                               {t('checkout.cvv')} *
                             </label>
                             <input
@@ -469,7 +473,7 @@ export default function Cart({ isOpen, onClose }) {
                               onChange={handleInputChange}
                               required
                               maxLength="3"
-                              className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:border-primary focus:outline-none transition-colors"
+                              className="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-slate-700 text-white focus:border-slate-500 focus:outline-none transition-colors"
                               placeholder={t('checkout.cvvPlaceholder')}
                             />
                           </div>
@@ -478,19 +482,19 @@ export default function Cart({ isOpen, onClose }) {
                     </div>
 
                     {/* Итого */}
-                    <div className="bg-gradient-to-r from-primary/10 to-transparent rounded-lg p-4 border border-primary/20">
+                    <div className="bg-slate-800/60 rounded-lg p-4 border border-slate-700">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-gray-400">{t('checkout.items', { count: getTotalItems() })}</span>
+                        <span className="text-slate-400">{t('checkout.items', { count: getTotalItems() })}</span>
                         <span className="text-white font-semibold">{getTotalPrice().toLocaleString()} {t('common.currency')}</span>
                       </div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-gray-400">{t('checkout.delivery')}:</span>
-                        <span className="text-green-400 font-semibold">{t('checkout.freeDelivery')}</span>
+                        <span className="text-slate-400">{t('checkout.delivery')}:</span>
+                        <span className="text-slate-200 font-semibold">{t('checkout.freeDelivery')}</span>
                       </div>
-                      <div className="border-t border-gray-700 my-3"></div>
+                      <div className="border-t border-slate-700 my-3"></div>
                       <div className="flex items-center justify-between">
                         <span className="text-lg font-bold text-white">{t('checkout.totalToPay')}</span>
-                        <span className="text-2xl font-black text-primary">{getTotalPrice().toLocaleString()} {t('common.currency')}</span>
+                        <span className="text-2xl font-black text-white">{getTotalPrice().toLocaleString()} {t('common.currency')}</span>
                       </div>
                     </div>
 
@@ -499,20 +503,20 @@ export default function Cart({ isOpen, onClose }) {
                       <button
                         type="button"
                         onClick={() => setShowCheckout(false)}
-                        className="flex-1 py-3 rounded-xl bg-gray-800 text-white font-semibold hover:bg-gray-700 transition-colors"
+                        className="flex-1 py-3 rounded-xl bg-slate-800 text-white font-semibold hover:bg-slate-700 transition-colors"
                       >
                         {t('checkout.cancel')}
                       </button>
                       <button
                         type="submit"
                         disabled={isProcessing}
-                        className="flex-1 py-3 rounded-xl bg-gradient-to-r from-primary to-red-600 text-white font-bold hover:shadow-lg hover:shadow-primary/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex-1 py-3 rounded-xl bg-white text-slate-900 font-bold hover:bg-slate-100 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isProcessing ? t('checkout.processing') : t('checkout.pay')}
                       </button>
                     </div>
 
-                    <p className="text-xs text-center text-gray-500">
+                    <p className="text-xs text-center text-slate-500">
                       {t('checkout.terms')}
                     </p>
                   </form>
@@ -531,12 +535,12 @@ export default function Cart({ isOpen, onClose }) {
                 className="fixed inset-0 flex items-center justify-center z-[70] p-4"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="bg-gradient-to-br from-gray-900 to-black border border-green-600/30 rounded-2xl max-w-md w-full p-8 text-center shadow-2xl">
+                <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-8 text-center shadow-2xl">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
-                    className="w-20 h-20 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center mx-auto mb-6"
+                    className="w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-6"
                   >
                     <CheckCircle className="w-10 h-10 text-white" />
                   </motion.div>
@@ -547,12 +551,12 @@ export default function Cart({ isOpen, onClose }) {
                     transition={{ delay: 0.4 }}
                   >
                     <h2 className="text-2xl font-bold text-white mb-3">{t('checkout.successTitle')}</h2>
-                    <p className="text-gray-400 mb-6">
+                    <p className="text-slate-400 mb-6">
                       {t('checkout.successSubtitle')}
                     </p>
-                    <div className="bg-green-600/10 rounded-lg p-4 mb-6">
-                      <p className="text-sm text-gray-400 mb-1">{t('checkout.orderAmountLabel')}</p>
-                      <p className="text-3xl font-black text-green-400">{getTotalPrice().toLocaleString()} {t('common.currency')}</p>
+                    <div className="bg-slate-800/60 rounded-lg p-4 mb-6">
+                      <p className="text-sm text-slate-400 mb-1">{t('checkout.orderAmountLabel')}</p>
+                      <p className="text-3xl font-black text-white">{getTotalPrice().toLocaleString()} {t('common.currency')}</p>
                     </div>
                     <button
                       type="button"
@@ -560,7 +564,7 @@ export default function Cart({ isOpen, onClose }) {
                         setShowSuccess(false)
                         onClose()
                       }}
-                      className="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-red-600 text-white font-bold hover:shadow-lg hover:shadow-primary/50 transition-all"
+                      className="w-full py-3 rounded-xl bg-white text-slate-900 font-bold hover:bg-slate-100 transition-all"
                     >
                       {t('checkout.successButton')}
                     </button>

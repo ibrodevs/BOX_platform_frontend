@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { 
   Facebook, Instagram, Youtube, Twitter, MessageCircle, 
   Mail, Phone, MapPin, Shield, Award, Globe, Sparkles,
-  ChevronRight, Heart, Send, Trophy, Crown
+  ChevronRight, Heart, Send, Trophy, Crown, Smartphone, Bot
 } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -23,11 +23,11 @@ export default function Footer() {
   }
 
   const socialLinks = [
-    { icon: Instagram, href: '#', label: t('footer.social.instagram'), color: 'from-purple-600 to-pink-600' },
-    { icon: Youtube, href: '#', label: t('footer.social.youtube'), color: 'from-red-600 to-red-700' },
-    { icon: Facebook, href: '#', label: t('footer.social.facebook'), color: 'from-blue-600 to-blue-700' },
-    { icon: Twitter, href: '#', label: t('footer.social.twitter'), color: 'from-sky-500 to-blue-500' },
-    { icon: MessageCircle, href: '#', label: t('footer.social.telegram'), color: 'from-blue-400 to-blue-500' },
+    { icon: Instagram, href: '#', label: t('footer.social.instagram'), color: 'from-slate-700 to-slate-800' },
+    { icon: Youtube, href: '#', label: t('footer.social.youtube'), color: 'from-slate-700 to-slate-800' },
+    { icon: Facebook, href: '#', label: t('footer.social.facebook'), color: 'from-slate-700 to-slate-800' },
+    { icon: Twitter, href: '#', label: t('footer.social.twitter'), color: 'from-slate-700 to-slate-800' },
+    { icon: MessageCircle, href: '#', label: t('footer.social.telegram'), color: 'from-slate-700 to-slate-800' },
   ]
 
   const footerLinks = [
@@ -80,17 +80,17 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black pt-20">
+    <footer className="relative overflow-hidden bg-slate-900 pt-20 text-slate-200">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
         
         {/* Grid Pattern */}
         <div 
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: `linear-gradient(to right, #666 1px, transparent 1px),
-                             linear-gradient(to bottom, #666 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(to right, #475569 1px, transparent 1px),
+                             linear-gradient(to bottom, #475569 1px, transparent 1px)`,
             backgroundSize: '50px 50px',
           }}
         />
@@ -99,7 +99,7 @@ export default function Footer() {
         {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 rounded-full bg-primary"
+            className="absolute w-2 h-2 rounded-full bg-slate-600/60"
             style={{
               left: `${10 + i * 20}%`,
               top: `${30 + i * 10}%`,
@@ -128,7 +128,7 @@ export default function Footer() {
                 <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.5 }}
-                  className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-red-600 flex items-center justify-center"
+                  className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center"
                 >
                   <Trophy className="w-6 h-6 text-white" />
                 </motion.div>
@@ -137,21 +137,21 @@ export default function Footer() {
                 </div>
               </Link>
               
-              <p className="text-gray-400 mb-6 max-w-md">
+              <p className="text-slate-400 mb-6 max-w-md">
                 {t('footer.description')}
               </p>
               
               <div className="flex items-center gap-4 mb-8">
-                <Award className="w-6 h-6 text-yellow-500" />
-                <span className="text-gray-300">{t('footer.badges.certified')}</span>
-                <Shield className="w-6 h-6 text-green-500" />
-                <span className="text-gray-300">{t('footer.badges.securePayments')}</span>
+                <Award className="w-6 h-6 text-slate-300" />
+                <span className="text-slate-300">{t('footer.badges.certified')}</span>
+                <Shield className="w-6 h-6 text-slate-300" />
+                <span className="text-slate-300">{t('footer.badges.securePayments')}</span>
               </div>
             </div>
             
             {/* Social Links */}
             <div className="mb-8">
-              <h4 className="font-bold text-lg mb-4">{t('footer.socialTitle')}</h4>
+              <h4 className="font-bold text-lg mb-4 text-white">{t('footer.socialTitle')}</h4>
               <div className="flex flex-wrap gap-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -164,7 +164,7 @@ export default function Footer() {
                     whileHover={{ y: -5 }}
                     className={`group relative p-3 rounded-xl bg-gradient-to-br ${social.color} overflow-hidden`}
                   >
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
                     <social.icon className="w-5 h-5 text-white relative z-10" />
                     <span className="sr-only">{social.label}</span>
                   </motion.a>
@@ -174,7 +174,7 @@ export default function Footer() {
             
             {/* Contact Info */}
             <div className="space-y-3">
-              <h4 className="font-bold text-lg mb-4">{t('footer.contactsTitle')}</h4>
+              <h4 className="font-bold text-lg mb-4 text-white">{t('footer.contactsTitle')}</h4>
               {contactInfo.map((contact, index) => (
                 <motion.a
                   key={index}
@@ -183,7 +183,7 @@ export default function Footer() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors group"
+                  className="flex items-center gap-3 text-slate-400 hover:text-white transition-colors group"
                 >
                   <contact.icon className="w-5 h-5" />
                   <span>{contact.text}</span>
@@ -215,7 +215,7 @@ export default function Footer() {
                     >
                       <Link
                         to={link.to}
-                        className="flex items-center gap-2 text-gray-400 hover:text-primary transition-colors group"
+                          className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group"
                       >
                         <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                         <span>{link.label}</span>
@@ -233,16 +233,16 @@ export default function Footer() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 p-6 rounded-2xl bg-gradient-to-r from-gray-900 to-black border border-gray-800"
+          className="mb-12 p-6 rounded-2xl bg-slate-800/60 border border-slate-700"
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-red-600 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-xl bg-slate-900 flex items-center justify-center">
                 <Globe className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h4 className="text-xl font-bold mb-2">{t('footer.app.title')}</h4>
-                <p className="text-gray-400">{t('footer.app.subtitle')}</p>
+                <h4 className="text-xl font-bold mb-2 text-white">{t('footer.app.title')}</h4>
+                <p className="text-slate-300">{t('footer.app.subtitle')}</p>
               </div>
             </div>
             
@@ -251,11 +251,11 @@ export default function Footer() {
                 href="#"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-black hover:bg-gray-900 rounded-xl border border-gray-800 flex items-center gap-3 transition-colors"
+                className="px-6 py-3 bg-slate-900 hover:bg-slate-800 rounded-xl border border-slate-700 flex items-center gap-3 transition-colors text-white"
               >
-                <div className="text-2xl">📱</div>
+                <Smartphone className="w-6 h-6" />
                 <div className="text-left">
-                  <div className="text-xs text-gray-400">{t('footer.app.downloadOn')}</div>
+                  <div className="text-xs text-slate-300">{t('footer.app.downloadOn')}</div>
                   <div className="font-bold">App Store</div>
                 </div>
               </motion.a>
@@ -264,11 +264,11 @@ export default function Footer() {
                 href="#"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-black hover:bg-gray-900 rounded-xl border border-gray-800 flex items-center gap-3 transition-colors"
+                className="px-6 py-3 bg-slate-900 hover:bg-slate-800 rounded-xl border border-slate-700 flex items-center gap-3 transition-colors text-white"
               >
-                <div className="text-2xl">🤖</div>
+                <Bot className="w-6 h-6" />
                 <div className="text-left">
-                  <div className="text-xs text-gray-400">{t('footer.app.getItOn')}</div>
+                  <div className="text-xs text-slate-300">{t('footer.app.getItOn')}</div>
                   <div className="font-bold">Google Play</div>
                 </div>
               </motion.a>
@@ -277,23 +277,23 @@ export default function Footer() {
         </motion.div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-gray-800/50">
+        <div className="pt-8 border-t border-slate-800/60">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-gray-400 text-sm">
+            <div className="text-slate-400 text-sm">
               <p>{t('footer.copyright', { year: 2026 })}</p>
             </div>
             
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
-                <Globe className="w-5 h-5 text-gray-400" />
-                <select className="bg-transparent text-gray-400 focus:outline-none">
+                <Globe className="w-5 h-5 text-slate-400" />
+                <select className="bg-transparent text-slate-400 focus:outline-none">
                   <option>{t('languages.ru')}</option>
                   <option>{t('languages.en')}</option>
                   <option>{t('languages.es')}</option>
                 </select>
               </div>
               
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2 text-slate-400">
                 <Shield className="w-5 h-5" />
                 <span className="text-sm">{t('footer.sslProtected')}</span>
               </div>
@@ -302,17 +302,17 @@ export default function Footer() {
                 <img 
                   src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Stripe_Logo%2C_revised_2016.svg" 
                   alt="Stripe" 
-                  className="h-6 opacity-50"
+                  className="h-6 opacity-60"
                 />
                 <img 
                   src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" 
                   alt="Visa" 
-                  className="h-6 opacity-50"
+                  className="h-6 opacity-60"
                 />
                 <img 
                   src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" 
                   alt="Mastercard" 
-                  className="h-6 opacity-50"
+                  className="h-6 opacity-60"
                 />
               </div>
             </div>
@@ -322,7 +322,7 @@ export default function Footer() {
           <motion.button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             whileHover={{ y: -5 }}
-            className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-gradient-to-br from-primary to-red-600 shadow-lg shadow-primary/30 flex items-center justify-center group"
+            className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-primary shadow-lg shadow-primary/30 flex items-center justify-center group"
           >
             <ChevronRight className="w-6 h-6 text-white transform rotate-270 group-hover:-translate-y-1 transition-transform" />
           </motion.button>

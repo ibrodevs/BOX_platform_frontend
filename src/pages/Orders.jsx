@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Lightbulb } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Package, CheckCircle, Truck, Clock, ChevronDown, ChevronUp } from 'lucide-react'
 import Loader from '../components/ui/Loader'
@@ -201,8 +202,12 @@ export default function Orders() {
                             key={index}
                             className="bg-gray-800/30 rounded-lg p-4 flex items-center gap-4"
                           >
-                            <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-gray-900 to-black flex items-center justify-center text-2xl">
-                              {item.image}
+                            <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center">
+                              {item.icon ? (
+                                <item.icon className="w-6 h-6 text-gray-800" />
+                              ) : (
+                                <span className="text-2xl">{item.image}</span>
+                              )}
                             </div>
                             <div className="flex-1">
                               <h5 className="font-semibold text-white mb-1">{item.name}</h5>
@@ -268,15 +273,17 @@ export default function Orders() {
 
         {/* Help Section */}
         {orders.length > 0 && (
-          <div className="card mt-12 bg-gradient-to-r from-primary/10 to-transparent">
+          <div className="card mt-12">
             <div className="flex items-start gap-4">
-              <div className="text-4xl">💡</div>
+              <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center">
+                <Lightbulb className="w-5 h-5 text-white" />
+              </div>
               <div>
                 <h3 className="font-bold mb-2">{t('orders.helpTitle')}</h3>
                 <p className="text-gray-400 mb-4">
                   {t('orders.helpSubtitle')}
                 </p>
-                <button className="text-primary hover:underline">
+                <button className="text-gray-900 hover:underline">
                   {t('orders.contactSupport')}
                 </button>
               </div>

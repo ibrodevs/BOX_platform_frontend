@@ -56,22 +56,10 @@ export default function Navbar() {
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled 
-            ? 'bg-black/90 backdrop-blur-xl border-b border-gray-800/50 shadow-2xl shadow-primary/10' 
-            : 'bg-transparent'
+            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm' 
+            : 'bg-white/70 backdrop-blur-md'
         }`}
       >
-        {/* Animated Glow Line */}
-        <motion.div
-          animate={{
-            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-          }}
-          className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent bg-[length:200%_100%]"
-        />
-
         <div className="container-custom">
           <div className="flex justify-between items-center h-20">
             {/* Logo with Animation */}
@@ -82,26 +70,18 @@ export default function Navbar() {
             >
               <Link to="/" className="flex items-center gap-3">
                 <div className="relative">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 rounded-full border-2 border-primary/30"
-                  />
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-red-600 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
                     <span className="text-white font-black text-lg">B</span>
                   </div>
                 </div>
                 
                 <div className="flex flex-col">
-                  <span className="text-2xl font-black bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent">
+                  <span className="text-2xl font-black text-slate-900">
                     BIVOL
                   </span>
-                  <span className="text-xs font-semibold text-primary tracking-widest">SCHOOL</span>
+                  <span className="text-xs font-semibold text-slate-600 tracking-widest">SCHOOL</span>
                 </div>
               </Link>
-              
-              {/* Glow effect on hover */}
-              <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-transparent rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
             </motion.div>
 
             {/* Desktop Navigation with Hover Effects */}
@@ -121,23 +101,20 @@ export default function Navbar() {
                       to={item.path}
                       className={`relative px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-300 group ${
                         isActive
-                          ? 'text-white bg-gradient-to-r from-primary/20 to-transparent'
-                          : 'text-gray-400 hover:text-white'
+                          ? 'text-slate-900 bg-slate-100'
+                          : 'text-slate-600 hover:text-slate-900'
                       }`}
                     >
-                      <Icon className={`w-4 h-4 transition-colors ${isActive ? 'text-primary' : ''}`} />
+                      <Icon className={`w-4 h-4 transition-colors ${isActive ? 'text-slate-900' : ''}`} />
                       <span className="font-medium">{item.label}</span>
                       
                       {/* Active indicator */}
                       {isActive && (
                         <motion.div
                           layoutId="navbar-indicator"
-                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-1 rounded-full bg-gradient-to-r from-primary to-red-600"
+                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-1 rounded-full bg-primary"
                         />
                       )}
-                      
-                      {/* Hover glow effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
                     </Link>
                   </motion.div>
                 )
@@ -151,9 +128,9 @@ export default function Navbar() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="p-2 rounded-lg bg-gray-900/50 hover:bg-gray-800 transition-colors"
+                className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition-colors"
               >
-                <Search className="w-5 h-5 text-gray-400" />
+                <Search className="w-5 h-5 text-slate-600" />
               </motion.button>
 
               {/* Language Switcher */}
@@ -165,14 +142,14 @@ export default function Navbar() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setCartOpen(true)}
-                  className="p-2 rounded-lg bg-gray-900/50 hover:bg-gray-800 transition-colors relative group flex items-center justify-center"
+                  className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition-colors relative group flex items-center justify-center"
                 >
-                  <ShoppingCart className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
+                  <ShoppingCart className="w-5 h-5 text-slate-700 group-hover:text-slate-900 transition-colors" />
                   {getTotalItems() > 0 && (
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="absolute -top-1 -right-1 min-w-5 h-5 px-1.5 bg-gradient-to-r from-primary to-red-600 rounded-full text-xs flex items-center justify-center text-white font-bold"
+                      className="absolute -top-1 -right-1 min-w-5 h-5 px-1.5 bg-primary rounded-full text-xs flex items-center justify-center text-white font-bold"
                     >
                       {getTotalItems()}
                     </motion.span>
@@ -186,10 +163,10 @@ export default function Navbar() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center gap-3 px-4 py-2 rounded-xl bg-gradient-to-r from-gray-900 to-black border border-gray-800 hover:border-primary/50 transition-all duration-300 group"
+                    className="flex items-center gap-3 px-4 py-2 rounded-xl bg-white border border-slate-200 hover:border-slate-300 transition-all duration-300 group"
                   >
                     <div className="relative">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center">
                         <User className="w-4 h-4 text-white" />
                       </div>
                       {user?.isPremium && (
@@ -198,15 +175,15 @@ export default function Navbar() {
                     </div>
                     
                     <div className="flex flex-col items-start">
-                      <span className="text-sm font-semibold text-white">
+                      <span className="text-sm font-semibold text-slate-900">
                         {user?.username || t('user.username')}
                       </span>
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-slate-500">
                         {user?.isPremium ? t('user.premium') : t('user.standard')}
                       </span>
                     </div>
                     
-                    <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${
+                    <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform duration-300 ${
                       dropdownOpen ? 'rotate-180' : ''
                     }`} />
                   </motion.button>
@@ -219,7 +196,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute right-0 mt-2 w-64 bg-gray-900/95 backdrop-blur-xl rounded-xl border border-gray-800 shadow-2xl overflow-hidden"
+                        className="absolute right-0 mt-2 w-64 bg-white rounded-xl border border-slate-200 shadow-lg overflow-hidden"
                         style={{ backdropFilter: 'blur(20px)' }}
                       >
                         <div className="p-2">
@@ -234,7 +211,7 @@ export default function Navbar() {
                                   item.action()
                                   setDropdownOpen(false)
                                 }}
-                                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-300 group"
+                                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-all duration-300 group"
                               >
                                 <item.icon className="w-4 h-4" />
                                 <span>{item.label}</span>
@@ -249,7 +226,7 @@ export default function Navbar() {
                                 <Link
                                   to={item.path}
                                   onClick={() => setDropdownOpen(false)}
-                                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-300 group"
+                                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-all duration-300 group"
                                 >
                                   <item.icon className="w-4 h-4" />
                                   <span>{item.label}</span>
@@ -261,7 +238,7 @@ export default function Navbar() {
                         
                         {/* Premium Upgrade Banner */}
                         {!user?.isPremium && (
-                          <div className="border-t border-gray-800 p-4 bg-gradient-to-r from-primary/10 to-transparent">
+                          <div className="border-t border-gray-200 p-4 bg-gray-50">
                             <Link
                               to="/premium"
                               className="flex items-center justify-between group"
@@ -269,7 +246,7 @@ export default function Navbar() {
                             >
                               <div className="flex items-center gap-2">
                                 <Crown className="w-4 h-4 text-yellow-500" />
-                                <span className="text-sm font-semibold text-white">{t('nav.premiumUpgrade')}</span>
+                                <span className="text-sm font-semibold text-gray-900">{t('nav.premiumUpgrade')}</span>
                               </div>
                               <Sparkles className="w-4 h-4 text-yellow-500 group-hover:scale-110 transition-transform" />
                             </Link>
@@ -287,7 +264,7 @@ export default function Navbar() {
                   >
                     <Link
                       to="/login"
-                      className="px-6 py-2 rounded-xl border border-gray-700 text-gray-400 hover:text-white hover:border-primary/50 transition-all duration-300 group"
+                      className="px-6 py-2 rounded-xl border border-gray-300 text-gray-700 hover:text-gray-900 hover:border-gray-400 transition-all duration-300 group"
                     >
                       <span className="font-medium">{t('nav.login')}</span>
                     </Link>
@@ -300,22 +277,10 @@ export default function Navbar() {
                   >
                     <Link
                       to="/register"
-                      className="group px-6 py-2 rounded-xl bg-gradient-to-r from-primary to-red-600 font-medium text-white flex items-center gap-2 overflow-hidden"
+                      className="group px-6 py-2 rounded-xl bg-gray-900 font-medium text-white flex items-center gap-2"
                     >
                       <Sparkles className="w-4 h-4" />
                       <span>{t('nav.register')}</span>
-                      
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                        animate={{
-                          x: ['-100%', '100%'],
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          repeatType: "loop",
-                        }}
-                      />
                     </Link>
                   </motion.div>
                 </div>

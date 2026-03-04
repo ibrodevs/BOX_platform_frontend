@@ -16,10 +16,10 @@ export default function Button({
   const baseStyles = 'font-bold rounded transition-all duration-300 inline-flex items-center justify-center'
   
   const variants = {
-    primary: 'bg-primary hover:bg-red-700 text-white disabled:opacity-50',
-    secondary: 'border-2 border-white hover:bg-white hover:text-black text-white disabled:opacity-50',
-    outline: 'border-2 border-primary hover:bg-primary text-primary hover:text-white disabled:opacity-50',
-    ghost: 'hover:bg-gray-800 text-white disabled:opacity-50',
+    primary: 'bg-gray-900 hover:bg-gray-800 text-white disabled:opacity-50',
+    secondary: 'border-2 border-gray-300 hover:bg-gray-100 text-gray-900 disabled:opacity-50',
+    outline: 'border-2 border-gray-900 hover:bg-gray-900 text-gray-900 hover:text-white disabled:opacity-50',
+    ghost: 'hover:bg-gray-100 text-gray-900 disabled:opacity-50',
   }
   
   const sizes = {

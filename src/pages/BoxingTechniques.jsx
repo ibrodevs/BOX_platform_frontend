@@ -97,10 +97,10 @@ export default function BoxingTechniques({ lesson, onSelectTechnique }) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-8 bg-gray-800 rounded-xl overflow-hidden"
+          className="mt-8 bg-white border border-gray-200 rounded-xl overflow-hidden"
         >
           {showVideo ? (
-            <div className="aspect-video bg-black">
+            <div className="aspect-video bg-gray-100">
               <video
                 src={selectedTechnique.videoUrl}
                 controls
@@ -109,10 +109,10 @@ export default function BoxingTechniques({ lesson, onSelectTechnique }) {
               />
             </div>
           ) : (
-            <div className="aspect-video bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
+            <div className="aspect-video bg-gray-100 flex items-center justify-center">
               <button
                 onClick={() => setShowVideo(true)}
-                className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center hover:scale-110 transition group"
+                className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center hover:scale-105 transition group"
               >
                 <Play className="w-8 h-8 text-white group-hover:rotate-12 transition" />
               </button>

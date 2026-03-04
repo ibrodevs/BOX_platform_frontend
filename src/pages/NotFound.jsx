@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { Shield } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 export default function NotFound() {
@@ -17,9 +18,9 @@ export default function NotFound() {
           transition={{ delay: 0.2, type: 'spring' }}
           className="text-9xl font-black mb-8"
         >
-          <span className="text-primary">4</span>
-          <span className="text-white">0</span>
-          <span className="text-primary">4</span>
+          <span className="text-gray-900">4</span>
+          <span className="text-gray-500">0</span>
+          <span className="text-gray-900">4</span>
         </motion.div>
         
         <motion.h1
@@ -35,7 +36,7 @@ export default function NotFound() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="text-gray-400 mb-8"
+          className="text-gray-600 mb-8"
         >
           {t('notFound.subtitle')}
         </motion.p>
@@ -60,9 +61,11 @@ export default function NotFound() {
             repeat: Infinity,
             repeatDelay: 1
           }}
-          className="text-8xl mt-12"
+          className="mt-12 flex items-center justify-center"
         >
-          🥊
+          <div className="w-16 h-16 rounded-2xl bg-gray-900 flex items-center justify-center">
+            <Shield className="w-8 h-8 text-white" />
+          </div>
         </motion.div>
       </div>
     </motion.div>

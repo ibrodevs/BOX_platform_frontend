@@ -26,11 +26,11 @@ export default function LanguageSwitcher() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-900/50 hover:bg-gray-800 transition-colors border border-gray-800 hover:border-primary/50"
+        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/80 hover:bg-slate-50 transition-colors border border-slate-200 hover:border-slate-300"
       >
-        <Globe className="w-4 h-4 text-gray-400" />
+        <Globe className="w-4 h-4 text-slate-500" />
         <span className="text-lg">{currentLanguage.flag}</span>
-        <span className="text-sm font-medium text-gray-400 hidden md:inline">
+        <span className="text-sm font-medium text-slate-600 hidden md:inline">
           {currentLanguage.code.toUpperCase()}
         </span>
       </motion.button>
@@ -43,7 +43,7 @@ export default function LanguageSwitcher() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="absolute right-0 mt-2 w-48 bg-gray-900/95 backdrop-blur-xl rounded-xl border border-gray-800 shadow-2xl overflow-hidden z-50"
+              className="absolute right-0 mt-2 w-48 bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden z-50"
             >
               <div className="p-2">
                 {languages.map((lang, index) => (
@@ -55,8 +55,8 @@ export default function LanguageSwitcher() {
                     onClick={() => changeLanguage(lang.code)}
                     className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
                       currentLanguage.code === lang.code
-                        ? 'bg-primary/20 text-white'
-                        : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                        ? 'bg-primary/10 text-slate-900'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                     }`}
                   >
                     <div className="flex items-center gap-3">

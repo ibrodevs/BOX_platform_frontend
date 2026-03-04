@@ -167,14 +167,9 @@ export default function Courses() {
   }
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+    <div ref={containerRef} className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-red-600/10"></div>
-          <div className="absolute inset-0 bg-[url('https://st3.depositphotos.com/13324256/16676/i/450/depositphotos_166764852-stock-photo-red-boxing-gloves.jpg')] bg-cover bg-center opacity-10"></div>
-        </div>
-
         <div className="container-custom relative z-10">
           <motion.div
             variants={staggerContainer}
@@ -183,9 +178,9 @@ export default function Courses() {
             className="text-center mb-12"
           >
             <motion.div variants={fadeInUp} className="inline-block mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-red-600/20 rounded-full border border-primary/30">
-                <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-primary text-sm font-semibold">{t('coursesPage.hero.badge')}</span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200">
+                <Sparkles className="w-4 h-4 text-gray-700" />
+                <span className="text-gray-700 text-sm font-semibold">{t('coursesPage.hero.badge')}</span>
               </span>
             </motion.div>
 
@@ -193,15 +188,13 @@ export default function Courses() {
               variants={fadeInUp}
               className="text-5xl md:text-7xl font-black mb-6"
             >
-              <span className="block text-white">{t('coursesPage.hero.titleLine1')}</span>
-              <span className="bg-gradient-to-r from-primary via-yellow-500 to-primary bg-[length:200%_auto] bg-clip-text text-transparent">
-                {t('coursesPage.hero.titleLine2')}
-              </span>
+              <span className="block text-gray-900">{t('coursesPage.hero.titleLine1')}</span>
+              <span className="block text-gray-700">{t('coursesPage.hero.titleLine2')}</span>
             </motion.h1>
 
             <motion.p 
               variants={fadeInUp}
-              className="text-xl text-gray-400 max-w-2xl mx-auto mb-10"
+              className="text-xl text-gray-600 max-w-2xl mx-auto mb-10"
             >
               {t('coursesPage.hero.subtitle')}
             </motion.p>
@@ -218,11 +211,11 @@ export default function Courses() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder={t('coursesPage.searchPlaceholder')}
-                  className="w-full pl-14 pr-6 py-4 bg-black/50 border border-gray-800 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors backdrop-blur-xl"
+                  className="w-full pl-14 pr-6 py-4 bg-white border border-gray-300 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-gray-600 transition-colors"
                 />
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
                 >
                   <Filter className="w-5 h-5" />
                 </button>
@@ -247,11 +240,11 @@ export default function Courses() {
                 
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <span className="text-gray-400">{t('common.sort')}:</span>
+                    <span className="text-gray-600">{t('common.sort')}:</span>
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
-                      className="bg-black/50 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary"
+                      className="bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:border-gray-600"
                     >
                       <option value="popular">{t('coursesPage.sort.popular')}</option>
                       <option value="rating">{t('coursesPage.sort.rating')}</option>
@@ -267,8 +260,8 @@ export default function Courses() {
                       onClick={() => setViewMode('grid')}
                       className={`p-2 rounded-lg transition-colors ${
                         viewMode === 'grid' 
-                          ? 'bg-primary text-white' 
-                          : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                          ? 'bg-gray-900 text-white' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
                       <Grid className="w-5 h-5" />
@@ -277,8 +270,8 @@ export default function Courses() {
                       onClick={() => setViewMode('list')}
                       className={`p-2 rounded-lg transition-colors ${
                         viewMode === 'list' 
-                          ? 'bg-primary text-white' 
-                          : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                          ? 'bg-gray-900 text-white' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
                       <List className="w-5 h-5" />
@@ -298,19 +291,19 @@ export default function Courses() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-gradient-to-r from-red-600/20 to-red-600/10 border border-red-600/50 rounded-2xl p-6 mb-8 backdrop-blur-xl"
+            className="bg-slate-100 border border-slate-300 rounded-2xl p-6 mb-8"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <Shield className="w-8 h-8 text-red-500" />
+                <Shield className="w-8 h-8 text-slate-700" />
                 <div>
-                  <p className="text-red-500 font-semibold">{error}</p>
-                  <p className="text-red-400/80 text-sm">{t('coursesPage.errors.tryLater')}</p>
+                  <p className="text-slate-900 font-semibold">{error}</p>
+                  <p className="text-slate-600 text-sm">{t('coursesPage.errors.tryLater')}</p>
                 </div>
               </div>
               <button 
                 onClick={fetchCourses}
-                className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold transition-colors"
+                className="px-4 py-2 bg-slate-900 hover:bg-slate-800 rounded-lg text-white font-semibold transition-colors"
               >
                 {t('coursesPage.actions.refresh')}
               </button>
@@ -326,7 +319,7 @@ export default function Courses() {
             </h2>
             {searchTerm && (
               <p className="text-gray-400">
-                {t('coursesPage.results.byQuery')} <span className="text-primary">{searchTerm}</span>
+                {t('coursesPage.results.byQuery')} <span className="text-slate-900">{searchTerm}</span>
               </p>
             )}
           </div>
@@ -355,24 +348,21 @@ export default function Courses() {
                     {/* Badges */}
                     {course.isNew && (
                       <div className="absolute top-4 left-4 z-10">
-                        <span className="px-3 py-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full text-xs font-bold text-white">
+                        <span className="px-3 py-1 bg-slate-900 rounded-full text-xs font-bold text-white">
                           {t('coursesPage.badges.new')}
                         </span>
                       </div>
                     )}
                     {course.isBestseller && (
                       <div className="absolute top-4 right-4 z-10">
-                        <span className="px-3 py-1 bg-gradient-to-r from-yellow-600 to-orange-500 rounded-full text-xs font-bold text-white flex items-center gap-1">
+                        <span className="px-3 py-1 bg-slate-700 rounded-full text-xs font-bold text-white flex items-center gap-1">
                           <TrendingUp className="w-3 h-3" />
                           {t('coursesPage.badges.top')}
                         </span>
                       </div>
                     )}
                     
-                    <CourseCard 
-                      course={course} 
-                      className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 group-hover:border-primary/50 transition-all duration-500"
-                    />
+                    <CourseCard course={course} />
                   </motion.div>
                 ))}
               </motion.div>
@@ -395,7 +385,7 @@ export default function Courses() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.05 }}
                     whileHover={{ x: 5 }}
-                    className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-6 group hover:border-primary/50 transition-all duration-500"
+                    className="bg-white border border-gray-200 rounded-2xl p-6 group hover:border-gray-300 transition-all duration-300"
                   >
                     <div className="flex flex-col md:flex-row md:items-center gap-6">
                       {/* Course Image */}
@@ -409,8 +399,8 @@ export default function Courses() {
                         </div>
                         
                         {/* Play Button Overlay */}
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-red-600 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-gray-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center">
                             <Play className="w-8 h-8 text-white" />
                           </div>
                         </div>
@@ -420,40 +410,40 @@ export default function Courses() {
                       <div className="flex-1">
                         <div className="flex flex-wrap items-center gap-3 mb-3">
                           {course.isNew && (
-                            <span className="px-3 py-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full text-xs font-bold text-white">
+                            <span className="px-3 py-1 bg-gray-900 rounded-full text-xs font-bold text-white">
                               {t('coursesPage.badges.new')}
                             </span>
                           )}
                           {course.isBestseller && (
-                            <span className="px-3 py-1 bg-gradient-to-r from-yellow-600 to-orange-500 rounded-full text-xs font-bold text-white flex items-center gap-1">
+                            <span className="px-3 py-1 bg-gray-700 rounded-full text-xs font-bold text-white flex items-center gap-1">
                               <TrendingUp className="w-3 h-3" />
                               {t('coursesPage.badges.topCourse')}
                             </span>
                           )}
-                          <span className="px-3 py-1 bg-gray-800 rounded-full text-xs font-medium text-gray-300">
+                          <span className="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium text-gray-700">
                             {course.level}
                           </span>
                         </div>
                         
-                        <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
                           {course.title}
                         </h3>
-                        <p className="text-gray-400 mb-4 line-clamp-2">
+                        <p className="text-gray-700 mb-4 line-clamp-2">
                           {course.description}
                         </p>
                         
-                        <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400 mb-4">
+                        <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600 mb-4">
                           <div className="flex items-center gap-2">
                             <Star className="w-4 h-4 text-yellow-500 fill-current" />
                             <span>{course.rating?.toFixed(1)}</span>
                             <span className="text-gray-600">({course.studentsCount})</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-blue-500" />
+                            <Clock className="w-4 h-4 text-gray-600" />
                             <span>{course.duration}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Users className="w-4 h-4 text-green-500" />
+                            <Users className="w-4 h-4 text-gray-600" />
                             <span>{course.studentsCount} {t('courses.students')}</span>
                           </div>
                           {/* category removed */}
@@ -463,14 +453,14 @@ export default function Courses() {
                         {course.progress && (
                           <div className="mb-4">
                             <div className="flex justify-between text-sm mb-1">
-                              <span className="text-gray-400">{t('coursesPage.progress')}</span>
-                              <span className="text-primary font-semibold">{course.progress}%</span>
+                              <span className="text-gray-600">{t('coursesPage.progress')}</span>
+                              <span className="text-gray-900 font-semibold">{course.progress}%</span>
                             </div>
-                            <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                               <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${course.progress}%` }}
-                                className="h-full bg-gradient-to-r from-primary to-red-600"
+                                className="h-full bg-gray-900"
                               />
                             </div>
                           </div>
@@ -479,19 +469,19 @@ export default function Courses() {
                         {/* Price & CTA */}
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                           <div>
-                            <div className="text-3xl font-bold text-white">{course.price} {t('common.currency')}</div>
+                            <div className="text-3xl font-bold text-gray-900">{course.price} {t('common.currency')}</div>
                             {course.originalPrice && (
                               <div className="text-sm text-gray-500 line-through">{course.originalPrice} {t('common.currency')}</div>
                             )}
                           </div>
                           
                           <div className="flex items-center gap-3">
-                            <button className="p-2 rounded-lg border border-gray-700 text-gray-400 hover:text-white hover:border-primary transition-colors">
+                            <button className="p-2 rounded-lg border border-gray-300 text-gray-700 hover:text-gray-900 hover:border-gray-400 transition-colors">
                               <Heart className="w-5 h-5" />
                             </button>
                             <Link
                               to={watchTarget}
-                              className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl font-semibold text-white hover:from-red-600 hover:to-primary transition-all duration-300"
+                              className="px-6 py-3 bg-gray-900 rounded-xl font-semibold text-white hover:bg-gray-800 transition-colors"
                             >
                               {t('courses.watch') || t('coursesPage.actions.details')}
                             </Link>
@@ -512,8 +502,8 @@ export default function Courses() {
             className="text-center py-20"
           >
             <div className="max-w-md mx-auto">
-              <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-primary/20 to-red-600/20 flex items-center justify-center">
-                <BookOpen className="w-12 h-12 text-primary" />
+              <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-slate-100 flex items-center justify-center">
+                <BookOpen className="w-12 h-12 text-slate-700" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">{t('coursesPage.empty.title')}</h3>
               <p className="text-gray-400 mb-6">
@@ -535,7 +525,7 @@ export default function Courses() {
                     setFilter('all')
                     setCurrentPage(1)
                   }}
-                  className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 rounded-xl text-white font-medium hover:from-red-600 hover:to-primary transition-all"
+                  className="px-6 py-3 bg-slate-900 rounded-xl text-white font-medium hover:bg-slate-800 transition-all"
                 >
                   {t('coursesPage.actions.viewAll')}
                 </button>
@@ -567,7 +557,7 @@ export default function Courses() {
                   onClick={() => setCurrentPage(page)}
                   className={`w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${
                     currentPage === page
-                      ? 'bg-primary text-white'
+                      ? 'bg-slate-900 text-white'
                       : 'bg-gray-800 text-gray-400 hover:text-white'
                   }`}
                 >
@@ -591,14 +581,14 @@ export default function Courses() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-20 p-8 rounded-2xl bg-gradient-to-r from-primary/10 via-black/50 to-primary/10 border border-gray-800 text-center"
+          className="mt-20 p-8 rounded-2xl bg-slate-100 border border-slate-200 text-center"
         >
-          <Award className="w-16 h-16 text-primary mx-auto mb-6" />
-          <h3 className="text-3xl font-bold text-white mb-4">{t('coursesPage.cta.title')}</h3>
-          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+          <Award className="w-16 h-16 text-slate-800 mx-auto mb-6" />
+          <h3 className="text-3xl font-bold text-slate-900 mb-4">{t('coursesPage.cta.title')}</h3>
+          <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
             {t('coursesPage.cta.subtitle')}
           </p>
-          <button className="px-8 py-4 bg-gradient-to-r from-primary to-red-600 rounded-xl font-bold text-lg hover:from-red-600 hover:to-primary transition-all duration-300">
+          <button className="px-8 py-4 bg-slate-900 rounded-xl font-bold text-lg text-white hover:bg-slate-800 transition-all duration-300">
             {t('coursesPage.cta.button')}
           </button>
         </motion.div>
