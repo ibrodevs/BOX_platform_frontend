@@ -61,7 +61,7 @@ export default function AIChat() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 bg-gray-900 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg z-50"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-gray-900 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg z-50"
       >
         {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
       </motion.button>
@@ -73,7 +73,7 @@ export default function AIChat() {
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            className="fixed bottom-24 right-6 w-96 h-[500px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 flex flex-col"
+            className="fixed bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-96 h-[70vh] max-h-[500px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 flex flex-col"
           >
             {/* Header */}
             <div className="bg-gray-900 p-4 rounded-t-lg text-white">

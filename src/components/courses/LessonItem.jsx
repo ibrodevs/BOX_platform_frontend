@@ -11,7 +11,11 @@ export default function LessonItem({ lesson, courseId, isLocked, isCompleted, in
       <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${
         isCompleted ? 'bg-green-600' : isLocked ? 'bg-gray-800' : 'bg-primary'
       }`}>
-        {isCompleted ? '✓' : index + 1}
+        {isCompleted ? (
+          <Check className="w-6 h-6 text-white" aria-hidden="true" />
+        ) : (
+          index + 1
+        )}
       </div>
 
       {/* Info */}

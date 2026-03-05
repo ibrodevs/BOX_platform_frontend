@@ -1,5 +1,25 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Plus, Minus, Trash2, ShoppingBag, ArrowRight, Package, CreditCard, User, Phone, MapPin, CheckCircle } from 'lucide-react'
+import {
+  X,
+  Plus,
+  Minus,
+  Trash2,
+  ShoppingBag,
+  ArrowRight,
+  Package,
+  CreditCard,
+  User,
+  Phone,
+  MapPin,
+  CheckCircle,
+  Shield,
+  Zap,
+  Droplet,
+  Layers,
+  GraduationCap,
+  RotateCw,
+  Gift
+} from 'lucide-react'
 import { useCart } from '../hooks/useCart'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -75,6 +95,18 @@ export default function Cart({ isOpen, onClose }) {
         cardCVV: ''
       })
     }, 3000)
+  }
+
+  const ICONS_BY_NAME = {
+    ShoppingBag,
+    Shield,
+    Zap,
+    Droplet,
+    Layers,
+    GraduationCap,
+    RotateCw,
+    Gift,
+    Package,
   }
 
   return (
@@ -179,11 +211,14 @@ export default function Cart({ isOpen, onClose }) {
                     <div className="flex gap-4">
                       {/* Item Image */}
                       <div className="w-20 h-20 rounded-lg bg-white flex items-center justify-center flex-shrink-0">
-                        {item.icon ? (
-                          <item.icon className="w-8 h-8 text-slate-800" />
-                        ) : (
-                          <span className="text-3xl">{item.image}</span>
-                        )}
+                        {(() => {
+                          const IconComponent = item?.iconName ? ICONS_BY_NAME[item.iconName] : null
+                          return IconComponent ? (
+                            <IconComponent className="w-8 h-8 text-slate-800" />
+                          ) : (
+                            <Package className="w-8 h-8 text-slate-800" />
+                          )
+                        })()}
                       </div>
 
                       {/* Item Details */}

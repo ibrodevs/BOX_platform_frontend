@@ -149,31 +149,31 @@ export default function Home() {
 
             <motion.p
               variants={fadeInUp}
-              className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed px-4"
             >
               {t('homePage.hero.subtitle')}
             </motion.p>
 
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center px-4"
             >
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
                 <Link 
                   to="/courses" 
-                  className="btn-primary flex items-center gap-2 text-base md:text-lg"
+                  className="btn-primary flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg w-full sm:w-auto"
                 >
                   <span>{t('homePage.hero.cta')}</span>
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-4 sm:w-5 h-4 sm:h-5" />
                 </Link>
               </motion.div>
 
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
                 <Link 
                   to="/merch" 
-                  className="btn-secondary flex items-center gap-2 text-base md:text-lg"
+                  className="btn-secondary flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg w-full sm:w-auto"
                 >
-                  <Play className="w-5 h-5" />
+                  <Play className="w-4 sm:w-5 h-4 sm:h-5" />
                   <span>{t('homePage.hero.buyMerch')}</span>
                 </Link>
               </motion.div>
@@ -181,18 +181,18 @@ export default function Home() {
 
             <motion.div
               variants={fadeInUp}
-              className="mt-12 flex flex-wrap justify-center gap-8 text-sm md:text-base"
+              className="mt-8 sm:mt-10 md:mt-12 flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm md:text-base px-4"
             >
-              <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-gray-600" />
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Shield className="w-4 sm:w-5 h-4 sm:h-5 text-gray-600" />
                 <span className="text-gray-600">{t('homePage.hero.features.0')}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Star className="w-5 h-5 text-gray-600" />
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Star className="w-4 sm:w-5 h-4 sm:h-5 text-gray-600" />
                 <span className="text-gray-600">{t('homePage.hero.features.1')}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Zap className="w-5 h-5 text-gray-600" />
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Zap className="w-4 sm:w-5 h-4 sm:h-5 text-gray-600" />
                 <span className="text-gray-600">{t('homePage.hero.features.2')}</span>
               </div>
             </motion.div>
@@ -212,30 +212,30 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gray-50 border-y border-gray-200">
+      <section className="py-12 sm:py-16 md:py-20 bg-gray-50 border-y border-gray-200">
         <div className="container-custom">
           <motion.div 
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-4 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6"
           >
             {statsItems.map((stat, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="relative p-6 rounded-xl bg-white border border-gray-200 hover:border-gray-300 transition-all duration-300"
+                className="relative p-4 sm:p-6 rounded-xl bg-white border border-gray-200 hover:border-gray-300 transition-all duration-300"
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center">
-                    <stat.icon className="w-6 h-6 text-gray-700" />
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg bg-gray-100 flex items-center justify-center">
+                    <stat.icon className="w-5 sm:w-6 h-5 sm:h-6 text-gray-700" />
                   </div>
                   <div>
-                    <div className="text-2xl md:text-3xl font-bold text-gray-900">
+                    <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-xs sm:text-sm text-gray-600">
                       {stat.label}
                     </div>
                   </div>

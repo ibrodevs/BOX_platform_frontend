@@ -282,7 +282,7 @@ export default function MyCourseCard({ course, index = 0 }) {
       
       {/* Completion Badge */}
       {isCompleted && (
-        <div className="absolute -top-2 -right-2">
+        <div className="absolute top-2 right-2 sm:-top-2 sm:-right-2">
           <motion.div
             animate={{ rotate: [0, 10, 0, -10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}

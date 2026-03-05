@@ -46,9 +46,9 @@ export default function About() {
   ]), [t])
 
   return (
-    <div ref={containerRef} className="relative min-h-screen bg-white">
+    <div ref={containerRef} className="relative min-h-screen bg-white overflow-x-hidden">
 
-      <div className="relative container-custom py-32">
+      <div className="relative container-custom px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
         {/* Hero с параллакс эффектом */}
         <motion.div className="text-center mb-20 relative z-10">
           <motion.div
@@ -83,7 +83,7 @@ export default function About() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-16 sm:mb-24"
         >
           {stats.map((stat, idx) => (
             <motion.div
@@ -128,7 +128,7 @@ export default function About() {
               <motion.div
                 animate={{ y: [0, -20, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -bottom-6 -left-6 bg-gray-900 text-white p-4 rounded-xl shadow-md"
+                className="absolute bottom-3 left-3 sm:-bottom-6 sm:-left-6 bg-gray-900 text-white p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-md max-w-[min(12rem,calc(100vw-2rem))]"
               >
                 <div className="text-2xl font-black">WBA</div>
                 <div className="text-sm font-semibold">{t('aboutPage.hero.badges.wba')}</div>
@@ -137,10 +137,10 @@ export default function About() {
               <motion.div
                 animate={{ y: [0, 20, 0] }}
                 transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-                className="absolute -top-6 -right-6 bg-gray-700 text-white p-4 rounded-xl shadow-md"
+                className="absolute top-3 right-3 sm:-top-6 sm:-right-6 bg-gray-700 text-white p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-md max-w-[min(14rem,calc(100vw-2rem))]"
               >
                 <div className="text-2xl font-black">WBC</div>
-                <div className="text-sm font-semibold">{t('aboutPage.hero.badges.wbc')}</div>
+                <div className="text-sm font-semibold whitespace-normal break-words">{t('aboutPage.hero.badges.wbc')}</div>
               </motion.div>
             </div>
           </motion.div>

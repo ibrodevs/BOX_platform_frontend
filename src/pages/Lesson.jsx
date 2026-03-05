@@ -8,7 +8,7 @@ import {
   Award, Star, Trophy, Sparkles, Lock, Check,
   Home, Swords, Dumbbell, GraduationCap,
   Play, Pause, Volume2, VolumeX, Maximize2, Minimize2,
-  Youtube, Film, Info, X
+  Youtube, Film, Info, X, LoaderCircle, XCircle
 } from 'lucide-react'
 import { getLesson, updateLessonProgress } from '../services/apiService'
 import { getLessonById } from '../data/staticLessons'
@@ -236,6 +236,7 @@ export default function Lesson() {
   const [selectedVideo, setSelectedVideo] = useState(null)
   const [showVideoModal, setShowVideoModal] = useState(false)
   const [showVideoInfo, setShowVideoInfo] = useState({})
+  const [isStaticLesson, setIsStaticLesson] = useState(false)
   
   const videoRef = useRef(null)
   const modalRef = useRef(null)
@@ -243,20 +244,19 @@ export default function Lesson() {
   useEffect(() => {
     const fetchLesson = async () => {
       try {
-        try {
-          const res = await getLesson(id)
-          setLesson(res.data)
-          loadPageProgress()
-        } catch (apiError) {
-          console.log('API не доступен, используем статичные данные')
-          const staticLesson = getLessonById(id, t)
-          if (staticLesson) {
-            setLesson(staticLesson)
-            loadLocalProgress()
-          } else {
-            throw new Error(t('lesson.notFound'))
-          }
+        // Prefer local static content when present (prevents noisy 404s in demo mode)
+        const staticLesson = getLessonById(id, t)
+        if (staticLesson) {
+          setLesson(staticLesson)
+          setIsStaticLesson(true)
+          loadLocalProgress()
+          return
         }
+
+        const res = await getLesson(id)
+        setLesson(res.data)
+        setIsStaticLesson(false)
+        loadPageProgress()
       } catch (err) {
         console.error(err)
         alert(t('lesson.notFound'))
@@ -267,7 +267,7 @@ export default function Lesson() {
     }
     
     fetchLesson()
-  }, [id, navigate])
+  }, [id, navigate, t])
 
   const loadPageProgress = async () => {
     try {
@@ -305,6 +305,12 @@ export default function Lesson() {
 
   const markLessonAsCompleted = async () => {
     try {
+      if (isStaticLesson) {
+        localStorage.setItem(`lesson-${id}-completed`, 'true')
+        alert(t('lesson.completedAlert'))
+        return
+      }
+
       await updateLessonProgress(id, { completed: true })
       alert(t('lesson.completedAlert'))
     } catch (error) {
@@ -314,6 +320,12 @@ export default function Lesson() {
 
   const markAsCompleted = async () => {
     try {
+      if (isStaticLesson) {
+        localStorage.setItem(`lesson-${id}-completed`, 'true')
+        alert(t('lesson.completedAlert'))
+        return
+      }
+
       await updateLessonProgress(id, { completed: true })
       alert(t('lesson.completedAlert'))
     } catch (error) {
@@ -387,14 +399,14 @@ export default function Lesson() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white px-4">
         <div className="text-center">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="text-6xl mb-4"
+            className="mb-4 flex justify-center"
           >
-            ⏳
+            <LoaderCircle className="w-12 h-12 text-primary" />
           </motion.div>
           <p className="text-gray-400">{t('lesson.loading')}</p>
         </div>
@@ -404,9 +416,11 @@ export default function Lesson() {
 
   if (!lesson) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white px-4">
         <div className="text-center">
-          <div className="text-6xl mb-4">❌</div>
+          <div className="flex justify-center mb-4">
+            <XCircle className="w-12 h-12 text-red-500" />
+          </div>
           <p className="text-gray-400">{t('lesson.notFound')}</p>
         </div>
       </div>
@@ -414,7 +428,7 @@ export default function Lesson() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 py-20">
+    <div className="min-h-screen bg-slate-950 text-white py-16 sm:py-20 overflow-x-hidden">
       {/* Модальное окно с видео */}
       <AnimatePresence>
         {showVideoModal && selectedVideo && (
@@ -478,10 +492,12 @@ export default function Lesson() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-3"
+            className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl sm:rounded-full shadow-lg flex items-center gap-3 max-w-[calc(100vw-2rem)] w-max"
           >
             <CheckCircle className="w-5 h-5" />
-            <span className="font-medium">Страница "{currentPageData.title}" завершена!</span>
+            <span className="font-medium text-sm sm:text-base whitespace-normal break-words text-center">
+              Страница "{currentPageData.title}" завершена!
+            </span>
           </motion.div>
         )}
       </AnimatePresence>
@@ -513,7 +529,7 @@ export default function Lesson() {
         </motion.div>
       </motion.div>
 
-      <div className="container-custom max-w-6xl">
+      <div className="container-custom max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -523,7 +539,7 @@ export default function Lesson() {
             <div className="mb-6">
               <Link 
                 to={`/courses/${lesson.course.slug}`}
-                className="inline-flex items-center gap-2 text-gray-400 hover:text-primary transition-colors"
+                className="inline-flex items-center gap-2 text-slate-300 hover:text-primary transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
                 {t('lesson.backToCourse', { title: lesson.course.title })}
@@ -533,7 +549,7 @@ export default function Lesson() {
 
           {/* Прогресс страниц */}
           <div className="mb-8 bg-gray-900/50 backdrop-blur-lg rounded-xl p-4 border border-gray-800">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
               <h3 className="text-white font-semibold">Прогресс обучения</h3>
               <span className="text-gray-400 text-sm">{completedPages.length}/5 страниц</span>
             </div>
@@ -563,7 +579,7 @@ export default function Lesson() {
                     </div>
                     
                     {/* Tooltip */}
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition bg-gray-900 text-white text-xs py-1 px-2 rounded whitespace-nowrap">
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition bg-gray-900 text-white text-xs py-1 px-2 rounded max-w-[min(16rem,calc(100vw-2rem))] whitespace-normal text-center break-words">
                       {pageData.title}
                     </div>
                   </motion.button>
@@ -573,7 +589,7 @@ export default function Lesson() {
           </div>
 
           {/* Карточки страниц в виде сетки */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
             {learningPages.map((page) => {
               const Icon = page.icon
               const isCompleted = isPageCompleted(page.id)
@@ -584,7 +600,7 @@ export default function Lesson() {
                   key={page.id}
                   whileHover={{ scale: 1.02, y: -5 }}
                   className={`
-                    bg-gray-900/50 backdrop-blur-lg rounded-xl p-6 border cursor-pointer
+                    bg-gray-900/50 backdrop-blur-lg rounded-xl p-4 sm:p-6 border cursor-pointer
                     ${isCurrent 
                       ? 'border-red-500 ring-2 ring-red-500/20' 
                       : isCompleted
@@ -650,21 +666,21 @@ export default function Lesson() {
 
           {/* Видео плеер для текущей страницы */}
           <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-white flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+              <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2 min-w-0">
                 {isExternalVideoUrl(currentPageData.videoUrl) ? (
                   <Youtube className="w-5 h-5 text-red-500" />
                 ) : (
                   <Film className="w-5 h-5 text-red-500" />
                 )}
-                Видеоурок: {currentPageData.videoTitle}
+                <span className="truncate">Видеоурок: {currentPageData.videoTitle}</span>
               </h3>
               <button
                 onClick={() => openVideo(currentPageData)}
-                className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm"
               >
                 <Play className="w-4 h-4" />
-                Смотреть в полном размере
+                <span className="leading-tight">Смотреть в полном размере</span>
               </button>
             </div>
             <div className="aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
@@ -688,24 +704,24 @@ export default function Lesson() {
           </div>
 
           {/* Навигация по страницам */}
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-4">
-              <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${currentPageData.color} flex items-center justify-center`}>
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-8">
+            <div className="flex items-center gap-4 min-w-0">
+              <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${currentPageData.color} flex items-center justify-center flex-shrink-0`}>
                 <PageIcon className="w-6 h-6 text-white" />
               </div>
-              <div>
-                <h2 className="text-2xl font-bold text-white">{currentPageData.title}</h2>
-                <p className="text-gray-400">{currentPageData.description}</p>
+              <div className="min-w-0">
+                <h2 className="text-xl sm:text-2xl font-bold text-white truncate">{currentPageData.title}</h2>
+                <p className="text-gray-400 text-sm sm:text-base line-clamp-2">{currentPageData.description}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap justify-between sm:justify-end">
               {!isPageCompleted(currentPage) && (
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => markPageAsCompleted(currentPage)}
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium text-sm"
                 >
                   <Check className="w-4 h-4" />
                   Завершить страницу
@@ -750,11 +766,11 @@ export default function Lesson() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-8"
+              className="bg-gradient-to-br from-gray-900/50 to-black border border-gray-800 rounded-2xl p-4 sm:p-6 lg:p-8"
             >
               {/* Статус страницы */}
               <div className="flex items-center justify-between mb-6">
-                <h1 className="text-3xl font-black text-white">{currentPageData.content.title}</h1>
+                <h1 className="text-2xl sm:text-3xl font-black text-white">{currentPageData.content.title}</h1>
                 <div className="flex items-center gap-2">
                   {isPageCompleted(currentPage) ? (
                     <div className="flex items-center gap-2 px-4 py-2 bg-green-600/20 border border-green-600/50 rounded-xl text-green-500 font-semibold">

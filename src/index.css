@@ -4,7 +4,20 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 font-sans;
+    @apply bg-slate-50 text-slate-900 font-sans overflow-x-hidden;
+  }
+
+  :where(
+      a,
+      button,
+      input,
+      textarea,
+      select,
+      summary,
+      [role='button'],
+      [tabindex]:not([tabindex='-1'])
+    ):focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-transparent;
   }
 }
 
@@ -27,9 +40,5 @@
   
   .card {
     @apply bg-white border border-slate-200 rounded-xl overflow-hidden transition-colors shadow-sm hover:shadow-md;
-  }
-
-  .card:hover * {
-    color: inherit;
   }
 }

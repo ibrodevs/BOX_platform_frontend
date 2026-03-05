@@ -5,7 +5,7 @@ import {
   Play, Clock, BookOpen, Users, Star, Award, Shield, 
   CheckCircle, Lock, Download, Share2, Heart, ChevronRight,
   TrendingUp, Target, Zap, Crown, Sparkles, Calendar,
-  MessageCircle, Bookmark, BarChart3, Trophy, HelpCircle, ArrowLeft, Gift, Mail, Smartphone
+  MessageCircle, Bookmark, BarChart3, Trophy, HelpCircle, ArrowLeft, Gift, Mail, Smartphone, User, ThumbsUp
 } from 'lucide-react'
 import { getCourse, createOrder, completePayment } from '../services/apiService'
 import { useAuthStore } from '../store/authStore'
@@ -37,6 +37,9 @@ export default function CourseDetail() {
     fetchCourseData()
   }, [slug])
 
+  const isValidImageSrc = (value) =>
+    typeof value === 'string' && /^(https?:\/\/|\/|data:image\/)/.test(value)
+
   const fetchCourseData = async () => {
     try {
       setLoading(true)
@@ -62,7 +65,7 @@ export default function CourseDetail() {
           rating: 4.9,
           students: 10500,
           courses: 8,
-          avatar: '👑'
+          avatar: null
         },
         
         stats: {
@@ -106,7 +109,6 @@ export default function CourseDetail() {
           {
             id: 1,
             user: t('courseDetail.reviewsData.0.user'),
-            avatar: '👤',
             rating: 5,
             date: t('courseDetail.reviewsData.0.date'),
             comment: t('courseDetail.reviewsData.0.comment'),
@@ -115,7 +117,6 @@ export default function CourseDetail() {
           {
             id: 2,
             user: t('courseDetail.reviewsData.1.user'),
-            avatar: '👩',
             rating: 5,
             date: t('courseDetail.reviewsData.1.date'),
             comment: t('courseDetail.reviewsData.1.comment'),
@@ -163,7 +164,6 @@ export default function CourseDetail() {
               {
                 id: 1,
                 user: t('courseDetail.reviewsData.0.user'),
-                avatar: '👤',
                 rating: 5,
                 date: t('courseDetail.reviewsData.0.date'),
                 comment: t('courseDetail.reviewsData.0.comment'),
@@ -172,7 +172,6 @@ export default function CourseDetail() {
               {
                 id: 2,
                 user: t('courseDetail.reviewsData.1.user'),
-                avatar: '👩',
                 rating: 5,
                 date: t('courseDetail.reviewsData.1.date'),
                 comment: t('courseDetail.reviewsData.1.comment'),
@@ -285,32 +284,32 @@ export default function CourseDetail() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-12 overflow-hidden">
+      <section className="relative pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-200/40 via-transparent to-slate-300/30"></div>
           <div className="absolute inset-0 bg-[url('https://img.freepik.com/free-vector/boxing-gloves-realistic-composition-with-dark-gradient-background-pair-red-mufflers-hanging-strings-vector-illustration_1284-78726.jpg?semt=ais_hybrid&w=740&q=80')] bg-cover bg-center opacity-5 grayscale"></div>
         </div>
 
-        <div className="container-custom relative">
+        <div className="container-custom relative px-4">
           <motion.div
             variants={staggerContainer}
             initial="initial"
             animate="animate"
-            className="grid lg:grid-cols-3 gap-8"
+            className="grid lg:grid-cols-3 gap-6 sm:gap-8"
           >
             {/* Left Column - Course Info */}
             <motion.div variants={fadeInUp} className="lg:col-span-2">
               <button
                 onClick={() => navigate('/courses')}
-                className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 mb-4 sm:mb-6 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg transition-colors text-sm sm:text-base"
               >
-                <ArrowLeft className="w-5 h-5" />
+                <ArrowLeft className="w-4 sm:w-5 h-4 sm:h-5" />
                 <span>{t('common.back')}</span>
               </button>
 
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-200 rounded-full border border-slate-300 mb-6">
-                <Sparkles className="w-4 h-4 text-slate-700" />
-                <span className="text-slate-800 text-sm font-semibold">
+              <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 bg-slate-200 rounded-full border border-slate-300 mb-4 sm:mb-6">
+                <Sparkles className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-slate-700" />
+                <span className="text-slate-800 text-xs sm:text-sm font-semibold">
                   {course.level === 'beginner'
                     ? t('courseDetail.levels.beginner')
                     : course.level === 'intermediate'
@@ -319,7 +318,7 @@ export default function CourseDetail() {
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-black mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-6">
                 {course.title}
               </h1>
               
@@ -328,29 +327,29 @@ export default function CourseDetail() {
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-gradient-to-r from-blue-600/20 to-blue-700/20 border-2 border-blue-500/50 rounded-xl"
+                  className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-r from-blue-600/20 to-blue-700/20 border-2 border-blue-500/50 rounded-xl"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
-                      <Play className="w-6 h-6 text-white" />
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                    <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
+                      <Play className="w-5 sm:w-6 h-5 sm:h-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <div className="font-bold text-white mb-1">
+                      <div className="font-bold text-white mb-1 text-sm sm:text-base">
                         <span className="inline-flex items-center gap-2">
-                          <Gift className="w-4 h-4" />
+                          <Gift className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                           {t('courseDetail.freeLessonsBanner', {
                           count: course.lessons.filter(l => l.is_free).length,
                           lessons: t('courses.lessonsCount', { count: course.lessons.filter(l => l.is_free).length })
                         })}
                         </span>
                       </div>
-                      <div className="text-sm text-gray-300">
+                      <div className="text-xs sm:text-sm text-gray-300">
                         {t('courseDetail.freeLessonsSubtitle')}
                       </div>
                     </div>
                     <Link
                       to={`/lessons/${course.lessons.find(l => l.is_free)?.id}`}
-                      className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold text-white transition-colors whitespace-nowrap"
+                      className="px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold text-white transition-colors w-full sm:w-auto text-center whitespace-normal sm:whitespace-nowrap text-sm sm:text-base"
                     >
                       {t('courseDetail.freeLessonsCta')}
                     </Link>
@@ -358,27 +357,27 @@ export default function CourseDetail() {
                 </motion.div>
               )}
               
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed">
                 {course.description}
               </p>
 
               {/* Instructor */}
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center">
-                  {course.instructor?.avatar ? (
+              <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full bg-gray-900 flex items-center justify-center">
+                  {isValidImageSrc(course.instructor?.avatar) ? (
                     <img src={course.instructor.avatar} alt={course.instructor?.name} className="w-full h-full rounded-full object-cover" />
                   ) : (
-                    <Shield className="w-7 h-7 text-white" />
+                    <Crown className="w-5 sm:w-7 h-5 sm:h-7 text-white" />
                   )}
                 </div>
                 <div>
-                  <div className="font-bold text-white">{course.instructor?.name}</div>
-                  <div className="text-sm text-gray-400">{course.instructor?.title}</div>
+                  <div className="font-bold text-white text-sm sm:text-base">{course.instructor?.name}</div>
+                  <div className="text-xs sm:text-sm text-gray-400">{course.instructor?.title}</div>
                   <div className="flex items-center gap-2 mt-1">
-                    <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                    <span className="text-sm">{course.instructor?.rating}</span>
-                    <span className="text-gray-500 text-sm">•</span>
-                    <span className="text-sm text-gray-400">
+                    <Star className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-yellow-500 fill-current" />
+                    <span className="text-xs sm:text-sm">{course.instructor?.rating}</span>
+                    <span className="text-gray-500 text-xs sm:text-sm">•</span>
+                    <span className="text-xs sm:text-sm text-gray-400">
                       {course.instructor?.students?.toLocaleString()} {t('courses.students')}
                     </span>
                   </div>
@@ -386,12 +385,12 @@ export default function CourseDetail() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="p-4 rounded-xl bg-gray-900/50 border border-gray-800">
-                  <div className="text-2xl font-bold text-white mb-1">{course.rating || 4.8}</div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <div className="p-3 sm:p-4 rounded-xl bg-gray-900/50 border border-gray-800">
+                  <div className="text-xl sm:text-2xl font-bold text-white mb-1">{course.rating || 4.8}</div>
                   <div className="flex items-center gap-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-500 fill-current" />
+                      <Star key={i} className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-500 fill-current" />
                     ))}
                   </div>
                   <div className="text-xs text-gray-400 mt-1">
@@ -399,21 +398,21 @@ export default function CourseDetail() {
                   </div>
                 </div>
                 
-                <div className="p-4 rounded-xl bg-gray-900/50 border border-gray-800">
-                  <div className="text-2xl font-bold text-white mb-1">{course.stats?.studentsEnrolled?.toLocaleString() || 2843}</div>
-                  <div className="text-sm text-gray-400">{t('courseDetail.stats.students')}</div>
+                <div className="p-3 sm:p-4 rounded-xl bg-gray-900/50 border border-gray-800">
+                  <div className="text-xl sm:text-2xl font-bold text-white mb-1">{course.stats?.studentsEnrolled?.toLocaleString() || 2843}</div>
+                  <div className="text-xs sm:text-sm text-gray-400">{t('courseDetail.stats.students')}</div>
                 </div>
                 
-                <div className="p-4 rounded-xl bg-gray-900/50 border border-gray-800">
-                  <div className="text-2xl font-bold text-white mb-1">{course.lessons_count || 10}</div>
-                  <div className="text-sm text-gray-400">{t('courseDetail.stats.lessons')}</div>
+                <div className="p-3 sm:p-4 rounded-xl bg-gray-900/50 border border-gray-800">
+                  <div className="text-xl sm:text-2xl font-bold text-white mb-1">{course.lessons_count || 10}</div>
+                  <div className="text-xs sm:text-sm text-gray-400">{t('courseDetail.stats.lessons')}</div>
                 </div>
                 
-                <div className="p-4 rounded-xl bg-gray-900/50 border border-gray-800">
-                  <div className="text-2xl font-bold text-white mb-1">
+                <div className="p-3 sm:p-4 rounded-xl bg-gray-900/50 border border-gray-800">
+                  <div className="text-xl sm:text-2xl font-bold text-white mb-1">
                     {course.duration_hours || 8}{t('courses.hoursShort')}
                   </div>
-                  <div className="text-sm text-gray-400">{t('courseDetail.stats.duration')}</div>
+                  <div className="text-xs sm:text-sm text-gray-400">{t('courseDetail.stats.duration')}</div>
                 </div>
               </div>
             </motion.div>
@@ -598,7 +597,7 @@ export default function CourseDetail() {
                 className={`px-6 py-4 font-semibold whitespace-nowrap transition-colors ${
                   activeTab === tab
                     ? 'text-primary border-b-2 border-primary'
-                    : 'text-gray-400 hover:text-white'
+                    : 'text-gray-500 hover:text-gray-900'
                 }`}
               >
                 {tab === 'overview' ? t('courseDetail.overview') :
@@ -712,7 +711,7 @@ export default function CourseDetail() {
                     <div className="flex flex-col md:flex-row gap-8 items-start">
                       <div className="text-center md:text-left">
                         <div className="w-32 h-32 rounded-full bg-gradient-to-r from-primary to-red-600 flex items-center justify-center text-4xl mb-4 mx-auto md:mx-0">
-                          {course.instructor?.avatar}
+                          <Crown className="w-14 h-14 text-white" />
                         </div>
                         <h3 className="text-2xl font-bold text-white">{course.instructor?.name}</h3>
                         <p className="text-gray-400 mb-4">{course.instructor?.title}</p>
@@ -806,7 +805,7 @@ export default function CourseDetail() {
                           <div className="flex items-start justify-between mb-4">
                             <div className="flex items-center gap-4">
                               <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-red-600 flex items-center justify-center text-xl">
-                                {review.avatar}
+                                <User className="w-6 h-6 text-white" />
                               </div>
                               <div>
                                 <div className="font-bold text-white">{review.user}</div>
@@ -824,7 +823,7 @@ export default function CourseDetail() {
                           
                           <div className="flex items-center justify-between">
                             <button className="text-sm text-gray-400 hover:text-white flex items-center gap-1">
-                              <span>👍</span>
+                              <ThumbsUp className="w-4 h-4" />
                               <span>{t('courseDetail.helpful', { count: review.helpful })}</span>
                             </button>
                             <button className="text-sm text-gray-400 hover:text-white">

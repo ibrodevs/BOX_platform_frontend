@@ -60,26 +60,26 @@ export default function Navbar() {
             : 'bg-white/70 backdrop-blur-md'
         }`}
       >
-        <div className="container-custom">
-          <div className="flex justify-between items-center h-20">
+        <div className="container-custom px-4">
+          <div className="flex justify-between items-center h-16 sm:h-20">
             {/* Logo with Animation */}
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="relative group"
             >
-              <Link to="/" className="flex items-center gap-3">
+              <Link to="/" className="flex items-center gap-2 sm:gap-3">
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                    <span className="text-white font-black text-lg">B</span>
+                  <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-primary flex items-center justify-center">
+                    <span className="text-white font-black text-base sm:text-lg">B</span>
                   </div>
                 </div>
                 
                 <div className="flex flex-col">
-                  <span className="text-2xl font-black text-slate-900">
+                  <span className="text-xl sm:text-2xl font-black text-slate-900">
                     BIVOL
                   </span>
-                  <span className="text-xs font-semibold text-slate-600 tracking-widest">SCHOOL</span>
+                  <span className="text-[10px] sm:text-xs font-semibold text-slate-600 tracking-widest">SCHOOL</span>
                 </div>
               </Link>
             </motion.div>

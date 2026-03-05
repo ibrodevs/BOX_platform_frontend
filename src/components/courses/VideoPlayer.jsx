@@ -145,7 +145,7 @@ export default function VideoPlayer({ videoUrl, timestamps, onTimeUpdate, onComp
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              className="absolute right-0 top-0 bottom-16 w-80 bg-black/90 backdrop-blur overflow-y-auto"
+              className="absolute right-0 top-0 bottom-16 w-[calc(100vw-2rem)] sm:w-80 bg-black/90 backdrop-blur overflow-y-auto"
             >
               <div className="p-4">
                 <h3 className="text-white font-semibold mb-4">{t('videoPlayer.timestamps')}</h3>

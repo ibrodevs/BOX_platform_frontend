@@ -8,7 +8,18 @@ export default {
   ],
   theme: {
     colors: {
-      ...colors,
+      inherit: 'inherit',
+      current: 'currentColor',
+      transparent: 'transparent',
+      black: '#111111',
+      white: '#FFFFFF',
+
+      slate: colors.slate,
+      gray: colors.gray,
+      zinc: colors.zinc,
+      neutral: colors.neutral,
+      stone: colors.stone,
+
       red: colors.gray,
       blue: colors.gray,
       green: colors.gray,
@@ -28,8 +39,6 @@ export default {
       violet: colors.gray,
       primary: colors.gray[900],
       "primary-dark": colors.gray[950],
-      black: '#111111',
-      white: '#FFFFFF',
     },
     extend: {
       fontFamily: {

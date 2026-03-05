@@ -277,7 +277,7 @@ export default function Dashboard() {
                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                               />
                             </div>
-                            <div className="absolute -top-2 -right-2">
+                            <div className="absolute top-2 right-2 sm:-top-2 sm:-right-2">
                               <div className="px-2 py-1 rounded-full text-xs font-bold bg-gray-900 text-white">
                                 {course.difficulty === 'beginner' ? t('courses.beginner') :
                                  course.difficulty === 'intermediate' ? t('courses.intermediate') : t('courses.advanced')}

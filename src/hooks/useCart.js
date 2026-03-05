@@ -1,6 +1,25 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+const getIconName = (icon) => {
+  if (!icon) return null
+  if (typeof icon === 'string') return icon
+  if (typeof icon === 'function') return icon.displayName || icon.name || null
+  if (typeof icon === 'object') {
+    return icon.displayName || icon.name || icon?.render?.name || null
+  }
+  return null
+}
+
+const sanitizeCartItem = (item) => {
+  const iconName = getIconName(item?.icon)
+  const { icon, ...rest } = item || {}
+  return {
+    ...rest,
+    iconName,
+  }
+}
+
 export const useCart = create(
   persist(
     (set, get) => ({
@@ -25,9 +44,10 @@ export const useCart = create(
             )
           })
         } else {
+          const safeItem = sanitizeCartItem(item)
           set({
             items: [...get().items, { 
-              ...item, 
+              ...safeItem, 
               quantity, 
               selectedSize, 
               selectedColor,
@@ -36,6 +56,10 @@ export const useCart = create(
           })
         }
       },
+
+      // Back-compat alias
+      addToCart: (item, quantity = 1, selectedSize = null, selectedColor = null) =>
+        get().addItem(item, quantity, selectedSize, selectedColor),
       
       // Удалить товар из корзины
       removeItem: (id, selectedSize, selectedColor) => {
@@ -90,7 +114,23 @@ export const useCart = create(
     }),
     {
       name: 'cart-storage',
-      version: 1,
+      version: 2,
+      partialize: (state) => ({
+        items: (state.items || []).map((item) => {
+          // Ensure no React components (icon) are persisted
+          const safe = sanitizeCartItem(item)
+          // Keep a consistent shape
+          return safe
+        }),
+      }),
+      migrate: (persistedState) => {
+        const state = persistedState || {}
+        const items = Array.isArray(state.items) ? state.items : []
+        return {
+          ...state,
+          items: items.map(sanitizeCartItem),
+        }
+      },
     }
   )
 )

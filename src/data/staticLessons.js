@@ -14,7 +14,7 @@ export const staticCourses = [
     rating: 4.8,
     image: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=2070',
     instructor: {
-      avatar: '👑'
+      avatar: null
     },
     lessons: [
       {
@@ -75,7 +75,7 @@ export const staticCourses = [
     rating: 4.9,
     image: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=2070',
     instructor: {
-      avatar: '👑'
+      avatar: null
     },
     lessons: [
       {
@@ -118,7 +118,7 @@ export const staticCourses = [
     rating: 4.7,
     image: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=2070',
     instructor: {
-      avatar: '👑'
+      avatar: null
     },
     lessons: [
       {

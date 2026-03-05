@@ -235,12 +235,12 @@ export default function Courses() {
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden"
             >
-              <div className="bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-gray-800 p-6 mb-6">
+              <div className="bg-white/90 backdrop-blur-xl rounded-2xl border border-slate-200 p-6 mb-6 shadow-sm">
                 {/* Categories removed */}
                 
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <span className="text-gray-600">{t('common.sort')}:</span>
+                    <span className="text-slate-600">{t('common.sort')}:</span>
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
@@ -314,12 +314,12 @@ export default function Courses() {
         {/* Courses Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
           <div className="w-full md:w-auto">
-            <h2 className="text-3xl font-bold text-white">
+            <h2 className="text-3xl font-bold text-slate-900">
               {t('coursesPage.results.found', { count: filteredCourses.length })}
             </h2>
             {searchTerm && (
-              <p className="text-gray-400">
-                {t('coursesPage.results.byQuery')} <span className="text-slate-900">{searchTerm}</span>
+              <p className="text-slate-600">
+                {t('coursesPage.results.byQuery')} <span className="text-slate-900 font-semibold">{searchTerm}</span>
               </p>
             )}
           </div>
@@ -505,8 +505,8 @@ export default function Courses() {
               <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-slate-100 flex items-center justify-center">
                 <BookOpen className="w-12 h-12 text-slate-700" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">{t('coursesPage.empty.title')}</h3>
-              <p className="text-gray-400 mb-6">
+              <h3 className="text-2xl font-bold text-slate-900 mb-3">{t('coursesPage.empty.title')}</h3>
+              <p className="text-slate-600 mb-6">
                 {searchTerm 
                   ? t('coursesPage.empty.withQuery', { query: searchTerm })
                   : t('coursesPage.empty.noFilters')

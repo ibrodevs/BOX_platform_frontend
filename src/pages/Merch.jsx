@@ -11,10 +11,10 @@ import MerchCard from '../components/MerchCard'
 import { useTranslation } from 'react-i18next'
 
 export default function Merch() {
-  const { addToCart, items: cartItems } = useCart()
+  const { addItem, items: cartItems } = useCart()
   const { t } = useTranslation()
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const [selectedItem, setSelectedItem] = useState(null)
+    const [selectedItem, setSelectedItem] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState('popular')
   const [priceRange, setPriceRange] = useState([0, 20000])
@@ -328,7 +328,7 @@ export default function Merch() {
   })
 
   const handleAddToCart = (item) => {
-    addToCart(item)
+      addItem(item)
     setNotification({
       type: 'success',
       title: t('shop.notification.addedTitle'),
@@ -682,9 +682,9 @@ export default function Merch() {
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 100 }}
-            className="fixed bottom-6 right-6 z-50"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-[calc(100vw-2rem)]"
           >
-            <div className="bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden min-w-80">
+            <div className="bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden w-[calc(100vw-2rem)] sm:w-auto max-w-sm sm:max-w-none">
               <div className="p-4">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center">

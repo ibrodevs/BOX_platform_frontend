@@ -326,7 +326,7 @@ export default function CoursePlayer() {
   const PageIcon = currentPageData.icon
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 pt-16">
+    <div className="min-h-screen bg-slate-950 text-white pt-16 overflow-x-hidden">
       {/* Анимированный фон */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5"></div>
@@ -351,7 +351,7 @@ export default function CoursePlayer() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-3"
+            className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl sm:rounded-full shadow-lg flex items-center gap-3 max-w-[calc(100vw-2rem)] w-max"
           >
             <CheckCircle className="w-5 h-5" />
             <span className="font-medium">Страница "{currentPageData.title}" завершена!</span>
@@ -390,7 +390,7 @@ export default function CoursePlayer() {
       <motion.div 
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="fixed top-20 left-1/2 transform -translate-x-1/2 z-30 flex gap-4 bg-gray-900/90 backdrop-blur-lg rounded-full px-6 py-2 border border-gray-700"
+        className="fixed top-20 left-1/2 -translate-x-1/2 z-30 flex flex-wrap justify-center gap-x-4 gap-y-2 bg-gray-900/90 backdrop-blur-lg rounded-2xl sm:rounded-full px-4 sm:px-6 py-2 border border-gray-700 max-w-[calc(100vw-2rem)]"
       >
         <div className="flex items-center gap-2">
           <Trophy className="w-4 h-4 text-yellow-500" />
@@ -406,13 +406,13 @@ export default function CoursePlayer() {
         </div>
       </motion.div>
 
-      <div className="flex h-[calc(100vh-4rem)]">
+      <div className="flex flex-col lg:flex-row h-[calc(100vh-4rem)]">
         {/* Сайдбар с уроками и страницами */}
         <motion.div 
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="w-96 border-r border-gray-800 overflow-hidden bg-gray-900/50 backdrop-blur-lg"
+          className="w-full lg:w-96 lg:border-r border-gray-800 overflow-hidden bg-gray-900/50 backdrop-blur-lg"
         >
           {/* Навигация по страницам */}
           <div className="p-4 border-b border-gray-800">
@@ -478,7 +478,7 @@ export default function CoursePlayer() {
         </motion.div>
 
         {/* Основной контент */}
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
           {/* Видео плеер */}
           <motion.div 
             ref={playerRef}
@@ -598,7 +598,7 @@ export default function CoursePlayer() {
 
           {/* Заголовок текущей страницы */}
           <div className="bg-gray-900 border-b border-gray-800 p-4">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${currentPageData.color} flex items-center justify-center`}>
                   <PageIcon className="w-5 h-5 text-white" />
@@ -610,13 +610,13 @@ export default function CoursePlayer() {
               </div>
               
               {/* Кнопки навигации по страницам */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 flex-wrap justify-between sm:justify-end">
                 {!isPageCompleted(currentPage) && !isPageLocked(currentPage) && (
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => completePage(currentPage)}
-                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium text-sm"
                   >
                     <Check className="w-4 h-4" />
                     Завершить страницу
@@ -690,7 +690,7 @@ export default function CoursePlayer() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="max-w-4xl mx-auto p-8"
+                className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8"
               >
                 {activeTab === 'lesson' && (
                   <>
@@ -856,7 +856,7 @@ export default function CoursePlayer() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setShowChat(!showChat)}
-        className="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-red-600 to-red-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition z-50 group"
+        className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 w-14 h-14 bg-gradient-to-r from-red-600 to-red-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition z-50 group"
       >
         <MessageCircle className="w-6 h-6 text-white group-hover:rotate-12 transition" />
       </motion.button>
@@ -868,7 +868,7 @@ export default function CoursePlayer() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-8 w-96 h-[500px] z-50 rounded-xl overflow-hidden shadow-2xl border border-gray-700"
+            className="fixed bottom-24 right-4 sm:right-8 w-[calc(100vw-2rem)] sm:w-96 h-[70vh] max-h-[500px] z-50 rounded-xl overflow-hidden shadow-2xl border border-gray-700"
           >
             <AIChat onClose={() => setShowChat(false)} />
           </motion.div>

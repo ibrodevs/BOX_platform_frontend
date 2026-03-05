@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { BookOpen } from 'lucide-react'
+import { BookOpen, LoaderCircle } from 'lucide-react'
 import { getMyCourses } from '../services/apiService'
 import { useAuthStore } from '../store/authStore'
 import CourseCard from '../components/CourseCard'
@@ -60,7 +60,9 @@ export default function MyCourses() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="text-6xl mb-4">⏳</div>
+          <div className="flex justify-center mb-4">
+            <LoaderCircle className="w-12 h-12 text-primary animate-spin" />
+          </div>
           <p className="text-gray-400">{t('common.loading')}</p>
         </div>
       </div>
